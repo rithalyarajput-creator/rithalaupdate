@@ -10,16 +10,21 @@
     "prebuild": "node scripts/parse-wxr.mjs",
     "build": "astro build",
     "postbuild": "node scripts/postbuild-redirects.mjs",
-    "preview": "astro preview",
+    "preview": "npm run build && wrangler dev",
     "astro": "astro",
-    "parse": "node scripts/parse-wxr.mjs"
+    "parse": "node scripts/parse-wxr.mjs",
+    "deploy": "npm run build && wrangler deploy"
   },
   "dependencies": {
+    "@astrojs/cloudflare": "11",
     "@astrojs/rss": "^4.0.7",
     "astro": "^4.16.18",
     "fast-xml-parser": "^4.5.0"
   },
   "engines": {
     "node": ">=18.17.0"
+  },
+  "devDependencies": {
+    "wrangler": "^4.90.0"
   }
 }

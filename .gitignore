@@ -27,3 +27,9 @@ src/data/wxr.json
 
 # local media-temp staging (large, served from WP CDN at runtime)
 media-temp/
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+!.env.example
