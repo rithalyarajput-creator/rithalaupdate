@@ -5,9 +5,11 @@
   "type": "module",
   "description": "Rithala Update - Rajput heritage, temples, festivals, village life from Rithala Village, Delhi",
   "scripts": {
-    "dev": "astro dev",
+    "dev": "node scripts/parse-wxr.mjs && astro dev",
     "start": "astro dev",
-    "build": "node scripts/parse-wxr.mjs && astro build && node scripts/postbuild-redirects.mjs",
+    "prebuild": "node scripts/parse-wxr.mjs",
+    "build": "astro build",
+    "postbuild": "node scripts/postbuild-redirects.mjs",
     "preview": "astro preview",
     "astro": "astro",
     "parse": "node scripts/parse-wxr.mjs"
