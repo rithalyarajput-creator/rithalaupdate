@@ -1,0 +1,75 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PostCard from '../components/PostCard.astro';
+import { posts, categories, formatDate } from '../lib/content.js';
+
+const latestPosts = posts.slice(0, 6);
+
+// Hand-picked gallery cards mapping (category slug -> image URL & title) using existing media
+const galleryCards = [
+  { href: '/category/events/',    img: 'https://rithalaupdate.wordpress.com/wp-content/uploads/2025/09/rithala-village-events-cover.jpg.png', title: 'Events' },
+  { href: '/category/places/',    img: 'https://rithalaupdate.wordpress.com/wp-content/uploads/2025/09/rithala-village-places-cover.jpg.png', title: 'Places' },
+  { href: '/tamples/',            img: 'https://rithalaupdate.wordpress.com/wp-content/uploads/2025/09/rithala-village-temples-cover.jpg.png', title: 'Temples' },
+  { href: '/category/brotherhood/', img: 'https://rithalaupdate.wordpress.com/wp-content/uploads/2025/09/rithala-village-brotherhood-cover.jpg.png', title: 'Brotherhood' },
+  { href: '/category/kawad-yatra-2024/', img: 'https://rithalaupdate.wordpress.com/wp-content/uploads/2025/09/rithala-village-kanwar-yatra-2024-cover.jpg.png', title: 'Kanwar Yatra 2024' },
+  { href: '/category/kawad-yatra-2025/', img: 'https://rithalaupdate.wordpress.com/wp-content/uploads/2025/09/rithala-village-kanwar-yatra-2025-cover.jpg.png', title: 'Kanwar Yatra 2025' },
+];
+---
+<BaseLayout
+  title="Rithala Village — Rajput Heritage, Temples, Festivals & Updates"
+  description="Rithala Update — Bhakti Reels, Rajput Culture & Temple Moments from Rithala Village, Delhi. Latest news, history, festivals, and gallery."
+>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-grid">
+        <img
+          src="https://rithalaupdate.wordpress.com/wp-content/uploads/2025/08/e0a4b8e0a4bee0a4aee0a4bee0a49ce0a4bfe0a495-e0a494e0a4b0-e0a4b8e0a4bee0a482e0a4b8e0a58de0a495e0a583e0a4a4e0a4bfe0a495-e0a4aae0a4b0e0a482e0a4aae0a4b0e0a4bee0a48fe0a481-rithala_village.png"
+          alt="Rithala Village"
+          width="600"
+          height="600"
+          fetchpriority="high"
+          style="border-radius: 8px;"
+        />
+        <div class="hero-text">
+          <h1>रिठाला गाँव</h1>
+          <p>
+            रिठाला गाँव दिल्ली के उत्तर-पश्चिम क्षेत्र में स्थित एक प्राचीन और
+            ऐतिहासिक गाँव है, जो अपनी राजपूताना विरासत, वीरता और सांस्कृतिक गौरव
+            के लिए प्रसिद्ध है। सदियों से यह गाँव परंपराओं, भाईचारी और आपसी
+            सहयोग का प्रतीक रहा है।
+          </p>
+          <a class="btn" href="/rithala-village-history/">Read More</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY CATEGORIES -->
+  <section class="section">
+    <div class="container">
+      <h2>Gallery</h2>
+      <div class="cat-cards">
+        {galleryCards.map((g) => (
+          <a class="cat-card" href={g.href}>
+            <img src={g.img} alt={g.title} loading="lazy" />
+            <span>{g.title}</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- LATEST POSTS -->
+  <section class="section">
+    <div class="container">
+      <h2>Latest Posts</h2>
+      <div class="card-grid">
+        {latestPosts.map((p) => <PostCard post={p} />)}
+      </div>
+      <div style="text-align:center; margin-top:18px;">
+        <a class="btn" href="/rithala-updates-2/">All Posts</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

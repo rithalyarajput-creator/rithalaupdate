@@ -1,0 +1,12 @@
+# Cloudflare Pages / Netlify style redirects
+# Trailing-slash canonicalization handled by Astro (trailingSlash:'always')
+
+# Old WordPress feed -> RSS
+/feed/                /rss.xml             301
+/feed                 /rss.xml             301
+/?feed=rss2           /rss.xml             301
+
+# Common WP archives that don't exist as a static page — point to All Posts
+/author/*             /rithala-updates-2/  301
+/tag/*                /rithala-updates-2/  301
+/page/*               /rithala-updates-2/  301

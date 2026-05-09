@@ -1,0 +1,37 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostCard from '../../components/PostCard.astro';
+import { categories, getPostsForCategory } from '../../lib/content.js';
+
+export function getStaticPaths() {
+  return categories
+    .filter((c) => c.slug && c.slug !== 'uncategorized')
+    .map((c) => ({
+      params: { slug: c.slug },
+      props: { category: c },
+    }));
+}
+
+const { category } = Astro.props;
+const list = getPostsForCategory(category.slug);
+const description = (category.description || '').replace(/<[^>]+>/g, '').slice(0, 200) ||
+  `Articles in ${category.name} from Rithala Village.`;
+---
+<BaseLayout
+  title={`${category.name} — Rithala Update`}
+  description={description}
+>
+  <section class="container section">
+    <h1>{category.name}</h1>
+    {category.description && (
+      <p style="color:#5b6573" set:html={category.description} />
+    )}
+    {list.length === 0 ? (
+      <p>No posts yet in this category.</p>
+    ) : (
+      <div class="card-grid">
+        {list.map((p) => <PostCard post={p} />)}
+      </div>
+    )}
+  </section>
+</BaseLayout>

@@ -1,0 +1,147 @@
+---
+import '../styles/global.css';
+import { site } from '../lib/content.js';
+
+const {
+  title,
+  description = site.description,
+  image,
+  canonical,
+  noindex = false,
+  type = 'website',
+} = Astro.props;
+
+const fullTitle = title ? `${title} | Rithala Update` : site.title;
+const canonicalURL = canonical
+  ? new URL(canonical, Astro.site).href
+  : new URL(Astro.url.pathname, Astro.site).href;
+const ogImage = image || new URL('/social-card.jpg', Astro.site).href;
+---
+<!doctype html>
+<html lang="hi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content={type} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:site_name" content="Rithala Update" />
+    <meta property="og:locale" content="hi_IN" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <!-- Preconnect to common image hosts (Astro will mirror these via media folder, but WP CDN may still be referenced inside content) -->
+    <link rel="preconnect" href="https://rithalaupdate.wordpress.com" crossorigin />
+    <link rel="preconnect" href="https://rithalaupdate.files.wordpress.com" crossorigin />
+    <link rel="preconnect" href="https://i0.wp.com" crossorigin />
+
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="alternate" type="application/rss+xml" title="Rithala Update RSS" href="/rss.xml" />
+
+    <!-- Google Fonts (Poppins + Hindi support) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Structured data -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'WebSite',
+      name: 'Rithala Update',
+      url: new URL('/', Astro.site).href,
+      potentialAction: {
+        '@type': 'SearchAction',
+        target: new URL('/?s={search_term_string}', Astro.site).href,
+        'query-input': 'required name=search_term_string',
+      },
+      inLanguage: 'hi',
+      description: site.description,
+    })} />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a href="/" class="brand" aria-label="Rithala Update home">
+          <img src="/logo.png" alt="Rithala Update Logo" width="48" height="48" loading="eager" />
+          <span class="brand-text">Rithala Update</span>
+        </a>
+        <div class="social-icons" aria-label="Social media">
+          <a href="https://www.instagram.com/rithala_update/" rel="noopener" target="_blank" title="Instagram">IG</a>
+          <a href="https://www.youtube.com/@rithala_update" rel="noopener" target="_blank" title="YouTube">YT</a>
+          <a href="https://www.facebook.com/profile.php?id=61581104611697" rel="noopener" target="_blank" title="Facebook">FB</a>
+          <a href="https://in.pinterest.com/rithala_update/" rel="noopener" target="_blank" title="Pinterest">PN</a>
+          <a href="mailto:rithalyarajput@gmail.com" title="Email">@</a>
+        </div>
+      </div>
+    </header>
+    <nav class="nav-wrap" aria-label="Main">
+      <div class="main-nav">
+        <a href="/">Home</a>
+        <a href="/about/">About Us</a>
+        <a href="/sandeep-rajput/">About Me</a>
+        <a href="/rithala-village-history/">History</a>
+        <a href="/rithala-updates-2/">Updates</a>
+        <a href="/gallery-photos-videos/">Gallery</a>
+        <a href="/tamples/">Temples</a>
+        <a href="/contact-location/">Contact</a>
+      </div>
+    </nav>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div>
+            <img src="/logo.png" alt="Rithala Update" width="120" style="border-radius:50%" />
+            <p style="margin-top:8px; font-size:0.85rem;">
+              <a href="/">Home</a> · <a href="/rithala-village-history/">History</a> ·
+              <a href="/rithala-updates-2/">Posts</a> ·
+              <a href="/gallery-photos-videos/">Images</a> ·
+              <a href="/contact-location/">Contact</a>
+            </p>
+          </div>
+          <div>
+            <h3>🚩 Jai Rajputana!</h3>
+            <p style="font-size:0.9rem">
+              Thank you for visiting <strong>Rithala Update</strong>, a humble effort
+              to honor our village's proud Rajput heritage, sacred temples, and
+              timeless traditions. Share your photos and stories at
+              <a href="mailto:rithalyarajput@gmail.com">rithalyarajput@gmail.com</a>.
+            </p>
+          </div>
+          <div>
+            <h3>Connect With Us</h3>
+            <p>
+              <a href="https://www.instagram.com/rithala_update/" rel="noopener" target="_blank">Instagram</a><br />
+              <a href="https://www.youtube.com/@rithala_update" rel="noopener" target="_blank">YouTube</a><br />
+              <a href="https://www.facebook.com/profile.php?id=61581104611697" rel="noopener" target="_blank">Facebook</a><br />
+              <a href="https://in.pinterest.com/rithala_update/" rel="noopener" target="_blank">Pinterest</a>
+            </p>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          © 2025 Rithala Update. All Rights Reserved. Designed & Managed by
+          <a href="/sandeep-rajput/">Sandeep Rajput</a>.
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

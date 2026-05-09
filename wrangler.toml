@@ -1,0 +1,15 @@
+# Cloudflare Pages configuration. (Optional — Cloudflare reads `dist/` and
+# `_redirects` automatically once you connect the GitHub repo. This file
+# documents the build command/output so manual `wrangler pages deploy` works.)
+
+name = "rithalaupdate"
+compatibility_date = "2025-09-01"
+
+[build]
+command = "npm install && npm run build"
+
+[build.upload]
+format = "service-worker"
+
+[site]
+bucket = "./dist"

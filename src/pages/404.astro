@@ -1,0 +1,20 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { posts } from '../lib/content.js';
+---
+<BaseLayout title="Page not found — 404" noindex>
+  <section class="container section" style="text-align:center; padding-top:60px; padding-bottom:60px;">
+    <h1>404</h1>
+    <p>क्षमा करें — यह पेज नहीं मिला।</p>
+    <p><a class="btn" href="/">Home</a></p>
+
+    <h2 style="margin-top:40px;">Latest Posts</h2>
+    <ul style="list-style:none; padding:0; max-width:500px; margin:0 auto; text-align:left;">
+      {posts.slice(0, 5).map((p) => (
+        <li style="padding:6px 0;">
+          <a href={p.path || `/${p.postName}/`}>{p.title}</a>
+        </li>
+      ))}
+    </ul>
+  </section>
+</BaseLayout>

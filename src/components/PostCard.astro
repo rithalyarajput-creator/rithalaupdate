@@ -1,0 +1,17 @@
+---
+import { formatDate, pickExcerpt } from '../lib/content.js';
+const { post } = Astro.props;
+const href = post.path || `/${post.postName}/`;
+---
+<article class="card">
+  {post.featuredImage && (
+    <a href={href} class="thumb">
+      <img src={post.featuredImage} alt={post.title} loading="lazy" decoding="async" />
+    </a>
+  )}
+  <div class="card-body">
+    <h3><a href={href}>{post.title}</a></h3>
+    <p class="meta">{formatDate(post.postDateGmt || post.postDate)}</p>
+    <p style="margin:0; font-size:0.9rem;">{pickExcerpt(post)}</p>
+  </div>
+</article>

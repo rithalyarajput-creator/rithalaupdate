@@ -1,0 +1,149 @@
+---
+// Catch-all route to preserve original WordPress URL paths exactly.
+// We render every published post and page at its original `path` and also
+// keep simple slug-only fallbacks (`/{post_name}/`) so internal links and
+// categories that linked by post_name keep working.
+
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PostCard from '../components/PostCard.astro';
+import { posts, pages, categories, formatDate, pickExcerpt } from '../lib/content.js';
+
+// Pages that should auto-show the full posts archive instead of the WordPress
+// page body (the original WP page is empty/placeholder).
+const AUTO_ARCHIVE_PAGES = new Set([
+  'rithala-updates',
+  'rithala-updates-2',
+]);
+
+export function getStaticPaths() {
+  const paths = [];
+
+  // Helper to register a slug path (without leading slash, with trailing slash).
+  // Astro's [...slug] expects the *decoded* path; URLs containing non-ASCII
+  // characters from the WordPress export arrive percent-encoded.
+  const seen = new Set();
+  function pushPath(p, props) {
+    if (!p) return;
+    let clean = p.replace(/^\/+/, '').replace(/\/+$/, '');
+    if (!clean) return; // do not duplicate root '/'
+    try {
+      clean = decodeURIComponent(clean);
+    } catch {
+      // leave as-is if it can't be decoded
+    }
+    if (seen.has(clean)) return;
+    seen.add(clean);
+    paths.push({ params: { slug: clean }, props });
+  }
+
+  for (const post of posts) {
+    pushPath(post.path, { kind: 'post', item: post });
+    pushPath(`/${post.postName}/`, { kind: 'post', item: post });
+  }
+  for (const page of pages) {
+    pushPath(page.path, { kind: 'page', item: page });
+    pushPath(`/${page.postName}/`, { kind: 'page', item: page });
+  }
+
+  return paths;
+}
+
+const { item, kind } = Astro.props;
+
+const description = pickExcerpt(item) || item.title;
+const ogImage = item.featuredImage || undefined;
+
+const isPost = kind === 'post';
+const date = formatDate(item.postDateGmt || item.postDate);
+const cats = (item.categories || []).filter((c) => c.nicename);
+const showArchive = !isPost && AUTO_ARCHIVE_PAGES.has(item.postName);
+---
+<BaseLayout
+  title={item.title}
+  description={description}
+  image={ogImage}
+  type={isPost ? 'article' : 'website'}
+>
+  <article class="container article">
+    <div class="article-content">
+      <h1>{item.title}</h1>
+      {isPost && (
+        <p class="article-meta">
+          {date}
+          {cats.length > 0 && (
+            <> · {cats.map((c, idx) => (
+              <>{idx > 0 && ', '}<a href={`/category/${c.nicename}/`}>{c.name}</a></>
+            ))}</>
+          )}
+        </p>
+      )}
+      {item.featuredImage && (
+        <figure>
+          <img src={item.featuredImage} alt={item.title} loading="eager" />
+        </figure>
+      )}
+      {showArchive ? (
+        <div class="card-grid">
+          {posts.map((p) => <PostCard post={p} />)}
+        </div>
+      ) : (
+        <div set:html={item.content} />
+      )}
+    </div>
+
+    <aside class="sidebar">
+      <h3>Latest Posts</h3>
+      <ul>
+        {posts.slice(0, 6).map((p) => (
+          <li><a href={p.path || `/${p.postName}/`}>{p.title}</a></li>
+        ))}
+      </ul>
+
+      <h3 style="margin-top:24px;">Categories</h3>
+      <ul>
+        {categories
+          .filter((c) => c.slug && c.name && c.slug !== 'uncategorized')
+          .map((c) => (
+            <li><a href={`/category/${c.slug}/`}>{c.name}</a></li>
+          ))}
+      </ul>
+    </aside>
+  </article>
+
+  {isPost && (
+    <section class="section" style="background:#fff8e7;">
+      <div class="container">
+        <h2>More like this</h2>
+        <div class="card-grid">
+          {posts
+            .filter((p) => p.id !== item.id)
+            .slice(0, 3)
+            .map((p) => <PostCard post={p} />)}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <script type="application/ld+json" set:html={JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': isPost ? 'Article' : 'WebPage',
+    headline: item.title,
+    image: item.featuredImage || undefined,
+    datePublished: item.postDateGmt || item.postDate || undefined,
+    dateModified: item.postModified || undefined,
+    author: {
+      '@type': 'Person',
+      name: item.creator || 'Rithala Update',
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'Rithala Update',
+      logo: {
+        '@type': 'ImageObject',
+        url: new URL('/logo.png', Astro.site).href,
+      },
+    },
+    mainEntityOfPage: new URL(Astro.url.pathname, Astro.site).href,
+    inLanguage: 'hi',
+  })} />
+</BaseLayout>
