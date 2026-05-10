@@ -1,9 +1,9 @@
 import Link from 'next/link';
 import PublicShell from '@/components/PublicShell';
 import PostCard from '@/components/PostCard';
-import { getPublishedPosts } from '@/lib/db';
+import { getPublishedPosts, getFeaturedReels } from '@/lib/db';
 
-export const revalidate = 60; // ISR — revalidate every 60s
+export const revalidate = 60;
 
 const galleryCards = [
   { href: '/category/events/', img: 'https://rithalaupdate.wordpress.com/wp-content/uploads/2025/09/rithala-village-events-cover.jpg.png', title: 'Events' },
@@ -16,11 +16,13 @@ const galleryCards = [
 
 export default async function HomePage() {
   let posts: any[] = [];
+  let featuredReels: any[] = [];
   try {
     posts = await getPublishedPosts(6);
-  } catch (e) {
-    console.error('DB not configured yet:', e);
-  }
+  } catch {}
+  try {
+    featuredReels = await getFeaturedReels(6);
+  } catch {}
 
   return (
     <PublicShell>
@@ -60,6 +62,34 @@ export default async function HomePage() {
           </div>
         </div>
       </section>
+
+      {featuredReels.length > 0 && (
+        <section className="section" style={{ background: '#fff8e7' }}>
+          <div className="container">
+            <h2>🎬 Featured Reels</h2>
+            <div className="reel-public-grid">
+              {featuredReels.map((r) => (
+                <a key={r.id} href={r.instagram_url} target="_blank" rel="noopener" className="reel-public-card">
+                  <div className="reel-public-thumb">
+                    {r.thumbnail_url ? (
+                      <img src={r.thumbnail_url} alt={r.title} />
+                    ) : (
+                      <div className="reel-placeholder">▶ Reel</div>
+                    )}
+                    <div className="reel-play-overlay">▶</div>
+                  </div>
+                  <div style={{ padding: 12 }}>
+                    <h3 style={{ margin: '0 0 4px', fontSize: '1rem' }}>{r.title}</h3>
+                  </div>
+                </a>
+              ))}
+            </div>
+            <p style={{ textAlign: 'center', marginTop: 20 }}>
+              <Link className="btn btn-secondary" href="/reels/">View All Reels →</Link>
+            </p>
+          </div>
+        </section>
+      )}
 
       <section className="section">
         <div className="container">

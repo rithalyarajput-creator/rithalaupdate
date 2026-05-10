@@ -21,10 +21,11 @@ async function isAuthenticated(token: string | undefined) {
 export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
-  // only guard /admin/*, but allow /admin/login and /admin/setup through
+  // only guard /admin/*, but allow login, setup, and migrate through
   if (!pathname.startsWith('/admin')) return NextResponse.next();
   if (pathname.startsWith('/admin/login')) return NextResponse.next();
   if (pathname.startsWith('/admin/setup')) return NextResponse.next();
+  if (pathname.startsWith('/admin/migrate')) return NextResponse.next();
   if (pathname.startsWith('/admin/_')) return NextResponse.next();
 
   const token = req.cookies.get(COOKIE_NAME)?.value;

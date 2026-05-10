@@ -1,5 +1,5 @@
 // POST /api/upload — uploads an image to Vercel Blob storage and
-// returns the public URL. Requires BLOB_READ_WRITE_TOKEN to be set.
+// returns the public URL + saved media row.
 
 import { NextRequest, NextResponse } from 'next/server';
 import { put } from '@vercel/blob';
@@ -14,7 +14,7 @@ export async function POST(req: NextRequest) {
 
   if (!process.env.BLOB_READ_WRITE_TOKEN) {
     return NextResponse.json(
-      { error: 'BLOB_READ_WRITE_TOKEN not set. Enable Vercel Blob in your project.' },
+      { error: 'BLOB_READ_WRITE_TOKEN not set. Enable Vercel Blob in your project (Storage → Create → Blob).' },
       { status: 500 }
     );
   }
@@ -27,11 +27,12 @@ export async function POST(req: NextRequest) {
 
   try {
     const blob = await put(filename, file, { access: 'public' });
-    await sql`
+    const r = await sql<{ id: number }>`
       INSERT INTO media (url, filename, mime_type, size_bytes, uploaded_by)
       VALUES (${blob.url}, ${file.name}, ${file.type}, ${file.size}, ${session.userId})
+      RETURNING id
     `;
-    return NextResponse.json({ url: blob.url, filename: file.name });
+    return NextResponse.json({ id: r.rows[0].id, url: blob.url, filename: file.name });
   } catch (e: any) {
     return NextResponse.json({ error: e.message || 'Upload failed' }, { status: 500 });
   }

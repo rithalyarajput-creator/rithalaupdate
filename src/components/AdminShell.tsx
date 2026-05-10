@@ -1,5 +1,4 @@
 // Sidebar wrapper for protected admin pages.
-// Login page does NOT use this — it has its own minimal centered layout.
 
 import Link from 'next/link';
 
@@ -16,8 +15,13 @@ export default function AdminShell({
         <h2>🚩 Rithala Admin</h2>
         <nav>
           <Link href="/admin/dashboard">📊 Dashboard</Link>
-          <Link href="/admin/posts">📝 Posts</Link>
+          <Link href="/admin/posts">📝 Blog Posts</Link>
           <Link href="/admin/posts/new">➕ New Post</Link>
+          <Link href="/admin/media">🖼️ Media Library</Link>
+          <Link href="/admin/categories">🏷️ Categories</Link>
+          <Link href="/admin/reels">🎬 Reels</Link>
+          <Link href="/admin/leads">📨 Leads</Link>
+          <Link href="/admin/settings">⚙️ Settings</Link>
           <Link href="/" target="_blank" rel="noopener">🌐 View Site</Link>
           <div style={{ flex: 1 }} />
           <div style={{ padding: '12px 20px', fontSize: '0.82rem', color: '#a1a1aa' }}>

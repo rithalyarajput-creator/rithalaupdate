@@ -42,14 +42,28 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const found = await resolve(params.slug).catch(() => null);
   if (!found) return { title: 'Not found' };
   const item: any = found.item;
-  const description = (item.excerpt || item.content || '').replace(/<[^>]+>/g, '').slice(0, 200);
+  const fallbackDesc = (item.excerpt || item.content || '').replace(/<[^>]+>/g, '').slice(0, 160);
+  const title = item.meta_title || item.title;
+  const description = item.meta_description || fallbackDesc;
+  const ogImg = item.og_image || item.featured_image || undefined;
+
   return {
-    title: item.title,
+    title,
     description,
+    alternates: item.canonical_url ? { canonical: item.canonical_url } : undefined,
+    robots: item.noindex ? { index: false, follow: false } : { index: true, follow: true },
+    keywords: item.focus_keyword || undefined,
     openGraph: {
-      title: item.title,
+      title,
       description,
-      images: item.featured_image ? [item.featured_image] : undefined,
+      images: ogImg ? [ogImg] : undefined,
+      type: 'article',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: ogImg ? [ogImg] : undefined,
     },
   };
 }
@@ -67,8 +81,42 @@ export default async function CatchAll({ params }: Props) {
     ? await getCategoriesForPost(item.id).catch(() => [])
     : [];
 
+  const SITE = process.env.NEXT_PUBLIC_SITE_URL || 'https://rithalaupdate.online';
+  const articleLd = isPost
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'Article',
+        headline: item.title,
+        image: item.featured_image ? [item.featured_image] : undefined,
+        datePublished: item.published_at || item.created_at,
+        dateModified: item.updated_at,
+        author: { '@type': 'Person', name: 'Sandeep Rajput' },
+        publisher: {
+          '@type': 'Organization',
+          name: 'Rithala Update',
+          logo: { '@type': 'ImageObject', url: `${SITE}/logo.png` },
+        },
+        description: item.meta_description || (item.excerpt || '').replace(/<[^>]+>/g, '').slice(0, 200),
+        mainEntityOfPage: { '@type': 'WebPage', '@id': `${SITE}/${item.slug}/` },
+        keywords: item.focus_keyword || undefined,
+      }
+    : null;
+
+  const breadcrumbLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE },
+      { '@type': 'ListItem', position: 2, name: item.title, item: `${SITE}/${item.slug}/` },
+    ],
+  };
+
   return (
     <PublicShell>
+      {articleLd && (
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleLd) }} />
+      )}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
       <article className="article">
         <div className="article-content">
           <h1>{item.title}</h1>
@@ -89,7 +137,7 @@ export default async function CatchAll({ params }: Props) {
           )}
           {item.featured_image && (
             <figure>
-              <img src={item.featured_image} alt={item.title} />
+              <img src={item.featured_image} alt={item.title} loading="eager" />
             </figure>
           )}
           <div dangerouslySetInnerHTML={{ __html: item.content || '' }} />

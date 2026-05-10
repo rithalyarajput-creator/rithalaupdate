@@ -17,7 +17,6 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
   const status = body.status === 'draft' ? 'draft' : 'published';
   const slug = String(body.slug || '').trim();
 
-  // Check old slug for revalidation
   const oldR = await sql`SELECT slug FROM posts WHERE id = ${id} LIMIT 1`;
   const oldSlug = oldR.rows[0]?.slug;
 
@@ -30,18 +29,22 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
       featured_image = ${body.featured_image || null},
       status = ${status},
       published_at = COALESCE(published_at, ${status === 'published' ? new Date().toISOString() : null}),
+      meta_title = ${body.meta_title || null},
+      meta_description = ${body.meta_description || null},
+      og_image = ${body.og_image || null},
+      focus_keyword = ${body.focus_keyword || null},
+      canonical_url = ${body.canonical_url || null},
+      noindex = ${!!body.noindex},
       updated_at = NOW()
     WHERE id = ${id}
   `;
 
-  // Reset categories
   await sql`DELETE FROM post_categories WHERE post_id = ${id}`;
   const catIds: number[] = Array.isArray(body.category_ids) ? body.category_ids : [];
   for (const cid of catIds) {
     await sql`INSERT INTO post_categories (post_id, category_id) VALUES (${id}, ${cid}) ON CONFLICT DO NOTHING`;
   }
 
-  // Revalidate
   revalidatePath('/');
   if (oldSlug) revalidatePath(`/${oldSlug}/`);
   revalidatePath(`/${slug}/`);

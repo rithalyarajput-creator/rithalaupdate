@@ -18,6 +18,54 @@ export type Post = {
   legacy_path: string | null;
   created_at: string;
   updated_at: string;
+  meta_title: string | null;
+  meta_description: string | null;
+  og_image: string | null;
+  focus_keyword: string | null;
+  canonical_url: string | null;
+  noindex: boolean | null;
+};
+
+export type Media = {
+  id: number;
+  url: string;
+  filename: string | null;
+  mime_type: string | null;
+  size_bytes: number | null;
+  uploaded_by: number | null;
+  alt_text: string | null;
+  caption: string | null;
+  title: string | null;
+  created_at: string;
+};
+
+export type Lead = {
+  id: number;
+  name: string;
+  email: string | null;
+  phone: string | null;
+  subject: string | null;
+  message: string;
+  source: string;
+  status: string;
+  ip_address: string | null;
+  user_agent: string | null;
+  notes: string | null;
+  created_at: string;
+  updated_at: string;
+};
+
+export type Reel = {
+  id: number;
+  title: string;
+  instagram_url: string;
+  thumbnail_url: string | null;
+  description: string | null;
+  display_order: number;
+  is_featured: boolean;
+  status: string;
+  created_at: string;
+  updated_at: string;
 };
 
 export type Page = {
@@ -120,4 +168,33 @@ export async function getAllSettings(): Promise<Record<string, string>> {
     SELECT key, value FROM settings
   `;
   return Object.fromEntries(rows.map((r) => [r.key, r.value]));
+}
+
+export async function getPublishedReels(limit = 12) {
+  const { rows } = await sql<Reel>`
+    SELECT * FROM reels
+    WHERE status = 'published'
+    ORDER BY display_order ASC, created_at DESC
+    LIMIT ${limit}
+  `;
+  return rows;
+}
+
+export async function getFeaturedReels(limit = 6) {
+  const { rows } = await sql<Reel>`
+    SELECT * FROM reels
+    WHERE status = 'published' AND is_featured = TRUE
+    ORDER BY display_order ASC, created_at DESC
+    LIMIT ${limit}
+  `;
+  return rows;
+}
+
+export async function getAllMedia(limit = 100) {
+  const { rows } = await sql<Media>`
+    SELECT * FROM media
+    ORDER BY created_at DESC
+    LIMIT ${limit}
+  `;
+  return rows;
 }

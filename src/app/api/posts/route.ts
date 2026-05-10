@@ -16,7 +16,6 @@ export async function POST(req: NextRequest) {
   if (!title) return NextResponse.json({ error: 'Title required' }, { status: 400 });
 
   const slugRaw = String(body.slug || '').trim() || slugify(title, { lower: true, strict: true });
-  // Avoid slug collisions
   let slug = slugRaw;
   let n = 1;
   while ((await sql`SELECT 1 FROM posts WHERE slug = ${slug} LIMIT 1`).rows.length > 0) {
@@ -27,22 +26,25 @@ export async function POST(req: NextRequest) {
   const publishedAt = status === 'published' ? new Date().toISOString() : null;
 
   const r = await sql`
-    INSERT INTO posts (slug, title, excerpt, content, featured_image, author_id, status, published_at)
+    INSERT INTO posts (
+      slug, title, excerpt, content, featured_image, author_id, status, published_at,
+      meta_title, meta_description, og_image, focus_keyword, canonical_url, noindex
+    )
     VALUES (
       ${slug}, ${title}, ${body.excerpt || null}, ${body.content || null},
-      ${body.featured_image || null}, ${session.userId}, ${status}, ${publishedAt}
+      ${body.featured_image || null}, ${session.userId}, ${status}, ${publishedAt},
+      ${body.meta_title || null}, ${body.meta_description || null}, ${body.og_image || null},
+      ${body.focus_keyword || null}, ${body.canonical_url || null}, ${!!body.noindex}
     )
     RETURNING id, slug
   `;
   const id = r.rows[0].id;
 
-  // Categories
   const catIds: number[] = Array.isArray(body.category_ids) ? body.category_ids : [];
   for (const cid of catIds) {
     await sql`INSERT INTO post_categories (post_id, category_id) VALUES (${id}, ${cid}) ON CONFLICT DO NOTHING`;
   }
 
-  // Revalidate public paths
   revalidatePath('/');
   revalidatePath(`/${slug}/`);
   return NextResponse.json({ id, slug });

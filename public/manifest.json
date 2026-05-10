@@ -1,0 +1,39 @@
+{
+  "name": "Rithala Update",
+  "short_name": "Rithala",
+  "description": "Bhakti Reels, Rajput Culture & Temple Moments from Rithala Village, Delhi.",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#ffffff",
+  "theme_color": "#f63a3a",
+  "lang": "hi",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "/logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["news", "lifestyle", "social"],
+  "shortcuts": [
+    {
+      "name": "Reels",
+      "url": "/reels/",
+      "description": "Latest video reels"
+    },
+    {
+      "name": "Contact",
+      "url": "/contact/",
+      "description": "Get in touch"
+    }
+  ]
+}
