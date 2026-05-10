@@ -6,6 +6,8 @@ import { getPublishedPosts, getFeaturedReels } from '@/lib/db';
 export const revalidate = 60;
 
 const HERO_IMAGE = 'https://9qidomuaf1nvlbrh.public.blob.vercel-storage.com/uploads/1778400974678-_______________________________Rithala_village-chtINXfbEiTju5dah7wgUclR3aSe5k.png';
+const RAJPUTANA_MAP = 'https://9qidomuaf1nvlbrh.public.blob.vercel-storage.com/uploads/1778401194056-rajputana-historical-map-rithala-village-rajput-heritage.jpg-EEgVFCLGU390rpOSFvELkE66HIiHge.jpg';
+const RAJPUTANA_LOGO = 'https://9qidomuaf1nvlbrh.public.blob.vercel-storage.com/uploads/1778401455542-rajputana-heritage-logo-rithala-village.png-JQ1YTLV0RDx0tAyMYICdirpX1RGJa7.png';
 
 const galleryCards = [
   { href: '/category/events/', img: 'https://rithalaupdate.wordpress.com/wp-content/uploads/2025/09/rithala-village-events-cover.jpg.png', title: 'Events' },
@@ -108,8 +110,63 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* ==============================
+          RAJPUTANA HERITAGE SECTION
+          ============================== */}
+      <section className="rajputana-section reveal-on-scroll">
+        <div className="rajputana-decor" aria-hidden="true">
+          <span className="rj-deco-1">⚔️</span>
+          <span className="rj-deco-2">🏰</span>
+          <span className="rj-deco-3">🛡️</span>
+        </div>
+        <div className="container">
+          <div className="rajputana-grid">
+            <div className="rajputana-content">
+              <img
+                src={RAJPUTANA_LOGO}
+                alt="राजपूताना heritage logo - Rajput warriors land"
+                className="rajputana-logo"
+                loading="lazy"
+              />
+              <p className="rajputana-text">
+                <strong>राजपूताना</strong> भारत का एक ऐतिहासिक क्षेत्र है, जिसका
+                अर्थ है <strong>"राजपूतों की भूमि"</strong>। यह नाम दो शब्दों से
+                बना है — <em>राजा + पुत्र</em> यानी <em>"राजपूत"</em>, जो शाही
+                वंश के योद्धा होते थे, और <em>"राजपूताना"</em> यानी वह भूमि जहाँ
+                इनका शासन और प्रभाव था। राजपूताना में वर्तमान राजस्थान राज्य और
+                उसके आसपास के कुछ हिस्से जैसे हरियाणा, गुजरात और मध्यप्रदेश शामिल
+                थे।
+              </p>
+              <p className="rajputana-text">
+                अंग्रेज़ी शासनकाल में इसे <strong>"राजपूताना एजेंसी"</strong> कहा
+                जाता था, जिसमें 18 बड़ी और 20 छोटी रियासतें थीं — जैसे मेवाड़,
+                मारवाड़, जयपुर, जोधपुर, बीकानेर, बूंदी और कोटा। यह क्षेत्र अपनी
+                वीरता, शौर्य और संस्कृति के लिए प्रसिद्ध था।
+              </p>
+              <p className="rajputana-text">
+                यहाँ के राजपूत शासकों ने अपने सम्मान, स्वाभिमान और मातृभूमि की
+                रक्षा के लिए अनेक युद्ध लड़े, जिनमें{' '}
+                <strong>हल्दीघाटी, खानवा और तारागढ़</strong> के युद्ध विशेष रूप
+                से प्रसिद्ध हैं। आज भी राजपूताना का इतिहास भारतीय गौरव और वीरता
+                का प्रतीक माना जाता है।
+              </p>
+            </div>
+            <div className="rajputana-image-wrap">
+              <div className="rajputana-image-frame">
+                <img
+                  src={RAJPUTANA_MAP}
+                  alt="राजपूताना ऐतिहासिक नक्शा - Historical Rajputana Agency map with princely states Mewar Marwar Jaipur Jodhpur"
+                  loading="lazy"
+                />
+              </div>
+              <p className="rajputana-caption">📜 Imperial Gazetteer of India — Rajputana Agency Map</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Categories */}
-      <section className="section">
+      <section className="section reveal-on-scroll">
         <div className="container">
           <h2>Categories</h2>
           <div className="cat-cards">
@@ -125,7 +182,7 @@ export default async function HomePage() {
 
       {/* Featured Reels */}
       {featuredReels.length > 0 && (
-        <section className="section" style={{ background: '#fff8e7' }}>
+        <section className="section reveal-on-scroll" style={{ background: '#fff8e7' }}>
           <div className="container">
             <h2>🎬 Featured Reels</h2>
             <div className="reel-public-grid">
@@ -153,7 +210,7 @@ export default async function HomePage() {
       )}
 
       {/* Latest Posts */}
-      <section className="section">
+      <section className="section reveal-on-scroll">
         <div className="container">
           <h2>Latest Posts</h2>
           {posts.length === 0 ? (

@@ -2,6 +2,8 @@ import type { Metadata, Viewport } from 'next';
 import './globals.css';
 import { getAllSettings } from '@/lib/db';
 import PWAInstall from '@/components/PWAInstall';
+import ScrollReveal from '@/components/ScrollReveal';
+import AIChatBot from '@/components/AIChatBot';
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://rithalaupdate.online';
 
@@ -171,6 +173,8 @@ export default async function RootLayout({
       </head>
       <body>
         {children}
+        <ScrollReveal />
+        <AIChatBot />
         <PWAInstall />
       </body>
     </html>
