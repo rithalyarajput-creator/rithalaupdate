@@ -869,7 +869,7 @@ html, body { overflow-x: hidden; }
 /* Print styles */
 @media print {
   .site-header, .nav-wrap, .site-footer, .pwa-install-banner, .sidebar,
-  .ai-chat-bubble, .ai-chat-window { display: none; }
+  .ai-chat-mascot, .ai-chat-window { display: none; }
   .article { display: block; padding: 0; }
   body { color: #000; background: #fff; }
 }
@@ -1166,38 +1166,103 @@ html, body { overflow-x: hidden; }
 /* ============================================
    AI CHATBOT
    ============================================ */
-.ai-chat-bubble {
+/* 3D Rajput Knight Mascot — floating left-bottom */
+.ai-chat-mascot {
   position: fixed; bottom: 20px; left: 20px;
   z-index: 998;
-  display: flex; align-items: center; gap: 8px;
-  padding: 12px 18px 12px 14px;
-  background: linear-gradient(135deg, #dc2626, #ea580c, #f5c61b);
-  background-size: 200% 200%;
-  color: #fff; font-weight: 600;
-  border: 2px solid rgba(255,255,255,0.4);
-  border-radius: 100px; cursor: pointer;
-  box-shadow: 0 8px 20px rgba(220,38,38,0.4);
-  animation: gradientShift 4s ease infinite, bubbleBounce 3s ease-in-out infinite;
-  transition: transform 0.2s;
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  width: 110px; height: 130px;
+  filter: drop-shadow(0 8px 16px rgba(0,0,0,0.25));
+  animation: mascotFloat 3s ease-in-out infinite;
+  transition: transform 0.3s ease;
 }
-.ai-chat-bubble:hover { transform: translateY(-3px) scale(1.03); }
-@keyframes bubbleBounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-4px); }
+.ai-chat-mascot:hover {
+  transform: scale(1.08) translateY(-4px);
+  animation-play-state: paused;
 }
-.ai-chat-icon { font-size: 1.4rem; }
-.ai-chat-label { font-size: 0.88rem; }
-.ai-chat-pulse {
-  position: absolute; top: 8px; right: 8px;
-  width: 10px; height: 10px;
-  background: #34d399;
+@keyframes mascotFloat {
+  0%, 100% { transform: translateY(0) rotate(-2deg); }
+  50% { transform: translateY(-8px) rotate(2deg); }
+}
+.ai-mascot-img-wrap {
+  display: block;
+  width: 100%; height: 100%;
+  position: relative;
+}
+.ai-mascot-img-wrap img {
+  width: 100%; height: 100%;
+  object-fit: contain;
+  display: block;
+  -webkit-user-drag: none;
+  user-select: none;
+}
+.ai-mascot-pulse {
+  position: absolute;
+  bottom: 8px; right: 4px;
+  width: 14px; height: 14px;
+  background: #22c55e;
   border-radius: 50%;
-  border: 2px solid #fff;
-  animation: pulse 1.6s ease-in-out infinite;
+  border: 3px solid #fff;
+  box-shadow: 0 0 0 0 rgba(34,197,94,0.7);
+  animation: mascotPulse 1.8s ease-in-out infinite;
+  z-index: 2;
 }
-@keyframes pulse {
-  0%, 100% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.4); opacity: 0.6; }
+@keyframes mascotPulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(34,197,94,0.7);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(34,197,94,0);
+    transform: scale(1.15);
+  }
+}
+
+/* Tooltip beside mascot */
+.ai-mascot-tooltip {
+  position: absolute;
+  left: calc(100% + 12px);
+  top: 12px;
+  background: #fff;
+  color: #11181f;
+  padding: 8px 14px;
+  border-radius: 12px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  white-space: nowrap;
+  line-height: 1.4;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+  border: 2px solid #fbbf24;
+  opacity: 0;
+  transform: translateX(-8px);
+  transition: opacity 0.3s ease 1s, transform 0.3s ease 1s;
+  pointer-events: none;
+}
+.ai-mascot-tooltip::before {
+  content: '';
+  position: absolute;
+  left: -10px; top: 16px;
+  width: 0; height: 0;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-right: 10px solid #fbbf24;
+}
+.ai-chat-mascot:hover .ai-mascot-tooltip,
+.ai-chat-mascot:focus-visible .ai-mascot-tooltip {
+  opacity: 1;
+  transform: translateX(0);
+  transition-delay: 0s;
+}
+/* Show tooltip briefly on page load to attract attention */
+@keyframes tooltipIntro {
+  0%, 90% { opacity: 0; transform: translateX(-8px); }
+  20%, 70% { opacity: 1; transform: translateX(0); }
+}
+.ai-chat-mascot .ai-mascot-tooltip {
+  animation: tooltipIntro 6s ease-in-out 2s 1;
 }
 
 .ai-chat-window {
@@ -1339,11 +1404,11 @@ html, body { overflow-x: hidden; }
 .ai-chat-input-row button:hover { transform: scale(1.1); }
 
 @media (max-width: 767px) {
-  .ai-chat-bubble {
-    bottom: 16px; left: 16px;
-    padding: 10px 16px 10px 12px;
+  .ai-chat-mascot {
+    bottom: 14px; left: 14px;
+    width: 80px; height: 96px;
   }
-  .ai-chat-label { font-size: 0.82rem; }
+  .ai-mascot-tooltip { font-size: 0.7rem; padding: 6px 10px; top: 8px; }
   .ai-chat-window {
     bottom: 16px; left: 16px; right: 16px;
     width: auto; max-width: none;

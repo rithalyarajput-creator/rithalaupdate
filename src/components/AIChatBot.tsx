@@ -71,13 +71,20 @@ export default function AIChatBot() {
     <>
       {!open && (
         <button
-          className="ai-chat-bubble"
+          className="ai-chat-mascot"
           onClick={() => setOpen(true)}
           aria-label="Open chat assistant"
         >
-          <span className="ai-chat-icon">💬</span>
-          <span className="ai-chat-pulse"></span>
-          <span className="ai-chat-label">Chat with us</span>
+          <span className="ai-mascot-tooltip">
+            नमस्ते जी! 🙏<br />Click to chat
+          </span>
+          <span className="ai-mascot-img-wrap">
+            <img
+              src="https://9qidomuaf1nvlbrh.public.blob.vercel-storage.com/uploads/1778402291026-4cf4f2a9-76c0-4609-a454-8283acead86b-Photoroom-eQUrNfKqGDinZB44ThrNwk1FEJVRSj.png"
+              alt="Rithala Rajput AI assistant"
+            />
+          </span>
+          <span className="ai-mascot-pulse"></span>
         </button>
       )}
 
