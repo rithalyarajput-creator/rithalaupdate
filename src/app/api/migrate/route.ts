@@ -87,14 +87,16 @@ export async function POST(req: NextRequest) {
     ['contact_address', 'Rithala Village, North-West Delhi, India'],
     ['header_menu_json', JSON.stringify([
       { label: 'Home', url: '/' },
-      { label: 'About', url: '/about/' },
+      {
+        label: 'About', url: '/about/', children: [
+          { label: 'About Us', url: '/about/' },
+          { label: 'About Me', url: '/about-me/' },
+        ],
+      },
       { label: 'History', url: '/category/history/' },
-      { label: 'Events', url: '/category/events/' },
-      { label: 'Places', url: '/category/places/' },
-      { label: 'Brotherhood', url: '/category/brotherhood/' },
-      { label: 'Kawad 2025', url: '/category/kawad-yatra-2025/' },
-      { label: 'Reels', url: '/reels/' },
-      { label: 'Contact', url: '/contact/' },
+      { label: 'Photos', url: '/category/places/' },
+      { label: 'Posts', url: '/posts/' },
+      { label: 'Contact Us', url: '/contact/' },
     ])],
     ['footer_menu_json', JSON.stringify([
       { label: 'Home', url: '/' },

@@ -2,7 +2,7 @@
 
 import { useState, useRef } from 'react';
 
-type MenuItem = { label: string; url: string };
+type MenuItem = { label: string; url: string; children?: MenuItem[] };
 
 export default function SettingsManager({ initialSettings }: { initialSettings: Record<string, string> }) {
   const [settings, setSettings] = useState<Record<string, string>>(initialSettings);
@@ -66,64 +66,120 @@ export default function SettingsManager({ initialSettings }: { initialSettings: 
   const headerMenu = parseMenu(settings.header_menu_json || '[]');
   const footerMenu = parseMenu(settings.footer_menu_json || '[]');
 
-  function MenuEditor({ menuKey, items }: { menuKey: string; items: MenuItem[] }) {
+  function MenuEditor({ menuKey, items, supportDropdown = true }: { menuKey: string; items: MenuItem[]; supportDropdown?: boolean }) {
     return (
       <div>
         {items.map((item, i) => (
-          <div key={i} style={{ display: 'flex', gap: 8, marginBottom: 8, alignItems: 'center' }}>
-            <input
-              type="text"
-              value={item.label}
-              placeholder="Label"
-              onChange={(e) => {
-                const next = [...items];
-                next[i] = { ...next[i], label: e.target.value };
-                setMenu(menuKey, next);
-              }}
-              style={{ flex: 1 }}
-            />
-            <input
-              type="text"
-              value={item.url}
-              placeholder="URL (e.g. /about/)"
-              onChange={(e) => {
-                const next = [...items];
-                next[i] = { ...next[i], url: e.target.value };
-                setMenu(menuKey, next);
-              }}
-              style={{ flex: 2 }}
-            />
-            <button
-              type="button"
-              className="btn btn-sm btn-secondary"
-              disabled={i === 0}
-              onClick={() => {
-                const next = [...items];
-                [next[i - 1], next[i]] = [next[i], next[i - 1]];
-                setMenu(menuKey, next);
-              }}
-            >
-              ↑
-            </button>
-            <button
-              type="button"
-              className="btn btn-sm btn-secondary"
-              disabled={i === items.length - 1}
-              onClick={() => {
-                const next = [...items];
-                [next[i], next[i + 1]] = [next[i + 1], next[i]];
-                setMenu(menuKey, next);
-              }}
-            >
-              ↓
-            </button>
-            <button
-              type="button"
-              className="btn-danger"
-              onClick={() => setMenu(menuKey, items.filter((_, j) => j !== i))}
-            >
-              ×
-            </button>
+          <div key={i} style={{ marginBottom: 12, padding: 10, background: '#fff', border: '1px solid #e5e7eb', borderRadius: 6 }}>
+            <div style={{ display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap' }}>
+              <input
+                type="text"
+                value={item.label}
+                placeholder="Label"
+                onChange={(e) => {
+                  const next = [...items];
+                  next[i] = { ...next[i], label: e.target.value };
+                  setMenu(menuKey, next);
+                }}
+                style={{ flex: 1, minWidth: 120 }}
+              />
+              <input
+                type="text"
+                value={item.url}
+                placeholder="URL (e.g. /about/)"
+                onChange={(e) => {
+                  const next = [...items];
+                  next[i] = { ...next[i], url: e.target.value };
+                  setMenu(menuKey, next);
+                }}
+                style={{ flex: 2, minWidth: 150 }}
+              />
+              <button
+                type="button"
+                className="btn btn-sm btn-secondary"
+                disabled={i === 0}
+                onClick={() => {
+                  const next = [...items];
+                  [next[i - 1], next[i]] = [next[i], next[i - 1]];
+                  setMenu(menuKey, next);
+                }}
+              >↑</button>
+              <button
+                type="button"
+                className="btn btn-sm btn-secondary"
+                disabled={i === items.length - 1}
+                onClick={() => {
+                  const next = [...items];
+                  [next[i], next[i + 1]] = [next[i + 1], next[i]];
+                  setMenu(menuKey, next);
+                }}
+              >↓</button>
+              <button
+                type="button"
+                className="btn-danger"
+                onClick={() => setMenu(menuKey, items.filter((_, j) => j !== i))}
+              >×</button>
+            </div>
+
+            {supportDropdown && (
+              <div style={{ marginTop: 10, paddingLeft: 16, borderLeft: '3px solid #fde68a' }}>
+                <p style={{ fontSize: '0.78rem', color: '#666', margin: '4px 0' }}>
+                  Dropdown items (sub-menu) — leave empty for no dropdown:
+                </p>
+                {(item.children || []).map((child, j) => (
+                  <div key={j} style={{ display: 'flex', gap: 6, marginBottom: 4, alignItems: 'center' }}>
+                    <input
+                      type="text"
+                      value={child.label}
+                      placeholder="Sub-label"
+                      onChange={(e) => {
+                        const next = [...items];
+                        const children = [...(next[i].children || [])];
+                        children[j] = { ...children[j], label: e.target.value };
+                        next[i] = { ...next[i], children };
+                        setMenu(menuKey, next);
+                      }}
+                      style={{ flex: 1, fontSize: '0.85rem', padding: '6px 8px' }}
+                    />
+                    <input
+                      type="text"
+                      value={child.url}
+                      placeholder="Sub-URL"
+                      onChange={(e) => {
+                        const next = [...items];
+                        const children = [...(next[i].children || [])];
+                        children[j] = { ...children[j], url: e.target.value };
+                        next[i] = { ...next[i], children };
+                        setMenu(menuKey, next);
+                      }}
+                      style={{ flex: 2, fontSize: '0.85rem', padding: '6px 8px' }}
+                    />
+                    <button
+                      type="button"
+                      className="btn-danger"
+                      onClick={() => {
+                        const next = [...items];
+                        const children = (next[i].children || []).filter((_, k) => k !== j);
+                        next[i] = { ...next[i], children };
+                        setMenu(menuKey, next);
+                      }}
+                      style={{ fontSize: '0.78rem', padding: '4px 8px' }}
+                    >×</button>
+                  </div>
+                ))}
+                <button
+                  type="button"
+                  className="btn btn-sm btn-secondary"
+                  onClick={() => {
+                    const next = [...items];
+                    const children = [...(next[i].children || []), { label: 'Sub Item', url: '/' }];
+                    next[i] = { ...next[i], children };
+                    setMenu(menuKey, next);
+                  }}
+                  style={{ fontSize: '0.8rem', marginTop: 4 }}
+                >+ Add Sub-Item</button>
+              </div>
+            )}
           </div>
         ))}
         <button
@@ -241,7 +297,7 @@ export default function SettingsManager({ initialSettings }: { initialSettings: 
               />
             </div>
             <h4>Footer Menu Links</h4>
-            <MenuEditor menuKey="footer_menu_json" items={footerMenu} />
+            <MenuEditor menuKey="footer_menu_json" items={footerMenu} supportDropdown={false} />
           </div>
         )}
 
@@ -289,8 +345,14 @@ export default function SettingsManager({ initialSettings }: { initialSettings: 
               <input type="url" value={settings.social_pinterest || ''} onChange={(e) => set('social_pinterest', e.target.value)} />
             </div>
             <div className="form-row">
-              <label>WhatsApp Number (with country code, no +)</label>
-              <input type="text" value={settings.social_whatsapp || ''} onChange={(e) => set('social_whatsapp', e.target.value)} placeholder="919876543210" />
+              <label>Email Address (header icon)</label>
+              <input
+                type="email"
+                value={settings.social_email || ''}
+                onChange={(e) => set('social_email', e.target.value)}
+                placeholder="rithalyarajput@gmail.com"
+              />
+              <p className="help">Shown as email icon in header. Use the Contact tab for the contact-page email.</p>
             </div>
           </div>
         )}
