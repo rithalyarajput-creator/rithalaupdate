@@ -28,7 +28,7 @@ const FALLBACK_HEADER: MenuItem[] = [
 ];
 
 export default async function PublicShell({ children }: { children: React.ReactNode }) {
-  const settings = await getAllSettings().catch(() => ({} as Record<string, string>));
+  const settings: Record<string, string> = await getAllSettings().catch(() => ({}));
   const headerMenu = parseMenu(settings.header_menu_json);
   const footerMenu = parseMenu(settings.footer_menu_json);
   const menu = headerMenu.length > 0 ? headerMenu : FALLBACK_HEADER;

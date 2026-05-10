@@ -15,7 +15,7 @@ export const viewport: Viewport = {
 export async function generateMetadata(): Promise<Metadata> {
   let settings: Record<string, string> = {};
   try {
-    settings = await getAllSettings();
+    settings = (await getAllSettings()) as Record<string, string>;
   } catch {}
 
   const siteTitle = settings.seo_default_title || settings.site_title || 'Rithala Update — Rajput Heritage, Temples, Festivals';
@@ -87,7 +87,7 @@ export default async function RootLayout({
   let gaId = '';
   let settings: Record<string, string> = {};
   try {
-    settings = await getAllSettings();
+    settings = (await getAllSettings()) as Record<string, string>;
     gaId = settings.seo_ga_id || '';
   } catch {}
 

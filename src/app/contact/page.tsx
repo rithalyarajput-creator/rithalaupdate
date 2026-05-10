@@ -13,7 +13,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function ContactPage() {
-  const settings = await getAllSettings().catch(() => ({}));
+  const settings: Record<string, string> = await getAllSettings().catch(() => ({}));
 
   return (
     <PublicShell>
