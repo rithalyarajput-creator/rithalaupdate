@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import PublicShell from '@/components/PublicShell';
 import PostCard from '@/components/PostCard';
+import HeroSlider from '@/components/HeroSlider';
 import { getPublishedPosts, getFeaturedReels } from '@/lib/db';
 
 export const revalidate = 60;
@@ -164,6 +165,13 @@ export default async function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* ==============================
+          HERITAGE IMAGE SLIDER
+          ============================== */}
+      <div className="reveal-on-scroll">
+        <HeroSlider />
+      </div>
 
       {/* Categories */}
       <section className="section reveal-on-scroll">

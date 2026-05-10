@@ -984,6 +984,186 @@ html, body { overflow-x: hidden; }
 }
 
 /* ============================================
+   HERO SLIDER (Heritage)
+   ============================================ */
+.hero-slider {
+  position: relative;
+  background: linear-gradient(180deg, #fff8e7 0%, #fff 100%);
+  padding: 36px 16px;
+}
+.hero-slider-inner {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow:
+    0 20px 50px rgba(220,38,38,0.18),
+    0 8px 16px rgba(0,0,0,0.12);
+  aspect-ratio: 21 / 9;
+  background: #1a1a1a;
+}
+@media (max-width: 767px) {
+  .hero-slider { padding: 20px 10px; }
+  .hero-slider-inner { aspect-ratio: 16 / 10; border-radius: 14px; }
+}
+
+.hs-slide {
+  position: absolute; inset: 0;
+  opacity: 0;
+  transform: scale(1.05);
+  transition: opacity 0.8s ease, transform 6s ease;
+  pointer-events: none;
+}
+.hs-slide.active {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
+}
+.hs-slide img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+.hs-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    transparent 50%,
+    rgba(0,0,0,0.55) 80%,
+    rgba(0,0,0,0.85) 100%
+  );
+  display: flex; align-items: flex-end;
+  padding: 32px 40px;
+}
+@media (max-width: 767px) {
+  .hs-overlay { padding: 18px 20px; }
+}
+
+.hs-caption {
+  color: #fff;
+  max-width: 700px;
+  transform: translateY(20px);
+  opacity: 0;
+  transition: transform 0.6s ease 0.3s, opacity 0.6s ease 0.3s;
+}
+.hs-slide.active .hs-caption {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.hs-eyebrow {
+  display: inline-block;
+  background: linear-gradient(90deg, #dc2626, #f5c61b);
+  padding: 4px 12px;
+  border-radius: 100px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  box-shadow: 0 4px 10px rgba(220,38,38,0.4);
+}
+.hs-title {
+  margin: 0 0 6px;
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1.15;
+  text-shadow: 0 3px 10px rgba(0,0,0,0.6);
+}
+.hs-subtitle {
+  margin: 0;
+  font-size: 1.05rem;
+  opacity: 0.95;
+  text-shadow: 0 2px 6px rgba(0,0,0,0.6);
+}
+@media (max-width: 767px) {
+  .hs-title { font-size: 1.25rem; }
+  .hs-subtitle { font-size: 0.85rem; }
+  .hs-eyebrow { font-size: 0.65rem; padding: 3px 10px; }
+}
+
+.hs-arrow {
+  position: absolute; top: 50%;
+  transform: translateY(-50%);
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.9);
+  border: 2px solid #fff;
+  color: #dc2626;
+  font-size: 1.8rem; line-height: 1;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s;
+  z-index: 5;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  font-weight: 700;
+}
+.hs-arrow:hover {
+  background: linear-gradient(135deg, #dc2626, #ea580c);
+  color: #fff;
+  transform: translateY(-50%) scale(1.1);
+}
+.hs-arrow-prev { left: 16px; }
+.hs-arrow-next { right: 16px; }
+@media (max-width: 767px) {
+  .hs-arrow { width: 36px; height: 36px; font-size: 1.4rem; }
+  .hs-arrow-prev { left: 8px; }
+  .hs-arrow-next { right: 8px; }
+}
+
+.hs-dots {
+  position: absolute; bottom: 16px; left: 50%;
+  transform: translateX(-50%);
+  display: flex; gap: 8px;
+  z-index: 5;
+}
+.hs-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.5);
+  border: 2px solid rgba(255,255,255,0.9);
+  cursor: pointer;
+  transition: all 0.25s;
+  padding: 0;
+}
+.hs-dot:hover { background: rgba(255,255,255,0.8); }
+.hs-dot.active {
+  width: 32px;
+  border-radius: 100px;
+  background: linear-gradient(90deg, #dc2626, #f5c61b);
+  border-color: #fff;
+}
+@media (max-width: 767px) {
+  .hs-dots { bottom: 8px; }
+  .hs-dot { width: 8px; height: 8px; }
+  .hs-dot.active { width: 24px; }
+}
+
+.hs-progress {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  height: 3px;
+  background: rgba(255,255,255,0.2);
+  z-index: 4;
+}
+.hs-progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #dc2626, #ea580c, #f5c61b);
+  width: 100%;
+  transform-origin: left;
+  animation: hsProgress linear forwards;
+}
+.hs-progress-bar.paused {
+  animation-play-state: paused;
+}
+@keyframes hsProgress {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+/* ============================================
    AI CHATBOT
    ============================================ */
 .ai-chat-bubble {
