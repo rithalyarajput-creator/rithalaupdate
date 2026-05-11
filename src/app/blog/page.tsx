@@ -30,7 +30,13 @@ export default async function BlogPage({ searchParams }: { searchParams: SP }) {
   let posts: any[] = [];
   try {
     const r = await sql<any>`
-      SELECT DISTINCT p.id, p.slug, p.title, p.excerpt, p.featured_image, p.published_at, p.author_name
+      SELECT DISTINCT p.id, p.slug, p.title, p.excerpt, p.featured_image, p.published_at, p.author_name,
+        (SELECT c.name FROM post_categories pc2
+         JOIN categories c ON c.id = pc2.category_id
+         WHERE pc2.post_id = p.id LIMIT 1) AS primary_category,
+        (SELECT c.slug FROM post_categories pc2
+         JOIN categories c ON c.id = pc2.category_id
+         WHERE pc2.post_id = p.id LIMIT 1) AS primary_category_slug
       FROM posts p
       LEFT JOIN post_categories pc ON pc.post_id = p.id
       LEFT JOIN categories c ON c.id = pc.category_id
@@ -48,7 +54,6 @@ export default async function BlogPage({ searchParams }: { searchParams: SP }) {
 
   const categories = await getCategories().catch(() => []);
 
-  // Authors (distinct names from posts)
   let authors: string[] = [];
   try {
     const r = await sql<{ name: string }>`
@@ -67,64 +72,114 @@ export default async function BlogPage({ searchParams }: { searchParams: SP }) {
     years = r.rows.map((row) => Number(row.year));
   } catch {}
 
+  // Only show featured-latest when there are NO active filters
+  const hasFilters = cat || aut || yr || q;
+  const featured = !hasFilters && posts.length > 0 ? posts[0] : null;
+  const rest = featured ? posts.slice(1) : posts;
+
   return (
     <PublicShell>
-      <section className="blog-hero">
+      <section className="blog2-hero">
         <div className="container">
-          <span className="blog-hero-eyebrow">Blog</span>
-          <h1 className="blog-hero-h1">All Blog Posts</h1>
-          <p className="blog-hero-lead">
+          <span className="blog2-hero-eyebrow">Insights & Stories</span>
+          <h1 className="blog2-hero-h1">Rithala Insights and Blogs</h1>
+          <p className="blog2-hero-lead">
             रिठाला गाँव, राजपूताना heritage, events, temples और culture से जुड़ी सारी कहानियाँ।
+            Read insights from experts and stories from our village.
           </p>
         </div>
+        <div className="blog2-hero-curve" aria-hidden="true"></div>
       </section>
 
-      <section className="blog-filter-section">
+      {/* Featured latest post */}
+      {featured && (
+        <section className="blog2-featured-section">
+          <div className="container">
+            <Link href={`/blog/${featured.slug}/`} className="blog2-featured">
+              <div className="blog2-featured-img">
+                {featured.featured_image ? (
+                  <img src={featured.featured_image} alt={featured.title} loading="eager" fetchPriority="high" />
+                ) : (
+                  <div className="blog2-featured-placeholder">Rithala</div>
+                )}
+              </div>
+              <div className="blog2-featured-body">
+                {featured.primary_category && (
+                  <span className="blog2-featured-tag">{featured.primary_category}</span>
+                )}
+                <h2 className="blog2-featured-title">{featured.title}</h2>
+                {featured.excerpt && (
+                  <p className="blog2-featured-excerpt">{featured.excerpt}</p>
+                )}
+                <div className="blog2-featured-meta">
+                  <span className="blog2-meta-item">
+                    <Icon name="calendar" size={14} />
+                    {featured.published_at ? new Date(featured.published_at).toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' }) : ''}
+                  </span>
+                  {featured.author_name && (
+                    <span className="blog2-meta-item">
+                      <Icon name="feather" size={14} />
+                      {featured.author_name}
+                    </span>
+                  )}
+                </div>
+                <span className="blog2-featured-cta">
+                  Read Full Article
+                  <Icon name="arrow-right" size={14} />
+                </span>
+              </div>
+            </Link>
+          </div>
+        </section>
+      )}
+
+      <section className="blog2-filter-section">
         <div className="container">
-          <BlogFilters
-            categories={categories}
-            authors={authors}
-            years={years}
-            current={{ category: cat, author: aut, year: yr, q }}
-          />
+          <div className="blog2-filter-row">
+            <BlogFilters
+              categories={categories}
+              authors={authors}
+              years={years}
+              current={{ category: cat, author: aut, year: yr, q }}
+            />
+            <span className="blog2-count">{posts.length} article{posts.length !== 1 ? 's' : ''}</span>
+          </div>
         </div>
       </section>
 
-      <section className="blog-grid-section">
+      <section className="blog2-grid-section">
         <div className="container">
-          {posts.length === 0 ? (
+          {rest.length === 0 && !featured ? (
             <div className="blog-empty">
               <Icon name="inbox" size={48} />
               <h3>कोई post नहीं मिली</h3>
               <p>Filters change करके try करें या <Link href="/blog/">सारे posts</Link> देखें।</p>
             </div>
-          ) : (
-            <div className="blog-grid-3d">
-              {posts.map((p) => (
-                <Link key={p.id} href={`/blog/${p.slug}/`} className="blog-card-3d">
-                  <div className="blog-card-img">
+          ) : rest.length === 0 ? null : (
+            <div className="blog2-grid">
+              {rest.map((p) => (
+                <Link key={p.id} href={`/blog/${p.slug}/`} className="blog2-card">
+                  <div className="blog2-card-img">
                     {p.featured_image ? (
                       <img src={p.featured_image} alt={p.title} loading="lazy" />
                     ) : (
-                      <div className="blog-card-img-placeholder">Rithala</div>
+                      <div className="blog2-card-placeholder">Rithala</div>
                     )}
-                    <div className="blog-card-glow" aria-hidden="true"></div>
+                    {p.primary_category && (
+                      <span className="blog2-card-tag">{p.primary_category}</span>
+                    )}
                   </div>
-                  <div className="blog-card-body">
-                    <div className="blog-card-meta">
-                      <span className="bc-meta-item">
-                        <Icon name="calendar" size={12} />
-                        {p.published_at ? new Date(p.published_at).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }) : 'Draft'}
+                  <div className="blog2-card-body">
+                    <h3 className="blog2-card-title">{p.title}</h3>
+                    <div className="blog2-card-foot">
+                      <span className="blog2-card-date">
+                        {p.published_at ? new Date(p.published_at).toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' }) : 'Draft'}
                       </span>
-                      {p.author_name && (
-                        <span className="bc-meta-item">
-                          <Icon name="feather" size={12} />
-                          {p.author_name}
-                        </span>
-                      )}
+                      <span className="blog2-card-cta">
+                        Read More
+                        <Icon name="arrow-right" size={13} />
+                      </span>
                     </div>
-                    <h3 className="blog-card-title">{p.title}</h3>
-                    <span className="blog-card-arrow">Read more →</span>
                   </div>
                 </Link>
               ))}
