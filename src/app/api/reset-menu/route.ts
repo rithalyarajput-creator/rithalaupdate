@@ -4,7 +4,7 @@
 import { NextResponse } from 'next/server';
 import { sql } from '@/lib/db';
 import { getSession } from '@/lib/auth';
-import { revalidatePath } from 'next/cache';
+import { revalidatePath, revalidateTag } from 'next/cache';
 
 const HEADER = [
   { label: 'Home', url: '/' },
@@ -42,10 +42,20 @@ export async function GET() {
     ON CONFLICT (key) DO UPDATE SET value = EXCLUDED.value
   `;
 
-  revalidatePath('/', 'layout');
+  // Revalidate every known page so the new menu is picked up immediately
+  const pathsToRevalidate = [
+    '/', '/blog', '/blog/[slug]', '/rithala-village-history', '/photos',
+    '/about', '/sandeep-rajput', '/contact', '/contact-location', '/reels',
+    '/category/[slug]', '/[...slug]',
+  ];
+  for (const p of pathsToRevalidate) {
+    try { revalidatePath(p, 'page'); } catch {}
+  }
+  try { revalidatePath('/', 'layout'); } catch {}
+
   return NextResponse.json({
     ok: true,
-    message: 'Header and footer menus reset to new defaults. Hard-refresh the site.',
+    message: 'Header and footer menus reset. ALL pages revalidated. Hard-refresh the site now.',
     header: HEADER,
     footer: FOOTER,
   });

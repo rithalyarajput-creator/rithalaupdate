@@ -19,6 +19,7 @@ export default function UsersManager({
   currentUserEmail: string;
 }) {
   const [users, setUsers] = useState<User[]>(initialUsers);
+  const [showForm, setShowForm] = useState(false);
   const [email, setEmail] = useState('');
   const [displayName, setDisplayName] = useState('');
   const [password, setPassword] = useState('');
@@ -26,7 +27,24 @@ export default function UsersManager({
   const [err, setErr] = useState<string | null>(null);
   const [msg, setMsg] = useState<string | null>(null);
 
-  function reset() {
+  function openAdd() {
+    setEditingId(null); setEmail(''); setDisplayName(''); setPassword('');
+    setShowForm(true);
+    setErr(null);
+  }
+
+  function startEdit(u: User) {
+    setEditingId(u.id);
+    setEmail(u.email);
+    setDisplayName(u.display_name || '');
+    setPassword('');
+    setShowForm(true);
+    setErr(null);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function closeForm() {
+    setShowForm(false);
     setEditingId(null); setEmail(''); setDisplayName(''); setPassword('');
   }
 
@@ -35,7 +53,6 @@ export default function UsersManager({
     setErr(null); setMsg(null);
 
     if (editingId) {
-      // Update existing — password optional
       const body: any = { display_name: displayName };
       if (password) body.password = password;
       const res = await fetch(`/api/users/${editingId}`, {
@@ -44,7 +61,7 @@ export default function UsersManager({
       });
       if (res.ok) {
         setUsers(users.map((u) => u.id === editingId ? { ...u, display_name: displayName } : u));
-        reset();
+        closeForm();
         setMsg('User updated');
         setTimeout(() => setMsg(null), 2500);
       } else {
@@ -52,7 +69,6 @@ export default function UsersManager({
         setErr(j.error || 'Update failed');
       }
     } else {
-      // Create new
       if (!email || !password) { setErr('Email and password required'); return; }
       if (password.length < 6) { setErr('Password must be at least 6 characters'); return; }
       const res = await fetch('/api/users', {
@@ -62,7 +78,7 @@ export default function UsersManager({
       if (res.ok) {
         const j = await res.json();
         setUsers([...users, { id: j.id, email, display_name: displayName, role: 'admin', created_at: new Date().toISOString() }]);
-        reset();
+        closeForm();
         setMsg('User created');
         setTimeout(() => setMsg(null), 2500);
       } else {
@@ -70,14 +86,6 @@ export default function UsersManager({
         setErr(j.error || 'Create failed');
       }
     }
-  }
-
-  function startEdit(u: User) {
-    setEditingId(u.id);
-    setEmail(u.email);
-    setDisplayName(u.display_name || '');
-    setPassword('');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   async function handleDelete(id: number, e: string) {
@@ -93,61 +101,69 @@ export default function UsersManager({
   }
 
   return (
-    <div className="adm-grid-2">
-      <div className="adm-card">
-        <div className="adm-card-head">
-          <h3>{editingId ? 'Edit User' : 'Add Admin User'}</h3>
-          {editingId && <button type="button" className="adm-btn-ghost" onClick={reset}>Cancel</button>}
-        </div>
+    <>
+      {msg && <div className="adm-alert adm-alert-success" style={{ margin: '0 0 16px' }}>{msg}</div>}
 
-        {err && <div className="adm-alert adm-alert-error">{err}</div>}
-        {msg && <div className="adm-alert adm-alert-success">{msg}</div>}
-
-        <form onSubmit={handleSubmit}>
-          <div className="adm-field">
-            <label>Email <span style={{ color: '#ef4444' }}>*</span></label>
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="admin@example.com"
-              required
-              disabled={!!editingId}
-            />
-            {editingId && <small>Email can&apos;t be changed. Delete and re-add to change email.</small>}
-          </div>
-
-          <div className="adm-field">
-            <label>Display Name</label>
-            <input
-              type="text"
-              value={displayName}
-              onChange={(e) => setDisplayName(e.target.value)}
-              placeholder="Full name"
-            />
-          </div>
-
-          <div className="adm-field">
-            <label>
-              Password {!editingId && <span style={{ color: '#ef4444' }}>*</span>}
-              {editingId && <small style={{ color: '#94a3b8', fontWeight: 400 }}> (leave empty to keep current)</small>}
-            </label>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder={editingId ? 'New password (optional)' : 'At least 6 characters'}
-              minLength={editingId ? undefined : 6}
-              required={!editingId}
-            />
-          </div>
-
-          <button type="submit" className="adm-btn-primary" style={{ width: '100%', margin: '0 22px' }}>
-            <Icon name={editingId ? 'check' : 'plus'} size={14} />
-            {editingId ? 'Update User' : 'Add User'}
-          </button>
-        </form>
+      <div className="adm-action-bar">
+        <button type="button" className="adm-btn-primary" onClick={openAdd}>
+          <Icon name="plus" size={14} /> Add Admin User
+        </button>
       </div>
+
+      {showForm && (
+        <div className="adm-card adm-inline-form">
+          <div className="adm-card-head">
+            <h3>{editingId ? 'Edit User' : 'Add Admin User'}</h3>
+            <button type="button" className="adm-btn-ghost" onClick={closeForm}>
+              <Icon name="close" size={13} /> Cancel
+            </button>
+          </div>
+          {err && <div className="adm-alert adm-alert-error">{err}</div>}
+          <form onSubmit={handleSubmit}>
+            <div className="adm-grid-form">
+              <div className="adm-field">
+                <label>Email <span style={{ color: '#ef4444' }}>*</span></label>
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="admin@example.com"
+                  required
+                  disabled={!!editingId}
+                />
+                {editingId && <small>Email can&apos;t be changed.</small>}
+              </div>
+              <div className="adm-field">
+                <label>Display Name</label>
+                <input
+                  type="text"
+                  value={displayName}
+                  onChange={(e) => setDisplayName(e.target.value)}
+                  placeholder="Full name"
+                />
+              </div>
+            </div>
+            <div className="adm-field">
+              <label>
+                Password {!editingId && <span style={{ color: '#ef4444' }}>*</span>}
+                {editingId && <small style={{ color: '#94a3b8', fontWeight: 400 }}> (leave empty to keep current)</small>}
+              </label>
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder={editingId ? 'New password (optional)' : 'At least 6 characters'}
+                minLength={editingId ? undefined : 6}
+                required={!editingId}
+              />
+            </div>
+            <button type="submit" className="adm-btn-primary" style={{ margin: '8px 22px 6px' }}>
+              <Icon name={editingId ? 'check' : 'plus'} size={14} />
+              {editingId ? 'Update User' : 'Add User'}
+            </button>
+          </form>
+        </div>
+      )}
 
       <div className="adm-card">
         <div className="adm-card-head">
@@ -159,41 +175,43 @@ export default function UsersManager({
             <h3>No users</h3>
           </div>
         ) : (
-          <table className="adm-table">
-            <thead>
-              <tr><th>Email</th><th>Name</th><th>Role</th><th>Actions</th></tr>
-            </thead>
-            <tbody>
-              {users.map((u) => (
-                <tr key={u.id}>
-                  <td>
-                    <strong>{u.email}</strong>
-                    {u.email === currentUserEmail && <span className="adm-badge adm-badge-blue" style={{ marginLeft: 8 }}>You</span>}
-                  </td>
-                  <td className="adm-cell-muted">{u.display_name || '—'}</td>
-                  <td><span className="adm-badge adm-badge-purple">{u.role}</span></td>
-                  <td className="actions">
-                    <div className="adm-actions">
-                      <button onClick={() => startEdit(u)} className="adm-act-btn adm-act-edit" title="Edit">
-                        <Icon name="edit" size={14} />
-                      </button>
-                      <button
-                        onClick={() => handleDelete(u.id, u.email)}
-                        className="adm-act-btn adm-act-delete"
-                        title="Delete"
-                        disabled={u.email === currentUserEmail}
-                        style={u.email === currentUserEmail ? { opacity: 0.4, cursor: 'not-allowed' } : {}}
-                      >
-                        <Icon name="trash" size={14} />
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <div className="adm-table-wrap">
+            <table className="adm-table">
+              <thead>
+                <tr><th>Email</th><th>Name</th><th>Role</th><th style={{ textAlign: 'right' }}>Actions</th></tr>
+              </thead>
+              <tbody>
+                {users.map((u) => (
+                  <tr key={u.id}>
+                    <td>
+                      <strong>{u.email}</strong>
+                      {u.email === currentUserEmail && <span className="adm-badge adm-badge-blue" style={{ marginLeft: 8 }}>You</span>}
+                    </td>
+                    <td className="adm-cell-muted">{u.display_name || '—'}</td>
+                    <td><span className="adm-badge adm-badge-purple">{u.role}</span></td>
+                    <td style={{ textAlign: 'right' }}>
+                      <div className="adm-actions">
+                        <button onClick={() => startEdit(u)} className="adm-act-btn adm-act-edit" title="Edit">
+                          <Icon name="edit" size={14} />
+                        </button>
+                        <button
+                          onClick={() => handleDelete(u.id, u.email)}
+                          className="adm-act-btn adm-act-delete"
+                          title="Delete"
+                          disabled={u.email === currentUserEmail}
+                          style={u.email === currentUserEmail ? { opacity: 0.4, cursor: 'not-allowed' } : {}}
+                        >
+                          <Icon name="trash" size={14} />
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         )}
       </div>
-    </div>
+    </>
   );
 }

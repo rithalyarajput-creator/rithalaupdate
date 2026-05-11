@@ -2,6 +2,7 @@
 // Pulls logo, header menu, footer, and social links from settings table.
 
 import Link from 'next/link';
+import { unstable_noStore as noStore } from 'next/cache';
 import { getAllSettings } from '@/lib/db';
 import SiteFooter from './SiteFooter';
 
@@ -32,6 +33,7 @@ const FALLBACK_HEADER: MenuItem[] = [
 ];
 
 export default async function PublicShell({ children }: { children: React.ReactNode }) {
+  noStore(); // always fetch the latest settings — header/footer reflect changes instantly
   const settings: Record<string, string> = await getAllSettings().catch(() => ({}));
   const headerMenu = parseMenu(settings.header_menu_json);
   const footerMenu = parseMenu(settings.footer_menu_json);
