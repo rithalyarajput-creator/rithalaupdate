@@ -3658,7 +3658,7 @@ body { overflow-x: clip; }
    ============================================ */
 .blog2-hero {
   position: relative;
-  padding: 60px 16px 100px;
+  padding: 50px 16px 70px;
   background:
     radial-gradient(ellipse at top, rgba(245,198,27,0.25), transparent 60%),
     linear-gradient(135deg, #11181f 0%, #1f2937 50%, #312e81 100%);
@@ -3697,15 +3697,15 @@ body { overflow-x: clip; }
 .blog2-hero-curve {
   position: absolute;
   bottom: -1px; left: 0; right: 0;
-  height: 60px;
-  background: #f8f9fb;
-  clip-path: polygon(0 100%, 100% 100%, 100% 0, 50% 60%, 0 0);
+  height: 40px;
+  background: #FFFFE4;
+  clip-path: polygon(0 100%, 100% 100%, 100% 30%, 50% 100%, 0 30%);
 }
 
 /* Featured latest post */
 .blog2-featured-section {
   padding: 0 16px;
-  margin-top: -40px;
+  margin-top: -30px;
   position: relative;
   z-index: 2;
 }
@@ -3713,31 +3713,29 @@ body { overflow-x: clip; }
   display: grid;
   grid-template-columns: 1fr;
   background: #fff;
-  border-radius: 22px;
+  border-radius: 18px;
   overflow: hidden;
   text-decoration: none;
   color: inherit;
-  box-shadow: 0 30px 60px rgba(0,0,0,0.15), 0 1px 3px rgba(0,0,0,0.05);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.12), 0 1px 3px rgba(0,0,0,0.04);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 @media (min-width: 800px) {
-  .blog2-featured { grid-template-columns: 1.1fr 1fr; }
+  .blog2-featured { grid-template-columns: 1.15fr 1fr; }
 }
 .blog2-featured:hover {
   transform: translateY(-4px);
-  box-shadow: 0 40px 80px rgba(220,38,38,0.15), 0 1px 3px rgba(0,0,0,0.05);
+  box-shadow: 0 30px 70px rgba(220,38,38,0.18), 0 1px 3px rgba(0,0,0,0.05);
 }
 .blog2-featured-img {
-  aspect-ratio: 16/10;
+  aspect-ratio: 1200 / 630;
   overflow: hidden;
   background: linear-gradient(135deg, #fff5d6, #fde9b1);
-}
-@media (min-width: 800px) {
-  .blog2-featured-img { aspect-ratio: auto; min-height: 100%; }
 }
 .blog2-featured-img img {
   width: 100%; height: 100%;
   object-fit: cover;
+  object-position: center;
   display: block;
   transition: transform 0.6s ease;
 }
@@ -3814,7 +3812,7 @@ body { overflow-x: clip; }
 
 /* Filter row */
 .blog2-filter-section {
-  padding: 40px 16px 20px;
+  padding: 30px 16px 16px;
 }
 .blog2-filter-row {
   display: flex; justify-content: space-between;
@@ -3915,10 +3913,10 @@ body { overflow-x: clip; }
 }
 .blog2-card-img {
   position: relative;
-  aspect-ratio: 4/3;
+  aspect-ratio: 1200 / 630;
   overflow: hidden;
   margin: 14px 14px 0;
-  border-radius: 16px;
+  border-radius: 14px;
   background: linear-gradient(135deg, #fff5d6, #fde9b1);
 }
 .blog2-card-img img {
