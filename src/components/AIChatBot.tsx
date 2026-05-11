@@ -23,6 +23,7 @@ const ROOT_MENU: Option[] = [
   { label: '📍 Location & Contact', value: 'contact' },
   { label: '📝 Blog Posts', value: 'posts' },
   { label: '🎉 Events', value: 'events' },
+  { label: '👤 Sandeep Rajput कौन हैं?', value: 'sandeep' },
 ];
 
 type TopicReply = { reply: string; next?: Option[] };
@@ -178,6 +179,49 @@ const TREE: Record<string, TopicReply> = {
     reply: '🚩 जय राजपूताना! बताइए क्या जानना चाहते हैं?',
     next: ROOT_MENU,
   },
+  sandeep: {
+    reply: '👤 **Sandeep Rajput** (जिन्हें online पर **Rithalya Rajput** के नाम से जाना जाता है) Rithala Update के founder हैं। वे Rithala Village, Delhi के 18 साल के digital creator, website developer, artist और social media designer हैं। उन्होंने **15 August 2022** को Rithala Update launch किया था।',
+    next: [
+      { label: '🎓 Education', value: 'sandeep_edu' },
+      { label: '🎨 Creative works', value: 'sandeep_works' },
+      { label: '💼 क्या करते हैं?', value: 'sandeep_work' },
+      { label: '🚀 क्यों बनाया Rithala Update?', value: 'sandeep_why' },
+      { label: '📖 Full About Me page', value: 'sandeep_full' },
+      { label: '↩️ Main menu', value: 'menu' },
+    ],
+  },
+  sandeep_edu: {
+    reply: '🎓 Sandeep Rajput ने **Rana Pratap Government Boys Senior Secondary School, Rithala, New Delhi** से schooling पूरी की है। उन्होंने lockdown के दौरान drawing और design skills पर बहुत focus किया।',
+    next: [
+      { label: '🎨 Creative works', value: 'sandeep_works' },
+      { label: '↩️ Main menu', value: 'menu' },
+    ],
+  },
+  sandeep_works: {
+    reply: '🎨 उनके सबसे बेहतरीन pencil sketches में हैं — **Maharana Pratap**, **Little Krishna**, **Little Ram**, **Karan Aujla** और **Virat Kohli** के sketch। वे website development, social media management, creative designing और digital branding पर भी काम करते हैं।',
+    next: [
+      { label: '👤 More about Sandeep', value: 'sandeep' },
+      { label: '↩️ Main menu', value: 'menu' },
+    ],
+  },
+  sandeep_work: {
+    reply: '💼 Sandeep Rajput website development, social media handling, digital promotions और creative designing करते हैं। उन्होंने ये पूरी Rithala Update website खुद design और develop की है, और Instagram, YouTube channels को भी खुद manage करते हैं।',
+    next: [
+      { label: '🎨 Creative works', value: 'sandeep_works' },
+      { label: '↩️ Main menu', value: 'menu' },
+    ],
+  },
+  sandeep_why: {
+    reply: '🚀 Rithala Update बनाने के पीछे एक simple vision था — Rithala Village को एक strong digital identity देना और एक ऐसा platform बनाना जहाँ लोग अपनी culture, community और local updates से connected रहें। पहले Instagram और social media पर content share होता था, फिर 15 August 2022 को website launch हुई।',
+    next: [
+      { label: '📖 Full About Me page', value: 'sandeep_full' },
+      { label: '↩️ Main menu', value: 'menu' },
+    ],
+  },
+  sandeep_full: {
+    reply: '📖 पूरा detailed About Me page यहाँ पढ़ें: **/sandeep-rajput/**',
+    next: [{ label: '↩️ Main menu', value: 'menu' }],
+  },
 };
 
 // Strip markdown/HTML for clean voice text
@@ -276,7 +320,10 @@ export default function AIChatBot() {
     setTimeout(() => {
       const lower = msg.toLowerCase();
       let topicKey = '';
-      if (/history|itihas|इतिहास/i.test(msg)) topicKey = 'history';
+      if (/sandeep|rithalya|founder|owner|creator|kaun banaya|kisne banaya|who.*made|who.*created|owner kaun|about you|about me|biography|kon hai|कौन है|बनाया|founder kaun|संदीप|रिठाल्या/i.test(msg)) topicKey = 'sandeep';
+      else if (/sketch|drawing|art|pencil/i.test(msg)) topicKey = 'sandeep_works';
+      else if (/school|college|education|study/i.test(msg)) topicKey = 'sandeep_edu';
+      else if (/history|itihas|इतिहास/i.test(msg)) topicKey = 'history';
       else if (/rajput|राजपूत/i.test(msg)) topicKey = 'rajputana';
       else if (/reel|video|वीडियो/i.test(msg)) topicKey = 'reels';
       else if (/contact|email|sampark|संपर्क/i.test(msg)) topicKey = 'contact';

@@ -145,10 +145,10 @@ function NavGroup({
   const groupActive = isGroupActive(item);
   const [open, setOpen] = useState(groupActive);
 
-  // Auto-close when user navigates outside this group's pages
+  // Auto-close when user navigates outside this group's pages.
+  // Do NOT force-open when inside — user must be able to toggle freely.
   useEffect(() => {
     if (!groupActive) setOpen(false);
-    else setOpen(true);
   }, [groupActive]);
 
   if (item.children) {

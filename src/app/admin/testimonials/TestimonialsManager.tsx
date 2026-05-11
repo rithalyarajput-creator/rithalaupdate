@@ -20,8 +20,53 @@ export default function TestimonialsManager({ initialItems }: { initialItems: Te
   const [items, setItems] = useState<Testimonial[]>(initialItems);
   const [tab, setTab] = useState<'pending' | 'approved' | 'all'>('pending');
   const [msg, setMsg] = useState<string | null>(null);
+  const [showAdd, setShowAdd] = useState(false);
+  const [addBusy, setAddBusy] = useState(false);
 
   const filtered = items.filter((t) => tab === 'all' ? true : t.status === tab);
+
+  async function handleAdd(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setAddBusy(true);
+    const fd = new FormData(e.currentTarget);
+    let avatar_url = '';
+    const file = fd.get('avatar') as File | null;
+    if (file && file.size > 0) {
+      const up = new FormData();
+      up.append('file', file);
+      const r = await fetch('/api/upload', { method: 'POST', body: up });
+      if (r.ok) { const j = await r.json(); avatar_url = j.url || ''; }
+    }
+    const body = {
+      name: String(fd.get('name') || ''),
+      phone: String(fd.get('phone') || ''),
+      email: String(fd.get('email') || ''),
+      location: String(fd.get('location') || ''),
+      message: String(fd.get('message') || ''),
+      rating: Number(fd.get('rating') || 5),
+      avatar_url,
+      submitter_session: 'admin-added',
+    };
+    const res = await fetch('/api/testimonials', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    });
+    if (res.ok) {
+      const j = await res.json();
+      const newItem = { id: j.id, ...body, status: 'pending', created_at: new Date().toISOString() } as any;
+      await fetch(`/api/testimonials/${j.id}`, {
+        method: 'PUT', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ status: 'approved' }),
+      });
+      newItem.status = 'approved';
+      setItems([newItem, ...items]);
+      setMsg('Testimonial added and approved');
+      setTimeout(() => setMsg(null), 2500);
+      setShowAdd(false);
+      (e.target as HTMLFormElement).reset();
+    }
+    setAddBusy(false);
+  }
 
   async function setStatus(id: number, status: string) {
     const res = await fetch(`/api/testimonials/${id}`, {
@@ -44,6 +89,65 @@ export default function TestimonialsManager({ initialItems }: { initialItems: Te
   return (
     <>
       {msg && <div className="adm-alert adm-alert-success" style={{ margin: '0 0 16px' }}>{msg}</div>}
+
+      <div className="adm-action-bar">
+        <button type="button" className="adm-btn-primary" onClick={() => setShowAdd(!showAdd)}>
+          <Icon name={showAdd ? 'close' : 'plus'} size={14} /> {showAdd ? 'Cancel' : 'Add Testimonial'}
+        </button>
+      </div>
+
+      {showAdd && (
+        <div className="adm-card adm-inline-form">
+          <div className="adm-card-head">
+            <h3>Add New Testimonial</h3>
+          </div>
+          <form onSubmit={handleAdd}>
+            <div className="adm-grid-form">
+              <div className="adm-field">
+                <label>Name <span style={{ color: '#ef4444' }}>*</span></label>
+                <input type="text" name="name" required placeholder="Person's full name" />
+              </div>
+              <div className="adm-field">
+                <label>Location</label>
+                <input type="text" name="location" placeholder="e.g. Rithala, Delhi" />
+              </div>
+            </div>
+            <div className="adm-grid-form">
+              <div className="adm-field">
+                <label>Phone</label>
+                <input type="tel" name="phone" placeholder="Optional" />
+              </div>
+              <div className="adm-field">
+                <label>Email</label>
+                <input type="email" name="email" placeholder="Optional" />
+              </div>
+            </div>
+            <div className="adm-field">
+              <label>Message <span style={{ color: '#ef4444' }}>*</span></label>
+              <textarea name="message" rows={4} required placeholder="Their testimonial text..." />
+            </div>
+            <div className="adm-grid-form">
+              <div className="adm-field">
+                <label>Rating</label>
+                <select name="rating" defaultValue="5">
+                  <option value="5">★★★★★ (5)</option>
+                  <option value="4">★★★★ (4)</option>
+                  <option value="3">★★★ (3)</option>
+                  <option value="2">★★ (2)</option>
+                  <option value="1">★ (1)</option>
+                </select>
+              </div>
+              <div className="adm-field">
+                <label>Avatar Photo</label>
+                <input type="file" name="avatar" accept="image/*" />
+              </div>
+            </div>
+            <button type="submit" disabled={addBusy} className="adm-btn-primary" style={{ margin: '8px 22px 6px' }}>
+              <Icon name="check" size={14} /> {addBusy ? 'Adding…' : 'Add & Auto-Approve'}
+            </button>
+          </form>
+        </div>
+      )}
 
       <div className="adm-tabs">
         <button className={tab === 'pending' ? 'is-active' : ''} onClick={() => setTab('pending')}>
