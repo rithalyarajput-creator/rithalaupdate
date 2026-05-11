@@ -199,16 +199,43 @@ export default async function HomePage() {
       )}
 
       {/* Latest Posts */}
-      <section className="section reveal-on-scroll">
+      <section className="lp2-section reveal-on-scroll">
         <div className="container">
-          <h2>Latest Posts</h2>
+          <div className="lp2-head">
+            <div>
+              <span className="lp2-eyebrow">Fresh from the village</span>
+              <h2 className="lp2-h2">Latest Blog Posts</h2>
+              <p className="lp2-sub">रिठाला से ताज़ा कहानियाँ, photos और updates</p>
+            </div>
+            <Link href="/blog/" className="lp2-view-all">View all posts →</Link>
+          </div>
+
           {posts.length === 0 ? (
-            <p style={{ textAlign: 'center', color: '#888' }}>
-              No posts yet. <Link href="/admin/login">Login to admin</Link> to add the first post.
-            </p>
+            <div className="lp2-empty">
+              <p>No posts yet. <Link href="/admin/login">Login to admin</Link> to add the first post.</p>
+            </div>
           ) : (
-            <div className="card-grid">
-              {posts.map((p) => <PostCard key={p.id} post={p} />)}
+            <div className="lp2-rail">
+              {posts.map((p: any) => (
+                <Link key={p.id} href={`/blog/${p.slug}/`} className="lp2-card">
+                  <div className="lp2-card-img">
+                    {p.featured_image ? (
+                      <img src={p.featured_image} alt={p.title} loading="lazy" />
+                    ) : (
+                      <div className="lp2-card-placeholder">Rithala</div>
+                    )}
+                  </div>
+                  <div className="lp2-card-body">
+                    <h3 className="lp2-card-title">{p.title}</h3>
+                    <div className="lp2-card-meta">
+                      <span>
+                        {p.published_at ? new Date(p.published_at).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }) : ''}
+                      </span>
+                      <span className="lp2-card-arrow">Read →</span>
+                    </div>
+                  </div>
+                </Link>
+              ))}
             </div>
           )}
         </div>
