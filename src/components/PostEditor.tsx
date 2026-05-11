@@ -10,10 +10,12 @@ export default function PostEditor({
   post,
   categories,
   selectedCategoryIds = [],
+  authors = [],
 }: {
   post?: any;
   categories: Category[];
   selectedCategoryIds?: number[];
+  authors?: { id: number; name: string }[];
 }) {
   const router = useRouter();
   const [title, setTitle] = useState(post?.title || '');
@@ -23,6 +25,10 @@ export default function PostEditor({
   const [featuredImage, setFeaturedImage] = useState(post?.featured_image || '');
   const [status, setStatus] = useState(post?.status || 'published');
   const [categoryIds, setCategoryIds] = useState<number[]>(selectedCategoryIds);
+  const [authorName, setAuthorName] = useState(post?.author_name || (authors[0]?.name ?? 'Sandeep Rajput'));
+  const [scheduledAt, setScheduledAt] = useState(
+    post?.scheduled_at ? new Date(post.scheduled_at).toISOString().slice(0, 16) : ''
+  );
 
   // SEO fields
   const [metaTitle, setMetaTitle] = useState(post?.meta_title || '');
@@ -79,6 +85,8 @@ export default function PostEditor({
       focus_keyword: focusKeyword,
       canonical_url: canonicalUrl,
       noindex,
+      author_name: authorName,
+      scheduled_at: scheduledAt ? new Date(scheduledAt).toISOString() : null,
     };
     const url = post?.id ? `/api/posts/${post.id}` : '/api/posts';
     const method = post?.id ? 'PUT' : 'POST';
@@ -326,7 +334,35 @@ export default function PostEditor({
         )}
       </div>
 
-      <div className="form-row" style={{ marginTop: 24 }}>
+      <div style={{ display: 'grid', gap: 16, gridTemplateColumns: '1fr 1fr', marginTop: 24 }}>
+        <div className="form-row">
+          <label>✍️ Author</label>
+          {authors.length > 0 ? (
+            <select value={authorName} onChange={(e) => setAuthorName(e.target.value)}>
+              {authors.map((a) => <option key={a.id} value={a.name}>{a.name}</option>)}
+            </select>
+          ) : (
+            <input type="text" value={authorName} onChange={(e) => setAuthorName(e.target.value)} placeholder="Author name" />
+          )}
+          <p className="help">
+            <a href="/admin/authors" target="_blank">Manage authors →</a>
+          </p>
+        </div>
+
+        <div className="form-row">
+          <label>⏰ Schedule (optional)</label>
+          <input
+            type="datetime-local"
+            value={scheduledAt}
+            onChange={(e) => setScheduledAt(e.target.value)}
+          />
+          <p className="help">
+            Future date set करें + Draft रखें = scheduled publish के लिए
+          </p>
+        </div>
+      </div>
+
+      <div className="form-row">
         <label>Status</label>
         <select value={status} onChange={(e) => setStatus(e.target.value)}>
           <option value="published">Published (live on site)</option>

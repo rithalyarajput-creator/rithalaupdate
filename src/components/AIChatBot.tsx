@@ -16,7 +16,6 @@ type Option = {
 
 const MASCOT_IMG = 'https://9qidomuaf1nvlbrh.public.blob.vercel-storage.com/uploads/1778477060484-3bd4fa98-21df-4bd8-a3e5-d594a0770adf-Photoroom-cdJpoqggOK8fAIidR10p1NY2cIefcK.png';
 
-// Top-level menu shown on welcome
 const ROOT_MENU: Option[] = [
   { label: '🏛️ रिठाला का इतिहास', value: 'history' },
   { label: '🚩 राजपूताना', value: 'rajputana' },
@@ -26,14 +25,9 @@ const ROOT_MENU: Option[] = [
   { label: '🎉 Events', value: 'events' },
 ];
 
-// Reply tree — each topic gives a reply AND optional follow-up options
-type TopicReply = {
-  reply: string;
-  next?: Option[];
-};
+type TopicReply = { reply: string; next?: Option[] };
 
 const TREE: Record<string, TopicReply> = {
-  // ===== HISTORY =====
   history: {
     reply: '📜 रिठाला गाँव का इतिहास 640+ साल पुराना है। आप क्या जानना चाहते हैं?',
     next: [
@@ -45,7 +39,7 @@ const TREE: Record<string, TopicReply> = {
     ],
   },
   history_year: {
-    reply: '🗓️ रिठाला गाँव की स्थापना **1384-85 ईस्वी** में हुई थी, जब दिल्ली पर सुल्तान फिरोज शाह तुगलक का शासन था। 640+ साल पुराना इतिहास है!',
+    reply: '🗓️ रिठाला गाँव की स्थापना **1384-85 ईस्वी** में हुई थी, जब दिल्ली पर सुल्तान फिरोज शाह तुगलक का शासन था।',
     next: [
       { label: '👑 Founder कौन था?', value: 'history_founder' },
       { label: '🥢 लाठी वाला नाम', value: 'history_lathi' },
@@ -53,7 +47,7 @@ const TREE: Record<string, TopicReply> = {
     ],
   },
   history_founder: {
-    reply: '👑 गाँव की नींव **राणा राजपाल सिंह** ने रखी थी। वे **तोमर चंद्रवंशी राजपूत** वंश के साहसी योद्धा थे। उन्होंने पूठ कलां से रिठाला की नींव रखी।',
+    reply: '👑 गाँव की नींव **राणा राजपाल सिंह** ने रखी थी। वे **तोमर चंद्रवंशी राजपूत** वंश के साहसी योद्धा थे।',
     next: [
       { label: '🏘️ पूठ कलां क्या है?', value: 'history_puth' },
       { label: '⚔️ तोमर वंश', value: 'history_tomar' },
@@ -61,36 +55,32 @@ const TREE: Record<string, TopicReply> = {
     ],
   },
   history_lathi: {
-    reply: '🥢 रिठाला का प्राचीन नाम **"लाठी वाला"** था। यहाँ के लोग लाठी, भाला, तलवार चलाने में निपुण थे। गाँव की सुरक्षा क़िले से नहीं, योद्धाओं की बहादुरी से होती थी।',
+    reply: '🥢 रिठाला का प्राचीन नाम **"लाठी वाला"** था। यहाँ के लोग लाठी, भाला, तलवार चलाने में निपुण थे।',
     next: [
       { label: '⚔️ राजपूताना वीरता', value: 'rajputana' },
       { label: '↩️ Main menu', value: 'menu' },
     ],
   },
   history_puth: {
-    reply: '🏘️ **पूठ कलां** राणा राजपाल सिंह का पैतृक गाँव था, जिसकी स्थापना 1048-49 ईस्वी में हुई थी। बाद में उन्होंने नई बस्ती बसाकर रिठाला की नींव रखी।',
+    reply: '🏘️ **पूठ कलां** राणा राजपाल सिंह का पैतृक गाँव था, जिसकी स्थापना 1048-49 ईस्वी में हुई थी।',
     next: [
       { label: '👑 Founder कौन था?', value: 'history_founder' },
       { label: '↩️ Main menu', value: 'menu' },
     ],
   },
   history_tomar: {
-    reply: '⚔️ **तोमर वंश** चंद्रवंशी राजपूतों का प्राचीन वंश है, जो दिल्ली के शासकों में रहे हैं। उनकी वीरता और शौर्य की कहानियाँ आज भी प्रसिद्ध हैं।',
+    reply: '⚔️ **तोमर वंश** चंद्रवंशी राजपूतों का प्राचीन वंश है, जो दिल्ली के शासकों में रहे हैं।',
     next: [
       { label: '🚩 राजपूताना', value: 'rajputana' },
       { label: '↩️ Main menu', value: 'menu' },
     ],
   },
   history_full: {
-    reply: '📖 पूरा detailed history यहाँ पढ़ें: **/rithala-village-history/** — 640+ साल का सफर, सभी chapters with timeline।',
-    next: [
-      { label: '↩️ Main menu', value: 'menu' },
-    ],
+    reply: '📖 पूरा detailed history यहाँ पढ़ें: **/rithala-village-history/**',
+    next: [{ label: '↩️ Main menu', value: 'menu' }],
   },
-
-  // ===== RAJPUTANA =====
   rajputana: {
-    reply: '🚩 **राजपूताना** का अर्थ है "राजपूतों की भूमि"। रिठाला इसी विरासत का जीवंत प्रमाण है।',
+    reply: '🚩 **राजपूताना** का अर्थ है "राजपूतों की भूमि"।',
     next: [
       { label: '🛡️ वीरता की कहानी', value: 'rajputana_veerta' },
       { label: '🎨 सांस्कृतिक परंपराएँ', value: 'rajputana_culture' },
@@ -99,23 +89,21 @@ const TREE: Record<string, TopicReply> = {
     ],
   },
   rajputana_veerta: {
-    reply: '🛡️ रिठाला के राजपूत हमेशा अपनी मातृभूमि की रक्षा के लिए तैयार रहे। लाठी, तलवार और धनुष-बाण लेकर मोर्चा संभालते थे। यही गाँव की पहचान बनी।',
+    reply: '🛡️ रिठाला के राजपूत हमेशा अपनी मातृभूमि की रक्षा के लिए तैयार रहे।',
     next: [
       { label: '🥢 लाठी वाला', value: 'history_lathi' },
       { label: '↩️ Main menu', value: 'menu' },
     ],
   },
   rajputana_culture: {
-    reply: '🎨 गाँव में पीढ़ी-दर-पीढ़ी त्यौहार, धार्मिक आयोजन, मेले और पारंपरिक रस्में निभाई जाती हैं। भाईचारा और एकता सबसे बड़ी ताकत है।',
+    reply: '🎨 गाँव में पीढ़ी-दर-पीढ़ी त्यौहार, धार्मिक आयोजन, मेले निभाए जाते हैं।',
     next: [
       { label: '🎉 Events देखें', value: 'events' },
       { label: '↩️ Main menu', value: 'menu' },
     ],
   },
-
-  // ===== REELS =====
   reels: {
-    reply: '🎬 हम Instagram reels और YouTube shorts share करते हैं। Homepage पर auto-play strip है।',
+    reply: '🎬 हम Instagram reels और YouTube shorts share करते हैं।',
     next: [
       { label: '▶ All Reels देखें', value: 'reels_all' },
       { label: '📷 Instagram', value: 'social_ig' },
@@ -124,15 +112,11 @@ const TREE: Record<string, TopicReply> = {
     ],
   },
   reels_all: {
-    reply: '▶ सारे reels यहाँ देखें: **/reels/** — Instagram + YouTube दोनों।',
-    next: [
-      { label: '↩️ Main menu', value: 'menu' },
-    ],
+    reply: '▶ सारे reels: **/reels/**',
+    next: [{ label: '↩️ Main menu', value: 'menu' }],
   },
-
-  // ===== CONTACT =====
   contact: {
-    reply: '📞 आप 4 तरीकों से हमसे जुड़ सकते हैं:',
+    reply: '📞 आप 4 तरीकों से जुड़ सकते हैं:',
     next: [
       { label: '📧 Email', value: 'contact_email' },
       { label: '📍 Location/Map', value: 'contact_loc' },
@@ -142,33 +126,19 @@ const TREE: Record<string, TopicReply> = {
     ],
   },
   contact_email: {
-    reply: '📧 हमें email करें: **rithalyarajput@gmail.com** — हम 24-48 घंटे में जवाब देते हैं।',
-    next: [
-      { label: '📝 Form से message भेजें', value: 'contact_form' },
-      { label: '↩️ Main menu', value: 'menu' },
-    ],
+    reply: '📧 Email करें: **rithalyarajput@gmail.com** — 24-48 घंटे में reply।',
+    next: [{ label: '↩️ Main menu', value: 'menu' }],
   },
   contact_loc: {
-    reply: '📍 **Rithala Village, North-West Delhi (Pin 110085)**\nनज़दीकी metro: **Rithala Metro Station** (Red Line)\nMap देखें: **/contact-location/**',
-    next: [
-      { label: '🗺️ Google Maps', value: 'contact_maps' },
-      { label: '↩️ Main menu', value: 'menu' },
-    ],
-  },
-  contact_maps: {
-    reply: '🗺️ Google Maps पर Rithala Village search करें या contact page पर embedded map देखें: **/contact-location/**',
-    next: [
-      { label: '↩️ Main menu', value: 'menu' },
-    ],
+    reply: '📍 **Rithala Village, North-West Delhi (Pin 110085)**\nMetro: Rithala (Red Line)\nMap: **/contact-location/**',
+    next: [{ label: '↩️ Main menu', value: 'menu' }],
   },
   contact_form: {
-    reply: '📝 हमारे contact page पर एक form है जहाँ आप directly message भेज सकते हैं: **/contact-location/** — सीधे admin inbox में जाएगा।',
-    next: [
-      { label: '↩️ Main menu', value: 'menu' },
-    ],
+    reply: '📝 Contact form यहाँ: **/contact-location/**',
+    next: [{ label: '↩️ Main menu', value: 'menu' }],
   },
   contact_social: {
-    reply: '🌐 आप हमें social media पर follow कर सकते हैं:',
+    reply: '🌐 हमें social पर follow करें:',
     next: [
       { label: '📷 Instagram', value: 'social_ig' },
       { label: '📘 Facebook', value: 'social_fb' },
@@ -176,78 +146,65 @@ const TREE: Record<string, TopicReply> = {
       { label: '↩️ Main menu', value: 'menu' },
     ],
   },
-  social_ig: {
-    reply: '📷 Instagram: **@rithala_update** — daily reels, photos, और updates!',
-    next: [{ label: '↩️ Main menu', value: 'menu' }],
-  },
-  social_fb: {
-    reply: '📘 Facebook page पर हमें follow करें — सारे events और news मिलेंगे।',
-    next: [{ label: '↩️ Main menu', value: 'menu' }],
-  },
-  social_yt: {
-    reply: '▶ YouTube channel: **@rithala_update** — videos और shorts।',
-    next: [{ label: '↩️ Main menu', value: 'menu' }],
-  },
-
-  // ===== POSTS =====
+  social_ig: { reply: '📷 Instagram: **@rithala_update**', next: [{ label: '↩️ Main menu', value: 'menu' }] },
+  social_fb: { reply: '📘 Facebook page पर follow करें।', next: [{ label: '↩️ Main menu', value: 'menu' }] },
+  social_yt: { reply: '▶ YouTube: **@rithala_update**', next: [{ label: '↩️ Main menu', value: 'menu' }] },
   posts: {
-    reply: '📝 हमारे blog posts categories में organize हैं:',
+    reply: '📝 Blog posts देखें: **/blog/** — category, author, date से filter करें।',
     next: [
       { label: '📜 History posts', value: 'posts_history' },
       { label: '🎉 Events posts', value: 'posts_events' },
       { label: '🏛️ Places posts', value: 'posts_places' },
-      { label: '🤝 Brotherhood', value: 'posts_brotherhood' },
       { label: '🚩 Kawad Yatra', value: 'posts_kawad' },
       { label: '↩️ Main menu', value: 'menu' },
     ],
   },
-  posts_history: {
-    reply: '📜 History posts: **/category/history/**',
-    next: [{ label: '↩️ Main menu', value: 'menu' }],
-  },
-  posts_events: {
-    reply: '🎉 Events posts: **/category/events/**',
-    next: [{ label: '↩️ Main menu', value: 'menu' }],
-  },
-  posts_places: {
-    reply: '🏛️ Places gallery: **/category/places/** — temples, landmarks, photos।',
-    next: [{ label: '↩️ Main menu', value: 'menu' }],
-  },
-  posts_brotherhood: {
-    reply: '🤝 Brotherhood posts: **/category/brotherhood/** — गाँव की एकता और संस्कृति।',
-    next: [{ label: '↩️ Main menu', value: 'menu' }],
-  },
-  posts_kawad: {
-    reply: '🚩 Kawad Yatra posts:\n• 2025: **/category/kawad-yatra-2025/**\n• 2024: **/category/kawad-yatra-2024/**',
-    next: [{ label: '↩️ Main menu', value: 'menu' }],
-  },
-
-  // ===== EVENTS =====
+  posts_history: { reply: '📜 History posts: **/blog/?category=history**', next: [{ label: '↩️ Main menu', value: 'menu' }] },
+  posts_events: { reply: '🎉 Events posts: **/blog/?category=events**', next: [{ label: '↩️ Main menu', value: 'menu' }] },
+  posts_places: { reply: '🏛️ Places gallery: **/blog/?category=places**', next: [{ label: '↩️ Main menu', value: 'menu' }] },
+  posts_kawad: { reply: '🚩 Kawad Yatra: **/blog/?category=kawad-yatra-2025**', next: [{ label: '↩️ Main menu', value: 'menu' }] },
   events: {
     reply: '🎉 गाँव में पूरे साल events होते हैं:',
     next: [
       { label: '🚩 Kawad Yatra 2025', value: 'posts_kawad' },
       { label: '🪔 Festivals', value: 'events_festivals' },
       { label: '🏛️ Temple events', value: 'events_temple' },
-      { label: '📅 सारे events', value: 'posts_events' },
       { label: '↩️ Main menu', value: 'menu' },
     ],
   },
-  events_festivals: {
-    reply: '🪔 गाँव में Diwali, Holi, Janmashtami, और कई festivals बड़े उत्साह से मनाते हैं। Photos: **/category/events/**',
-    next: [{ label: '↩️ Main menu', value: 'menu' }],
-  },
-  events_temple: {
-    reply: '🏛️ Temple events: श्री जागेश्वर नाथ कात्यायनी धाम में नियमित आयोजन होते हैं। Places: **/category/places/**',
-    next: [{ label: '↩️ Main menu', value: 'menu' }],
-  },
-
-  // ===== MENU =====
+  events_festivals: { reply: '🪔 Diwali, Holi, Janmashtami सब बड़े उत्साह से मनाते हैं।', next: [{ label: '↩️ Main menu', value: 'menu' }] },
+  events_temple: { reply: '🏛️ श्री जागेश्वर नाथ कात्यायनी धाम में नियमित आयोजन होते हैं।', next: [{ label: '↩️ Main menu', value: 'menu' }] },
   menu: {
     reply: '🚩 जय राजपूताना! बताइए क्या जानना चाहते हैं?',
     next: ROOT_MENU,
   },
 };
+
+// Strip markdown/HTML for clean voice text
+function plainText(t: string): string {
+  return t
+    .replace(/\*\*(.+?)\*\*/g, '$1')
+    .replace(/<[^>]+>/g, '')
+    .replace(/\/[a-z0-9-]+\//gi, '')
+    .replace(/[📜🚩🎬📞📝🎉🏛️📅👑🥢🏘️⚔️🛡️🎨▶📷📘📍📧📨🪔🌐↩️🗓️]/g, '')
+    .trim();
+}
+
+function speak(text: string) {
+  if (typeof window === 'undefined' || !('speechSynthesis' in window)) return;
+  try {
+    window.speechSynthesis.cancel();
+    const utter = new SpeechSynthesisUtterance(plainText(text));
+    // Try Hindi voice
+    const voices = window.speechSynthesis.getVoices();
+    const hi = voices.find((v) => v.lang.startsWith('hi')) || voices.find((v) => v.lang.startsWith('en-IN')) || voices[0];
+    if (hi) utter.voice = hi;
+    utter.lang = hi?.lang || 'hi-IN';
+    utter.rate = 0.95;
+    utter.pitch = 1.0;
+    window.speechSynthesis.speak(utter);
+  } catch {}
+}
 
 export default function AIChatBot() {
   const pathname = usePathname();
@@ -256,7 +213,10 @@ export default function AIChatBot() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [typing, setTyping] = useState(false);
   const [hasGreeted, setHasGreeted] = useState(false);
+  const [voiceOn, setVoiceOn] = useState(false);
+  const [listening, setListening] = useState(false);
   const endRef = useRef<HTMLDivElement>(null);
+  const recogRef = useRef<any>(null);
 
   const isAdminPage = pathname?.startsWith('/admin');
 
@@ -264,7 +224,13 @@ export default function AIChatBot() {
     if (open) endRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages, open, typing]);
 
-  // Welcome sequence on first open
+  // Pre-load voices (some browsers need this)
+  useEffect(() => {
+    if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+      window.speechSynthesis.getVoices();
+    }
+  }, []);
+
   useEffect(() => {
     if (!open || hasGreeted) return;
     setHasGreeted(true);
@@ -277,14 +243,15 @@ export default function AIChatBot() {
     setTimeout(() => {
       setMessages((m) => [
         ...m,
-        {
-          role: 'bot',
-          text: 'बताइए, आप किस बारे में जानना चाहते हैं?',
-          options: ROOT_MENU,
-        },
+        { role: 'bot', text: 'बताइए, आप किस बारे में जानना चाहते हैं?', options: ROOT_MENU },
       ]);
     }, 1700);
   }, [open, hasGreeted]);
+
+  function botReply(reply: string, options?: Option[]) {
+    setMessages((m) => [...m, { role: 'bot', text: reply, options }]);
+    if (voiceOn) speak(reply);
+  }
 
   function handleOption(value: string, label: string) {
     setMessages((m) => [...m, { role: 'user', text: label }]);
@@ -292,28 +259,21 @@ export default function AIChatBot() {
     setTimeout(() => {
       const topic = TREE[value];
       if (topic) {
-        setMessages((m) => [
-          ...m,
-          { role: 'bot', text: topic.reply, options: topic.next },
-        ]);
+        botReply(topic.reply, topic.next);
       } else {
-        setMessages((m) => [
-          ...m,
-          { role: 'bot', text: 'अभी इस topic के बारे में जानकारी नहीं है।', options: ROOT_MENU },
-        ]);
+        botReply('अभी इस topic के बारे में जानकारी नहीं है।', ROOT_MENU);
       }
       setTyping(false);
-    }, 600 + Math.random() * 500);
+    }, 500 + Math.random() * 400);
   }
 
-  function handleTextSend() {
-    const msg = input.trim();
+  function handleTextSend(textOverride?: string) {
+    const msg = (textOverride ?? input).trim();
     if (!msg) return;
     setMessages((m) => [...m, { role: 'user', text: msg }]);
     setInput('');
     setTyping(true);
     setTimeout(() => {
-      // Try keyword routing
       const lower = msg.toLowerCase();
       let topicKey = '';
       if (/history|itihas|इतिहास/i.test(msg)) topicKey = 'history';
@@ -321,7 +281,7 @@ export default function AIChatBot() {
       else if (/reel|video|वीडियो/i.test(msg)) topicKey = 'reels';
       else if (/contact|email|sampark|संपर्क/i.test(msg)) topicKey = 'contact';
       else if (/event|कार्यक्रम|festival/i.test(msg)) topicKey = 'events';
-      else if (/post|blog|article|news/i.test(msg)) topicKey = 'posts';
+      else if (/blog|post|article|news/i.test(msg)) topicKey = 'posts';
       else if (/founder|राजपाल|founded|kaun/i.test(msg)) topicKey = 'history_founder';
       else if (/kab|when|year|saal|स्थापना/i.test(msg)) topicKey = 'history_year';
       else if (/lathi|लाठी/i.test(msg)) topicKey = 'history_lathi';
@@ -331,19 +291,52 @@ export default function AIChatBot() {
 
       const topic = TREE[topicKey];
       if (topic) {
-        setMessages((m) => [...m, { role: 'bot', text: topic.reply, options: topic.next }]);
+        botReply(topic.reply, topic.next);
       } else {
-        setMessages((m) => [
-          ...m,
-          {
-            role: 'bot',
-            text: 'मुझे आपका सवाल पूरी तरह समझ नहीं आया 🙏 नीचे से कोई option चुनें या email करें: rithalyarajput@gmail.com',
-            options: ROOT_MENU,
-          },
-        ]);
+        botReply('मुझे आपका सवाल पूरी तरह समझ नहीं आया 🙏 नीचे से कोई option चुनें या email करें: rithalyarajput@gmail.com', ROOT_MENU);
       }
       setTyping(false);
-    }, 700 + Math.random() * 500);
+    }, 600 + Math.random() * 400);
+  }
+
+  function toggleVoice() {
+    if (!voiceOn) {
+      setVoiceOn(true);
+      // Briefly speak a confirmation
+      speak('Voice on. मैं आपके सवालों के जवाब बोलकर दूँगा।');
+    } else {
+      setVoiceOn(false);
+      if (typeof window !== 'undefined') window.speechSynthesis?.cancel();
+    }
+  }
+
+  function toggleListen() {
+    const SR = (typeof window !== 'undefined') &&
+      ((window as any).SpeechRecognition || (window as any).webkitSpeechRecognition);
+    if (!SR) {
+      alert('Voice input आपके browser में नहीं चलता। Chrome/Edge use करें।');
+      return;
+    }
+    if (listening) {
+      try { recogRef.current?.stop(); } catch {}
+      setListening(false);
+      return;
+    }
+    const recog = new SR();
+    recog.lang = 'hi-IN';
+    recog.continuous = false;
+    recog.interimResults = false;
+    recog.onresult = (e: any) => {
+      const text = e.results[0][0].transcript;
+      setInput(text);
+      setListening(false);
+      handleTextSend(text);
+    };
+    recog.onerror = () => setListening(false);
+    recog.onend = () => setListening(false);
+    recogRef.current = recog;
+    recog.start();
+    setListening(true);
   }
 
   if (isAdminPage) return null;
@@ -375,24 +368,49 @@ export default function AIChatBot() {
             <div style={{ flex: 1 }}>
               <div style={{ fontWeight: 700, fontSize: '0.95rem' }}>Rithala AI</div>
               <div style={{ fontSize: '0.72rem', opacity: 0.9 }}>
-                <span className="ai-online-dot"></span> Online · Ask anything
+                <span className="ai-online-dot"></span> Online
               </div>
             </div>
+            <button
+              className={`ai-voice-toggle ${voiceOn ? 'on' : ''}`}
+              onClick={toggleVoice}
+              aria-label={voiceOn ? 'Mute voice' : 'Enable voice'}
+              title={voiceOn ? 'Voice on (click to mute)' : 'Click to enable voice'}
+            >
+              {voiceOn ? '🔊' : '🔇'}
+            </button>
             <button className="ai-chat-close" onClick={() => setOpen(false)} aria-label="Close chat">×</button>
           </header>
 
           <div className="ai-chat-body">
             {messages.map((m, i) => (
               <div key={i} className="ai-chat-msg-wrap">
-                <div
-                  className={`ai-chat-msg ai-chat-msg-${m.role}`}
-                  dangerouslySetInnerHTML={{
-                    __html: m.text
-                      .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-                      .replace(/(\/[a-z0-9\-/]+\/?)/gi, '<a href="$1">$1</a>')
-                      .replace(/\n/g, '<br/>'),
-                  }}
-                />
+                <div className={`ai-chat-row ai-chat-row-${m.role}`}>
+                  {m.role === 'bot' && (
+                    <span className="ai-msg-avatar">
+                      <img src={MASCOT_IMG} alt="" />
+                    </span>
+                  )}
+                  <div
+                    className={`ai-chat-msg ai-chat-msg-${m.role}`}
+                    dangerouslySetInnerHTML={{
+                      __html: m.text
+                        .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+                        .replace(/(\/[a-z0-9\-/]+\/?)/gi, '<a href="$1">$1</a>')
+                        .replace(/\n/g, '<br/>'),
+                    }}
+                  />
+                  {m.role === 'bot' && (
+                    <button
+                      className="ai-msg-speak"
+                      onClick={() => speak(m.text)}
+                      aria-label="Play this message"
+                      title="Listen"
+                    >
+                      🔊
+                    </button>
+                  )}
+                </div>
                 {m.options && m.options.length > 0 && (
                   <div className="ai-chat-options">
                     {m.options.map((opt, j) => (
@@ -409,8 +427,13 @@ export default function AIChatBot() {
               </div>
             ))}
             {typing && (
-              <div className="ai-chat-msg ai-chat-msg-bot ai-chat-typing">
-                <span></span><span></span><span></span>
+              <div className="ai-chat-row ai-chat-row-bot">
+                <span className="ai-msg-avatar">
+                  <img src={MASCOT_IMG} alt="" />
+                </span>
+                <div className="ai-chat-msg ai-chat-msg-bot ai-chat-typing">
+                  <span></span><span></span><span></span>
+                </div>
               </div>
             )}
             <div ref={endRef} />
@@ -423,12 +446,22 @@ export default function AIChatBot() {
               handleTextSend();
             }}
           >
+            <button
+              type="button"
+              className={`ai-mic-btn ${listening ? 'listening' : ''}`}
+              onClick={toggleListen}
+              aria-label={listening ? 'Stop listening' : 'Voice input'}
+              title="Speak your question (Hindi/English)"
+            >
+              {listening ? '⏹' : '🎤'}
+            </button>
             <input
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder="Type a question or click an option..."
+              placeholder={listening ? 'Listening...' : 'Type or speak...'}
               aria-label="Message"
+              disabled={listening}
             />
             <button type="submit" aria-label="Send">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M2 21l21-9L2 3v7l15 2-15 2v7z"/></svg>

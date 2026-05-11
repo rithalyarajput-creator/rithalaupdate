@@ -28,13 +28,15 @@ export async function POST(req: NextRequest) {
   const r = await sql`
     INSERT INTO posts (
       slug, title, excerpt, content, featured_image, author_id, status, published_at,
-      meta_title, meta_description, og_image, focus_keyword, canonical_url, noindex
+      meta_title, meta_description, og_image, focus_keyword, canonical_url, noindex,
+      author_name, scheduled_at
     )
     VALUES (
       ${slug}, ${title}, ${body.excerpt || null}, ${body.content || null},
       ${body.featured_image || null}, ${session.userId}, ${status}, ${publishedAt},
       ${body.meta_title || null}, ${body.meta_description || null}, ${body.og_image || null},
-      ${body.focus_keyword || null}, ${body.canonical_url || null}, ${!!body.noindex}
+      ${body.focus_keyword || null}, ${body.canonical_url || null}, ${!!body.noindex},
+      ${body.author_name || null}, ${body.scheduled_at || null}
     )
     RETURNING id, slug
   `;

@@ -35,6 +35,8 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
       focus_keyword = ${body.focus_keyword || null},
       canonical_url = ${body.canonical_url || null},
       noindex = ${!!body.noindex},
+      author_name = ${body.author_name || null},
+      scheduled_at = ${body.scheduled_at || null},
       updated_at = NOW()
     WHERE id = ${id}
   `;

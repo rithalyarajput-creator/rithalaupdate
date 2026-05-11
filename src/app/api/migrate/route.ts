@@ -120,7 +120,7 @@ export async function POST(req: NextRequest) {
       },
       { label: 'History', url: '/rithala-village-history/' },
       { label: 'Photos', url: '/category/places/' },
-      { label: 'Posts', url: '/posts/' },
+      { label: 'Blog', url: '/blog/' },
       { label: 'Contact Us', url: '/contact-location/' },
     ])],
     ['footer_menu_json', JSON.stringify([

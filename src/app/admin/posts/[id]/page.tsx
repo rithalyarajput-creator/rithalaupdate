@@ -1,7 +1,7 @@
 import { notFound, redirect } from 'next/navigation';
 import AdminShell from '@/components/AdminShell';
 import { getSession } from '@/lib/auth';
-import { sql, getCategories, getCategoriesForPost } from '@/lib/db';
+import { sql, getCategories, getCategoriesForPost, getAuthors } from '@/lib/db';
 import PostEditor from '@/components/PostEditor';
 
 export const dynamic = 'force-dynamic';
@@ -17,21 +17,23 @@ export default async function EditPost({ params }: { params: { id: string } }) {
   if (r.rows.length === 0) notFound();
   const post = r.rows[0];
 
-  const [categories, postCats] = await Promise.all([
+  const [categories, postCats, authors] = await Promise.all([
     getCategories(),
     getCategoriesForPost(id),
+    getAuthors().catch(() => []),
   ]);
   const selectedCategoryIds = postCats.map((c) => c.id);
 
   return (
     <AdminShell email={session.email}>
       <div className="admin-header">
-        <h1>✏️ Edit Post</h1>
+        <h1>✏️ Edit Blog</h1>
       </div>
       <PostEditor
         post={post}
         categories={categories}
         selectedCategoryIds={selectedCategoryIds}
+        authors={authors}
       />
     </AdminShell>
   );
