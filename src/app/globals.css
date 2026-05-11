@@ -1058,7 +1058,418 @@ p { margin: 0 0 1em; }
 }
 
 /* ===========================================
-   PUBLIC PHOTOS PAGE
+   PUBLIC PHOTOS PAGE — V2 (polaroid folders)
+   =========================================== */
+.ph2-hero {
+  padding: 50px 16px 30px;
+  background:
+    radial-gradient(ellipse at top, rgba(245,198,27,0.2), transparent 60%),
+    linear-gradient(180deg, #FFFFE4 0%, #fff5d6 100%);
+  text-align: center;
+}
+.ph2-eyebrow {
+  display: inline-block;
+  background: linear-gradient(135deg, #dc2626, #ea580c);
+  color: #fff;
+  padding: 5px 14px;
+  border-radius: 100px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.ph2-h1 {
+  margin: 0 0 10px;
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  font-weight: 800;
+  background: linear-gradient(135deg, #11181f, #dc2626 60%, #ea580c);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.ph2-lead {
+  color: #4b5563;
+  font-size: 1rem;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.65;
+}
+
+.ph2-tabs-section { padding: 18px 16px 10px; }
+.ph2-tabs {
+  display: flex; gap: 8px; flex-wrap: wrap;
+  justify-content: center;
+}
+.ph2-tab {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: #fff;
+  border: 1.5px solid #e2e8f0;
+  color: #475569;
+  padding: 8px 16px;
+  border-radius: 100px;
+  text-decoration: none;
+  font-size: 0.88rem;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: all 0.2s;
+}
+.ph2-tab:hover { border-color: #dc2626; color: #dc2626; }
+.ph2-tab.is-active {
+  background: linear-gradient(135deg, #dc2626, #ea580c);
+  color: #fff;
+  border-color: transparent;
+}
+.ph2-tab-count {
+  background: #f1f5f9;
+  color: #64748b;
+  padding: 1px 8px;
+  border-radius: 100px;
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+.ph2-tab.is-active .ph2-tab-count {
+  background: rgba(255,255,255,0.25);
+  color: #fff;
+}
+
+.ph2-body { padding: 24px 16px 80px; }
+.ph2-crumb {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 0.85rem; color: #64748b;
+  margin-bottom: 16px;
+}
+.ph2-crumb a { color: #dc2626; text-decoration: none; font-weight: 600; }
+.ph2-crumb a:hover { text-decoration: underline; }
+.ph2-crumb span { color: #0f172a; font-weight: 600; }
+
+.ph2-folder-head {
+  margin-bottom: 22px;
+  text-align: center;
+}
+.ph2-folder-head h2 {
+  margin: 0 0 4px;
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  color: #0f172a;
+  font-family: 'Noto Sans Devanagari', sans-serif;
+}
+.ph2-folder-head p {
+  margin: 0 0 6px;
+  color: #64748b;
+  font-size: 0.95rem;
+}
+.ph2-folder-head small { color: #94a3b8; }
+
+/* Polaroid folder cards */
+.ph2-folder-grid {
+  display: grid;
+  gap: 30px 20px;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  padding: 14px 4px 30px;
+}
+@media (max-width: 600px) {
+  .ph2-folder-grid { grid-template-columns: repeat(2, 1fr); gap: 22px 12px; }
+}
+
+.ph2-folder-card {
+  position: relative;
+  text-decoration: none;
+  color: inherit;
+  padding-bottom: 14px;
+  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.ph2-folder-card:hover { transform: translateY(-6px); }
+
+/* Stacked papers under the polaroid (only visible on hover) */
+.ph2-folder-stack {
+  position: absolute;
+  inset: 6px 6px 14px 6px;
+  background: #fff;
+  border-radius: 4px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1),
+              opacity 0.35s ease;
+  opacity: 0;
+  z-index: 1;
+}
+.ph2-stack-3 { transform: rotate(-3deg) translate(-2px, 4px); }
+.ph2-stack-2 { transform: rotate(2deg) translate(4px, 2px); }
+.ph2-stack-1 { transform: rotate(-1deg); opacity: 0.6; }
+.ph2-folder-card:hover .ph2-stack-3 {
+  opacity: 1;
+  transform: rotate(-7deg) translate(-10px, 6px);
+}
+.ph2-folder-card:hover .ph2-stack-2 {
+  opacity: 1;
+  transform: rotate(5deg) translate(10px, 4px);
+}
+
+.ph2-folder-photo {
+  position: relative;
+  z-index: 2;
+  margin: 0;
+  background: #fff;
+  padding: 12px 12px 8px;
+  border-radius: 4px;
+  box-shadow: 0 14px 30px rgba(0,0,0,0.15), 0 2px 6px rgba(0,0,0,0.08);
+  transform: rotate(-1.5deg);
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1),
+              box-shadow 0.4s ease;
+}
+.ph2-folder-card:hover .ph2-folder-photo {
+  transform: rotate(0deg) scale(1.03);
+  box-shadow: 0 24px 50px rgba(220,38,38,0.2), 0 4px 10px rgba(0,0,0,0.1);
+}
+.ph2-folder-photo img {
+  width: 100%;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  display: block;
+  background: #f1f5f9;
+}
+.ph2-folder-cover-empty {
+  width: 100%;
+  aspect-ratio: 1/1;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  background: linear-gradient(135deg, #fff5d6, #fde9b1);
+  color: #94a3b8;
+  gap: 4px;
+}
+.ph2-folder-photo figcaption {
+  margin-top: 10px;
+  text-align: center;
+  font-family: 'Georgia', serif;
+}
+.ph2-folder-photo figcaption strong {
+  display: block;
+  color: #0f172a;
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+.ph2-folder-photo figcaption small {
+  display: block;
+  color: #64748b;
+  font-size: 0.78rem;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Photos inside a folder */
+.ph2-photo-grid {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+}
+@media (max-width: 600px) {
+  .ph2-photo-grid { grid-template-columns: repeat(2, 1fr); gap: 6px; }
+}
+.ph2-photo-item {
+  border: none; padding: 0; margin: 0;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: zoom-in;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+.ph2-photo-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.15);
+}
+.ph2-photo-item img {
+  width: 100%;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  display: block;
+}
+
+.ph2-empty {
+  text-align: center;
+  padding: 80px 30px;
+  color: #94a3b8;
+}
+.ph2-empty svg { color: #cbd5e1; margin-bottom: 14px; }
+.ph2-empty h3 { margin: 0 0 4px; color: #475569; }
+.ph2-empty p { margin: 0; }
+
+/* Lightbox */
+.ph2-lightbox {
+  position: fixed; inset: 0;
+  background: rgba(15,23,42,0.96);
+  z-index: 1000;
+  display: flex; align-items: center; justify-content: center;
+  padding: 60px 16px;
+  animation: lbFade 0.2s ease;
+}
+@keyframes lbFade { from { opacity: 0; } to { opacity: 1; } }
+.ph2-lb-close {
+  position: absolute; top: 18px; right: 18px;
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: #fff;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s;
+}
+.ph2-lb-close:hover { background: rgba(239,68,68,0.7); }
+.ph2-lb-nav {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 52px; height: 52px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.15);
+  color: #fff;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s, transform 0.2s;
+  z-index: 2;
+}
+.ph2-lb-nav:hover {
+  background: rgba(255,255,255,0.2);
+  transform: translateY(-50%) scale(1.08);
+}
+.ph2-lb-prev { left: 18px; }
+.ph2-lb-next { right: 18px; }
+@media (max-width: 600px) {
+  .ph2-lb-nav { width: 40px; height: 40px; }
+  .ph2-lb-prev { left: 8px; }
+  .ph2-lb-next { right: 8px; }
+}
+.ph2-lb-stage {
+  position: relative;
+  max-width: min(1100px, 100%);
+  max-height: 100%;
+  display: flex; flex-direction: column;
+  align-items: center; gap: 14px;
+}
+.ph2-lb-stage img {
+  max-width: 100%;
+  max-height: calc(100vh - 160px);
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 30px 70px rgba(0,0,0,0.6);
+  animation: lbImg 0.25s ease;
+}
+@keyframes lbImg { from { opacity: 0; transform: scale(0.96); } to { opacity: 1; transform: scale(1); } }
+.ph2-lb-caption {
+  color: #fff;
+  text-align: center;
+  max-width: 700px;
+}
+.ph2-lb-caption strong { display: block; font-size: 1.1rem; }
+.ph2-lb-caption span {
+  display: block;
+  font-size: 0.92rem;
+  opacity: 0.85;
+  margin-top: 4px;
+}
+.ph2-lb-caption small {
+  display: block;
+  margin-top: 6px;
+  font-size: 0.78rem;
+  opacity: 0.6;
+}
+
+/* ===========================================
+   ADMIN — Folder cards + section header
+   =========================================== */
+.adm-section-head {
+  display: flex; justify-content: space-between;
+  align-items: center; gap: 14px;
+  margin-bottom: 14px; flex-wrap: wrap;
+}
+.adm-section-head h2 {
+  margin: 0; font-size: 1.15rem; color: #0f172a;
+  display: flex; align-items: center; gap: 8px;
+  font-weight: 700;
+}
+.adm-section-head p {
+  margin: 2px 0 0; color: #64748b; font-size: 0.85rem;
+}
+
+.adm-folder-grid {
+  padding: 18px 22px 22px;
+  display: grid; gap: 24px;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+}
+.adm-folder-card {
+  position: relative;
+  background: #fff;
+  border-radius: 6px;
+  padding: 10px 10px 6px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  transform: rotate(-1deg);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.adm-folder-card:hover {
+  transform: rotate(0deg) translateY(-3px);
+  box-shadow: 0 16px 36px rgba(220,38,38,0.18);
+}
+.adm-folder-stack {
+  position: absolute;
+  inset: 4px;
+  background: #fff;
+  border-radius: 4px;
+  z-index: -1;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+  transform: rotate(2deg);
+}
+.adm-folder-stack-2 {
+  z-index: -2;
+  transform: rotate(-4deg) translate(2px, 2px);
+}
+.adm-folder-cover img {
+  width: 100%;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  border-radius: 4px;
+  display: block;
+}
+.adm-folder-cover-empty {
+  width: 100%; aspect-ratio: 1/1;
+  background: linear-gradient(135deg, #fff5d6, #fde9b1);
+  display: flex; align-items: center; justify-content: center;
+  color: #94a3b8;
+  border-radius: 4px;
+}
+.adm-folder-body {
+  padding: 8px 4px 4px;
+  text-align: center;
+}
+.adm-folder-body strong {
+  display: block;
+  font-size: 0.95rem; color: #0f172a;
+  margin-bottom: 2px;
+}
+.adm-folder-body small {
+  font-size: 0.75rem; color: #64748b;
+}
+.adm-folder-actions {
+  position: absolute;
+  top: 6px; right: 6px;
+  display: flex; gap: 4px;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.adm-folder-card:hover .adm-folder-actions { opacity: 1; }
+.adm-folder-actions .adm-act-btn {
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(6px);
+}
+
+.adm-photo-folder {
+  display: inline-flex; align-items: center; gap: 4px;
+  margin-top: 4px;
+  font-size: 0.72rem;
+  color: #64748b;
+}
+
+/* ===========================================
+   PUBLIC PHOTOS PAGE (legacy v1)
    =========================================== */
 .ph-hero {
   padding: 60px 16px 30px;

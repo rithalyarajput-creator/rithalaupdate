@@ -70,6 +70,23 @@ export async function POST(req: NextRequest) {
     )
   `);
 
+  // Photo folders (collections inside a category, e.g. 'Holi 2025')
+  await run('photo_folders table', sql`
+    CREATE TABLE IF NOT EXISTS photo_folders (
+      id          SERIAL PRIMARY KEY,
+      category_id INTEGER REFERENCES photo_categories(id) ON DELETE CASCADE,
+      name        VARCHAR(200) NOT NULL,
+      slug        VARCHAR(200) NOT NULL,
+      cover_url   TEXT,
+      description TEXT,
+      created_at  TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+      UNIQUE (category_id, slug)
+    )
+  `);
+  await run('photos.folder_id column', sql`
+    ALTER TABLE photos ADD COLUMN IF NOT EXISTS folder_id INTEGER REFERENCES photo_folders(id) ON DELETE SET NULL
+  `);
+
   // Seed default photo categories
   const photoCats: [string, string][] = [
     ['kawad-yatra-2025', 'Kawad Yatra 2025'],

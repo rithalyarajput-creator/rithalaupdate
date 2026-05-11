@@ -10,8 +10,11 @@ export async function POST(req: NextRequest) {
   if (!body.image_url) return NextResponse.json({ error: 'image_url required' }, { status: 400 });
 
   const r = await sql<{ id: number }>`
-    INSERT INTO photos (title, image_url, alt_text, caption)
-    VALUES (${body.title || null}, ${body.image_url}, ${body.alt_text || null}, ${body.caption || null})
+    INSERT INTO photos (title, image_url, alt_text, caption, folder_id)
+    VALUES (
+      ${body.title || null}, ${body.image_url}, ${body.alt_text || null},
+      ${body.caption || null}, ${body.folder_id || null}
+    )
     RETURNING id
   `;
   const id = r.rows[0].id;
