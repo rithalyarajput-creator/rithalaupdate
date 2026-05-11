@@ -2439,6 +2439,266 @@ html, body { overflow-x: hidden; }
 }
 
 /* ============================================
+   CONTACT V5 — Clean form left, map+info right
+   ============================================ */
+.ct2-hero {
+  padding: 70px 16px 40px;
+  background:
+    radial-gradient(ellipse at top, rgba(245,198,27,0.25), transparent 60%),
+    linear-gradient(180deg, #FFFFE4 0%, #fff5d6 100%);
+  text-align: center;
+}
+.ct2-eyebrow {
+  display: inline-block;
+  background: #fff;
+  border: 1.5px solid rgba(220,38,38,0.2);
+  color: #b91c1c;
+  padding: 6px 16px;
+  border-radius: 100px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  margin-bottom: 16px;
+}
+.ct2-hero h1 {
+  margin: 0 0 10px;
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 800;
+  color: #11181f;
+  font-family: 'Noto Sans Devanagari', sans-serif;
+}
+.ct2-grad {
+  background: linear-gradient(135deg, #dc2626, #ea580c, #f5c61b);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.ct2-hero p {
+  color: #4b5563;
+  font-size: 1rem;
+  max-width: 620px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+.ct2-main {
+  padding: 30px 16px 70px;
+  background: #f9fafb;
+}
+.ct2-grid {
+  display: grid; gap: 24px;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 900px) {
+  .ct2-grid { grid-template-columns: 1.3fr 1fr; gap: 30px; align-items: start; }
+}
+
+/* LEFT — Form card */
+.ct2-form-card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 36px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.06);
+  border: 1px solid rgba(245,198,27,0.25);
+}
+@media (max-width: 600px) { .ct2-form-card { padding: 24px; } }
+.ct2-form-head { margin-bottom: 20px; }
+.ct2-form-eyebrow {
+  display: inline-block;
+  background: linear-gradient(135deg, #dc2626, #ea580c);
+  color: #fff;
+  padding: 4px 12px;
+  border-radius: 100px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  margin-bottom: 10px;
+}
+.ct2-form-head h2 {
+  margin: 0 0 4px;
+  font-size: 1.6rem;
+  color: #11181f;
+  font-family: 'Noto Sans Devanagari', sans-serif;
+}
+.ct2-form-head p {
+  margin: 0;
+  font-size: 0.92rem;
+  color: #6b7280;
+}
+.ct2-form-card .form-row input,
+.ct2-form-card .form-row textarea {
+  border-radius: 10px;
+  border: 1.5px solid #e5e7eb;
+  padding: 11px 14px;
+  font-size: 0.95rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.ct2-form-card .form-row input:focus,
+.ct2-form-card .form-row textarea:focus {
+  outline: none;
+  border-color: #dc2626;
+  box-shadow: 0 0 0 3px rgba(220,38,38,0.1);
+}
+.ct2-form-card .btn {
+  background: linear-gradient(135deg, #dc2626, #ea580c, #f5c61b);
+  padding: 13px 28px !important;
+  font-weight: 700 !important;
+  box-shadow: 0 10px 24px rgba(220,38,38,0.3);
+}
+.ct2-form-card .btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(220,38,38,0.45);
+}
+
+/* RIGHT side stack */
+.ct2-side {
+  display: flex; flex-direction: column; gap: 24px;
+}
+
+/* MAP card */
+.ct2-map-card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 14px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.06);
+  border: 1px solid rgba(245,198,27,0.25);
+}
+.ct2-map-frame {
+  width: 100%;
+  aspect-ratio: 4/3;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+.ct2-map-frame iframe {
+  width: 100%; height: 100%;
+  border: 0; display: block;
+}
+.ct2-map-cta {
+  display: flex; align-items: center; justify-content: center;
+  gap: 8px;
+  width: 100%;
+  background: linear-gradient(135deg, #11181f, #1f2937);
+  color: #fff !important;
+  padding: 11px 16px;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.25s ease;
+}
+.ct2-map-cta:hover {
+  background: linear-gradient(135deg, #dc2626, #ea580c);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(220,38,38,0.3);
+}
+
+/* INFO card */
+.ct2-info-card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 28px 30px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.06);
+  border: 1px solid rgba(245,198,27,0.25);
+  position: relative;
+  overflow: hidden;
+}
+.ct2-info-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #dc2626, #ea580c, #f5c61b);
+}
+@media (max-width: 600px) { .ct2-info-card { padding: 22px 20px; } }
+
+.ct2-info-h3 {
+  margin: 0 0 20px;
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #11181f;
+  display: flex; align-items: center; gap: 10px;
+}
+.ct2-info-icon-h {
+  width: 36px; height: 36px;
+  background: linear-gradient(135deg, #dc2626, #ea580c);
+  border-radius: 10px;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 1.1rem;
+}
+.ct2-info-list {
+  display: flex; flex-direction: column; gap: 14px;
+  margin-bottom: 22px;
+}
+.ct2-info-row {
+  display: flex; gap: 12px;
+  align-items: flex-start;
+}
+.ct2-info-ic {
+  width: 36px; height: 36px;
+  background: #fff5d6;
+  color: #dc2626;
+  border-radius: 10px;
+  display: inline-flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.25s ease;
+}
+.ct2-info-row:hover .ct2-info-ic {
+  background: linear-gradient(135deg, #dc2626, #ea580c);
+  color: #fff;
+  transform: scale(1.05);
+}
+.ct2-info-row > div {
+  flex: 1; min-width: 0;
+}
+.ct2-info-row strong {
+  display: block;
+  font-size: 0.78rem;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+.ct2-info-row a, .ct2-info-row > div > span {
+  color: #11181f;
+  font-size: 0.92rem;
+  font-weight: 600;
+  text-decoration: none;
+  word-break: break-word;
+  line-height: 1.4;
+}
+.ct2-info-row a:hover { color: #dc2626; }
+
+.ct2-social-block {
+  padding-top: 18px;
+  border-top: 1px solid #f1f1f1;
+  display: flex; align-items: center; gap: 14px;
+  flex-wrap: wrap;
+}
+.ct2-social-block small {
+  font-size: 0.82rem;
+  color: #6b7280;
+  font-weight: 600;
+}
+.ct2-social-row {
+  display: flex; gap: 8px;
+}
+.ct2-soc {
+  width: 34px; height: 34px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: 10px;
+  color: #fff;
+  text-decoration: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+}
+.ct2-soc:hover { transform: translateY(-3px) scale(1.08); box-shadow: 0 6px 14px rgba(0,0,0,0.2); }
+.ct2-soc-ig { background: linear-gradient(45deg, #f09433, #dc2743, #bc1888); }
+.ct2-soc-fb { background: #1877f2; }
+.ct2-soc-yt { background: #ff0000; }
+.ct2-soc-pn { background: #e60023; }
+
+/* ============================================
    CONTACT V4 — Curved hero, glass form over map
    ============================================ */
 .cx-hero {

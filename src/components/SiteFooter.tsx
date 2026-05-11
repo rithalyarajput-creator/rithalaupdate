@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import NewsletterForm from './NewsletterForm';
 
 type MenuItem = { label: string; url: string };
 
@@ -56,21 +57,7 @@ export default function SiteFooter({
           </p>
           <div className="ftr-newsletter">
             <p className="ftr-newsletter-label">📬 Subscribe for updates</p>
-            <form
-              action={`mailto:${contactEmail}`}
-              method="post"
-              encType="text/plain"
-              className="ftr-newsletter-form"
-            >
-              <input
-                type="email"
-                name="email"
-                placeholder="Your email"
-                required
-                aria-label="Email address"
-              />
-              <button type="submit">Join →</button>
-            </form>
+            <NewsletterForm />
           </div>
         </div>
 

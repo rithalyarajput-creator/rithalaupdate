@@ -20,11 +20,16 @@ const STATUS_OPTIONS = ['new', 'contacted', 'qualified', 'closed', 'spam'];
 export default function LeadsManager({ initialLeads }: { initialLeads: Lead[] }) {
   const [leads, setLeads] = useState<Lead[]>(initialLeads);
   const [filter, setFilter] = useState<string>('all');
+  const [sourceTab, setSourceTab] = useState<'all' | 'contact_form' | 'newsletter'>('all');
   const [selected, setSelected] = useState<Lead | null>(null);
   const [msg, setMsg] = useState<string | null>(null);
   const [err, setErr] = useState<string | null>(null);
 
-  const filtered = filter === 'all' ? leads : leads.filter((l) => l.status === filter);
+  const bySource = sourceTab === 'all' ? leads : leads.filter((l) => l.source === sourceTab);
+  const filtered = filter === 'all' ? bySource : bySource.filter((l) => l.status === filter);
+
+  const contactCount = leads.filter((l) => l.source === 'contact_form').length;
+  const newsletterCount = leads.filter((l) => l.source === 'newsletter').length;
 
   async function updateStatus(id: number, status: string) {
     const res = await fetch(`/api/leads/${id}`, {
@@ -68,15 +73,37 @@ export default function LeadsManager({ initialLeads }: { initialLeads: Lead[] })
       {msg && <div className="form-success">{msg}</div>}
 
       <div className="admin-card">
+        {/* Source tabs */}
+        <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: 14, paddingBottom: 14, borderBottom: '2px solid #eee' }}>
+          <button
+            className={`btn btn-sm ${sourceTab === 'all' ? '' : 'btn-secondary'}`}
+            onClick={() => setSourceTab('all')}
+          >
+            🗂️ All Leads ({leads.length})
+          </button>
+          <button
+            className={`btn btn-sm ${sourceTab === 'contact_form' ? '' : 'btn-secondary'}`}
+            onClick={() => setSourceTab('contact_form')}
+          >
+            📨 Contact Form ({contactCount})
+          </button>
+          <button
+            className={`btn btn-sm ${sourceTab === 'newsletter' ? '' : 'btn-secondary'}`}
+            onClick={() => setSourceTab('newsletter')}
+          >
+            📬 Newsletter ({newsletterCount})
+          </button>
+        </div>
+
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: 16 }}>
           <button
             className={`btn btn-sm ${filter === 'all' ? '' : 'btn-secondary'}`}
             onClick={() => setFilter('all')}
           >
-            All ({leads.length})
+            All ({bySource.length})
           </button>
           {STATUS_OPTIONS.map((s) => {
-            const count = leads.filter((l) => l.status === s).length;
+            const count = bySource.filter((l) => l.status === s).length;
             return (
               <button
                 key={s}
