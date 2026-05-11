@@ -1942,8 +1942,9 @@ p { margin: 0 0 1em; }
 /* Make all images responsive by default */
 img, video, iframe { max-width: 100%; height: auto; }
 
-/* Prevent horizontal overflow */
-html, body { overflow-x: hidden; }
+/* Prevent horizontal overflow — only on body so html stays the
+   scroll container (required for position: sticky to work) */
+body { overflow-x: clip; }
 
 /* Mobile-first nav improvements */
 @media (max-width: 767px) {
@@ -4052,6 +4053,7 @@ html, body { overflow-x: hidden; }
   .bd2-grid {
     grid-template-columns: minmax(0, 1fr) 340px;
     gap: 40px;
+    align-items: start;
   }
 }
 .bd2-main {
@@ -4295,12 +4297,37 @@ html, body { overflow-x: hidden; }
   line-height: 1.55;
 }
 
-/* Form aside — static, scrolls with page content */
+/* Form aside — STICKY: stays in view while article scrolls */
 .bd2-aside {
   min-width: 0;
 }
 .bd2-aside-sticky {
-  position: static;
+  position: sticky;
+  top: 20px;
+}
+
+/* Long form: own scroll if it doesn't fit viewport */
+@media (min-height: 700px) {
+  .bd2-aside-sticky {
+    max-height: calc(100vh - 40px);
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0,0,0,0.15) transparent;
+  }
+  .bd2-aside-sticky::-webkit-scrollbar { width: 5px; }
+  .bd2-aside-sticky::-webkit-scrollbar-track { background: transparent; }
+  .bd2-aside-sticky::-webkit-scrollbar-thumb {
+    background: rgba(0,0,0,0.15);
+    border-radius: 3px;
+  }
+}
+
+@media (max-width: 999px) {
+  .bd2-aside-sticky {
+    position: static;
+    max-height: none;
+    overflow: visible;
+  }
 }
 
 .bd-related-section {
