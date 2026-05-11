@@ -19,16 +19,16 @@ function parseMenu(json: string | undefined): MenuItem[] {
 
 const FALLBACK_HEADER: MenuItem[] = [
   { label: 'Home', url: '/' },
+  { label: 'Blog', url: '/blog/' },
+  { label: 'History', url: '/rithala-village-history/' },
+  { label: 'Photos', url: '/photos/' },
   {
     label: 'About', url: '/about/', children: [
       { label: 'About Us', url: '/about/' },
-      { label: 'About Me', url: '/about-me/' },
+      { label: 'About Me', url: '/sandeep-rajput/' },
     ],
   },
-  { label: 'History', url: '/rithala-village-history/' },
-  { label: 'Photos', url: '/category/places/' },
-  { label: 'Blog', url: '/blog/' },
-  { label: 'Contact Us', url: '/contact-location/' },
+  { label: 'Contact Us', url: '/contact/' },
 ];
 
 export default async function PublicShell({ children }: { children: React.ReactNode }) {

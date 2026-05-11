@@ -26,8 +26,11 @@ export default async function EditPost({ params }: { params: { id: string } }) {
 
   return (
     <AdminShell email={session.email}>
-      <div className="admin-header">
-        <h1>✏️ Edit Blog</h1>
+      <div className="adm-page-head">
+        <div>
+          <h1 className="adm-h1">Edit Blog</h1>
+          <p className="adm-h1-sub">Update content, SEO, and publishing options</p>
+        </div>
       </div>
       <PostEditor
         post={post}

@@ -1,5 +1,6 @@
 import { redirect } from 'next/navigation';
 import AdminShell from '@/components/AdminShell';
+import Icon from '@/components/Icon';
 import { getSession } from '@/lib/auth';
 import { getCategories, getAuthors } from '@/lib/db';
 import PostEditor from '@/components/PostEditor';
@@ -15,8 +16,11 @@ export default async function NewPost() {
   ]);
   return (
     <AdminShell email={session.email}>
-      <div className="admin-header">
-        <h1>➕ New Blog</h1>
+      <div className="adm-page-head">
+        <div>
+          <h1 className="adm-h1"><Icon name="plus" size={22} /> New Blog</h1>
+          <p className="adm-h1-sub">Write a new blog post with full SEO and scheduling</p>
+        </div>
       </div>
       <PostEditor categories={categories} authors={authors} />
     </AdminShell>

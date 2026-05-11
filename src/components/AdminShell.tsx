@@ -25,9 +25,11 @@ const NAV: NavItem[] = [
       { href: '/admin/categories', label: 'Categories', icon: 'tag' },
     ],
   },
+  { href: '/admin/photos', label: 'Photos', icon: 'photo' },
   { href: '/admin/media', label: 'Media Library', icon: 'image' },
   { href: '/admin/reels', label: 'Reels', icon: 'video' },
   { href: '/admin/leads', label: 'Leads', icon: 'inbox' },
+  { href: '/admin/users', label: 'Users', icon: 'users' },
   { href: '/admin/settings', label: 'Settings', icon: 'settings' },
 ];
 

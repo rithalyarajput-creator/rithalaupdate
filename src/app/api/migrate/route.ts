@@ -38,6 +38,53 @@ export async function POST(req: NextRequest) {
     )
   `);
 
+  // Photo categories (separate from blog categories)
+  await run('photo_categories table', sql`
+    CREATE TABLE IF NOT EXISTS photo_categories (
+      id          SERIAL PRIMARY KEY,
+      slug        VARCHAR(200) UNIQUE NOT NULL,
+      name        VARCHAR(200) NOT NULL,
+      description TEXT,
+      created_at  TIMESTAMPTZ NOT NULL DEFAULT NOW()
+    )
+  `);
+
+  // Photos
+  await run('photos table', sql`
+    CREATE TABLE IF NOT EXISTS photos (
+      id          SERIAL PRIMARY KEY,
+      title       VARCHAR(300),
+      image_url   TEXT NOT NULL,
+      alt_text    TEXT,
+      caption     TEXT,
+      created_at  TIMESTAMPTZ NOT NULL DEFAULT NOW()
+    )
+  `);
+
+  // photo <-> category many-to-many
+  await run('photo_photo_categories table', sql`
+    CREATE TABLE IF NOT EXISTS photo_photo_categories (
+      photo_id    INTEGER REFERENCES photos(id) ON DELETE CASCADE,
+      category_id INTEGER REFERENCES photo_categories(id) ON DELETE CASCADE,
+      PRIMARY KEY (photo_id, category_id)
+    )
+  `);
+
+  // Seed default photo categories
+  const photoCats: [string, string][] = [
+    ['kawad-yatra-2025', 'Kawad Yatra 2025'],
+    ['kawad-yatra-2024', 'Kawad Yatra 2024'],
+    ['festivals', 'Festivals'],
+    ['temples', 'Temples'],
+    ['village-life', 'Village Life'],
+  ];
+  for (const [slug, name] of photoCats) {
+    await run(`photo_categories.${slug}`, sql`
+      INSERT INTO photo_categories (slug, name) VALUES (${slug}, ${name})
+      ON CONFLICT (slug) DO NOTHING
+    `);
+  }
+
   // Posts: author_name (display) and scheduled_at
   await run('posts.author_name', sql`ALTER TABLE posts ADD COLUMN IF NOT EXISTS author_name VARCHAR(200)`);
   await run('posts.scheduled_at', sql`ALTER TABLE posts ADD COLUMN IF NOT EXISTS scheduled_at TIMESTAMPTZ`);
@@ -112,16 +159,16 @@ export async function POST(req: NextRequest) {
     ['contact_address', 'Rithala Village, North-West Delhi, India'],
     ['header_menu_json', JSON.stringify([
       { label: 'Home', url: '/' },
+      { label: 'Blog', url: '/blog/' },
+      { label: 'History', url: '/rithala-village-history/' },
+      { label: 'Photos', url: '/photos/' },
       {
         label: 'About', url: '/about/', children: [
           { label: 'About Us', url: '/about/' },
-          { label: 'About Me', url: '/about-me/' },
+          { label: 'About Me', url: '/sandeep-rajput/' },
         ],
       },
-      { label: 'History', url: '/rithala-village-history/' },
-      { label: 'Photos', url: '/category/places/' },
-      { label: 'Blog', url: '/blog/' },
-      { label: 'Contact Us', url: '/contact-location/' },
+      { label: 'Contact Us', url: '/contact/' },
     ])],
     ['footer_menu_json', JSON.stringify([
       { label: 'Home', url: '/' },

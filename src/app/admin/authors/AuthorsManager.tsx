@@ -2,6 +2,7 @@
 
 import { useState, useRef } from 'react';
 import slugify from 'slugify';
+import Icon from '@/components/Icon';
 
 type Author = {
   id: number;
@@ -11,6 +12,7 @@ type Author = {
   avatar_url: string | null;
   email: string | null;
   social_url: string | null;
+  post_count?: number;
 };
 
 export default function AuthorsManager({ initialAuthors }: { initialAuthors: Author[] }) {
@@ -42,7 +44,7 @@ export default function AuthorsManager({ initialAuthors }: { initialAuthors: Aut
     if (res.ok) {
       const j = await res.json();
       setAvatar(j.url);
-      setMsg('✓ Avatar uploaded');
+      setMsg('Avatar uploaded');
       setTimeout(() => setMsg(null), 2000);
     }
   }
@@ -51,19 +53,27 @@ export default function AuthorsManager({ initialAuthors }: { initialAuthors: Aut
     e.preventDefault();
     setErr(null); setMsg(null);
     const finalSlug = slug || slugify(name, { lower: true, strict: true });
-    const body = { name, slug: finalSlug, bio, avatar_url: avatar || null, email: authorEmail || null, social_url: social || null };
+    const body = {
+      name, slug: finalSlug, bio,
+      avatar_url: avatar || null,
+      email: authorEmail || null,
+      social_url: social || null,
+    };
     const url = editing ? `/api/authors/${editing.id}` : '/api/authors';
     const method = editing ? 'PUT' : 'POST';
-    const res = await fetch(url, { method, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+    const res = await fetch(url, {
+      method, headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    });
     if (res.ok) {
       const j = await res.json();
       if (editing) {
         setAuthors(authors.map((a) => a.id === editing.id ? { ...editing, ...body } : a));
       } else {
-        setAuthors([...authors, { id: j.id, ...body } as Author]);
+        setAuthors([...authors, { id: j.id, ...body, post_count: 0 } as Author]);
       }
       reset();
-      setMsg('✓ Saved');
+      setMsg('Author saved');
       setTimeout(() => setMsg(null), 2000);
     } else {
       const j = await res.json().catch(() => ({}));
@@ -80,100 +90,140 @@ export default function AuthorsManager({ initialAuthors }: { initialAuthors: Aut
   }
 
   async function handleDelete(id: number) {
-    if (!confirm('Delete this author?')) return;
+    if (!confirm('Delete this author? Posts written by them will keep their author name as text.')) return;
     const res = await fetch(`/api/authors/${id}`, { method: 'DELETE' });
     if (res.ok) setAuthors(authors.filter((a) => a.id !== id));
   }
 
   return (
-    <div>
-      {err && <div className="form-error">{err}</div>}
-      {msg && <div className="form-success">{msg}</div>}
+    <div className="adm-grid-2">
+      <div className="adm-card">
+        <div className="adm-card-head">
+          <h3>{editing ? `Edit: ${editing.name}` : 'Add New Author'}</h3>
+          {editing && <button type="button" className="adm-btn-ghost" onClick={reset}>Cancel</button>}
+        </div>
 
-      <div className="admin-card">
-        <h3 style={{ marginTop: 0 }}>{editing ? `✏️ Edit: ${editing.name}` : '➕ Add Author'}</h3>
+        {err && <div className="adm-alert adm-alert-error">{err}</div>}
+        {msg && <div className="adm-alert adm-alert-success">{msg}</div>}
+
         <form onSubmit={handleSubmit}>
-          <div className="form-row">
-            <label>Author Name *</label>
+          <div className="adm-field">
+            <label>Avatar Image</label>
+            <div className="adm-avatar-picker">
+              {avatar ? (
+                <img src={avatar} alt="" className="adm-avatar-preview" />
+              ) : (
+                <div className="adm-avatar-preview adm-avatar-empty">
+                  <Icon name="user" size={32} />
+                </div>
+              )}
+              <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 8 }}>
+                <input
+                  type="url" value={avatar}
+                  onChange={(e) => setAvatar(e.target.value)}
+                  placeholder="https://... or upload"
+                />
+                <button type="button" className="adm-btn-ghost" onClick={() => fileRef.current?.click()}>
+                  <Icon name="plus" size={13} /> Upload Photo
+                </button>
+                <input ref={fileRef} type="file" accept="image/*" onChange={handleAvatarUpload} style={{ display: 'none' }} />
+              </div>
+            </div>
+          </div>
+
+          <div className="adm-field">
+            <label>Name <span style={{ color: '#ef4444' }}>*</span></label>
             <input
               type="text" value={name} required
               onChange={(e) => {
                 setName(e.target.value);
                 if (!editing) setSlug(slugify(e.target.value, { lower: true, strict: true }));
               }}
+              placeholder="e.g. Sandeep Rajput"
             />
           </div>
-          <div className="form-row">
+
+          <div className="adm-field">
             <label>Slug</label>
             <input type="text" value={slug} onChange={(e) => setSlug(e.target.value)} />
-            <p className="help">URL: /author/{slug || '...'}/</p>
+            <small>URL: /blog/?author={slug || '...'}</small>
           </div>
-          <div className="form-row">
-            <label>Avatar Image</label>
-            <div style={{ display: 'flex', gap: 12, alignItems: 'flex-start', flexWrap: 'wrap' }}>
-              {avatar && <img src={avatar} alt="" style={{ width: 80, height: 80, borderRadius: '50%', objectFit: 'cover' }} />}
-              <div style={{ flex: 1, minWidth: 200 }}>
-                <input type="url" value={avatar} onChange={(e) => setAvatar(e.target.value)} placeholder="https://... or upload" />
-                <input ref={fileRef} type="file" accept="image/*" onChange={handleAvatarUpload} style={{ marginTop: 6 }} />
-              </div>
-            </div>
+
+          <div className="adm-field">
+            <label>Description / Bio</label>
+            <textarea value={bio} onChange={(e) => setBio(e.target.value)} rows={4} placeholder="Short bio shown on blog posts and author page..." />
           </div>
-          <div className="form-row">
-            <label>Bio</label>
-            <textarea value={bio} onChange={(e) => setBio(e.target.value)} rows={3} style={{ minHeight: 70, fontFamily: 'inherit' }} placeholder="Short bio..." />
+
+          <div className="adm-field">
+            <label>Email</label>
+            <input type="email" value={authorEmail} onChange={(e) => setAuthorEmail(e.target.value)} />
           </div>
-          <div style={{ display: 'grid', gap: 12, gridTemplateColumns: '1fr 1fr' }}>
-            <div className="form-row">
-              <label>Email</label>
-              <input type="email" value={authorEmail} onChange={(e) => setAuthorEmail(e.target.value)} />
-            </div>
-            <div className="form-row">
-              <label>Social URL</label>
-              <input type="url" value={social} onChange={(e) => setSocial(e.target.value)} placeholder="https://instagram.com/..." />
-            </div>
+
+          <div className="adm-field">
+            <label>Social URL</label>
+            <input type="url" value={social} onChange={(e) => setSocial(e.target.value)} placeholder="https://instagram.com/..." />
           </div>
-          <div className="form-actions">
-            <button type="submit" className="btn">{editing ? 'Update Author' : 'Add Author'}</button>
-            {editing && <button type="button" className="btn btn-secondary" onClick={reset}>Cancel</button>}
-          </div>
+
+          <button type="submit" className="adm-btn-primary" style={{ width: '100%', margin: '0 22px' }}>
+            <Icon name={editing ? 'check' : 'plus'} size={14} />
+            {editing ? 'Update Author' : 'Add Author'}
+          </button>
         </form>
       </div>
 
-      <div className="admin-card">
-        <h3 style={{ marginTop: 0 }}>All Authors ({authors.length})</h3>
+      <div className="adm-card">
+        <div className="adm-card-head">
+          <h3>All Authors ({authors.length})</h3>
+        </div>
+
         {authors.length === 0 ? (
-          <p style={{ color: '#888' }}>No authors yet. Add one above.</p>
+          <div className="adm-empty">
+            <Icon name="feather" size={40} />
+            <h3>No authors yet</h3>
+            <p>Add your first author on the left.</p>
+          </div>
         ) : (
-          <table className="admin-table">
-            <thead>
-              <tr><th>Author</th><th>Bio</th><th>Email</th><th>Actions</th></tr>
-            </thead>
-            <tbody>
-              {authors.map((a) => (
-                <tr key={a.id}>
-                  <td>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                      {a.avatar_url ? (
-                        <img src={a.avatar_url} alt="" style={{ width: 36, height: 36, borderRadius: '50%', objectFit: 'cover' }} />
-                      ) : (
-                        <div style={{ width: 36, height: 36, borderRadius: '50%', background: 'linear-gradient(135deg, #dc2626, #ea580c)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700 }}>{a.name[0]}</div>
-                      )}
-                      <div>
-                        <strong>{a.name}</strong>
-                        <div style={{ fontSize: '0.78rem', color: '#666' }}>/{a.slug}</div>
-                      </div>
+          <div className="adm-author-list">
+            {authors.map((a) => {
+              const max = Math.max(...authors.map((x) => x.post_count || 0), 1);
+              const pct = ((a.post_count || 0) / max) * 100;
+              return (
+                <div key={a.id} className="adm-author-row">
+                  {a.avatar_url ? (
+                    <img src={a.avatar_url} alt="" className="adm-author-avatar" />
+                  ) : (
+                    <div className="adm-author-avatar adm-author-avatar-fallback">
+                      {a.name[0]}
                     </div>
-                  </td>
-                  <td style={{ fontSize: '0.85rem', color: '#666', maxWidth: 300 }}>{(a.bio || '').slice(0, 80) || '—'}</td>
-                  <td style={{ fontSize: '0.85rem' }}>{a.email || '—'}</td>
-                  <td className="actions">
-                    <button className="btn btn-sm" onClick={() => startEdit(a)}>Edit</button>
-                    <button className="btn-danger" onClick={() => handleDelete(a.id)}>Delete</button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+                  )}
+                  <div className="adm-author-info">
+                    <div className="adm-author-name">
+                      <strong>{a.name}</strong>
+                      <code>/{a.slug}/</code>
+                    </div>
+                    {a.bio && <small className="adm-author-bio">{a.bio.slice(0, 100)}</small>}
+                    <div className="adm-cat-bar-wrap">
+                      <div className="adm-cat-bar" style={{ width: `${pct}%` }}></div>
+                    </div>
+                  </div>
+                  <div className="adm-cat-meta">
+                    <div className="adm-cat-count">
+                      <strong>{a.post_count || 0}</strong>
+                      <small>posts</small>
+                    </div>
+                    <div className="adm-actions">
+                      <button onClick={() => startEdit(a)} className="adm-act-btn adm-act-edit" title="Edit">
+                        <Icon name="edit" size={14} />
+                      </button>
+                      <button onClick={() => handleDelete(a.id)} className="adm-act-btn adm-act-delete" title="Delete">
+                        <Icon name="trash" size={14} />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
         )}
       </div>
     </div>

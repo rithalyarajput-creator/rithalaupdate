@@ -111,7 +111,7 @@ export default function PostEditor({
   post?: any;
   categories: Category[];
   selectedCategoryIds?: number[];
-  authors?: { id: number; name: string }[];
+  authors?: { id: number; name: string; avatar_url?: string | null }[];
 }) {
   const router = useRouter();
   const [title, setTitle] = useState(post?.title || '');
@@ -402,18 +402,11 @@ export default function PostEditor({
             <Icon name="feather" size={16} /> Author
           </h3>
           <div className="pe-field">
-            {authors.length > 0 ? (
-              <select value={authorName} onChange={(e) => setAuthorName(e.target.value)}>
-                {authors.map((a) => <option key={a.id} value={a.name}>{a.name}</option>)}
-              </select>
-            ) : (
-              <input
-                type="text"
-                value={authorName}
-                onChange={(e) => setAuthorName(e.target.value)}
-                placeholder="Author name"
-              />
-            )}
+            <AuthorPicker
+              authors={authors}
+              value={authorName}
+              onChange={setAuthorName}
+            />
             <small><a href="/admin/authors" target="_blank">Manage authors</a></small>
           </div>
         </div>
@@ -727,6 +720,84 @@ function CategoriesPicker({
       <a href="/admin/categories" target="_blank" className="pe-cat-manage-link">
         <Icon name="plus" size={11} /> New category
       </a>
+    </div>
+  );
+}
+
+/* ===========================================
+   AuthorPicker — dropdown with avatars
+   =========================================== */
+function AuthorPicker({
+  authors,
+  value,
+  onChange,
+}: {
+  authors: { id: number; name: string; avatar_url?: string | null }[];
+  value: string;
+  onChange: (name: string) => void;
+}) {
+  const [open, setOpen] = useState(false);
+  const wrapRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function onDoc(e: MouseEvent) {
+      if (wrapRef.current && !wrapRef.current.contains(e.target as Node)) setOpen(false);
+    }
+    if (open) document.addEventListener('mousedown', onDoc);
+    return () => document.removeEventListener('mousedown', onDoc);
+  }, [open]);
+
+  if (authors.length === 0) {
+    return (
+      <input
+        type="text"
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        placeholder="Author name"
+      />
+    );
+  }
+
+  const current = authors.find((a) => a.name === value);
+
+  return (
+    <div className="pe-author-picker" ref={wrapRef}>
+      <button
+        type="button"
+        className="pe-author-trigger"
+        onClick={() => setOpen(!open)}
+      >
+        <span className="pe-author-trigger-left">
+          {current?.avatar_url ? (
+            <img src={current.avatar_url} alt="" />
+          ) : (
+            <span className="pe-author-avatar-fallback">{value[0] || '?'}</span>
+          )}
+          <span>{current?.name || value}</span>
+        </span>
+        <Icon name={open ? 'chevron-up' : 'chevron-down'} size={14} />
+      </button>
+
+      {open && (
+        <div className="pe-author-dropdown">
+          {authors.map((a) => (
+            <button
+              key={a.id}
+              type="button"
+              className={`pe-author-option ${a.name === value ? 'is-active' : ''}`}
+              onClick={() => { onChange(a.name); setOpen(false); }}
+            >
+              {a.avatar_url ? (
+                <img src={a.avatar_url} alt="" />
+              ) : (
+                <span className="pe-author-avatar-fallback">{a.name[0]}</span>
+              )}
+              <span>{a.name}</span>
+              {a.name === value && <Icon name="check" size={14} />}
+            </button>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
