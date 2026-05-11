@@ -162,6 +162,14 @@ export async function POST(req: NextRequest) {
       updated_at    TIMESTAMPTZ NOT NULL DEFAULT NOW()
     )
   `);
+
+  // Reels — direct video file (MP4 etc.) and YouTube URL columns
+  await run('reels.video_url', sql`ALTER TABLE reels ADD COLUMN IF NOT EXISTS video_url TEXT`);
+  await run('reels.youtube_url', sql`ALTER TABLE reels ADD COLUMN IF NOT EXISTS youtube_url TEXT`);
+  // Optional click-through URL when user taps the reel card
+  await run('reels.click_url', sql`ALTER TABLE reels ADD COLUMN IF NOT EXISTS click_url TEXT`);
+  // Make instagram_url nullable now that video_url / youtube_url are also valid
+  await run('reels.instagram_url nullable', sql`ALTER TABLE reels ALTER COLUMN instagram_url DROP NOT NULL`);
   await run('reels index status', sql`CREATE INDEX IF NOT EXISTS reels_status_idx ON reels(status)`);
   await run('reels index order', sql`CREATE INDEX IF NOT EXISTS reels_order_idx ON reels(display_order)`);
 

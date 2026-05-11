@@ -58,7 +58,10 @@ export type Lead = {
 export type Reel = {
   id: number;
   title: string;
-  instagram_url: string;
+  instagram_url: string | null;
+  video_url?: string | null;
+  youtube_url?: string | null;
+  click_url?: string | null;
   thumbnail_url: string | null;
   description: string | null;
   display_order: number;

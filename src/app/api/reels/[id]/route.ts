@@ -11,7 +11,10 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
   await sql`
     UPDATE reels SET
       title = ${body.title},
-      instagram_url = ${body.instagram_url},
+      instagram_url = ${body.instagram_url || null},
+      video_url = ${body.video_url || null},
+      youtube_url = ${body.youtube_url || null},
+      click_url = ${body.click_url || null},
       thumbnail_url = ${body.thumbnail_url || null},
       description = ${body.description || null},
       display_order = ${body.display_order || 0},
