@@ -48,8 +48,13 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
   }
 
   revalidatePath('/');
-  if (oldSlug) revalidatePath(`/${oldSlug}/`);
+  revalidatePath('/blog');
+  if (oldSlug) {
+    revalidatePath(`/${oldSlug}/`);
+    revalidatePath(`/blog/${oldSlug}`);
+  }
   revalidatePath(`/${slug}/`);
+  revalidatePath(`/blog/${slug}`);
 
   return NextResponse.json({ ok: true, id, slug });
 }

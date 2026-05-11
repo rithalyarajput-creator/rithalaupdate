@@ -48,6 +48,8 @@ export async function POST(req: NextRequest) {
   }
 
   revalidatePath('/');
+  revalidatePath('/blog');
+  revalidatePath(`/blog/${slug}`);
   revalidatePath(`/${slug}/`);
   return NextResponse.json({ id, slug });
 }

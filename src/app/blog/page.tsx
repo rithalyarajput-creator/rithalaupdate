@@ -3,6 +3,7 @@ import Link from 'next/link';
 import PublicShell from '@/components/PublicShell';
 import BlogFilters from './BlogFilters';
 import { sql, getCategories } from '@/lib/db';
+import Icon from '@/components/Icon';
 
 export const revalidate = 60;
 
@@ -70,7 +71,7 @@ export default async function BlogPage({ searchParams }: { searchParams: SP }) {
     <PublicShell>
       <section className="blog-hero">
         <div className="container">
-          <span className="blog-hero-eyebrow">📝 Blog</span>
+          <span className="blog-hero-eyebrow">Blog</span>
           <h1 className="blog-hero-h1">All Blog Posts</h1>
           <p className="blog-hero-lead">
             रिठाला गाँव, राजपूताना heritage, events, temples और culture से जुड़ी सारी कहानियाँ।
@@ -93,7 +94,7 @@ export default async function BlogPage({ searchParams }: { searchParams: SP }) {
         <div className="container">
           {posts.length === 0 ? (
             <div className="blog-empty">
-              <div style={{ fontSize: '3rem' }}>📭</div>
+              <Icon name="inbox" size={48} />
               <h3>कोई post नहीं मिली</h3>
               <p>Filters change करके try करें या <Link href="/blog/">सारे posts</Link> देखें।</p>
             </div>
@@ -105,14 +106,22 @@ export default async function BlogPage({ searchParams }: { searchParams: SP }) {
                     {p.featured_image ? (
                       <img src={p.featured_image} alt={p.title} loading="lazy" />
                     ) : (
-                      <div className="blog-card-img-placeholder">🚩 Rithala</div>
+                      <div className="blog-card-img-placeholder">Rithala</div>
                     )}
                     <div className="blog-card-glow" aria-hidden="true"></div>
                   </div>
                   <div className="blog-card-body">
                     <div className="blog-card-meta">
-                      <span>📅 {p.published_at ? new Date(p.published_at).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }) : 'Draft'}</span>
-                      {p.author_name && <span>· ✍️ {p.author_name}</span>}
+                      <span className="bc-meta-item">
+                        <Icon name="calendar" size={12} />
+                        {p.published_at ? new Date(p.published_at).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }) : 'Draft'}
+                      </span>
+                      {p.author_name && (
+                        <span className="bc-meta-item">
+                          <Icon name="feather" size={12} />
+                          {p.author_name}
+                        </span>
+                      )}
                     </div>
                     <h3 className="blog-card-title">{p.title}</h3>
                     <span className="blog-card-arrow">Read more →</span>
