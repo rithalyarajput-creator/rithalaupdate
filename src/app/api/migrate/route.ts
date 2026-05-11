@@ -38,6 +38,39 @@ export async function POST(req: NextRequest) {
     )
   `);
 
+  // FAQs
+  await run('faqs table', sql`
+    CREATE TABLE IF NOT EXISTS faqs (
+      id            SERIAL PRIMARY KEY,
+      question      TEXT NOT NULL,
+      answer        TEXT NOT NULL,
+      category      VARCHAR(100),
+      display_order INTEGER DEFAULT 0,
+      show_on_home  BOOLEAN DEFAULT FALSE,
+      status        VARCHAR(20) DEFAULT 'published',
+      created_at    TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+      updated_at    TIMESTAMPTZ NOT NULL DEFAULT NOW()
+    )
+  `);
+
+  // Testimonials
+  await run('testimonials table', sql`
+    CREATE TABLE IF NOT EXISTS testimonials (
+      id            SERIAL PRIMARY KEY,
+      name          VARCHAR(200) NOT NULL,
+      phone         VARCHAR(50),
+      email         VARCHAR(255),
+      avatar_url    TEXT,
+      message       TEXT NOT NULL,
+      rating        INTEGER DEFAULT 5,
+      location      VARCHAR(200),
+      status        VARCHAR(20) DEFAULT 'pending',
+      submitter_session VARCHAR(100),
+      created_at    TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+      updated_at    TIMESTAMPTZ NOT NULL DEFAULT NOW()
+    )
+  `);
+
   // Photo categories (separate from blog categories)
   await run('photo_categories table', sql`
     CREATE TABLE IF NOT EXISTS photo_categories (

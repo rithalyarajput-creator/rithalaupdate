@@ -3,7 +3,8 @@ import PublicShell from '@/components/PublicShell';
 import PostCard from '@/components/PostCard';
 import HeroSlider from '@/components/HeroSlider';
 import ReelsStrip from '@/components/ReelsStrip';
-import { getPublishedPosts, getFeaturedReels, getPublishedReels } from '@/lib/db';
+import TestimonialsSection from '@/components/TestimonialsSection';
+import { getPublishedPosts, getFeaturedReels, getPublishedReels, sql } from '@/lib/db';
 
 export const revalidate = 60;
 
@@ -24,9 +25,14 @@ export default async function HomePage() {
   let posts: any[] = [];
   let featuredReels: any[] = [];
   let allReels: any[] = [];
+  let homeFaqs: any[] = [];
   try { posts = await getPublishedPosts(6); } catch {}
   try { featuredReels = await getFeaturedReels(6); } catch {}
   try { allReels = await getPublishedReels(20); } catch {}
+  try {
+    const r = await sql`SELECT id, question, answer FROM faqs WHERE show_on_home = TRUE AND status = 'published' ORDER BY display_order ASC, created_at DESC LIMIT 8`;
+    homeFaqs = r.rows;
+  } catch {}
 
   return (
     <PublicShell>
@@ -240,6 +246,26 @@ export default async function HomePage() {
           )}
         </div>
       </section>
+      <TestimonialsSection />
+
+      {homeFaqs.length > 0 && (
+        <section className="home-faq-section">
+          <div className="container">
+            <div className="home-faq-head">
+              <h2>Frequently Asked Questions</h2>
+              <Link href="/faqs/" className="home-faq-all">View all FAQs →</Link>
+            </div>
+            <div className="home-faq-grid">
+              {homeFaqs.map((f: any) => (
+                <details key={f.id} className="home-faq-item">
+                  <summary><span>{f.question}</span><span className="home-faq-plus">+</span></summary>
+                  <div className="home-faq-ans">{f.answer}</div>
+                </details>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
     </PublicShell>
   );
 }

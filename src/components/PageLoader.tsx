@@ -41,9 +41,9 @@ function LoaderInner() {
     <div className="page-loader" aria-hidden="true">
       <div className="page-loader-bar"></div>
       <div className="page-loader-orb">
-        <span className="pl-tarla pl-tarla-1"></span>
-        <span className="pl-tarla pl-tarla-2"></span>
-        <span className="pl-tarla pl-tarla-3"></span>
+        <svg className="pl-swords" width="48" height="48" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M14.5 17.5L3 6V3h3l11.5 11.5M13 19l6-6 2 2-6 6-2-2m-9-4l3 3-2 2-3-3 2-2m5.5-1.5L8 12l2-2 1.5 1.5-2 2M9.5 6.5L11 5l8 8-1.5 1.5-8-8z" />
+        </svg>
       </div>
     </div>
   );

@@ -83,18 +83,26 @@ export default function SiteFooter({
           </div>
         </div>
 
-        {/* CENTER: Quick Links */}
+        {/* CENTER 1: Quick Links */}
         <div className="ftr3-col ftr3-col-links">
           <h3 className="ftr3-heading">Quick Links</h3>
           <ul className="ftr3-menu">
-            {menu.map((item, i) => (
-              <li key={i}>
-                <Link href={item.url}>
-                  <span className="ftr3-arrow">›</span>
-                  {item.label}
-                </Link>
-              </li>
-            ))}
+            <li><Link href="/"><span className="ftr3-arrow">›</span>Home</Link></li>
+            <li><Link href="/blog/"><span className="ftr3-arrow">›</span>Blog</Link></li>
+            <li><Link href="/rithala-village-history/"><span className="ftr3-arrow">›</span>History</Link></li>
+            <li><Link href="/about/"><span className="ftr3-arrow">›</span>About</Link></li>
+            <li><Link href="/contact/"><span className="ftr3-arrow">›</span>Contact</Link></li>
+          </ul>
+        </div>
+
+        {/* CENTER 2: More Links */}
+        <div className="ftr3-col ftr3-col-links">
+          <h3 className="ftr3-heading">More</h3>
+          <ul className="ftr3-menu">
+            <li><Link href="/photos/"><span className="ftr3-arrow">›</span>Photos</Link></li>
+            <li><Link href="/reels/"><span className="ftr3-arrow">›</span>Reels</Link></li>
+            <li><Link href="/faqs/"><span className="ftr3-arrow">›</span>FAQs</Link></li>
+            <li><Link href="/sandeep-rajput/"><span className="ftr3-arrow">›</span>About Me</Link></li>
           </ul>
           <div className="ftr3-contact-mini">
             <p>

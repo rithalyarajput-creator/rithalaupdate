@@ -29,6 +29,8 @@ const NAV: NavItem[] = [
   { href: '/admin/media', label: 'Media Library', icon: 'image' },
   { href: '/admin/reels', label: 'Reels', icon: 'video' },
   { href: '/admin/leads', label: 'Leads', icon: 'inbox' },
+  { href: '/admin/faqs', label: 'FAQs', icon: 'book' },
+  { href: '/admin/testimonials', label: 'Testimonials', icon: 'star' },
   { href: '/admin/users', label: 'Users', icon: 'users' },
   { href: '/admin/settings', label: 'Settings', icon: 'settings' },
 ];
