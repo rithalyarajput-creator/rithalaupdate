@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 
 type Reel = {
   id: number;
@@ -25,7 +25,6 @@ export default function ReelsManager({ initialReels }: { initialReels: Reel[] })
   const [status, setStatus] = useState('published');
   const [err, setErr] = useState<string | null>(null);
   const [msg, setMsg] = useState<string | null>(null);
-  const fileRef = useRef<HTMLInputElement>(null);
 
   function reset() {
     setEditing(null);
@@ -36,21 +35,6 @@ export default function ReelsManager({ initialReels }: { initialReels: Reel[] })
     setDisplayOrder(0);
     setIsFeatured(true);
     setStatus('published');
-  }
-
-  async function handleThumbnailUpload(e: React.ChangeEvent<HTMLInputElement>) {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    const fd = new FormData();
-    fd.append('file', file);
-    setMsg('Uploading…');
-    const res = await fetch('/api/upload', { method: 'POST', body: fd });
-    if (res.ok) {
-      const j = await res.json();
-      setThumbnailUrl(j.url);
-      setMsg('✓ Thumbnail uploaded');
-      setTimeout(() => setMsg(null), 2000);
-    }
   }
 
   async function handleSubmit(e: React.FormEvent) {
@@ -137,30 +121,6 @@ export default function ReelsManager({ initialReels }: { initialReels: Reel[] })
             <p className="help">
               Open Instagram → Reel → Share → Copy Link → paste here.
             </p>
-          </div>
-          <div className="form-row">
-            <label>Thumbnail Image (shown on website)</label>
-            <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
-              {thumbnailUrl && (
-                <img src={thumbnailUrl} alt="" style={{ width: 100, height: 140, objectFit: 'cover', borderRadius: 6 }} />
-              )}
-              <div style={{ flex: 1, minWidth: 200 }}>
-                <input
-                  type="url"
-                  value={thumbnailUrl}
-                  onChange={(e) => setThumbnailUrl(e.target.value)}
-                  placeholder="https://... or upload below"
-                />
-                <input
-                  ref={fileRef}
-                  type="file"
-                  accept="image/*"
-                  onChange={handleThumbnailUpload}
-                  style={{ marginTop: 6 }}
-                />
-              </div>
-            </div>
-            <p className="help">Take a screenshot of the reel and upload as thumbnail.</p>
           </div>
           <div className="form-row">
             <label>Description (optional)</label>

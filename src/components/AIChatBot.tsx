@@ -1,59 +1,150 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 
 type Message = { role: 'user' | 'bot'; text: string };
 
+const MASCOT_IMG = 'https://9qidomuaf1nvlbrh.public.blob.vercel-storage.com/uploads/1778475906395-3bd4fa98-21df-4bd8-a3e5-d594a0770adf-4hxIsaaFmcDsCITDqXs93kXhm2sOII.png';
+
 const QUICK_REPLIES = [
-  { q: 'About Rithala', label: 'रिठाला के बारे में' },
-  { q: 'Latest events', label: 'Events' },
-  { q: 'Contact', label: 'Contact कैसे करें?' },
+  { q: 'रिठाला गाँव क्या है?', label: 'रिठाला गाँव' },
   { q: 'History', label: 'History' },
+  { q: 'Latest events', label: 'Events' },
+  { q: 'How to contact?', label: 'Contact' },
+  { q: 'Reels', label: 'Reels' },
 ];
 
-const KB: Record<string, string> = {
-  rithala:
-    'रिठाला गाँव दिल्ली के उत्तर-पश्चिम क्षेत्र में स्थित एक प्राचीन और ऐतिहासिक गाँव है, जो अपनी राजपूताना विरासत के लिए प्रसिद्ध है। 🚩',
-  rajput:
-    'राजपूताना का अर्थ है "राजपूतों की भूमि"। यह क्षेत्र वीरता, शौर्य और संस्कृति के लिए प्रसिद्ध है। ⚔️',
-  history:
-    'रिठाला का इतिहास सैकड़ों वर्ष पुराना है। आप /category/history/ पर पूरा इतिहास पढ़ सकते हैं। 📜',
-  contact:
-    'आप हमें Contact Us page से संपर्क कर सकते हैं या rithalyarajput@gmail.com पर email कर सकते हैं। 📧',
-  events:
-    'सभी latest events के लिए /category/events/ पर जाएँ। हम Kawad Yatra, festivals और कई events cover करते हैं। 🎉',
-  reels:
-    'Latest reels देखने के लिए /reels/ page पर जाएँ। 🎬',
-  kawad: 'Kawad Yatra 2025 highlights के लिए /category/kawad-yatra-2025/ देखें। 🚩',
-  hello:
-    'नमस्ते जी! 🙏 मैं Rithala Update का AI assistant हूँ। बताइए, कैसे help करूँ?',
-};
+// Smart knowledge base — pattern -> reply
+type Reply = { match: RegExp; reply: string };
+const KNOWLEDGE: Reply[] = [
+  {
+    match: /(^|\W)(hi|hello|hey|namaste|नमस्ते|नमस्कार|राम राम|जय)/i,
+    reply: 'राम राम जी 🙏 जय राजपूताना! मैं Rithala AI हूँ। आप मुझसे रिठाला गाँव, राजपूताना इतिहास, events, reels, या कैसे संपर्क करें — कुछ भी पूछ सकते हैं।',
+  },
+  {
+    match: /(founder|founding|kisne banaya|kisne banaai|kab basa|kab basi|kis ne|राजपाल|founder|कौन था)/i,
+    reply: 'रिठाला गाँव की नींव **राणा राजपाल सिंह** ने 1384-85 ईस्वी में रखी थी। वे तोमर चंद्रवंशी राजपूत वंश के साहसी योद्धा थे। पूरी history: /rithala-village-history/',
+  },
+  {
+    match: /(year|kab|when|started|founded|established|sthapna|स्थापना|कब)/i,
+    reply: 'रिठाला गाँव की स्थापना **1384-85 ईस्वी** में हुई थी, जब दिल्ली पर सुल्तान फिरोज शाह तुगलक का शासन था। 640+ साल पुराना इतिहास! 🏛️',
+  },
+  {
+    match: /(lathi|लाठी|wala|वाला|prachin naam)/i,
+    reply: 'रिठाला गाँव का प्राचीन नाम **"लाठी वाला"** था। यहाँ के लोग लाठी, भाला, तलवार चलाने में निपुण थे। गाँव की सुरक्षा क़िले से नहीं, योद्धाओं की बहादुरी से होती थी। ⚔️',
+  },
+  {
+    match: /(puth|पूठ|kalan|कलां|ancestor|purvaj|पूर्वज)/i,
+    reply: 'राणा राजपाल सिंह के पूर्वज **पूठ कलां** गाँव में रहते थे, जिसकी स्थापना 1048-49 ईस्वी में हुई थी। बाद में उन्होंने रिठाला बसाया।',
+  },
+  {
+    match: /(tomar|तोमर|chandravanshi|चंद्रवंशी|rajput vansh|राजपूत वंश)/i,
+    reply: 'रिठाला के राजपूत **तोमर चंद्रवंशी** हैं। तोमर वंश दिल्ली के प्राचीन शासकों में से एक है, जो अपनी वीरता और शौर्य के लिए प्रसिद्ध है।',
+  },
+  {
+    match: /(history|itihas|इतिहास|story|kahani|कहानी)/i,
+    reply: '📜 रिठाला गाँव का 640+ साल पुराना इतिहास पढ़ें: **/rithala-village-history/** — Tomar Rajput वंश, राणा राजपाल सिंह, लाठी वाला परंपरा, और पूठ कलां की पूरी कहानी।',
+  },
+  {
+    match: /(contact|sampark|email|phone|address|संपर्क|पता)/i,
+    reply: '📞 हमसे संपर्क करें: **/contact-location/** पर email, phone, location map, और direct message form है। या seedha email करें: rithalyarajput@gmail.com',
+  },
+  {
+    match: /(location|where|kahan|कहाँ|address|पता)/i,
+    reply: '📍 **Rithala Village, North-West Delhi** (Pin 110085)। नज़दीकी metro: Rithala Metro Station (Red Line)। Map देखें: /contact-location/',
+  },
+  {
+    match: /(reel|video|वीडियो|short|insta video)/i,
+    reply: '🎬 हमारी latest reels देखें: **/reels/** — Instagram aur YouTube shorts दोनों मिलेंगे। Homepage पर भी auto-play strip है।',
+  },
+  {
+    match: /(event|कार्यक्रम|festival|त्यौहार|mela|मेला)/i,
+    reply: '🎉 गाँव के सारे events: **/category/events/** — Kawad Yatra, festivals, religious aayojan सब cover होते हैं।',
+  },
+  {
+    match: /(kawad|kanwar|कावड़|कांवड़|यात्रा)/i,
+    reply: '🚩 **Kawad Yatra 2025** highlights: /category/kawad-yatra-2025/ | Kawad 2024: /category/kawad-yatra-2024/',
+  },
+  {
+    match: /(temple|mandir|मंदिर|katyayani|jageshwar)/i,
+    reply: '🏛️ रिठाला में कई पवित्र मंदिर हैं, जिनमें **श्री जागेश्वर नाथ कात्यायनी धाम** प्रसिद्ध है। Places gallery: /category/places/',
+  },
+  {
+    match: /(post|blog|article|news|update|samachar|samachara)/i,
+    reply: '📝 सारे blog posts: **/posts/** | Categories के हिसाब से देखें: /category/history/, /category/events/, /category/places/',
+  },
+  {
+    match: /(about|kaun|who are you|aap kon)/i,
+    reply: 'मैं **Rithala AI** हूँ 🚩 — रिठाला गाँव की official website का assistant। मुझे गाँव का इतिहास, events, reels, contact info सब पता है। About: /about/',
+  },
+  {
+    match: /(thank|shukriya|dhanyavaad|धन्यवाद|शुक्रिया)/i,
+    reply: 'आपका भी धन्यवाद! 🙏 जय राजपूताना! कुछ और जानना हो तो पूछिए।',
+  },
+  {
+    match: /(bye|goodbye|alvida|अलविदा)/i,
+    reply: 'राम राम जी! फिर मिलते हैं। 🚩 Rithala Update को visit करते रहिए!',
+  },
+  {
+    match: /(admin|login|dashboard|kaise post|kaise add)/i,
+    reply: '🔐 Admin panel: /admin/login | वहाँ से नए blog posts, reels, categories add कर सकते हैं।',
+  },
+  {
+    match: /(install|app|download|pwa|mobile app)/i,
+    reply: '📱 हाँ! Rithala Update को आप **app की तरह install** कर सकते हैं। Browser में "Install" prompt आएगा, या menu से "Add to Home Screen" चुनें।',
+  },
+  {
+    match: /(seo|google|search|rank)/i,
+    reply: '🔍 हमारी website full SEO optimized है — Google Search Console, structured data, sitemap, और fast loading सब set है।',
+  },
+];
 
-function findReply(text: string): string {
-  const t = text.toLowerCase();
-  if (/hi|hello|namaste|नमस्ते|हाय/.test(t)) return KB.hello;
-  if (/contact|sampark|email|phone|संपर्क/.test(t)) return KB.contact;
-  if (/event|कार्यक्रम/.test(t)) return KB.events;
-  if (/reel|video|वीडियो/.test(t)) return KB.reels;
-  if (/kawad|kanwar|कावड़|यात्रा/.test(t)) return KB.kawad;
-  if (/history|itihas|इतिहास/.test(t)) return KB.history;
-  if (/rajput|rajputana|राजपूत/.test(t)) return KB.rajput;
-  if (/rithala|रिठाला|गाँव|gaon|village/.test(t)) return KB.rithala;
-  return 'मुझे आपका सवाल पूरा समझ नहीं आया। आप ये topics try करें: रिठाला गाँव, History, Events, Reels, Contact, Kawad Yatra. 🙏';
+function smartReply(text: string): string {
+  for (const k of KNOWLEDGE) {
+    if (k.match.test(text)) return k.reply;
+  }
+  // Fallback
+  return 'मुझे आपका सवाल पूरी तरह समझ नहीं आया 🙏 आप ये topics try करें:\n\n• रिठाला गाँव का इतिहास\n• Founder कौन था?\n• Kawad Yatra\n• Reels / Events / Posts\n• Contact कैसे करें?\n\nया seedha email करें: rithalyarajput@gmail.com';
 }
 
+const WELCOME_MSGS = [
+  '🚩 राम राम जी! जय राजपूताना!',
+  'मैं **Rithala AI** हूँ — आपकी सेवा में 🙏',
+  'रिठाला गाँव, इतिहास, events, reels या contact — कुछ भी पूछिए!',
+];
+
 export default function AIChatBot() {
+  const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState('');
-  const [messages, setMessages] = useState<Message[]>([
-    { role: 'bot', text: 'नमस्ते! 🙏 मैं Rithala AI हूँ। आप मुझसे रिठाला गाँव, राजपूताना इतिहास, events या contact के बारे में पूछ सकते हैं।' },
-  ]);
+  const [messages, setMessages] = useState<Message[]>([]);
   const [typing, setTyping] = useState(false);
+  const [hasGreeted, setHasGreeted] = useState(false);
   const endRef = useRef<HTMLDivElement>(null);
+
+  // Don't render chatbot on admin pages
+  const isAdminPage = pathname?.startsWith('/admin');
 
   useEffect(() => {
     if (open) endRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages, open]);
+
+  // Send greeting messages one by one when chat opens for first time
+  useEffect(() => {
+    if (!open || hasGreeted) return;
+    setHasGreeted(true);
+    let i = 0;
+    const interval = setInterval(() => {
+      if (i >= WELCOME_MSGS.length) {
+        clearInterval(interval);
+        return;
+      }
+      setMessages((m) => [...m, { role: 'bot', text: WELCOME_MSGS[i] }]);
+      i++;
+    }, 700);
+    return () => clearInterval(interval);
+  }, [open, hasGreeted]);
 
   function send(text?: string) {
     const msg = (text ?? input).trim();
@@ -62,10 +153,12 @@ export default function AIChatBot() {
     setInput('');
     setTyping(true);
     setTimeout(() => {
-      setMessages((m) => [...m, { role: 'bot', text: findReply(msg) }]);
+      setMessages((m) => [...m, { role: 'bot', text: smartReply(msg) }]);
       setTyping(false);
-    }, 600 + Math.random() * 600);
+    }, 700 + Math.random() * 600);
   }
+
+  if (isAdminPage) return null;
 
   return (
     <>
@@ -76,13 +169,10 @@ export default function AIChatBot() {
           aria-label="Open chat assistant"
         >
           <span className="ai-mascot-tooltip">
-            नमस्ते जी! 🙏<br />Click to chat
+            🙏 जय राजपूताना!<br />Click to chat
           </span>
           <span className="ai-mascot-img-wrap">
-            <img
-              src="https://9qidomuaf1nvlbrh.public.blob.vercel-storage.com/uploads/1778402291026-4cf4f2a9-76c0-4609-a454-8283acead86b-Photoroom-eQUrNfKqGDinZB44ThrNwk1FEJVRSj.png"
-              alt="Rithala Rajput AI assistant"
-            />
+            <img src={MASCOT_IMG} alt="Rithala AI Assistant" />
           </span>
           <span className="ai-mascot-pulse"></span>
         </button>
@@ -91,19 +181,35 @@ export default function AIChatBot() {
       {open && (
         <div className="ai-chat-window" role="dialog" aria-label="Chat with Rithala AI">
           <header className="ai-chat-header">
-            <div className="ai-chat-avatar">🚩</div>
+            <div className="ai-chat-avatar">
+              <img src={MASCOT_IMG} alt="" />
+            </div>
             <div style={{ flex: 1 }}>
               <div style={{ fontWeight: 700, fontSize: '0.95rem' }}>Rithala AI</div>
-              <div style={{ fontSize: '0.72rem', opacity: 0.85 }}>● Online · आप हिंदी/English में पूछ सकते हैं</div>
+              <div style={{ fontSize: '0.72rem', opacity: 0.9 }}>
+                <span className="ai-online-dot"></span> Online · Ask anything
+              </div>
             </div>
             <button className="ai-chat-close" onClick={() => setOpen(false)} aria-label="Close chat">×</button>
           </header>
 
           <div className="ai-chat-body">
-            {messages.map((m, i) => (
-              <div key={i} className={`ai-chat-msg ai-chat-msg-${m.role}`}>
-                {m.text}
+            {messages.length === 0 && (
+              <div className="ai-chat-msg ai-chat-msg-bot ai-chat-typing">
+                <span></span><span></span><span></span>
               </div>
+            )}
+            {messages.map((m, i) => (
+              <div
+                key={i}
+                className={`ai-chat-msg ai-chat-msg-${m.role}`}
+                dangerouslySetInnerHTML={{
+                  __html: m.text
+                    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+                    .replace(/(\/[a-z0-9\-/]+\/?)/gi, '<a href="$1">$1</a>')
+                    .replace(/\n/g, '<br/>'),
+                }}
+              />
             ))}
             {typing && (
               <div className="ai-chat-msg ai-chat-msg-bot ai-chat-typing">
@@ -132,10 +238,12 @@ export default function AIChatBot() {
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder="अपना सवाल टाइप करें..."
+              placeholder="अपना सवाल टाइप करें... (Hindi/English)"
               aria-label="Message"
             />
-            <button type="submit" aria-label="Send">➤</button>
+            <button type="submit" aria-label="Send">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M2 21l21-9L2 3v7l15 2-15 2v7z"/></svg>
+            </button>
           </form>
         </div>
       )}
