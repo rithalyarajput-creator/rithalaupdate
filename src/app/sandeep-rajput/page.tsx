@@ -163,9 +163,9 @@ export default function SandeepRajputPage() {
 
           <h3>I am passionate about:</h3>
           <ul className="sr-list">
-            <li><Icon name="code" size={16} /> Website Development</li>
+            <li><Icon name="dashboard" size={16} /> Website Development</li>
             <li><Icon name="users" size={16} /> Social Media Management</li>
-            <li><Icon name="palette" size={16} /> Creative Designing</li>
+            <li><Icon name="image" size={16} /> Creative Designing</li>
             <li><Icon name="star" size={16} /> Digital Branding & Promotions</li>
             <li><Icon name="feather" size={16} /> Drawing & Pencil Sketch Art</li>
             <li><Icon name="flag" size={16} /> Community-Based Digital Projects</li>
