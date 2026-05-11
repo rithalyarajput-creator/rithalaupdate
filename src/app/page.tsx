@@ -2,7 +2,8 @@ import Link from 'next/link';
 import PublicShell from '@/components/PublicShell';
 import PostCard from '@/components/PostCard';
 import HeroSlider from '@/components/HeroSlider';
-import { getPublishedPosts, getFeaturedReels } from '@/lib/db';
+import ReelsStrip from '@/components/ReelsStrip';
+import { getPublishedPosts, getFeaturedReels, getPublishedReels } from '@/lib/db';
 
 export const revalidate = 60;
 
@@ -22,8 +23,10 @@ const galleryCards = [
 export default async function HomePage() {
   let posts: any[] = [];
   let featuredReels: any[] = [];
+  let allReels: any[] = [];
   try { posts = await getPublishedPosts(6); } catch {}
   try { featuredReels = await getFeaturedReels(6); } catch {}
+  try { allReels = await getPublishedReels(20); } catch {}
 
   return (
     <PublicShell>
@@ -188,33 +191,11 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* Featured Reels */}
-      {featuredReels.length > 0 && (
-        <section className="section reveal-on-scroll" style={{ background: '#fff8e7' }}>
-          <div className="container">
-            <h2>🎬 Featured Reels</h2>
-            <div className="reel-public-grid">
-              {featuredReels.map((r) => (
-                <a key={r.id} href={r.instagram_url} target="_blank" rel="noopener" className="reel-public-card">
-                  <div className="reel-public-thumb">
-                    {r.thumbnail_url ? (
-                      <img src={r.thumbnail_url} alt={r.title} />
-                    ) : (
-                      <div className="reel-placeholder">▶ Reel</div>
-                    )}
-                    <div className="reel-play-overlay">▶</div>
-                  </div>
-                  <div style={{ padding: 12 }}>
-                    <h3 style={{ margin: '0 0 4px', fontSize: '1rem' }}>{r.title}</h3>
-                  </div>
-                </a>
-              ))}
-            </div>
-            <p style={{ textAlign: 'center', marginTop: 20 }}>
-              <Link className="btn btn-secondary" href="/reels/">View All Reels →</Link>
-            </p>
-          </div>
-        </section>
+      {/* Reels Auto-Scroll Strip */}
+      {allReels.length > 0 && (
+        <div className="reveal-on-scroll">
+          <ReelsStrip reels={allReels} />
+        </div>
       )}
 
       {/* Latest Posts */}

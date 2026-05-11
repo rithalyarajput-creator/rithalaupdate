@@ -3,6 +3,7 @@
 
 import Link from 'next/link';
 import { getAllSettings } from '@/lib/db';
+import SiteFooter from './SiteFooter';
 
 type MenuItem = { label: string; url: string; children?: MenuItem[] };
 
@@ -27,7 +28,7 @@ const FALLBACK_HEADER: MenuItem[] = [
   { label: 'History', url: '/rithala-village-history/' },
   { label: 'Photos', url: '/category/places/' },
   { label: 'Posts', url: '/posts/' },
-  { label: 'Contact Us', url: '/contact/' },
+  { label: 'Contact Us', url: '/contact-location/' },
 ];
 
 export default async function PublicShell({ children }: { children: React.ReactNode }) {
@@ -114,52 +115,12 @@ export default async function PublicShell({ children }: { children: React.ReactN
 
       <main>{children}</main>
 
-      <footer className="site-footer">
-        <div className="container">
-          <div className="footer-grid">
-            <div>
-              <img src={logoUrl} alt={siteTitle} width={100} style={{ borderRadius: '50%' }} />
-              {footerMenu.length > 0 && (
-                <p style={{ fontSize: '0.85rem', marginTop: 8 }}>
-                  {footerMenu.map((item, i) => (
-                    <span key={i}>
-                      {i > 0 && ' · '}
-                      <Link href={item.url}>{item.label}</Link>
-                    </span>
-                  ))}
-                </p>
-              )}
-            </div>
-            <div>
-              <h3>🚩 Jai Rajputana!</h3>
-              <p style={{ fontSize: '0.9rem' }}>{footerAbout}</p>
-              {settings.contact_email && (
-                <p style={{ fontSize: '0.85rem' }}>
-                  📧 <a href={`mailto:${settings.contact_email}`}>{settings.contact_email}</a>
-                </p>
-              )}
-            </div>
-            <div>
-              <h3>Connect</h3>
-              <p>
-                {settings.social_instagram && (
-                  <><a href={settings.social_instagram} target="_blank" rel="noopener">Instagram</a><br /></>
-                )}
-                {settings.social_youtube && (
-                  <><a href={settings.social_youtube} target="_blank" rel="noopener">YouTube</a><br /></>
-                )}
-                {settings.social_facebook && (
-                  <><a href={settings.social_facebook} target="_blank" rel="noopener">Facebook</a><br /></>
-                )}
-                {settings.social_pinterest && (
-                  <><a href={settings.social_pinterest} target="_blank" rel="noopener">Pinterest</a></>
-                )}
-              </p>
-            </div>
-          </div>
-          <div className="footer-bottom">{footerText}</div>
-        </div>
-      </footer>
+      <SiteFooter
+        settings={settings}
+        footerMenu={footerMenu}
+        logoUrl={logoUrl}
+        siteTitle={siteTitle}
+      />
     </>
   );
 }
