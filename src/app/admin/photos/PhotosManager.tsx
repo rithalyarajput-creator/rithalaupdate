@@ -26,7 +26,8 @@ export default function PhotosManager({
   const [photos, setPhotos] = useState<Photo[]>(initialPhotos);
   const [cats, setCats] = useState<Cat[]>(initialCategories);
 
-  // Photo form
+  // Photo form state
+  const [showPhotoForm, setShowPhotoForm] = useState(false);
   const [editingPhoto, setEditingPhoto] = useState<Photo | null>(null);
   const [title, setTitle] = useState('');
   const [imageUrl, setImageUrl] = useState('');
@@ -35,14 +36,34 @@ export default function PhotosManager({
   const [selectedCats, setSelectedCats] = useState<number[]>([]);
   const fileRef = useRef<HTMLInputElement>(null);
 
-  // Category form
+  // Category form state
+  const [showCatForm, setShowCatForm] = useState(false);
   const [catName, setCatName] = useState('');
   const [catSlug, setCatSlug] = useState('');
 
   const [err, setErr] = useState<string | null>(null);
   const [msg, setMsg] = useState<string | null>(null);
 
-  function resetPhoto() {
+  function openAddPhoto() {
+    setEditingPhoto(null);
+    setTitle(''); setImageUrl(''); setAltText(''); setCaption('');
+    setSelectedCats([]);
+    setShowPhotoForm(true);
+    setErr(null);
+  }
+
+  function startEditPhoto(p: Photo) {
+    setEditingPhoto(p);
+    setTitle(p.title || ''); setImageUrl(p.image_url);
+    setAltText(p.alt_text || ''); setCaption(p.caption || '');
+    setSelectedCats(p.category_ids);
+    setShowPhotoForm(true);
+    setErr(null);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function closePhotoForm() {
+    setShowPhotoForm(false);
     setEditingPhoto(null);
     setTitle(''); setImageUrl(''); setAltText(''); setCaption('');
     setSelectedCats([]);
@@ -76,35 +97,38 @@ export default function PhotosManager({
     });
     if (res.ok) {
       const j = await res.json();
+      const catNames = cats.filter((c) => selectedCats.includes(c.id)).map((c) => c.name);
       if (editingPhoto) {
         setPhotos(photos.map((p) => p.id === editingPhoto.id
-          ? { ...editingPhoto, title, image_url: imageUrl, alt_text: altText, caption, category_ids: selectedCats, category_names: cats.filter((c) => selectedCats.includes(c.id)).map((c) => c.name) }
+          ? { ...editingPhoto, title, image_url: imageUrl, alt_text: altText, caption, category_ids: selectedCats, category_names: catNames }
           : p
         ));
       } else {
-        setPhotos([{ id: j.id, title, image_url: imageUrl, alt_text: altText, caption, category_ids: selectedCats, category_names: cats.filter((c) => selectedCats.includes(c.id)).map((c) => c.name) }, ...photos]);
+        setPhotos([{ id: j.id, title, image_url: imageUrl, alt_text: altText, caption, category_ids: selectedCats, category_names: catNames }, ...photos]);
       }
-      resetPhoto();
-      setMsg('Photo saved');
-      setTimeout(() => setMsg(null), 2000);
+      closePhotoForm();
+      setMsg(editingPhoto ? 'Photo updated' : 'Photo added');
+      setTimeout(() => setMsg(null), 2500);
     } else {
       const j = await res.json().catch(() => ({}));
       setErr(j.error || 'Failed');
     }
   }
 
-  function startEditPhoto(p: Photo) {
-    setEditingPhoto(p);
-    setTitle(p.title || ''); setImageUrl(p.image_url);
-    setAltText(p.alt_text || ''); setCaption(p.caption || '');
-    setSelectedCats(p.category_ids);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-
   async function deletePhoto(id: number) {
     if (!confirm('Delete this photo?')) return;
     const res = await fetch(`/api/photos/${id}`, { method: 'DELETE' });
     if (res.ok) setPhotos(photos.filter((p) => p.id !== id));
+  }
+
+  function openAddCat() {
+    setCatName(''); setCatSlug('');
+    setShowCatForm(true);
+  }
+
+  function closeCatForm() {
+    setShowCatForm(false);
+    setCatName(''); setCatSlug('');
   }
 
   async function handleCatSubmit(e: React.FormEvent) {
@@ -117,7 +141,7 @@ export default function PhotosManager({
     if (res.ok) {
       const j = await res.json();
       setCats([...cats, { id: j.id, slug: finalSlug, name: catName, n: 0 }]);
-      setCatName(''); setCatSlug('');
+      closeCatForm();
       setMsg('Category added');
       setTimeout(() => setMsg(null), 2000);
     }
@@ -134,17 +158,26 @@ export default function PhotosManager({
   }
 
   return (
-    <div>
-      {err && <div className="adm-alert adm-alert-error">{err}</div>}
-      {msg && <div className="adm-alert adm-alert-success">{msg}</div>}
+    <>
+      {msg && <div className="adm-alert adm-alert-success" style={{ margin: '0 0 16px' }}>{msg}</div>}
 
-      <div className="adm-grid-2" style={{ alignItems: 'start' }}>
-        {/* Photo upload form */}
-        <div className="adm-card">
+      {/* ============ TOP ACTION BAR ============ */}
+      <div className="adm-action-bar">
+        <button type="button" className="adm-btn-primary" onClick={openAddPhoto}>
+          <Icon name="plus" size={14} /> Add Photo
+        </button>
+      </div>
+
+      {/* ============ PHOTO FORM (inline) ============ */}
+      {showPhotoForm && (
+        <div className="adm-card adm-inline-form">
           <div className="adm-card-head">
-            <h3>{editingPhoto ? 'Edit Photo' : 'Add Photo'}</h3>
-            {editingPhoto && <button type="button" className="adm-btn-ghost" onClick={resetPhoto}>Cancel</button>}
+            <h3>{editingPhoto ? 'Edit Photo' : 'Add New Photo'}</h3>
+            <button type="button" className="adm-btn-ghost" onClick={closePhotoForm}>
+              <Icon name="close" size={13} /> Cancel
+            </button>
           </div>
+          {err && <div className="adm-alert adm-alert-error">{err}</div>}
           <form onSubmit={handlePhotoSubmit}>
             <div className="adm-field">
               <label>Photo Image <span style={{ color: '#ef4444' }}>*</span></label>
@@ -158,12 +191,12 @@ export default function PhotosManager({
               ) : (
                 <div className="adm-img-empty">
                   <Icon name="image" size={36} />
-                  <small>No image</small>
+                  <small>No image yet</small>
                 </div>
               )}
               <div style={{ display: 'flex', gap: 8, marginTop: 8 }}>
                 <button type="button" className="adm-btn-ghost" onClick={() => fileRef.current?.click()} style={{ flex: 1 }}>
-                  <Icon name="plus" size={13} /> Upload
+                  <Icon name="plus" size={13} /> Upload from device
                 </button>
                 <input ref={fileRef} type="file" accept="image/*" onChange={handleUpload} style={{ display: 'none' }} />
               </div>
@@ -175,18 +208,19 @@ export default function PhotosManager({
               />
             </div>
 
-            <div className="adm-field">
-              <label>Title</label>
-              <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="e.g. Kawad Yatra start" />
+            <div className="adm-grid-form">
+              <div className="adm-field">
+                <label>Title</label>
+                <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="e.g. Kawad Yatra start" />
+              </div>
+              <div className="adm-field">
+                <label>Alt Text (SEO + accessibility)</label>
+                <input type="text" value={altText} onChange={(e) => setAltText(e.target.value)} placeholder="Describe the image" />
+              </div>
             </div>
 
             <div className="adm-field">
-              <label>Alt Text (for SEO + accessibility)</label>
-              <input type="text" value={altText} onChange={(e) => setAltText(e.target.value)} placeholder="Describe the image" />
-            </div>
-
-            <div className="adm-field">
-              <label>Caption (optional)</label>
+              <label>Caption <small style={{ color: '#94a3b8', fontWeight: 400 }}>(optional)</small></label>
               <textarea value={caption} onChange={(e) => setCaption(e.target.value)} rows={2} placeholder="Optional caption shown below the image" />
             </div>
 
@@ -194,7 +228,7 @@ export default function PhotosManager({
               <label>Categories <small style={{ color: '#94a3b8', fontWeight: 400 }}>(select one or more)</small></label>
               <div className="adm-multicat">
                 {cats.length === 0 ? (
-                  <small>No photo categories yet. Add some on the right.</small>
+                  <small>No photo categories yet. Add one below.</small>
                 ) : cats.map((c) => (
                   <label key={c.id} className={`adm-multicat-chip ${selectedCats.includes(c.id) ? 'is-active' : ''}`}>
                     <input
@@ -209,66 +243,16 @@ export default function PhotosManager({
               </div>
             </div>
 
-            <button type="submit" className="adm-btn-primary" style={{ width: '100%', margin: '0 22px' }}>
+            <button type="submit" className="adm-btn-primary" style={{ margin: '8px 22px 6px' }}>
               <Icon name={editingPhoto ? 'check' : 'plus'} size={14} />
               {editingPhoto ? 'Update Photo' : 'Add Photo'}
             </button>
           </form>
         </div>
+      )}
 
-        {/* Photo categories */}
-        <div className="adm-card">
-          <div className="adm-card-head">
-            <h3>Photo Categories ({cats.length})</h3>
-          </div>
-
-          <form onSubmit={handleCatSubmit} style={{ padding: '14px 22px 18px', borderBottom: '1px solid #f1f5f9' }}>
-            <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-              <input
-                type="text" value={catName}
-                onChange={(e) => {
-                  setCatName(e.target.value);
-                  setCatSlug(slugify(e.target.value, { lower: true, strict: true }));
-                }}
-                placeholder="e.g. Kawad 2026"
-                style={{ flex: 1, minWidth: 140, padding: 9, border: '1.5px solid #e2e8f0', borderRadius: 8 }}
-                required
-              />
-              <button type="submit" className="adm-btn-primary" style={{ padding: '9px 18px' }}>
-                <Icon name="plus" size={13} /> Add
-              </button>
-            </div>
-          </form>
-
-          {cats.length === 0 ? (
-            <div className="adm-empty">
-              <Icon name="tag" size={40} />
-              <h3>No categories yet</h3>
-              <p>Add one above to start organizing photos.</p>
-            </div>
-          ) : (
-            <ul className="adm-photocat-list">
-              {cats.map((c) => (
-                <li key={c.id}>
-                  <span>
-                    <strong>{c.name}</strong>
-                    <code>/{c.slug}/</code>
-                  </span>
-                  <span className="adm-photocat-meta">
-                    <small>{c.n || 0} photos</small>
-                    <button onClick={() => deleteCat(c.id)} className="adm-act-btn adm-act-delete" title="Delete">
-                      <Icon name="trash" size={13} />
-                    </button>
-                  </span>
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
-      </div>
-
-      {/* Photo gallery */}
-      <div className="adm-card" style={{ marginTop: 20 }}>
+      {/* ============ PHOTO LIBRARY ============ */}
+      <div className="adm-card">
         <div className="adm-card-head">
           <h3>Photo Library ({photos.length})</h3>
         </div>
@@ -276,7 +260,7 @@ export default function PhotosManager({
           <div className="adm-empty">
             <Icon name="photo" size={40} />
             <h3>No photos yet</h3>
-            <p>Upload your first photo above.</p>
+            <p>Click &quot;Add Photo&quot; above to upload your first photo.</p>
           </div>
         ) : (
           <div className="adm-photo-grid">
@@ -304,6 +288,79 @@ export default function PhotosManager({
           </div>
         )}
       </div>
-    </div>
+
+      {/* ============ CATEGORIES SECTION ============ */}
+      <div className="adm-action-bar" style={{ marginTop: 28 }}>
+        <button type="button" className="adm-btn-primary" onClick={openAddCat}>
+          <Icon name="plus" size={14} /> Add Photo Category
+        </button>
+      </div>
+
+      {showCatForm && (
+        <div className="adm-card adm-inline-form">
+          <div className="adm-card-head">
+            <h3>Add Photo Category</h3>
+            <button type="button" className="adm-btn-ghost" onClick={closeCatForm}>
+              <Icon name="close" size={13} /> Cancel
+            </button>
+          </div>
+          <form onSubmit={handleCatSubmit}>
+            <div className="adm-grid-form">
+              <div className="adm-field">
+                <label>Name <span style={{ color: '#ef4444' }}>*</span></label>
+                <input
+                  type="text" value={catName}
+                  onChange={(e) => {
+                    setCatName(e.target.value);
+                    setCatSlug(slugify(e.target.value, { lower: true, strict: true }));
+                  }}
+                  placeholder="e.g. Kawad 2026"
+                  autoFocus
+                  required
+                />
+              </div>
+              <div className="adm-field">
+                <label>Slug</label>
+                <input type="text" value={catSlug} onChange={(e) => setCatSlug(e.target.value)} />
+                <small>URL: /photos/?category={catSlug || '...'}</small>
+              </div>
+            </div>
+            <button type="submit" className="adm-btn-primary" style={{ margin: '8px 22px 6px' }}>
+              <Icon name="plus" size={14} /> Add Category
+            </button>
+          </form>
+        </div>
+      )}
+
+      <div className="adm-card">
+        <div className="adm-card-head">
+          <h3>Photo Categories ({cats.length})</h3>
+        </div>
+        {cats.length === 0 ? (
+          <div className="adm-empty">
+            <Icon name="tag" size={40} />
+            <h3>No categories yet</h3>
+            <p>Click &quot;Add Photo Category&quot; above to create one.</p>
+          </div>
+        ) : (
+          <ul className="adm-photocat-list">
+            {cats.map((c) => (
+              <li key={c.id}>
+                <span>
+                  <strong>{c.name}</strong>
+                  <code>/{c.slug}/</code>
+                </span>
+                <span className="adm-photocat-meta">
+                  <small>{c.n || 0} photos</small>
+                  <button onClick={() => deleteCat(c.id)} className="adm-act-btn adm-act-delete" title="Delete">
+                    <Icon name="trash" size={13} />
+                  </button>
+                </span>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+    </>
   );
 }

@@ -822,6 +822,44 @@ p { margin: 0 0 1em; }
 }
 
 /* ===========================================
+   ADMIN — Single-column Add/List pattern
+   =========================================== */
+.adm-action-bar {
+  display: flex; justify-content: flex-end;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+@media (max-width: 600px) {
+  .adm-action-bar { justify-content: stretch; }
+  .adm-action-bar .adm-btn-primary { flex: 1; justify-content: center; }
+}
+
+.adm-inline-form {
+  margin-bottom: 18px;
+  animation: admSlide 0.25s ease;
+  border: 1.5px solid rgba(220,38,38,0.3);
+  box-shadow: 0 10px 30px rgba(220,38,38,0.08);
+}
+@keyframes admSlide {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.adm-inline-form .adm-card-head {
+  background: linear-gradient(135deg, rgba(220,38,38,0.04), rgba(245,198,27,0.06));
+}
+.adm-inline-form .adm-card-head h3 {
+  color: #dc2626;
+}
+
+.adm-grid-form {
+  display: grid; gap: 0;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 700px) {
+  .adm-grid-form { grid-template-columns: 1fr 1fr; column-gap: 16px; }
+}
+
+/* ===========================================
    AUTHORS LIST (admin)
    =========================================== */
 .adm-author-list { padding: 6px 22px 22px; }
