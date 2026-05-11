@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import slugify from 'slugify';
 
@@ -182,18 +182,8 @@ export default function PostEditor({
         />
       </div>
 
-      <div className="form-row">
-        <label>Content (HTML allowed)</label>
-        <textarea
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
-          rows={20}
-          placeholder="<p>Write your post content here. HTML and basic formatting work.</p>"
-        />
-        <p className="help">
-          Tip: Use <code>&lt;h2&gt;</code>, <code>&lt;p&gt;</code>, <code>&lt;strong&gt;</code>, <code>&lt;img src="..."/&gt;</code>.
-        </p>
-      </div>
+      <ContentEditor content={content} onChange={setContent} />
+
 
       <div className="form-row">
         <label>Categories</label>
@@ -378,6 +368,164 @@ export default function PostEditor({
           Save as Draft
         </button>
       </div>
+    </div>
+  );
+}
+
+/* ===========================================
+   ContentEditor — Visual + HTML mode toggle
+   Visual mode uses contentEditable with basic formatting toolbar.
+   =========================================== */
+
+function ContentEditor({ content, onChange }: { content: string; onChange: (v: string) => void }) {
+  const [mode, setMode] = useState<'visual' | 'html'>('visual');
+  const editorRef = useRef<HTMLDivElement>(null);
+  const lastExternal = useRef(content);
+
+  // Sync incoming content to visual editor when it changes externally
+  useEffect(() => {
+    if (mode === 'visual' && editorRef.current) {
+      if (lastExternal.current !== content && editorRef.current.innerHTML !== content) {
+        editorRef.current.innerHTML = content || '';
+        lastExternal.current = content;
+      }
+    }
+  }, [content, mode]);
+
+  // When switching to visual mode, populate the div
+  useEffect(() => {
+    if (mode === 'visual' && editorRef.current && editorRef.current.innerHTML !== content) {
+      editorRef.current.innerHTML = content || '';
+    }
+  }, [mode]);
+
+  function exec(cmd: string, value?: string) {
+    document.execCommand(cmd, false, value);
+    if (editorRef.current) {
+      onChange(editorRef.current.innerHTML);
+      lastExternal.current = editorRef.current.innerHTML;
+      editorRef.current.focus();
+    }
+  }
+
+  function insertLink() {
+    const url = prompt('Enter URL (https://...):');
+    if (url) exec('createLink', url);
+  }
+
+  function insertImage() {
+    const url = prompt('Enter image URL (or upload via Media Library first):');
+    if (url) exec('insertImage', url);
+  }
+
+  function clearFormat() { exec('removeFormat'); }
+
+  return (
+    <div className="form-row">
+      <label style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <span>Blog Content</span>
+        <div style={{ display: 'inline-flex', background: '#f1f5f9', borderRadius: 8, padding: 3, gap: 2 }}>
+          <button
+            type="button"
+            onClick={() => {
+              if (mode === 'html' && editorRef.current) {
+                // already synced via state
+              }
+              setMode('visual');
+            }}
+            style={{
+              padding: '6px 14px',
+              borderRadius: 6,
+              border: 'none',
+              cursor: 'pointer',
+              fontSize: '0.82rem',
+              fontWeight: 600,
+              background: mode === 'visual' ? '#fff' : 'transparent',
+              color: mode === 'visual' ? '#dc2626' : '#64748b',
+              boxShadow: mode === 'visual' ? '0 2px 4px rgba(0,0,0,0.08)' : 'none',
+            }}
+          >
+            Visual
+          </button>
+          <button
+            type="button"
+            onClick={() => setMode('html')}
+            style={{
+              padding: '6px 14px',
+              borderRadius: 6,
+              border: 'none',
+              cursor: 'pointer',
+              fontSize: '0.82rem',
+              fontWeight: 600,
+              background: mode === 'html' ? '#fff' : 'transparent',
+              color: mode === 'html' ? '#dc2626' : '#64748b',
+              boxShadow: mode === 'html' ? '0 2px 4px rgba(0,0,0,0.08)' : 'none',
+            }}
+          >
+            HTML
+          </button>
+        </div>
+      </label>
+
+      {mode === 'visual' && (
+        <>
+          <div className="ce-toolbar">
+            <button type="button" onClick={() => exec('formatBlock', '<h2>')} title="Heading 2"><strong>H2</strong></button>
+            <button type="button" onClick={() => exec('formatBlock', '<h3>')} title="Heading 3"><strong>H3</strong></button>
+            <button type="button" onClick={() => exec('formatBlock', '<p>')} title="Paragraph">P</button>
+            <span className="ce-divider"></span>
+            <button type="button" onClick={() => exec('bold')} title="Bold"><strong>B</strong></button>
+            <button type="button" onClick={() => exec('italic')} title="Italic"><em>I</em></button>
+            <button type="button" onClick={() => exec('underline')} title="Underline"><u>U</u></button>
+            <span className="ce-divider"></span>
+            <button type="button" onClick={() => exec('insertUnorderedList')} title="Bullet list">• List</button>
+            <button type="button" onClick={() => exec('insertOrderedList')} title="Numbered list">1. List</button>
+            <button type="button" onClick={() => exec('formatBlock', '<blockquote>')} title="Quote">&ldquo; &rdquo;</button>
+            <span className="ce-divider"></span>
+            <button type="button" onClick={insertLink} title="Add link">Link</button>
+            <button type="button" onClick={insertImage} title="Insert image">Image</button>
+            <button type="button" onClick={clearFormat} title="Clear formatting">Clear</button>
+          </div>
+          <div
+            ref={editorRef}
+            contentEditable
+            suppressContentEditableWarning
+            className="ce-visual"
+            onInput={(e) => {
+              const html = (e.target as HTMLDivElement).innerHTML;
+              onChange(html);
+              lastExternal.current = html;
+            }}
+            onPaste={(e) => {
+              // Paste as plain text to avoid messy styles
+              e.preventDefault();
+              const text = e.clipboardData.getData('text/plain');
+              document.execCommand('insertText', false, text);
+            }}
+          />
+          <p className="help">
+            Normal text type karein. Toolbar से heading, bold, list, link add करें. यहाँ जो दिखेगा वो website पर वैसा ही दिखेगा।
+          </p>
+        </>
+      )}
+
+      {mode === 'html' && (
+        <>
+          <textarea
+            value={content}
+            onChange={(e) => {
+              onChange(e.target.value);
+              lastExternal.current = e.target.value;
+            }}
+            rows={20}
+            placeholder="<p>Direct HTML लिखें यहाँ.</p>"
+            style={{ fontFamily: 'monospace', fontSize: '0.88rem' }}
+          />
+          <p className="help">
+            Direct HTML mode. Use <code>&lt;h2&gt;</code>, <code>&lt;p&gt;</code>, <code>&lt;strong&gt;</code>, <code>&lt;a&gt;</code>, <code>&lt;img&gt;</code>, etc.
+          </p>
+        </>
+      )}
     </div>
   );
 }
