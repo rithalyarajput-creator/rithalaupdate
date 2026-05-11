@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation';
 
 type Message = { role: 'user' | 'bot'; text: string };
 
-const MASCOT_IMG = 'https://9qidomuaf1nvlbrh.public.blob.vercel-storage.com/uploads/1778475906395-3bd4fa98-21df-4bd8-a3e5-d594a0770adf-4hxIsaaFmcDsCITDqXs93kXhm2sOII.png';
+const MASCOT_IMG = 'https://9qidomuaf1nvlbrh.public.blob.vercel-storage.com/uploads/1778477060484-3bd4fa98-21df-4bd8-a3e5-d594a0770adf-Photoroom-cdJpoqggOK8fAIidR10p1NY2cIefcK.png';
 
 const QUICK_REPLIES = [
   { q: 'रिठाला गाँव क्या है?', label: 'रिठाला गाँव' },
