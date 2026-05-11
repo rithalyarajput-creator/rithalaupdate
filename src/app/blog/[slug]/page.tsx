@@ -3,7 +3,8 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import PublicShell from '@/components/PublicShell';
 import BlogSidebarForm from './BlogSidebarForm';
-import { sql, getPostBySlug, getPublishedPosts, getCategoriesForPost } from '@/lib/db';
+import Icon from '@/components/Icon';
+import { sql, getPostBySlug, getPublishedPosts, getCategoriesForPost, getAllSettings } from '@/lib/db';
 
 export const revalidate = 60;
 
@@ -44,11 +45,24 @@ export default async function BlogDetail({ params }: Props) {
 
   const cats = await getCategoriesForPost(post.id).catch(() => []);
   const catIds = cats.map((c) => c.id);
+  const settings: Record<string, string> = await getAllSettings().catch(() => ({}));
+
+  // Try to find author avatar
+  let authorAvatar: string | null = null;
+  let authorSlug: string | null = null;
+  if (post.author_name) {
+    try {
+      const r = await sql<{ avatar_url: string; slug: string }>`
+        SELECT avatar_url, slug FROM authors WHERE name = ${post.author_name} LIMIT 1
+      `;
+      authorAvatar = r.rows[0]?.avatar_url || null;
+      authorSlug = r.rows[0]?.slug || null;
+    } catch {}
+  }
 
   let related: any[] = [];
   try {
     if (catIds.length > 0) {
-      // Use sql.query for array parameter
       const placeholders = catIds.map((_, i) => `$${i + 1}`).join(',');
       const r = await sql.query(
         `SELECT DISTINCT p.id, p.slug, p.title, p.excerpt, p.featured_image, p.published_at, p.author_name
@@ -93,62 +107,150 @@ export default async function BlogDetail({ params }: Props) {
     mainEntityOfPage: { '@type': 'WebPage', '@id': `${SITE}/blog/${post.slug}/` },
   };
 
+  const shareUrl = `${SITE}/blog/${post.slug}/`;
+  const shareTitle = encodeURIComponent(post.title);
+  const shareLink = encodeURIComponent(shareUrl);
+
+  const primaryCat = cats[0];
+
   return (
     <PublicShell>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleLd) }} />
 
-      <article className="bd-article">
-        <div className="container bd-grid">
-          <main className="bd-main">
-            <div className="bd-breadcrumb">
-              <Link href="/">Home</Link> · <Link href="/blog/">Blog</Link>
-              {cats[0] && <> · <Link href={`/blog/?category=${cats[0].slug}`}>{cats[0].name}</Link></>}
-            </div>
-
-            <h1 className="bd-title">{post.title}</h1>
-
-            <div className="bd-meta">
-              <span>📅 {new Date(post.published_at || post.created_at).toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
-              {post.author_name && <span>· ✍️ <Link href={`/blog/?author=${encodeURIComponent(post.author_name)}`}>{post.author_name}</Link></span>}
-              {cats.length > 0 && (
-                <span>· 🏷️ {cats.map((c, i) => (
-                  <span key={c.id}>
-                    {i > 0 && ', '}
-                    <Link href={`/blog/?category=${c.slug}`}>{c.name}</Link>
-                  </span>
-                ))}</span>
+      <article className="bd2-article">
+        <div className="container bd2-grid">
+          {/* MAIN CONTENT */}
+          <main className="bd2-main">
+            {/* HEADER */}
+            <header className="bd2-header">
+              {primaryCat && (
+                <Link href={`/blog/?category=${primaryCat.slug}`} className="bd2-cat-pill">
+                  {primaryCat.name}
+                </Link>
               )}
-            </div>
 
+              <h1 className="bd2-title">{post.title}</h1>
+
+              {(post.excerpt) && (
+                <p className="bd2-excerpt">{post.excerpt}</p>
+              )}
+
+              <div className="bd2-meta-row">
+                <div className="bd2-author">
+                  {authorAvatar ? (
+                    <img src={authorAvatar} alt="" className="bd2-author-avatar" />
+                  ) : (
+                    <div className="bd2-author-avatar bd2-author-avatar-fallback">
+                      {(post.author_name || 'S')[0]}
+                    </div>
+                  )}
+                  <div className="bd2-author-info">
+                    <small>Written by</small>
+                    {authorSlug ? (
+                      <Link href={`/blog/?author=${encodeURIComponent(post.author_name)}`}>
+                        <strong>{post.author_name || 'Sandeep Rajput'}</strong>
+                      </Link>
+                    ) : (
+                      <strong>{post.author_name || 'Sandeep Rajput'}</strong>
+                    )}
+                    <span className="bd2-meta-date">
+                      <Icon name="calendar" size={12} />
+                      {new Date(post.published_at || post.created_at).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="bd2-share">
+                  <a
+                    href={`https://www.facebook.com/sharer/sharer.php?u=${shareLink}`}
+                    target="_blank" rel="noopener"
+                    aria-label="Share on Facebook"
+                    className="bd2-share-btn bd2-share-fb"
+                  >
+                    <Icon name="facebook" size={14} />
+                  </a>
+                  <a
+                    href={`https://twitter.com/intent/tweet?text=${shareTitle}&url=${shareLink}`}
+                    target="_blank" rel="noopener"
+                    aria-label="Share on Twitter"
+                    className="bd2-share-btn bd2-share-tw"
+                  >
+                    <Icon name="twitter" size={14} />
+                  </a>
+                  <a
+                    href={`https://wa.me/?text=${shareTitle}%20${shareLink}`}
+                    target="_blank" rel="noopener"
+                    aria-label="Share on WhatsApp"
+                    className="bd2-share-btn bd2-share-wa"
+                  >
+                    <Icon name="whatsapp" size={14} />
+                  </a>
+                  {settings.social_instagram && (
+                    <a
+                      href={settings.social_instagram}
+                      target="_blank" rel="noopener"
+                      aria-label="Instagram"
+                      className="bd2-share-btn bd2-share-ig"
+                    >
+                      <Icon name="instagram" size={14} />
+                    </a>
+                  )}
+                </div>
+              </div>
+            </header>
+
+            {/* FEATURED IMAGE */}
             {post.featured_image && (
-              <figure className="bd-hero-img">
+              <figure className="bd2-hero-img">
                 <img src={post.featured_image} alt={post.title} loading="eager" />
               </figure>
             )}
 
-            <div className="bd-content" dangerouslySetInnerHTML={{ __html: post.content || '' }} />
+            {/* CONTENT */}
+            <div className="bd2-content" dangerouslySetInnerHTML={{ __html: post.content || '' }} />
 
-            <div className="bd-share">
-              <span>📤 Share:</span>
-              <a href={`https://wa.me/?text=${encodeURIComponent(post.title + ' — ' + SITE + '/blog/' + post.slug + '/')}`} target="_blank" rel="noopener">WhatsApp</a>
-              <a href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(SITE + '/blog/' + post.slug + '/')}`} target="_blank" rel="noopener">Facebook</a>
-              <a href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(post.title)}&url=${encodeURIComponent(SITE + '/blog/' + post.slug + '/')}`} target="_blank" rel="noopener">Twitter</a>
+            {/* TAGS / CATEGORIES STRIP */}
+            {cats.length > 0 && (
+              <div className="bd2-tags">
+                <span>Filed under:</span>
+                {cats.map((c) => (
+                  <Link key={c.id} href={`/blog/?category=${c.slug}`} className="bd2-tag">
+                    {c.name}
+                  </Link>
+                ))}
+              </div>
+            )}
+
+            {/* AUTHOR CARD */}
+            <div className="bd2-author-card">
+              {authorAvatar ? (
+                <img src={authorAvatar} alt="" />
+              ) : (
+                <div className="bd2-author-card-fallback">{(post.author_name || 'S')[0]}</div>
+              )}
+              <div>
+                <small>Written by</small>
+                <strong>{post.author_name || 'Sandeep Rajput'}</strong>
+                <p>Editor at Rithala Update — sharing the heritage, culture, and untold stories of Rithala village.</p>
+              </div>
             </div>
           </main>
 
-          <aside className="bd-sidebar">
-            <div className="bd-sticky">
+          {/* RIGHT STICKY FORM */}
+          <aside className="bd2-aside">
+            <div className="bd2-aside-sticky">
               <BlogSidebarForm postTitle={post.title} />
             </div>
           </aside>
         </div>
       </article>
 
+      {/* RELATED */}
       {related.length > 0 && (
         <section className="bd-related-section">
           <div className="container">
             <div className="bd-related-head">
-              <span className="blog-hero-eyebrow">📚 More to read</span>
+              <span className="blog-hero-eyebrow">More to read</span>
               <h2>Related Posts</h2>
             </div>
             <div className="blog-grid-3d">
@@ -158,13 +260,14 @@ export default async function BlogDetail({ params }: Props) {
                     {p.featured_image ? (
                       <img src={p.featured_image} alt={p.title} loading="lazy" />
                     ) : (
-                      <div className="blog-card-img-placeholder">🚩 Rithala</div>
+                      <div className="blog-card-img-placeholder">Rithala</div>
                     )}
                     <div className="blog-card-glow" aria-hidden="true"></div>
                   </div>
                   <div className="blog-card-body">
                     <div className="blog-card-meta">
-                      <span>📅 {p.published_at ? new Date(p.published_at).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }) : ''}</span>
+                      <Icon name="calendar" size={12} />
+                      <span>{p.published_at ? new Date(p.published_at).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }) : ''}</span>
                     </div>
                     <h3 className="blog-card-title">{p.title}</h3>
                     <span className="blog-card-arrow">Read more →</span>

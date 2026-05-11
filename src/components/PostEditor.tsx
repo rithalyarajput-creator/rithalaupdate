@@ -341,28 +341,6 @@ export default function PostEditor({
             />
           </div>
 
-          <div className="pe-field">
-            <label>Open Graph (Social Share) Image</label>
-            <div className="pe-image-picker">
-              {ogImage && <img src={ogImage} alt="" />}
-              <div style={{ flex: 1, minWidth: 200, display: 'flex', flexDirection: 'column', gap: 8 }}>
-                <input
-                  type="url"
-                  value={ogImage}
-                  onChange={(e) => setOgImage(e.target.value)}
-                  placeholder="https://..."
-                />
-                <div style={{ display: 'flex', gap: 8 }}>
-                  <input type="file" accept="image/*" onChange={(e) => handleImageUpload(e, 'og')} />
-                  <button type="button" onClick={() => openMediaPicker('og')} className="adm-btn-ghost">
-                    <Icon name="image" size={14} /> Browse Media
-                  </button>
-                </div>
-              </div>
-            </div>
-            <small>Recommended: 1200x630px. Shown on WhatsApp, Facebook, Twitter shares.</small>
-          </div>
-
           {/* Google preview */}
           <div className="pe-google-preview">
             <small>Google Preview:</small>
