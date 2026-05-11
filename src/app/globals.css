@@ -4052,7 +4052,6 @@ html, body { overflow-x: hidden; }
   .bd2-grid {
     grid-template-columns: minmax(0, 1fr) 340px;
     gap: 40px;
-    align-items: start;
   }
 }
 .bd2-main {
@@ -4296,25 +4295,12 @@ html, body { overflow-x: hidden; }
   line-height: 1.55;
 }
 
-/* Form aside (sticky — follows scroll on desktop) */
+/* Form aside — static, scrolls with page content */
 .bd2-aside {
   min-width: 0;
 }
 .bd2-aside-sticky {
-  position: sticky;
-  top: 16px;
-  max-height: calc(100vh - 32px);
-  overflow-y: auto;
-  scrollbar-width: thin;
-}
-.bd2-aside-sticky::-webkit-scrollbar { width: 6px; }
-.bd2-aside-sticky::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.1); border-radius: 3px; }
-@media (max-width: 999px) {
-  .bd2-aside-sticky {
-    position: static;
-    max-height: none;
-    overflow: visible;
-  }
+  position: static;
 }
 
 .bd-related-section {
