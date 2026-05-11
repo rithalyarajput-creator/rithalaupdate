@@ -24,7 +24,7 @@ const FALLBACK_HEADER: MenuItem[] = [
       { label: 'About Me', url: '/about-me/' },
     ],
   },
-  { label: 'History', url: '/history/' },
+  { label: 'History', url: '/rithala-village-history/' },
   { label: 'Photos', url: '/category/places/' },
   { label: 'Posts', url: '/posts/' },
   { label: 'Contact Us', url: '/contact/' },
