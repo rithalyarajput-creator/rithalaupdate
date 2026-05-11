@@ -7,6 +7,101 @@ import Icon from './Icon';
 
 type Category = { id: number; slug: string; name: string };
 
+/**
+ * Clean HTML from Word / Google Docs / web pages while keeping
+ * block-level formatting (h1-h6, p, ul/ol, blockquote, strong, em, a, img).
+ */
+function cleanPastedHtml(html: string): string {
+  if (typeof document === 'undefined') return html;
+
+  // 1) Quick string-level scrubs
+  let clean = html
+    .replace(/<\?xml[^>]*>/g, '')
+    .replace(/<!--[\s\S]*?-->/g, '')
+    .replace(/<script[\s\S]*?<\/script>/gi, '')
+    .replace(/<style[\s\S]*?<\/style>/gi, '')
+    .replace(/<meta[^>]*>/gi, '')
+    .replace(/<link[^>]*>/gi, '')
+    .replace(/ on\w+="[^"]*"/gi, '')
+    .replace(/<o:p[^>]*>[\s\S]*?<\/o:p>/gi, '');
+
+  // 2) Parse via DOM to preserve structure
+  const tmpl = document.createElement('template');
+  tmpl.innerHTML = clean;
+  const root = tmpl.content;
+
+  const ALLOWED = new Set([
+    'P', 'BR', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6',
+    'STRONG', 'B', 'EM', 'I', 'U', 'S', 'STRIKE', 'DEL', 'INS',
+    'BLOCKQUOTE', 'PRE', 'CODE',
+    'UL', 'OL', 'LI',
+    'A', 'IMG', 'FIGURE', 'FIGCAPTION',
+    'TABLE', 'THEAD', 'TBODY', 'TR', 'TH', 'TD',
+    'HR', 'DIV', 'SPAN',
+  ]);
+
+  function walk(node: Node) {
+    const kids = Array.from(node.childNodes);
+    kids.forEach((child) => {
+      if (child.nodeType === Node.ELEMENT_NODE) {
+        const el = child as Element;
+        const tag = el.tagName.toUpperCase();
+
+        // Convert Word's bold/italic spans to <strong>/<em>
+        const style = (el.getAttribute('style') || '').toLowerCase();
+        if (tag === 'SPAN' && /font-weight\s*:\s*(bold|[6-9]00)/.test(style)) {
+          const s = document.createElement('strong');
+          s.innerHTML = el.innerHTML;
+          el.replaceWith(s);
+          walk(s);
+          return;
+        }
+        if (tag === 'SPAN' && /font-style\s*:\s*italic/.test(style)) {
+          const em = document.createElement('em');
+          em.innerHTML = el.innerHTML;
+          el.replaceWith(em);
+          walk(em);
+          return;
+        }
+
+        if (!ALLOWED.has(tag)) {
+          // Unwrap unknown tag — keep its children
+          const parent = el.parentNode!;
+          while (el.firstChild) parent.insertBefore(el.firstChild, el);
+          parent.removeChild(el);
+          walk(parent);
+          return;
+        }
+
+        // Strip everything except a couple of safe attributes
+        const allowedAttrs =
+          tag === 'A' ? ['href', 'title', 'target', 'rel'] :
+          tag === 'IMG' ? ['src', 'alt', 'title', 'width', 'height'] :
+          [];
+
+        Array.from(el.attributes).forEach((a) => {
+          if (!allowedAttrs.includes(a.name.toLowerCase())) {
+            el.removeAttribute(a.name);
+          }
+        });
+
+        walk(el);
+      } else if (child.nodeType === Node.COMMENT_NODE) {
+        node.removeChild(child);
+      }
+    });
+  }
+  walk(root);
+
+  // 3) Serialize back
+  const container = document.createElement('div');
+  container.appendChild(root.cloneNode(true));
+  return container.innerHTML
+    // Drop empty paragraphs/spans
+    .replace(/<p>\s*<\/p>/g, '')
+    .replace(/<span>\s*<\/span>/g, '');
+}
+
 export default function PostEditor({
   post,
   categories,
@@ -268,23 +363,6 @@ export default function PostEditor({
             <small>Recommended: 1200x630px. Shown on WhatsApp, Facebook, Twitter shares.</small>
           </div>
 
-          <div className="pe-field">
-            <label>Canonical URL (advanced)</label>
-            <input
-              type="url"
-              value={canonicalUrl}
-              onChange={(e) => setCanonicalUrl(e.target.value)}
-              placeholder="Leave empty unless duplicating from another site"
-            />
-          </div>
-
-          <div className="pe-field">
-            <label className="pe-checkbox">
-              <input type="checkbox" checked={noindex} onChange={(e) => setNoindex(e.target.checked)} />
-              <span>Hide from search engines (noindex)</span>
-            </label>
-          </div>
-
           {/* Google preview */}
           <div className="pe-google-preview">
             <small>Google Preview:</small>
@@ -367,27 +445,11 @@ export default function PostEditor({
           <h3 className="pe-card-head">
             <Icon name="tag" size={16} /> Categories
           </h3>
-          <div className="pe-cat-list">
-            {categories.length === 0 ? (
-              <small style={{ padding: '0 14px', color: '#94a3b8' }}>
-                No categories yet. <a href="/admin/categories" target="_blank">Add categories</a>.
-              </small>
-            ) : categories.map((c) => (
-              <label key={c.id} className="pe-cat-item">
-                <input
-                  type="checkbox"
-                  checked={categoryIds.includes(c.id)}
-                  onChange={() => toggleCategory(c.id)}
-                />
-                <span>{c.name}</span>
-              </label>
-            ))}
-          </div>
-          <div style={{ padding: '8px 14px 0' }}>
-            <a href="/admin/categories" target="_blank" style={{ fontSize: '0.8rem', color: '#dc2626', textDecoration: 'none', fontWeight: 600 }}>
-              + New category
-            </a>
-          </div>
+          <CategoriesPicker
+            categories={categories}
+            value={categoryIds}
+            onChange={setCategoryIds}
+          />
         </div>
 
         {/* FEATURED IMAGE */}
@@ -562,19 +624,16 @@ function ContentEditor({
             className="ce-visual"
             onInput={(e) => onChange((e.target as HTMLDivElement).innerHTML)}
             onPaste={(e) => {
-              // Allow pasted HTML to keep formatting — only sanitize obviously dangerous bits
               const html = e.clipboardData.getData('text/html');
               const text = e.clipboardData.getData('text/plain');
               if (html) {
                 e.preventDefault();
-                // Strip script/style tags + on* event handlers + bg styles from Word
-                const clean = html
-                  .replace(/<script[\s\S]*?<\/script>/gi, '')
-                  .replace(/<style[\s\S]*?<\/style>/gi, '')
-                  .replace(/ on\w+="[^"]*"/gi, '')
-                  .replace(/ class="[^"]*"/gi, '')
-                  .replace(/ style="[^"]*background[^"]*"/gi, '');
+                const clean = cleanPastedHtml(html);
+                // Use insertHTML — keeps block-level tags like h1/h2/h3/blockquote/ul/ol intact
                 document.execCommand('insertHTML', false, clean);
+                if (editorRef.current) {
+                  onChange(editorRef.current.innerHTML);
+                }
               } else if (text) {
                 e.preventDefault();
                 document.execCommand('insertText', false, text);
@@ -601,6 +660,95 @@ function ContentEditor({
           </p>
         </>
       )}
+    </div>
+  );
+}
+
+/* ===========================================
+   CategoriesPicker — Author-style dropdown with checkboxes
+   =========================================== */
+function CategoriesPicker({
+  categories,
+  value,
+  onChange,
+}: {
+  categories: Category[];
+  value: number[];
+  onChange: (next: number[]) => void;
+}) {
+  const [open, setOpen] = useState(false);
+  const wrapRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function onDocClick(e: MouseEvent) {
+      if (wrapRef.current && !wrapRef.current.contains(e.target as Node)) {
+        setOpen(false);
+      }
+    }
+    if (open) document.addEventListener('mousedown', onDocClick);
+    return () => document.removeEventListener('mousedown', onDocClick);
+  }, [open]);
+
+  function toggle(id: number) {
+    onChange(value.includes(id) ? value.filter((x) => x !== id) : [...value, id]);
+  }
+
+  const selectedNames = categories.filter((c) => value.includes(c.id)).map((c) => c.name);
+  const label = selectedNames.length === 0
+    ? 'Select categories'
+    : selectedNames.length === 1
+      ? selectedNames[0]
+      : `${selectedNames.length} categories selected`;
+
+  return (
+    <div className="pe-cat-picker" ref={wrapRef}>
+      <button
+        type="button"
+        className="pe-cat-picker-trigger"
+        onClick={() => setOpen(!open)}
+        aria-expanded={open}
+      >
+        <span>{label}</span>
+        <Icon name={open ? 'chevron-up' : 'chevron-down'} size={14} />
+      </button>
+
+      {selectedNames.length > 0 && (
+        <div className="pe-cat-chips">
+          {categories.filter((c) => value.includes(c.id)).map((c) => (
+            <span key={c.id} className="pe-cat-chip">
+              {c.name}
+              <button type="button" onClick={() => toggle(c.id)} aria-label={`Remove ${c.name}`}>
+                <Icon name="close" size={12} />
+              </button>
+            </span>
+          ))}
+        </div>
+      )}
+
+      {open && (
+        <div className="pe-cat-dropdown">
+          {categories.length === 0 ? (
+            <small style={{ padding: '10px 14px', display: 'block', color: '#94a3b8' }}>
+              No categories yet. <a href="/admin/categories" target="_blank">Add some</a>.
+            </small>
+          ) : (
+            categories.map((c) => (
+              <label key={c.id} className="pe-cat-option">
+                <input
+                  type="checkbox"
+                  checked={value.includes(c.id)}
+                  onChange={() => toggle(c.id)}
+                />
+                <span>{c.name}</span>
+              </label>
+            ))
+          )}
+        </div>
+      )}
+
+      <a href="/admin/categories" target="_blank" className="pe-cat-manage-link">
+        <Icon name="plus" size={11} /> New category
+      </a>
     </div>
   );
 }
