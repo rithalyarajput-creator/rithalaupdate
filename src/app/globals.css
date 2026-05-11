@@ -1180,28 +1180,36 @@ p { margin: 0 0 1em; }
 }
 .ph2-folder-card:hover { transform: translateY(-6px); }
 
-/* Stacked papers under the polaroid (only visible on hover) */
+/* Stacked papers under the polaroid — ALWAYS visible (bulk effect) */
 .ph2-folder-stack {
   position: absolute;
-  inset: 6px 6px 14px 6px;
+  inset: 0;
   background: #fff;
   border-radius: 4px;
-  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
-  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1),
-              opacity 0.35s ease;
-  opacity: 0;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.1);
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
   z-index: 1;
 }
-.ph2-stack-3 { transform: rotate(-3deg) translate(-2px, 4px); }
-.ph2-stack-2 { transform: rotate(2deg) translate(4px, 2px); }
-.ph2-stack-1 { transform: rotate(-1deg); opacity: 0.6; }
-.ph2-folder-card:hover .ph2-stack-3 {
+.ph2-stack-3 {
+  transform: rotate(-5deg) translate(-8px, 4px);
   opacity: 1;
-  transform: rotate(-7deg) translate(-10px, 6px);
+}
+.ph2-stack-2 {
+  transform: rotate(3deg) translate(6px, 2px);
+  opacity: 1;
+}
+.ph2-stack-1 {
+  transform: rotate(-1deg);
+  opacity: 1;
+}
+.ph2-folder-card:hover .ph2-stack-3 {
+  transform: rotate(-9deg) translate(-14px, 8px);
 }
 .ph2-folder-card:hover .ph2-stack-2 {
-  opacity: 1;
-  transform: rotate(5deg) translate(10px, 4px);
+  transform: rotate(7deg) translate(12px, 6px);
+}
+.ph2-folder-card:hover .ph2-stack-1 {
+  transform: rotate(-3deg) translate(-4px, 2px);
 }
 
 .ph2-folder-photo {
@@ -1391,36 +1399,117 @@ p { margin: 0 0 1em; }
   margin: 2px 0 0; color: #64748b; font-size: 0.85rem;
 }
 
-.adm-folder-grid {
-  padding: 18px 22px 22px;
-  display: grid; gap: 24px;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+/* Admin tabs (Photos page) */
+.adm-tabs {
+  display: flex; gap: 4px;
+  background: #f1f5f9;
+  padding: 4px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  width: fit-content;
+  flex-wrap: wrap;
 }
+.adm-tab {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: transparent;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 8px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #64748b;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s;
+}
+.adm-tab:hover { color: #0f172a; }
+.adm-tab.is-active {
+  background: #fff;
+  color: #dc2626;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+.adm-tab span {
+  background: #e2e8f0;
+  color: #64748b;
+  padding: 1px 8px;
+  border-radius: 100px;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+.adm-tab.is-active span {
+  background: linear-gradient(135deg, #dc2626, #ea580c);
+  color: #fff;
+}
+
+/* Folder-open header (Back + title + Add Photo) */
+.adm-folder-open-head {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 16px 20px;
+  margin-bottom: 16px;
+  display: flex; align-items: center; gap: 16px;
+  flex-wrap: wrap;
+}
+.adm-folder-open-title {
+  flex: 1; min-width: 0;
+}
+.adm-folder-open-title h2 {
+  margin: 0;
+  font-size: 1.25rem;
+  color: #0f172a;
+  font-weight: 700;
+}
+.adm-folder-open-title small {
+  color: #64748b;
+  font-size: 0.82rem;
+}
+
+.adm-folder-grid {
+  padding: 18px 22px 28px;
+  display: grid; gap: 36px 24px;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+}
+@media (max-width: 600px) {
+  .adm-folder-grid { grid-template-columns: repeat(2, 1fr); gap: 28px 14px; padding: 14px 14px 22px; }
+}
+
 .adm-folder-card {
   position: relative;
   background: #fff;
   border-radius: 6px;
-  padding: 10px 10px 6px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-  transform: rotate(-1deg);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 10px 10px 8px;
+  box-shadow: 0 12px 24px rgba(0,0,0,0.12);
+  transform: rotate(-1.5deg);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+  cursor: pointer;
 }
 .adm-folder-card:hover {
-  transform: rotate(0deg) translateY(-3px);
-  box-shadow: 0 16px 36px rgba(220,38,38,0.18);
+  transform: rotate(0deg) translateY(-4px) scale(1.02);
+  box-shadow: 0 22px 44px rgba(220,38,38,0.2);
+  z-index: 5;
 }
+
+/* Stacked papers BEHIND the main card — always visible */
 .adm-folder-stack {
   position: absolute;
-  inset: 4px;
+  inset: 0;
   background: #fff;
-  border-radius: 4px;
+  border-radius: 6px;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.1);
   z-index: -1;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.06);
-  transform: rotate(2deg);
+  transform: rotate(3deg) translate(6px, 2px);
+  transition: transform 0.35s ease;
 }
 .adm-folder-stack-2 {
   z-index: -2;
-  transform: rotate(-4deg) translate(2px, 2px);
+  transform: rotate(-5deg) translate(-8px, 4px);
+}
+.adm-folder-card:hover .adm-folder-stack {
+  transform: rotate(6deg) translate(12px, 4px);
+}
+.adm-folder-card:hover .adm-folder-stack-2 {
+  transform: rotate(-9deg) translate(-14px, 8px);
 }
 .adm-folder-cover img {
   width: 100%;
