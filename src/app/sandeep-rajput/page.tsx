@@ -8,6 +8,39 @@ export const revalidate = 300;
 const PORTRAIT = 'https://9qidomuaf1nvlbrh.public.blob.vercel-storage.com/uploads/1778480814023-sandeep-rajput-rithalya-rajput-rithala-delhi.png-1HotTzrfaJxcggidFmo033DNSHDPMu.webp';
 const PORTRAIT_2 = 'https://9qidomuaf1nvlbrh.public.blob.vercel-storage.com/uploads/1778480815703-sandeep-rajput-rithala-village-2-xymbfyECPUpkDzS95iO3FwDK5vkUim.png';
 
+const ARTWORKS = [
+  {
+    img: 'https://9qidomuaf1nvlbrh.public.blob.vercel-storage.com/uploads/1778480852254-rajputs-warrior-art-by-sandeep-rajput-1-EcVAvTjm85N2w0aQvMnINf1q6UJHDc.png',
+    title: 'Maharana Pratap',
+    sub: 'Legendary Rajput Warrior | Sketch by Sandeep Rajput',
+    alt: 'Maharana Pratap legendary Rajput warrior sketch by Sandeep Rajput Rithalya Rajput',
+  },
+  {
+    img: 'https://9qidomuaf1nvlbrh.public.blob.vercel-storage.com/uploads/1778480850386-little-krishna-art-by-sandeep-rajput-My42d3DBHBriELEJVA1mOHJJo1keeD.png',
+    title: 'Little Krishna',
+    sub: 'Pencil Drawing by Sandeep Rajput',
+    alt: 'Little Krishna pencil drawing by Sandeep Rajput from Rithala Village',
+  },
+  {
+    img: 'https://9qidomuaf1nvlbrh.public.blob.vercel-storage.com/uploads/1778480848621-karan-aujla-art-by-sandeep-rajput-lBjClfy7IXQpR7wTAV6B57kMszDu6w.png',
+    title: 'Karan Aujla',
+    sub: 'Punjabi Singer Sketch by Sandeep Rajput',
+    alt: 'Karan Aujla Punjabi singer pencil sketch by Sandeep Rajput',
+  },
+  {
+    img: 'https://9qidomuaf1nvlbrh.public.blob.vercel-storage.com/uploads/1778480846991-little-ram-art-by-sandeep-rajput-CfC5gcy4UkzhNKrzWUXgaWxdUDXvuC.png',
+    title: 'Little Ram',
+    sub: 'Pencil Art by Sandeep Rajput',
+    alt: 'Little Ram pencil art devotional drawing by Sandeep Rajput',
+  },
+  {
+    img: 'https://9qidomuaf1nvlbrh.public.blob.vercel-storage.com/uploads/1778480845194-virat-kholi-art-by-sandeep-rajput-yfvTxR9dqTw0jHTXu8nBNxAQBhWGTN.png',
+    title: 'Virat Kohli',
+    sub: 'Pencil Portrait by Sandeep Rajput',
+    alt: 'Virat Kohli Indian cricketer pencil portrait by Sandeep Rajput',
+  },
+];
+
 export const metadata: Metadata = {
   title: 'Sandeep Rajput (Rithalya Rajput) — Founder of Rithala Update | Digital Creator from Rithala Village, Delhi',
   description: 'Sandeep Rajput, popularly known as Rithalya Rajput, is an 18-year-old digital creator, website developer, artist and founder of Rithala Update — the digital platform of Rithala Village, Delhi. Launched on 15 August 2022.',
@@ -171,12 +204,32 @@ export default function SandeepRajputPage() {
             <li><Icon name="flag" size={16} /> Community-Based Digital Projects</li>
           </ul>
 
-          <h2>My Creative Works</h2>
+          <h2>My Art Gallery</h2>
           <p>
             Some of my best creative works include pencil sketches of <strong>Maharana Pratap</strong>,
             <strong> Little Krishna</strong>, <strong>Little Ram</strong>, <strong>Karan Aujla</strong>, and
-            <strong> Virat Kohli</strong>, which represent the artistic side of my journey and creativity.
+            <strong> Virat Kohli</strong> — each piece representing a different side of my artistic journey,
+            from historical Rajput heritage to spiritual devotion and modern portraiture.
           </p>
+        </div>
+
+        <div className="container sr-gallery-wrap">
+          <div className="sr-gallery">
+            {ARTWORKS.map((art) => (
+              <figure key={art.title} className="sr-art-card">
+                <div className="sr-art-img">
+                  <img src={art.img} alt={art.alt} loading="lazy" />
+                </div>
+                <figcaption>
+                  <strong>{art.title}</strong>
+                  <small>{art.sub}</small>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+
+        <div className="container sr-prose">
 
           <h2>More Than Just a Website</h2>
           <p>

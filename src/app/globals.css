@@ -8996,3 +8996,15 @@ body { overflow-x: clip; }
   .sr-h1 { font-size: 2.2rem; }
   .about-h1 { font-size: 2rem; }
 }
+
+/* ========== SANDEEP RAJPUT ART GALLERY ========== */
+.sr-gallery-wrap { max-width: 1200px; margin: 30px auto 40px; }
+.sr-gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 22px; }
+.sr-art-card { margin: 0; background: #fff; border-radius: 14px; overflow: hidden; box-shadow: 0 8px 24px rgba(0,0,0,0.08); border: 1px solid #f1e6c2; transition: transform 0.25s, box-shadow 0.25s; }
+.sr-art-card:hover { transform: translateY(-4px); box-shadow: 0 14px 34px rgba(0,0,0,0.14); }
+.sr-art-img { aspect-ratio: 3 / 4; overflow: hidden; background: #f8fafc; }
+.sr-art-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s; }
+.sr-art-card:hover .sr-art-img img { transform: scale(1.04); }
+.sr-art-card figcaption { padding: 14px 16px; }
+.sr-art-card figcaption strong { display: block; color: #0f172a; font-size: 1rem; margin-bottom: 4px; }
+.sr-art-card figcaption small { color: #64748b; font-size: 0.82rem; line-height: 1.4; display: block; }
