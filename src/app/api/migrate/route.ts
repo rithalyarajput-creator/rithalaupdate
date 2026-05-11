@@ -93,7 +93,7 @@ export async function POST(req: NextRequest) {
           { label: 'About Me', url: '/about-me/' },
         ],
       },
-      { label: 'History', url: '/category/history/' },
+      { label: 'History', url: '/history/' },
       { label: 'Photos', url: '/category/places/' },
       { label: 'Posts', url: '/posts/' },
       { label: 'Contact Us', url: '/contact/' },
