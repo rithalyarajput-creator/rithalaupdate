@@ -190,6 +190,34 @@ export async function getFeaturedReels(limit = 6) {
   return rows;
 }
 
+export type Author = {
+  id: number;
+  name: string;
+  slug: string;
+  bio: string | null;
+  avatar_url: string | null;
+  email: string | null;
+  social_url: string | null;
+  created_at: string;
+};
+
+export async function getAuthors() {
+  const { rows } = await sql<Author>`SELECT * FROM authors ORDER BY name`;
+  return rows;
+}
+
+export async function getCategoryPostCounts() {
+  const { rows } = await sql<{ id: number; slug: string; name: string; n: number }>`
+    SELECT c.id, c.slug, c.name, COUNT(pc.post_id)::int AS n
+    FROM categories c
+    LEFT JOIN post_categories pc ON pc.category_id = c.id
+    LEFT JOIN posts p ON p.id = pc.post_id AND p.status = 'published'
+    GROUP BY c.id, c.slug, c.name
+    ORDER BY c.name
+  `;
+  return rows;
+}
+
 export async function getAllMedia(limit = 100) {
   const { rows } = await sql<Media>`
     SELECT * FROM media

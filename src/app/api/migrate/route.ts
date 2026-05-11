@@ -24,6 +24,31 @@ export async function POST(req: NextRequest) {
     }
   };
 
+  // Authors table
+  await run('authors table', sql`
+    CREATE TABLE IF NOT EXISTS authors (
+      id          SERIAL PRIMARY KEY,
+      name        VARCHAR(200) NOT NULL,
+      slug        VARCHAR(200) UNIQUE NOT NULL,
+      bio         TEXT,
+      avatar_url  TEXT,
+      email       VARCHAR(255),
+      social_url  TEXT,
+      created_at  TIMESTAMPTZ NOT NULL DEFAULT NOW()
+    )
+  `);
+
+  // Posts: author_name (display) and scheduled_at
+  await run('posts.author_name', sql`ALTER TABLE posts ADD COLUMN IF NOT EXISTS author_name VARCHAR(200)`);
+  await run('posts.scheduled_at', sql`ALTER TABLE posts ADD COLUMN IF NOT EXISTS scheduled_at TIMESTAMPTZ`);
+
+  // Default author
+  await run('default author', sql`
+    INSERT INTO authors (name, slug, bio, email)
+    VALUES ('Sandeep Rajput', 'sandeep-rajput', 'Founder & writer at Rithala Update — sharing the heritage of Rithala village.', 'rithalyarajput@gmail.com')
+    ON CONFLICT (slug) DO NOTHING
+  `);
+
   // Posts SEO columns
   await run('posts.meta_title', sql`ALTER TABLE posts ADD COLUMN IF NOT EXISTS meta_title TEXT`);
   await run('posts.meta_description', sql`ALTER TABLE posts ADD COLUMN IF NOT EXISTS meta_description TEXT`);
