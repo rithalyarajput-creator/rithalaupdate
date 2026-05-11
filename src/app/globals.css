@@ -3658,13 +3658,17 @@ body { overflow-x: clip; }
    ============================================ */
 .blog2-hero {
   position: relative;
-  padding: 50px 16px 70px;
+  padding: 60px 16px 220px;
   background:
-    radial-gradient(ellipse at top, rgba(245,198,27,0.25), transparent 60%),
-    linear-gradient(135deg, #11181f 0%, #1f2937 50%, #312e81 100%);
+    radial-gradient(ellipse at top right, rgba(245,198,27,0.18), transparent 60%),
+    radial-gradient(ellipse at bottom left, rgba(220,38,38,0.2), transparent 60%),
+    linear-gradient(135deg, #b91c1c 0%, #7c2d12 30%, #581c87 70%, #4c1d95 100%);
   text-align: center;
   color: #fff;
   overflow: hidden;
+}
+@media (max-width: 700px) {
+  .blog2-hero { padding: 50px 16px 160px; }
 }
 .blog2-hero-eyebrow {
   display: inline-block;
@@ -3695,19 +3699,18 @@ body { overflow-x: clip; }
   line-height: 1.7;
 }
 .blog2-hero-curve {
-  position: absolute;
-  bottom: -1px; left: 0; right: 0;
-  height: 40px;
-  background: #FFFFE4;
-  clip-path: polygon(0 100%, 100% 100%, 100% 30%, 50% 100%, 0 30%);
+  display: none;
 }
 
-/* Featured latest post */
+/* Featured latest post — overlaps hero by ~50% */
 .blog2-featured-section {
   padding: 0 16px;
-  margin-top: -30px;
+  margin-top: -200px;
   position: relative;
-  z-index: 2;
+  z-index: 3;
+}
+@media (max-width: 700px) {
+  .blog2-featured-section { margin-top: -140px; }
 }
 .blog2-featured {
   display: grid;
@@ -3728,7 +3731,7 @@ body { overflow-x: clip; }
   box-shadow: 0 30px 70px rgba(220,38,38,0.18), 0 1px 3px rgba(0,0,0,0.05);
 }
 .blog2-featured-img {
-  aspect-ratio: 1200 / 630;
+  aspect-ratio: 1200 / 700;
   overflow: hidden;
   background: linear-gradient(135deg, #fff5d6, #fde9b1);
 }
@@ -3913,7 +3916,7 @@ body { overflow-x: clip; }
 }
 .blog2-card-img {
   position: relative;
-  aspect-ratio: 1200 / 630;
+  aspect-ratio: 1200 / 700;
   overflow: hidden;
   margin: 14px 14px 0;
   border-radius: 14px;
