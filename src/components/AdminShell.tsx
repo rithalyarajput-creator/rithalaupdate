@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Icon from './Icon';
 
 type NavItem = {
@@ -142,6 +142,12 @@ function NavGroup({
 }) {
   const groupActive = isGroupActive(item);
   const [open, setOpen] = useState(groupActive);
+
+  // Auto-close when user navigates outside this group's pages
+  useEffect(() => {
+    if (!groupActive) setOpen(false);
+    else setOpen(true);
+  }, [groupActive]);
 
   if (item.children) {
     return (

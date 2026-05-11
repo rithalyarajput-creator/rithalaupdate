@@ -240,30 +240,119 @@ export default function SettingsManager({ initialSettings }: { initialSettings: 
               />
             </div>
             <div className="form-row">
-              <label>Logo</label>
-              <div style={{ display: 'flex', gap: 12, alignItems: 'flex-start', flexWrap: 'wrap' }}>
-                {settings.site_logo_url && (
-                  <img src={settings.site_logo_url} alt="Logo" style={{ width: 80, height: 80, objectFit: 'contain', background: '#fff', borderRadius: 6, border: '1px solid #ddd' }} />
-                )}
-                <div style={{ flex: 1, minWidth: 200 }}>
+              <label>Site Logo (shown in header + footer)</label>
+              <div style={{ display: 'flex', gap: 14, alignItems: 'flex-start', flexWrap: 'wrap', padding: '10px 0' }}>
+                <div style={{ position: 'relative' }}>
+                  <img
+                    src={settings.site_logo_url || '/logo.png'}
+                    alt="Logo"
+                    style={{ width: 96, height: 96, objectFit: 'contain', background: '#fff', borderRadius: 12, border: '2px solid #e5e7eb', padding: 6 }}
+                  />
+                  {settings.site_logo_url && (
+                    <button
+                      type="button"
+                      onClick={() => set('site_logo_url', '')}
+                      style={{
+                        position: 'absolute', top: -8, right: -8,
+                        width: 26, height: 26, borderRadius: '50%',
+                        background: '#ef4444', color: '#fff',
+                        border: '2px solid #fff', cursor: 'pointer',
+                        display: 'flex', alignItems: 'center', justifyContent: 'center',
+                        fontSize: 14, fontWeight: 700,
+                        boxShadow: '0 4px 10px rgba(0,0,0,0.2)',
+                      }}
+                      title="Remove logo (use default)"
+                    >×</button>
+                  )}
+                </div>
+                <div style={{ flex: 1, minWidth: 200, display: 'flex', flexDirection: 'column', gap: 8 }}>
                   <input
                     type="url"
                     value={settings.site_logo_url || ''}
                     onChange={(e) => set('site_logo_url', e.target.value)}
-                    placeholder="/logo.png or upload below"
+                    placeholder="https://... or leave empty for default /logo.png"
                   />
-                  <input ref={fileRef} type="file" accept="image/*" onChange={uploadLogo} style={{ marginTop: 6 }} />
+                  <div style={{ display: 'flex', gap: 8 }}>
+                    <button
+                      type="button"
+                      onClick={() => fileRef.current?.click()}
+                      style={{
+                        background: 'linear-gradient(135deg, #dc2626, #ea580c)',
+                        color: '#fff', padding: '8px 16px', border: 'none',
+                        borderRadius: 8, cursor: 'pointer', fontWeight: 600,
+                        fontSize: '0.85rem',
+                      }}
+                    >Upload New Logo</button>
+                    {settings.site_logo_url && (
+                      <button
+                        type="button"
+                        onClick={() => set('site_logo_url', '')}
+                        style={{
+                          background: 'transparent', color: '#ef4444',
+                          padding: '8px 16px', border: '1.5px solid #ef4444',
+                          borderRadius: 8, cursor: 'pointer', fontWeight: 600,
+                          fontSize: '0.85rem',
+                        }}
+                      >Remove</button>
+                    )}
+                  </div>
+                  <input ref={fileRef} type="file" accept="image/*" onChange={uploadLogo} style={{ display: 'none' }} />
+                  <p className="help" style={{ margin: 0 }}>Recommended: square PNG with transparent background, at least 256×256px.</p>
                 </div>
               </div>
             </div>
+
             <div className="form-row">
-              <label>Favicon URL</label>
-              <input
-                type="url"
-                value={settings.site_favicon_url || ''}
-                onChange={(e) => set('site_favicon_url', e.target.value)}
-                placeholder="/favicon.png"
-              />
+              <label>Site Favicon (browser tab icon)</label>
+              <div style={{ display: 'flex', gap: 14, alignItems: 'flex-start', flexWrap: 'wrap', padding: '10px 0' }}>
+                <div style={{ position: 'relative' }}>
+                  <img
+                    src={settings.site_favicon_url || '/favicon.png'}
+                    alt="Favicon"
+                    style={{ width: 64, height: 64, objectFit: 'contain', background: '#fff', borderRadius: 8, border: '2px solid #e5e7eb', padding: 6 }}
+                  />
+                  {settings.site_favicon_url && (
+                    <button
+                      type="button"
+                      onClick={() => set('site_favicon_url', '')}
+                      style={{
+                        position: 'absolute', top: -8, right: -8,
+                        width: 24, height: 24, borderRadius: '50%',
+                        background: '#ef4444', color: '#fff',
+                        border: '2px solid #fff', cursor: 'pointer',
+                        display: 'flex', alignItems: 'center', justifyContent: 'center',
+                        fontSize: 12, fontWeight: 700,
+                        boxShadow: '0 4px 10px rgba(0,0,0,0.2)',
+                      }}
+                      title="Remove favicon"
+                    >×</button>
+                  )}
+                </div>
+                <div style={{ flex: 1, minWidth: 200, display: 'flex', flexDirection: 'column', gap: 8 }}>
+                  <input
+                    type="url"
+                    value={settings.site_favicon_url || ''}
+                    onChange={(e) => set('site_favicon_url', e.target.value)}
+                    placeholder="https://... or leave empty for default /favicon.png"
+                  />
+                  <div style={{ display: 'flex', gap: 8 }}>
+                    <FaviconUploadButton onUploaded={(url) => set('site_favicon_url', url)} />
+                    {settings.site_favicon_url && (
+                      <button
+                        type="button"
+                        onClick={() => set('site_favicon_url', '')}
+                        style={{
+                          background: 'transparent', color: '#ef4444',
+                          padding: '8px 16px', border: '1.5px solid #ef4444',
+                          borderRadius: 8, cursor: 'pointer', fontWeight: 600,
+                          fontSize: '0.85rem',
+                        }}
+                      >Remove</button>
+                    )}
+                  </div>
+                  <p className="help" style={{ margin: 0 }}>Square PNG/ICO. 32×32 or 64×64 recommended.</p>
+                </div>
+              </div>
             </div>
           </div>
         )}
@@ -417,5 +506,35 @@ export default function SettingsManager({ initialSettings }: { initialSettings: 
         </button>
       </div>
     </div>
+  );
+}
+
+function FaviconUploadButton({ onUploaded }: { onUploaded: (url: string) => void }) {
+  const ref = useRef<HTMLInputElement>(null);
+  async function handle(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const fd = new FormData();
+    fd.append('file', file);
+    const res = await fetch('/api/upload', { method: 'POST', body: fd });
+    if (res.ok) {
+      const j = await res.json();
+      onUploaded(j.url);
+    }
+  }
+  return (
+    <>
+      <button
+        type="button"
+        onClick={() => ref.current?.click()}
+        style={{
+          background: 'linear-gradient(135deg, #dc2626, #ea580c)',
+          color: '#fff', padding: '8px 16px', border: 'none',
+          borderRadius: 8, cursor: 'pointer', fontWeight: 600,
+          fontSize: '0.85rem',
+        }}
+      >Upload Favicon</button>
+      <input ref={ref} type="file" accept="image/*,.ico" onChange={handle} style={{ display: 'none' }} />
+    </>
   );
 }
