@@ -4296,12 +4296,25 @@ html, body { overflow-x: hidden; }
   line-height: 1.55;
 }
 
-/* Form aside (static — scrolls with content) */
+/* Form aside (sticky — follows scroll on desktop) */
 .bd2-aside {
   min-width: 0;
 }
 .bd2-aside-sticky {
-  position: static;
+  position: sticky;
+  top: 16px;
+  max-height: calc(100vh - 32px);
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+.bd2-aside-sticky::-webkit-scrollbar { width: 6px; }
+.bd2-aside-sticky::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.1); border-radius: 3px; }
+@media (max-width: 999px) {
+  .bd2-aside-sticky {
+    position: static;
+    max-height: none;
+    overflow: visible;
+  }
 }
 
 .bd-related-section {

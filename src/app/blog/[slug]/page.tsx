@@ -6,7 +6,8 @@ import BlogSidebarForm from './BlogSidebarForm';
 import Icon from '@/components/Icon';
 import { sql, getPostBySlug, getPublishedPosts, getCategoriesForPost, getAllSettings } from '@/lib/db';
 
-export const revalidate = 60;
+export const revalidate = 30;
+export const dynamicParams = true;
 
 const SITE = process.env.NEXT_PUBLIC_SITE_URL || 'https://rithalaupdate.online';
 
@@ -40,7 +41,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function BlogDetail({ params }: Props) {
-  const post: any = await getPostBySlug(params.slug).catch(() => null);
+  // Try the slug exactly first, then trimmed/decoded
+  const slug = decodeURIComponent(params.slug || '').trim();
+  let post: any = await getPostBySlug(slug).catch(() => null);
+  if (!post) {
+    // Fallback: case-insensitive match
+    try {
+      const r = await sql<any>`SELECT * FROM posts WHERE LOWER(slug) = LOWER(${slug}) LIMIT 1`;
+      post = r.rows[0] || null;
+    } catch {}
+  }
   if (!post) notFound();
 
   const cats = await getCategoriesForPost(post.id).catch(() => []);

@@ -20,6 +20,9 @@ export const revalidate = 60;
 type Props = { params: { slug: string[] } };
 
 async function resolve(slugArr: string[]) {
+  // Skip blog paths — they are handled by the dedicated /blog/[slug] route
+  if (slugArr[0] === 'blog') return null;
+
   const joined = '/' + slugArr.join('/') + '/';
   const lastSeg = slugArr[slugArr.length - 1];
 
