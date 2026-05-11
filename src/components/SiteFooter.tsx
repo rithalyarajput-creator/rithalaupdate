@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import NewsletterForm from './NewsletterForm';
+import Icon from './Icon';
 
 type MenuItem = { label: string; url: string };
 
@@ -48,7 +49,7 @@ export default function SiteFooter({
             </div>
             <div>
               <div className="ftr-brand-name">{siteTitle}</div>
-              <div className="ftr-brand-tag">🚩 Jai Rajputana</div>
+              <div className="ftr-brand-tag">Jai Rajputana</div>
             </div>
           </Link>
           <p className="ftr-brand-line">
@@ -56,7 +57,9 @@ export default function SiteFooter({
             Rajput culture, sacred temples, and timeless traditions.
           </p>
           <div className="ftr-newsletter">
-            <p className="ftr-newsletter-label">📬 Subscribe for updates</p>
+            <p className="ftr-newsletter-label">
+              <Icon name="mail" size={14} /> Subscribe for updates
+            </p>
             <NewsletterForm />
           </div>
         </div>
@@ -64,7 +67,7 @@ export default function SiteFooter({
         {/* CENTER: About */}
         <div className="ftr-col ftr-col-center">
           <h3 className="ftr-heading">
-            <span>🚩</span> Jai Rajputana!
+            <Icon name="flag" size={18} /> Jai Rajputana!
           </h3>
           <p className="ftr-about">{aboutText}</p>
         </div>
@@ -113,8 +116,8 @@ export default function SiteFooter({
           </div>
 
           <div className="ftr-contact-mini">
-            <p>📧 <a href={`mailto:${contactEmail}`}>{contactEmail}</a></p>
-            {settings.contact_phone && <p>📞 <a href={`tel:${settings.contact_phone}`}>{settings.contact_phone}</a></p>}
+            <p><Icon name="mail" size={13} /> <a href={`mailto:${contactEmail}`}>{contactEmail}</a></p>
+            {settings.contact_phone && <p><Icon name="phone" size={13} /> <a href={`tel:${settings.contact_phone}`}>{settings.contact_phone}</a></p>}
           </div>
         </div>
       </div>
@@ -123,8 +126,8 @@ export default function SiteFooter({
         <div className="container ftr-bottom-row">
           <p className="ftr-copyright">{copyrightText}</p>
           <p className="ftr-credits">
-            Built with ❤️ in Rithala Village
-            <span className="ftr-flag">🚩</span>
+            Built with <Icon name="heart" size={13} /> in Rithala Village
+            <Icon name="flag" size={13} />
           </p>
         </div>
       </div>

@@ -3,6 +3,33 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
+import Icon from './Icon';
+
+type NavItem = {
+  href?: string;
+  label: string;
+  icon: string;
+  children?: NavItem[];
+};
+
+const NAV: NavItem[] = [
+  { href: '/admin/dashboard', label: 'Dashboard', icon: 'dashboard' },
+  {
+    label: 'Blog Posts',
+    icon: 'newspaper',
+    children: [
+      { href: '/admin/posts', label: 'All Blogs', icon: 'blog' },
+      { href: '/admin/posts/new', label: 'New Blog', icon: 'plus' },
+      { href: '/admin/schedule', label: 'Scheduled', icon: 'clock' },
+      { href: '/admin/authors', label: 'Authors', icon: 'feather' },
+      { href: '/admin/categories', label: 'Categories', icon: 'tag' },
+    ],
+  },
+  { href: '/admin/media', label: 'Media Library', icon: 'image' },
+  { href: '/admin/reels', label: 'Reels', icon: 'video' },
+  { href: '/admin/leads', label: 'Leads', icon: 'inbox' },
+  { href: '/admin/settings', label: 'Settings', icon: 'settings' },
+];
 
 export default function AdminShell({
   children,
@@ -11,86 +38,148 @@ export default function AdminShell({
   children: React.ReactNode;
   email: string;
 }) {
-  const pathname = usePathname();
-  const blogPaths = ['/admin/posts', '/admin/authors', '/admin/categories', '/admin/schedule'];
-  const isBlogSection = blogPaths.some((p) => pathname?.startsWith(p));
-  const [blogOpen, setBlogOpen] = useState(isBlogSection);
+  const pathname = usePathname() || '';
+  const [mobileOpen, setMobileOpen] = useState(false);
 
-  function isActive(href: string) {
-    return pathname === href || pathname?.startsWith(href + '/');
+  function isActive(href?: string) {
+    if (!href) return false;
+    if (href === '/admin/posts/new') return pathname === href;
+    if (href === '/admin/posts') return pathname === href || (pathname.startsWith('/admin/posts/') && pathname !== '/admin/posts/new');
+    return pathname === href || pathname.startsWith(href + '/');
+  }
+
+  function isGroupActive(item: NavItem) {
+    return item.children?.some((c) => isActive(c.href)) ?? false;
   }
 
   return (
-    <div className="admin-shell">
-      <aside className="admin-sidebar">
-        <h2>🚩 Rithala Admin</h2>
-        <nav>
-          <Link href="/admin/dashboard" className={isActive('/admin/dashboard') ? 'active' : ''}>
-            📊 Dashboard
-          </Link>
+    <div className={`admin-shell-v2 ${mobileOpen ? 'mobile-open' : ''}`}>
+      {/* Mobile topbar */}
+      <header className="admin-topbar">
+        <button
+          className="admin-mobile-toggle"
+          onClick={() => setMobileOpen(!mobileOpen)}
+          aria-label="Toggle menu"
+        >
+          <Icon name={mobileOpen ? 'close' : 'menu'} size={20} />
+        </button>
+        <div className="admin-topbar-brand">
+          <Icon name="flag" size={18} />
+          <span>Rithala Admin</span>
+        </div>
+      </header>
 
-          {/* BLOG POSTS GROUP */}
-          <button
-            type="button"
-            className={`admin-group-toggle ${blogOpen ? 'open' : ''} ${isBlogSection ? 'active-group' : ''}`}
-            onClick={() => setBlogOpen(!blogOpen)}
-          >
-            📝 Blog Posts
-            <span className="admin-chevron">{blogOpen ? '▾' : '▸'}</span>
-          </button>
-          {blogOpen && (
-            <div className="admin-group">
-              <Link href="/admin/posts" className={isActive('/admin/posts') && !pathname?.includes('/new') ? 'active' : ''}>
-                📋 All Blogs
-              </Link>
-              <Link href="/admin/posts/new" className={isActive('/admin/posts/new') ? 'active' : ''}>
-                ➕ New Blog
-              </Link>
-              <Link href="/admin/schedule" className={isActive('/admin/schedule') ? 'active' : ''}>
-                ⏰ Scheduled
-              </Link>
-              <Link href="/admin/authors" className={isActive('/admin/authors') ? 'active' : ''}>
-                ✍️ Authors
-              </Link>
-              <Link href="/admin/categories" className={isActive('/admin/categories') ? 'active' : ''}>
-                🏷️ Categories
-              </Link>
+      {/* Sidebar */}
+      <aside className="admin-sidebar-v2" aria-label="Admin navigation">
+        <div className="admin-sidebar-head">
+          <div className="admin-brand">
+            <div className="admin-brand-icon">
+              <Icon name="flag" size={18} />
             </div>
-          )}
+            <div>
+              <strong>Rithala</strong>
+              <small>Admin Panel</small>
+            </div>
+          </div>
+        </div>
 
-          <Link href="/admin/media" className={isActive('/admin/media') ? 'active' : ''}>
-            🖼️ Media Library
-          </Link>
-          <Link href="/admin/reels" className={isActive('/admin/reels') ? 'active' : ''}>
-            🎬 Reels
-          </Link>
-          <Link href="/admin/leads" className={isActive('/admin/leads') ? 'active' : ''}>
-            📨 Leads
-          </Link>
-          <Link href="/admin/settings" className={isActive('/admin/settings') ? 'active' : ''}>
-            ⚙️ Settings
-          </Link>
-          <Link href="/" target="_blank" rel="noopener">🌐 View Site</Link>
+        <nav className="admin-nav">
+          {NAV.map((item, i) => (
+            <NavGroup key={i} item={item} isActive={isActive} isGroupActive={isGroupActive} />
+          ))}
 
-          <div style={{ flex: 1 }} />
-          <div style={{ padding: '12px 20px', fontSize: '0.82rem', color: '#a1a1aa' }}>
-            Logged in as<br /><strong>{email}</strong>
+          <a
+            href="/"
+            target="_blank"
+            rel="noopener"
+            className="admin-nav-item"
+          >
+            <span className="admin-nav-icon"><Icon name="external" size={17} /></span>
+            <span className="admin-nav-label">View Site</span>
+          </a>
+        </nav>
+
+        <div className="admin-sidebar-foot">
+          <div className="admin-user">
+            <div className="admin-user-avatar">
+              {email[0]?.toUpperCase()}
+            </div>
+            <div className="admin-user-info">
+              <small>Logged in as</small>
+              <strong>{email}</strong>
+            </div>
           </div>
           <form action="/api/auth/logout" method="POST">
-            <button
-              type="submit"
-              style={{
-                background: 'transparent', border: 'none', color: '#fff',
-                padding: '12px 20px', cursor: 'pointer', textAlign: 'left',
-                width: '100%', fontSize: '0.95rem',
-              }}
-            >
-              🚪 Logout
+            <button type="submit" className="admin-logout-btn">
+              <Icon name="logout" size={15} />
+              Logout
             </button>
           </form>
-        </nav>
+        </div>
       </aside>
-      <main className="admin-main">{children}</main>
+
+      {/* Backdrop for mobile */}
+      {mobileOpen && <div className="admin-backdrop" onClick={() => setMobileOpen(false)} />}
+
+      {/* Main */}
+      <main className="admin-main-v2">
+        <div className="admin-main-inner">{children}</div>
+      </main>
     </div>
+  );
+}
+
+function NavGroup({
+  item,
+  isActive,
+  isGroupActive,
+}: {
+  item: NavItem;
+  isActive: (href?: string) => boolean;
+  isGroupActive: (item: NavItem) => boolean;
+}) {
+  const groupActive = isGroupActive(item);
+  const [open, setOpen] = useState(groupActive);
+
+  if (item.children) {
+    return (
+      <div className={`admin-nav-group ${open ? 'open' : ''} ${groupActive ? 'active' : ''}`}>
+        <button
+          type="button"
+          className="admin-nav-item admin-nav-group-toggle"
+          onClick={() => setOpen(!open)}
+          aria-expanded={open}
+        >
+          <span className="admin-nav-icon"><Icon name={item.icon as any} size={17} /></span>
+          <span className="admin-nav-label">{item.label}</span>
+          <span className="admin-nav-chevron">
+            <Icon name={open ? 'chevron-down' : 'chevron-right'} size={14} />
+          </span>
+        </button>
+
+        <div className="admin-nav-children" hidden={!open}>
+          {item.children.map((child, i) => (
+            <Link
+              key={i}
+              href={child.href!}
+              className={`admin-nav-item admin-nav-child ${isActive(child.href) ? 'is-active' : ''}`}
+            >
+              <span className="admin-nav-icon"><Icon name={child.icon as any} size={15} /></span>
+              <span className="admin-nav-label">{child.label}</span>
+            </Link>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <Link
+      href={item.href!}
+      className={`admin-nav-item ${isActive(item.href) ? 'is-active' : ''}`}
+    >
+      <span className="admin-nav-icon"><Icon name={item.icon as any} size={17} /></span>
+      <span className="admin-nav-label">{item.label}</span>
+    </Link>
   );
 }

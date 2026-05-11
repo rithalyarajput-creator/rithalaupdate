@@ -53,7 +53,7 @@ export default async function PublicShell({ children }: { children: React.ReactN
             </div>
             <div className="brand-text-block">
               <span className="brand-text">{siteTitle}</span>
-              <span className="brand-tag">🚩 Rajput Heritage</span>
+              <span className="brand-tag">Rajput Heritage</span>
             </div>
           </Link>
 
