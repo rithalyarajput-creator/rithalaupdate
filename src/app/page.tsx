@@ -175,15 +175,8 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* Heritage banner image */}
-      <div className="heritage-banner-wrap">
-        <img
-          src="https://9qidomuaf1nvlbrh.public.blob.vercel-storage.com/uploads/1778401739643-rithala-village-990-bus-stand-banner.jpg-2-XLI4otRnMtLUBhErG2AC1lqz3yPUJ4.png"
-          alt="Rithala Village 990 Bus Stand"
-          className="heritage-banner-img"
-          loading="lazy"
-        />
-      </div>
+      {/* Heritage banner slider */}
+      <HeroSlider />
 
 
       {/* Reels Auto-Scroll Strip */}
