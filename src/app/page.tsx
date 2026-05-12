@@ -220,23 +220,33 @@ export default async function HomePage() {
               <p><BiText hi="अभी कोई पोस्ट नहीं है।" en="No posts yet." /> <Link href="/admin/login"><BiText hi="Admin में लॉगिन करें" en="Login to admin" /></Link></p>
             </div>
           ) : (
-            <div className="lp2-rail">
+            <div className="bc-grid">
               {posts.map((p: any) => (
-                <Link key={p.id} href={`/blog/${p.slug}/`} className="lp2-card">
-                  <div className="lp2-card-img">
+                <Link key={p.id} href={`/blog/${p.slug}/`} className="bc-card">
+                  <div className="bc-img-wrap">
                     {p.featured_image ? (
                       <img src={p.featured_image} alt={p.title} loading="lazy" />
                     ) : (
-                      <div className="lp2-card-placeholder">Rithala</div>
+                      <div className="bc-placeholder">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" width="32" height="32">
+                          <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/>
+                        </svg>
+                        <span>Rithala</span>
+                      </div>
                     )}
+                    <div className="bc-overlay" />
+                    <div className="bc-tag">Rithala Village</div>
                   </div>
-                  <div className="lp2-card-body">
-                    <h3 className="lp2-card-title">{p.title}</h3>
-                    <div className="lp2-card-meta">
-                      <span>
+                  <div className="bc-body">
+                    <h3 className="bc-title">{p.title}</h3>
+                    <div className="bc-meta">
+                      <span className="bc-date">
                         {p.published_at ? new Date(p.published_at).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }) : ''}
                       </span>
-                      <BiText as="span" className="lp2-card-arrow" hi="पढ़ें →" en="Read →" />
+                      <span className="bc-read">
+                        <BiText hi="पढ़ें" en="Read More" />
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" width="12" height="12"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                      </span>
                     </div>
                   </div>
                 </Link>
