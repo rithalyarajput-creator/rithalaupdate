@@ -9532,3 +9532,14 @@ body { overflow-x: clip; }
   transition: background 0.12s, color 0.12s;
 }
 .mob-nav-sublink:hover { background: #fef2f2; color: #dc2626; }
+
+/* Mobile nav social section */
+.mob-nav-social { padding: 20px 20px 28px; border-top: 1px solid #f1f5f9; margin-top: auto; }
+.mob-nav-social-label { font-size: 0.72rem; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.08em; margin: 0 0 12px; }
+.mob-nav-social-icons { display: flex; gap: 10px; flex-wrap: wrap; }
+.mob-soc-btn { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #fff; text-decoration: none; transition: transform 0.15s; }
+.mob-soc-btn:hover { transform: scale(1.1); }
+.mob-soc-ig { background: linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888); }
+.mob-soc-fb { background: #1877f2; }
+.mob-soc-yt { background: #ff0000; }
+.mob-soc-pn { background: #e60023; }

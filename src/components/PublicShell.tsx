@@ -98,7 +98,7 @@ export default async function PublicShell({ children }: { children: React.ReactN
 
           {/* Mobile: hamburger only */}
           <div className="mobile-only">
-            <MobileNav menu={menu} />
+            <MobileNav menu={menu} settings={settings} />
           </div>
         </div>
       </header>
