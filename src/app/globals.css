@@ -6631,19 +6631,20 @@ body { overflow-x: clip; }
   font-size: 1.1rem;
 }
 .bd2-author-info {
-  display: flex; flex-direction: column;
+  display: flex; flex-direction: row; align-items: center; gap: 6px;
   line-height: 1.3;
 }
 .bd2-author-info small {
-  font-size: 0.7rem;
-  color: #94a3b8;
-  text-transform: uppercase;
-  letter-spacing: 1px;
+  font-size: 0.82rem;
+  color: #64748b;
+  font-weight: 400;
+  white-space: nowrap;
 }
 .bd2-author-info strong {
   font-size: 0.95rem;
   color: #0f172a;
   font-weight: 700;
+  white-space: nowrap;
 }
 .bd2-author-info a { color: inherit; text-decoration: none; }
 .bd2-author-info a:hover strong { color: #dc2626; }
@@ -6655,10 +6656,10 @@ body { overflow-x: clip; }
 }
 
 .bd2-share {
-  display: flex; gap: 8px;
+  display: flex; gap: 6px; align-items: center;
 }
 .bd2-share-btn {
-  width: 36px; height: 36px;
+  width: 32px; height: 32px;
   border-radius: 50%;
   display: inline-flex; align-items: center; justify-content: center;
   color: #fff;
