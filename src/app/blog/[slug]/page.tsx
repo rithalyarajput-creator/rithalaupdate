@@ -279,8 +279,7 @@ export default async function BlogDetail({ params }: Props) {
         <section className="bd-related-section">
           <div className="container">
             <div className="bd-related-head">
-              <span className="blog-hero-eyebrow">More to read</span>
-              <h2>Related Posts</h2>
+              <h2>You Must Also Read</h2>
             </div>
             <div className="blog-grid-3d">
               {related.map((p) => (
