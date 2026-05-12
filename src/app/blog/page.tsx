@@ -156,28 +156,28 @@ export default async function BlogPage({ searchParams }: { searchParams: SP }) {
               <p>Filters change करके try करें या <Link href="/blog/">सारे posts</Link> देखें।</p>
             </div>
           ) : rest.length === 0 ? null : (
-            <div className="blog2-grid">
+            <div className="bc-grid">
               {rest.map((p) => (
-                <Link key={p.id} href={`/blog/${p.slug}/`} className="blog2-card">
-                  <div className="blog2-card-img">
+                <Link key={p.id} href={`/blog/${p.slug}/`} className="bc-card">
+                  <div className="bc-img-wrap">
                     {p.featured_image ? (
                       <img src={p.featured_image} alt={p.title} loading="lazy" />
                     ) : (
-                      <div className="blog2-card-placeholder">Rithala</div>
+                      <div className="bc-placeholder"><span>Rithala</span></div>
                     )}
+                    <div className="bc-overlay" aria-hidden="true" />
                     {p.primary_category && (
-                      <span className="blog2-card-tag">{p.primary_category}</span>
+                      <span className="bc-tag">{p.primary_category}</span>
                     )}
                   </div>
-                  <div className="blog2-card-body">
-                    <h3 className="blog2-card-title">{p.title}</h3>
-                    <div className="blog2-card-foot">
-                      <span className="blog2-card-date">
-                        {p.published_at ? new Date(p.published_at).toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' }) : 'Draft'}
+                  <div className="bc-body">
+                    <h3 className="bc-title">{p.title}</h3>
+                    <div className="bc-meta">
+                      <span className="bc-date">
+                        {p.published_at ? new Date(p.published_at).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }) : 'Draft'}
                       </span>
-                      <span className="blog2-card-cta">
-                        Read More
-                        <Icon name="arrow-right" size={13} />
+                      <span className="bc-read">
+                        पढ़ें <Icon name="arrow-right" size={13} />
                       </span>
                     </div>
                   </div>
