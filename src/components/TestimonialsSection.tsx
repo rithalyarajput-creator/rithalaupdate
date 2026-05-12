@@ -108,10 +108,8 @@ export default function TestimonialsSection() {
     <section className="home-test-section">
       <div className="container">
         <div className="home-test-head">
-          <div>
-            <h2>What People Say</h2>
-            <p>Stories from our Rithala community</p>
-          </div>
+          <h2>What People Say</h2>
+          <p>Stories from our Rithala community</p>
           <button className="home-test-share-btn" onClick={openShare}>
             <Icon name="plus" size={14} /> Share your testimonial
           </button>

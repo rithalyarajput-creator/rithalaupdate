@@ -4025,6 +4025,23 @@ body { overflow-x: clip; }
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 28px;
 }
+@media (max-width: 700px) {
+  .bc-grid {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 16px;
+    padding-bottom: 12px;
+    margin: 0 -16px;
+    padding-left: 16px;
+    padding-right: 16px;
+    scrollbar-width: none;
+  }
+  .bc-grid::-webkit-scrollbar { display: none; }
+  .bc-card { flex: 0 0 80vw; scroll-snap-align: start; }
+  .lp2-head { flex-direction: column; gap: 14px; }
+  .lp2-view-all { align-self: flex-start; }
+}
 .bc-card {
   display: flex; flex-direction: column;
   background: #fff;
@@ -4273,6 +4290,11 @@ body { overflow-x: clip; }
 
 .rajputana-content {
   display: flex; flex-direction: column; gap: 16px;
+}
+@media (max-width: 899px) {
+  .rajputana-content { align-items: center; text-align: center; }
+  .rajputana-logo { margin: 0 auto; }
+  .rajputana-text { text-align: left; }
 }
 .rajputana-logo {
   width: 280px; max-width: 100%; height: auto;
@@ -5461,7 +5483,9 @@ body { overflow-x: clip; }
 }
 .reel-card-strip:hover { transform: translateY(-6px); }
 @media (max-width: 600px) {
-  .reel-card-strip { flex: 0 0 180px; }
+  .reel-card-strip { flex: 0 0 75vw; }
+  .reels-strip { scroll-snap-type: x mandatory; padding-bottom: 16px; }
+  .reel-card-strip { scroll-snap-align: start; }
 }
 
 .reel-card-inner {
@@ -9256,11 +9280,12 @@ body { overflow-x: clip; }
 /* ========== HOMEPAGE TESTIMONIALS ========== */
 .home-test-section {
   padding: 60px 0;
-  background: linear-gradient(160deg, #1e3a5f 0%, #0f2744 100%);
+  background: linear-gradient(160deg, #2563a8 0%, #1a4a80 100%);
 }
-.home-test-head { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 32px; flex-wrap: wrap; gap: 16px; }
-.home-test-head h2 { font-size: 2rem; font-weight: 800; color: #fff; margin: 0 0 4px; }
-.home-test-head p { color: rgba(255,255,255,0.65); margin: 0; }
+.home-test-head { display: flex; flex-direction: column; align-items: center; text-align: center; margin-bottom: 32px; gap: 8px; }
+.home-test-head h2 { font-size: 2rem; font-weight: 800; color: #fff; margin: 0; }
+.home-test-head p { color: rgba(255,255,255,0.75); margin: 0; }
+.home-test-head-row { display: flex; justify-content: center; margin-top: 12px; }
 .home-test-share-btn { background: linear-gradient(135deg, #f59e0b, #d97706); color: #fff; border: 0; padding: 10px 18px; border-radius: 999px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; box-shadow: 0 4px 12px rgba(245,158,11,0.35); }
 .home-test-share-btn:hover { transform: translateY(-1px); }
 .home-test-rail { display: flex; gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 4px 4px 16px; scrollbar-width: none; }
