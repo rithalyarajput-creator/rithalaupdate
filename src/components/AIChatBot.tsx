@@ -1,6 +1,6 @@
 ﻿'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 
 type Message = {
@@ -224,6 +224,21 @@ const TREE: Record<string, TopicReply> = {
   },
 };
 
+// Render message text: **bold** -> <strong>, /path/ -> <a>, \n -> <br>
+function renderMsg(text: string): React.ReactNode[] {
+  const parts = text.split(/(\*\*[^*]+\*\*|\n|\/[a-z0-9\-/]+\/)/gi);
+  return parts.map((part, i) => {
+    if (/^\*\*[^*]+\*\*$/.test(part)) {
+      return <strong key={i}>{part.slice(2, -2)}</strong>;
+    }
+    if (part === '\n') return <br key={i} />;
+    if (/^\/[a-z0-9\-/]+\/$/.test(part)) {
+      return <a key={i} href={part}>{part}</a>;
+    }
+    return part;
+  });
+}
+
 // Strip markdown/HTML for clean voice text
 function plainText(t: string): string {
   return t
@@ -438,15 +453,9 @@ export default function AIChatBot() {
                       <img src={MASCOT_IMG} alt="" />
                     </span>
                   )}
-                  <div
-                    className={`ai-chat-msg ai-chat-msg-${m.role}`}
-                    dangerouslySetInnerHTML={{
-                      __html: m.text
-                        .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-                        .replace(/(\/[a-z0-9\-/]+\/?)/gi, '<a href="$1">$1</a>')
-                        .replace(/\n/g, '<br/>'),
-                    }}
-                  />
+                  <div className={`ai-chat-msg ai-chat-msg-${m.role}`}>
+                    {renderMsg(m.text)}
+                  </div>
                   {m.role === 'bot' && (
                     <button
                       className="ai-msg-speak"
