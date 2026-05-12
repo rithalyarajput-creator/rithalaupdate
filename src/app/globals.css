@@ -4029,9 +4029,19 @@ body { overflow-x: clip; }
   .bc-grid {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 20px;
+    overflow-y: auto;
+    scroll-snap-type: y mandatory;
+    max-height: 80vh;
+    padding: 8px 4px 16px;
+    scrollbar-width: none;
   }
-  .bc-card { width: 100%; }
+  .bc-grid::-webkit-scrollbar { display: none; }
+  .bc-card {
+    width: 100%;
+    flex-shrink: 0;
+    scroll-snap-align: start;
+  }
   .lp2-head { flex-direction: column; gap: 14px; }
   .lp2-view-all { align-self: flex-start; }
 }
