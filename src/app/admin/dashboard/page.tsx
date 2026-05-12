@@ -64,9 +64,6 @@ export default async function Dashboard() {
           </h1>
           <p className="adm-h1-sub">Here is what's happening with your site today</p>
         </div>
-        <Link className="adm-btn-primary" href="/admin/posts/new">
-          <Icon name="plus" size={16} /> New Blog
-        </Link>
       </div>
 
       <div className="adm-stats">
@@ -155,9 +152,6 @@ export default async function Dashboard() {
               <Icon name="blog" size={40} />
               <h3>No posts yet</h3>
               <p>Create your first blog post to get started.</p>
-              <Link href="/admin/posts/new" className="adm-btn-primary">
-                <Icon name="plus" size={14} /> New Blog
-              </Link>
             </div>
           ) : (
             <ul className="adm-activity">

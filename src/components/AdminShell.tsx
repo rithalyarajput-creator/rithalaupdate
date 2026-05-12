@@ -18,19 +18,49 @@ const NAV: NavItem[] = [
     label: 'Blog Posts',
     icon: 'newspaper',
     children: [
-      { href: '/admin/posts', label: 'All Blogs', icon: 'blog' },
-      { href: '/admin/posts/new', label: 'New Blog', icon: 'plus' },
+      { href: '/admin/posts', label: 'All Posts', icon: 'blog' },
+      { href: '/admin/posts/new', label: 'New Post', icon: 'plus' },
       { href: '/admin/schedule', label: 'Scheduled', icon: 'clock' },
       { href: '/admin/authors', label: 'Authors', icon: 'feather' },
       { href: '/admin/categories', label: 'Categories', icon: 'tag' },
     ],
   },
-  { href: '/admin/photos', label: 'Photos', icon: 'photo' },
-  { href: '/admin/media', label: 'Media Library', icon: 'image' },
-  { href: '/admin/reels', label: 'Reels', icon: 'video' },
-  { href: '/admin/leads', label: 'Leads', icon: 'inbox' },
-  { href: '/admin/faqs', label: 'FAQs', icon: 'book' },
-  { href: '/admin/testimonials', label: 'Testimonials', icon: 'star' },
+  {
+    label: 'Media',
+    icon: 'image',
+    children: [
+      { href: '/admin/media', label: 'Media Library', icon: 'image' },
+      { href: '/admin/photos', label: 'Photos', icon: 'photo' },
+      { href: '/admin/reels', label: 'Reels', icon: 'video' },
+    ],
+  },
+  {
+    label: 'Reviews',
+    icon: 'star',
+    children: [
+      { href: '/admin/testimonials', label: 'Testimonials', icon: 'star' },
+      { href: '/admin/faqs', label: 'FAQs', icon: 'book' },
+    ],
+  },
+  {
+    label: 'Leads',
+    icon: 'inbox',
+    children: [
+      { href: '/admin/leads', label: 'All Leads', icon: 'inbox' },
+      { href: '/admin/leads?source=blog', label: 'Blog Form', icon: 'blog' },
+      { href: '/admin/leads?source=newsletter', label: 'Newsletter', icon: 'mail' },
+    ],
+  },
+  {
+    label: 'Content',
+    icon: 'edit',
+    children: [
+      { href: '/admin/settings?page=home', label: 'Home Page', icon: 'dashboard' },
+      { href: '/admin/settings?page=about', label: 'About Us', icon: 'book' },
+      { href: '/admin/settings?page=aboutme', label: 'About Me', icon: 'feather' },
+      { href: '/admin/settings?page=history', label: 'History', icon: 'tag' },
+    ],
+  },
   { href: '/admin/users', label: 'Users', icon: 'users' },
   { href: '/admin/settings', label: 'Settings', icon: 'settings' },
 ];
@@ -143,10 +173,8 @@ function NavGroup({
   isGroupActive: (item: NavItem) => boolean;
 }) {
   const groupActive = isGroupActive(item);
-  const [open, setOpen] = useState(groupActive);
+  const [open, setOpen] = useState(false);
 
-  // Auto-close when user navigates outside this group's pages.
-  // Do NOT force-open when inside — user must be able to toggle freely.
   useEffect(() => {
     if (!groupActive) setOpen(false);
   }, [groupActive]);
