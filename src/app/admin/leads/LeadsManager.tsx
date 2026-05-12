@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useSearchParams } from 'next/navigation';
 
 type Lead = {
   id: number;
@@ -18,9 +19,16 @@ type Lead = {
 const STATUS_OPTIONS = ['new', 'contacted', 'qualified', 'closed', 'spam'];
 
 export default function LeadsManager({ initialLeads }: { initialLeads: Lead[] }) {
+  const searchParams = useSearchParams();
   const [leads, setLeads] = useState<Lead[]>(initialLeads);
   const [filter, setFilter] = useState<string>('all');
-  const [sourceTab, setSourceTab] = useState<'all' | 'contact_form' | 'newsletter'>('all');
+  const VALID_TABS = ['all', 'contact_form', 'blog_form', 'newsletter'] as const;
+  type SourceTab = typeof VALID_TABS[number];
+  const initTab = ((): SourceTab => {
+    const s = searchParams?.get('source') || '';
+    return VALID_TABS.includes(s as SourceTab) ? (s as SourceTab) : 'all';
+  })();
+  const [sourceTab, setSourceTab] = useState<SourceTab>(initTab);
   const [selected, setSelected] = useState<Lead | null>(null);
   const [msg, setMsg] = useState<string | null>(null);
   const [err, setErr] = useState<string | null>(null);
@@ -29,6 +37,7 @@ export default function LeadsManager({ initialLeads }: { initialLeads: Lead[] })
   const filtered = filter === 'all' ? bySource : bySource.filter((l) => l.status === filter);
 
   const contactCount = leads.filter((l) => l.source === 'contact_form').length;
+  const blogFormCount = leads.filter((l) => l.source === 'blog_form').length;
   const newsletterCount = leads.filter((l) => l.source === 'newsletter').length;
 
   async function updateStatus(id: number, status: string) {
@@ -79,19 +88,25 @@ export default function LeadsManager({ initialLeads }: { initialLeads: Lead[] })
             className={`btn btn-sm ${sourceTab === 'all' ? '' : 'btn-secondary'}`}
             onClick={() => setSourceTab('all')}
           >
-            🗂️ All Leads ({leads.length})
+            All Leads ({leads.length})
           </button>
           <button
             className={`btn btn-sm ${sourceTab === 'contact_form' ? '' : 'btn-secondary'}`}
             onClick={() => setSourceTab('contact_form')}
           >
-            📨 Contact Form ({contactCount})
+            Contact Form ({contactCount})
+          </button>
+          <button
+            className={`btn btn-sm ${sourceTab === 'blog_form' ? '' : 'btn-secondary'}`}
+            onClick={() => setSourceTab('blog_form')}
+          >
+            Blog Form ({blogFormCount})
           </button>
           <button
             className={`btn btn-sm ${sourceTab === 'newsletter' ? '' : 'btn-secondary'}`}
             onClick={() => setSourceTab('newsletter')}
           >
-            📬 Newsletter ({newsletterCount})
+            Newsletter ({newsletterCount})
           </button>
         </div>
 
@@ -199,8 +214,8 @@ export default function LeadsManager({ initialLeads }: { initialLeads: Lead[] })
             </div>
 
             <div style={{ display: 'flex', gap: 8, justifyContent: 'space-between' }}>
-              <a href={`mailto:${selected.email}`} className="btn">📧 Reply via Email</a>
-              <button className="btn-danger" onClick={() => deleteLead(selected.id)}>🗑 Delete</button>
+              <a href={`mailto:${selected.email}`} className="btn">Reply via Email</a>
+              <button className="btn-danger" onClick={() => deleteLead(selected.id)}>Delete</button>
             </div>
           </div>
         </div>

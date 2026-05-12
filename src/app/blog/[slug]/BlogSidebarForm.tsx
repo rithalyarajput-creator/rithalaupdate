@@ -15,6 +15,7 @@ export default function BlogSidebarForm({ postTitle }: { postTitle: string }) {
 
     const fd = new FormData(e.currentTarget);
     fd.append('subject', `[Blog: ${postTitle}]`);
+    fd.append('source', 'blog_form');
     const res = await fetch('/api/leads', { method: 'POST', body: fd });
     const j = await res.json().catch(() => ({}));
 

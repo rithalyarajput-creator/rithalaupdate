@@ -13,6 +13,9 @@ export async function POST(req: NextRequest) {
   let phone = '';
   let subject = '';
   let message = '';
+  let source = 'contact_form';
+
+  const VALID_SOURCES = ['contact_form', 'blog_form', 'newsletter'];
 
   if (fd) {
     name = String(fd.get('name') || '').trim();
@@ -20,6 +23,8 @@ export async function POST(req: NextRequest) {
     phone = String(fd.get('phone') || '').trim();
     subject = String(fd.get('subject') || '').trim();
     message = String(fd.get('message') || '').trim();
+    const s = String(fd.get('source') || '').trim();
+    if (VALID_SOURCES.includes(s)) source = s;
   } else {
     const j = await req.json().catch(() => ({}));
     name = String(j.name || '').trim();
@@ -27,6 +32,8 @@ export async function POST(req: NextRequest) {
     phone = String(j.phone || '').trim();
     subject = String(j.subject || '').trim();
     message = String(j.message || '').trim();
+    const s = String(j.source || '').trim();
+    if (VALID_SOURCES.includes(s)) source = s;
   }
 
   if (!name || !message) {
@@ -43,7 +50,7 @@ export async function POST(req: NextRequest) {
 
   await sql`
     INSERT INTO leads (name, email, phone, subject, message, source, ip_address, user_agent)
-    VALUES (${name}, ${email || null}, ${phone || null}, ${subject || null}, ${message}, 'contact_form', ${ip}, ${ua})
+    VALUES (${name}, ${email || null}, ${phone || null}, ${subject || null}, ${message}, ${source}, ${ip}, ${ua})
   `;
 
   return NextResponse.json({ ok: true, message: 'Thank you! We will get back to you soon.' });

@@ -47,7 +47,7 @@ const NAV: NavItem[] = [
     icon: 'inbox',
     children: [
       { href: '/admin/leads', label: 'All Leads', icon: 'inbox' },
-      { href: '/admin/leads?source=blog', label: 'Blog Form', icon: 'blog' },
+      { href: '/admin/leads?source=blog_form', label: 'Blog Form', icon: 'blog' },
       { href: '/admin/leads?source=newsletter', label: 'Newsletter', icon: 'mail' },
     ],
   },
