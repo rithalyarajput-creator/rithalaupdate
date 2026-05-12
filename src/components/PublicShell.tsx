@@ -6,6 +6,7 @@ import { unstable_noStore as noStore } from 'next/cache';
 import { getAllSettings } from '@/lib/db';
 import SiteFooter from './SiteFooter';
 import HeaderClient from './HeaderClient';
+import MobileNav from './MobileNav';
 
 type MenuItem = { label: string; url: string; children?: MenuItem[] };
 
@@ -60,7 +61,8 @@ export default async function PublicShell({ children }: { children: React.ReactN
             </div>
           </Link>
 
-          <div className="connect-block">
+          {/* Desktop: social + search + lang */}
+          <div className="connect-block desktop-only">
             <div className="header-top-row">
               <span className="connect-tagline">"Connect With Us"</span>
               <div className="social-icons">
@@ -93,10 +95,16 @@ export default async function PublicShell({ children }: { children: React.ReactN
               <HeaderClient />
             </div>
           </div>
+
+          {/* Mobile: hamburger only */}
+          <div className="mobile-only">
+            <MobileNav menu={menu} />
+          </div>
         </div>
       </header>
 
-      <nav className="nav-wrap" aria-label="Main">
+      {/* Desktop nav bar */}
+      <nav className="nav-wrap desktop-only" aria-label="Main">
         <div className="main-nav">
           {menu.map((item, i) => {
             const hasChildren = Array.isArray(item.children) && item.children.length > 0;
