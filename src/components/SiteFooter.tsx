@@ -75,11 +75,6 @@ export default function SiteFooter({
                 <Icon name="pinterest" size={16} />
               </a>
             )}
-            {contactEmail && (
-              <a href={`mailto:${contactEmail}`} aria-label="Email" className="ftr3-soc-mail">
-                <Icon name="mail" size={16} />
-              </a>
-            )}
           </div>
         </div>
 
@@ -104,18 +99,14 @@ export default function SiteFooter({
             <li><Link href="/faqs/"><span className="ftr3-arrow">›</span>FAQs</Link></li>
             <li><Link href="/sandeep-rajput/"><span className="ftr3-arrow">›</span>About Me</Link></li>
           </ul>
-          <div className="ftr3-contact-mini">
-            <p>
-              <Icon name="mail" size={13} />
-              <a href={`mailto:${contactEmail}`}>{contactEmail}</a>
-            </p>
-            {settings.contact_phone && (
+          {settings.contact_phone && (
+            <div className="ftr3-contact-mini">
               <p>
                 <Icon name="phone" size={13} />
                 <a href={`tel:${settings.contact_phone}`}>{settings.contact_phone}</a>
               </p>
-            )}
-          </div>
+            </div>
+          )}
         </div>
 
         {/* RIGHT: Newsletter */}

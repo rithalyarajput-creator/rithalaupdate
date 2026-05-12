@@ -83,8 +83,8 @@ const PILLARS = [
 ];
 
 const TIMELINE = [
-  { year: '2020', text: 'Started sharing Rithala updates on Instagram and social media', textHi: 'Instagram और social media पर रिठाला अपडेट शेयर करना शुरू किया' },
-  { year: '2022', text: 'Official website launched on 15 August 2022', textHi: '15 अगस्त 2022 को आधिकारिक वेबसाइट लॉन्च हुई' },
+  { year: '2020', text: 'Rithala Update started on Instagram and social media — sharing village updates, photos and local news', textHi: '2020 में Instagram और social media पर रिठाला अपडेट की शुरुआत हुई' },
+  { year: '2022', text: 'Official Rithala Update website launched on 15 August 2022 — India\'s Independence Day', textHi: '15 अगस्त 2022 को आधिकारिक Rithala Update वेबसाइट लॉन्च हुई' },
   { year: '2024', text: 'Photo archives, Reels and community submissions expanded', textHi: 'फ़ोटो आर्काइव, Reels और सामुदायिक सबमिशन का विस्तार हुआ' },
   { year: '2026', text: 'Full digital platform with AI chatbot, FAQs and Testimonials', textHi: 'AI chatbot, FAQs और Testimonials के साथ पूर्ण डिजिटल प्लेटफ़ॉर्म' },
 ];
@@ -136,8 +136,8 @@ export default async function AboutPage() {
             </div>
             <div className="ab-logo-meta">
               <strong>Rithala Update</strong>
-              <span>Launched 15 August 2022</span>
-              <span>Rithala Village, Delhi</span>
+              <span>Social Media: 2020 onwards</span>
+              <span>Website: 15 August 2022</span>
             </div>
           </div>
 
@@ -227,10 +227,11 @@ export default async function AboutPage() {
               through modern digital platforms.
             </p>
             <p>
-              What started as a small social media initiative gradually became one of the growing
-              local digital platforms representing Rithala online. On{' '}
-              <strong>15 August 2022</strong>, the official website was launched — a date chosen
-              to symbolize awareness, freedom of information, and community connection.
+              What started in <strong>2020</strong> as a small social media initiative on Instagram gradually
+              became one of the growing local digital platforms representing Rithala online. As the
+              audience grew, the need for a dedicated website became clear. On{' '}
+              <strong>15 August 2022</strong> — India&#39;s Independence Day — the official Rithala Update
+              website was launched, symbolizing awareness, freedom of information, and community connection.
             </p>
             <p className="ab-story-hi">
               Instagram से शुरू हुई यात्रा आज रिठाला गाँव का पूर्ण डिजिटल घर बन चुकी है।

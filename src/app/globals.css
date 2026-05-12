@@ -4123,7 +4123,13 @@ body { overflow-x: clip; }
 /* ============================================
    PAGE LOADER — Rajputana Swords
    ============================================ */
-.pl-wrap { position: fixed; inset: 0; z-index: 9999; pointer-events: none; }
+.pl-wrap {
+  position: fixed; inset: 0; z-index: 9999; pointer-events: none;
+  background: rgba(255,255,228,0.45);
+  backdrop-filter: blur(1px);
+  animation: pl-bg-in 0.15s ease;
+}
+@keyframes pl-bg-in { from { opacity: 0; } to { opacity: 1; } }
 
 /* Top sliding progress bar */
 .pl-bar {
@@ -4137,19 +4143,21 @@ body { overflow-x: clip; }
   100% { background-position: 0% 0; }
 }
 
-/* Swords orb — bottom-right corner */
+/* Swords orb — centered with backdrop */
 .pl-orb {
-  position: fixed; bottom: 80px; right: 20px;
-  width: 90px; height: 90px;
-  background: rgba(255,255,228,0.92);
+  position: fixed;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 110px; height: 110px;
+  background: rgba(255,255,228,0.96);
   border-radius: 50%;
-  box-shadow: 0 8px 28px rgba(185,28,28,0.35);
-  border: 2px solid rgba(185,28,28,0.2);
+  box-shadow: 0 12px 40px rgba(185,28,28,0.3), 0 0 0 8px rgba(185,28,28,0.08);
+  border: 2px solid rgba(185,28,28,0.18);
   display: flex; align-items: center; justify-content: center;
   animation: pl-orb-in 0.2s ease;
-  backdrop-filter: blur(4px);
+  backdrop-filter: blur(6px);
 }
-@keyframes pl-orb-in { from { transform: scale(0.7); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+@keyframes pl-orb-in { from { transform: translate(-50%,-50%) scale(0.6); opacity: 0; } to { transform: translate(-50%,-50%) scale(1); opacity: 1; } }
 
 .pl-swords-scene { width: 72px; height: 72px; overflow: visible; }
 
