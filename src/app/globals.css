@@ -4028,18 +4028,16 @@ body { overflow-x: clip; }
 @media (max-width: 700px) {
   .bc-grid {
     display: flex;
-    flex-direction: column;
-    gap: 20px;
-    overflow-y: auto;
-    scroll-snap-type: y mandatory;
-    max-height: 80vh;
-    padding: 8px 4px 16px;
+    flex-direction: row;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 14px;
+    padding-bottom: 12px;
     scrollbar-width: none;
   }
   .bc-grid::-webkit-scrollbar { display: none; }
   .bc-card {
-    width: 100%;
-    flex-shrink: 0;
+    flex: 0 0 82vw;
     scroll-snap-align: start;
   }
   .lp2-head { flex-direction: column; gap: 14px; }
