@@ -5,6 +5,7 @@ import PWAInstall from '@/components/PWAInstall';
 import ScrollReveal from '@/components/ScrollReveal';
 import AIChatBot from '@/components/AIChatBot';
 import PageLoader from '@/components/PageLoader';
+import { LanguageProvider } from '@/context/LanguageContext';
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://rithalaupdate.online';
 
@@ -173,7 +174,9 @@ export default async function RootLayout({
         )}
       </head>
       <body>
-        {children}
+        <LanguageProvider>
+          {children}
+        </LanguageProvider>
         <PageLoader />
         <ScrollReveal />
         <AIChatBot />

@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { unstable_noStore as noStore } from 'next/cache';
 import { getAllSettings } from '@/lib/db';
 import SiteFooter from './SiteFooter';
+import HeaderClient from './HeaderClient';
 
 type MenuItem = { label: string; url: string; children?: MenuItem[] };
 
@@ -60,7 +61,10 @@ export default async function PublicShell({ children }: { children: React.ReactN
           </Link>
 
           <div className="connect-block">
-            <span className="connect-tagline">"Connect With Us"</span>
+            <div className="header-top-row">
+              <span className="connect-tagline">"Connect With Us"</span>
+              <HeaderClient />
+            </div>
             <div className="social-icons">
               {settings.social_instagram && (
                 <a href={settings.social_instagram} target="_blank" rel="noopener" aria-label="Instagram" className="social-ig">

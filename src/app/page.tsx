@@ -4,6 +4,7 @@ import PostCard from '@/components/PostCard';
 import HeroSlider from '@/components/HeroSlider';
 import ReelsStrip from '@/components/ReelsStrip';
 import TestimonialsSection from '@/components/TestimonialsSection';
+import BiText from '@/components/BiText';
 import { getPublishedPosts, getFeaturedReels, getPublishedReels, sql } from '@/lib/db';
 
 export const revalidate = 60;
@@ -70,49 +71,47 @@ export default async function HomePage() {
             <div className="hero-content-v2">
               <span className="hero-eyebrow">
                 <span className="hero-eyebrow-line"></span>
-                Welcome to Rithala
+                <BiText hi="रिठाला में आपका स्वागत है" en="Welcome to Rithala" />
                 <span className="hero-eyebrow-line"></span>
               </span>
 
               <h1 className="hero-title-v2">
-                <span className="hero-title-hindi">रिठाला गाँव</span>
-                <span className="hero-title-english">Rithala Village</span>
+                <BiText hi="रिठाला गाँव" en="Rithala Village" />
               </h1>
 
-              <p className="hero-description">
-                रिठाला गाँव दिल्ली के उत्तर-पश्चिम क्षेत्र में स्थित एक प्राचीन और
-                ऐतिहासिक गाँव है, जो अपनी राजपूताना विरासत, वीरता और सांस्कृतिक
-                गौरव के लिए प्रसिद्ध है। सदियों से यह गाँव परंपराओं, भाईचारे और
-                आपसी सहयोग का प्रतीक रहा है, जहाँ के लोग मेहनती, साहसी और अपने
-                इतिहास पर गर्व करने वाले हैं।
-              </p>
+              <BiText
+                as="p"
+                className="hero-description"
+                hi="रिठाला गाँव दिल्ली के उत्तर-पश्चिम क्षेत्र में स्थित एक प्राचीन और ऐतिहासिक गाँव है, जो अपनी राजपूताना विरासत, वीरता और सांस्कृतिक गौरव के लिए प्रसिद्ध है। सदियों से यह गाँव परंपराओं, भाईचारे और आपसी सहयोग का प्रतीक रहा है।"
+                en="Rithala Village is an ancient and historical village in North-West Delhi, famous for its Rajputana heritage, bravery, and cultural pride. For centuries, this village has been a symbol of traditions, brotherhood, and community unity."
+              />
 
               <ul className="hero-highlights">
                 <li>
                   <span className="hero-icon">📜</span>
-                  <span>सदियों पुरानी परंपराओं का प्रतीक</span>
+                  <BiText hi="सदियों पुरानी परंपराओं का प्रतीक" en="Symbol of centuries-old traditions" />
                 </li>
                 <li>
                   <span className="hero-icon">⚔️</span>
-                  <span>राजपूत वीरता की गौरवशाली कहानियाँ</span>
+                  <BiText hi="राजपूत वीरता की गौरवशाली कहानियाँ" en="Glorious stories of Rajput bravery" />
                 </li>
                 <li>
                   <span className="hero-icon">🏛️</span>
-                  <span>सांस्कृतिक धरोहर और ऐतिहासिक स्थल</span>
+                  <BiText hi="सांस्कृतिक धरोहर और ऐतिहासिक स्थल" en="Cultural heritage and historical sites" />
                 </li>
                 <li>
                   <span className="hero-icon">🤝</span>
-                  <span>भाईचारे और सामाजिक एकता</span>
+                  <BiText hi="भाईचारे और सामाजिक एकता" en="Brotherhood and social unity" />
                 </li>
               </ul>
 
               <div className="hero-cta-row">
                 <Link href="/about/" className="btn-hero-primary">
-                  <span className="btn-hero-text">📖 Read Full Story</span>
+                  <BiText as="span" className="btn-hero-text" hi="📖 पूरी कहानी पढ़ें" en="📖 Read Full Story" />
                   <span className="btn-hero-arrow">→</span>
                 </Link>
                 <Link href="/contact/" className="btn-hero-secondary">
-                  Contact Us
+                  <BiText hi="संपर्क करें" en="Contact Us" />
                 </Link>
               </div>
             </div>
@@ -185,7 +184,7 @@ export default async function HomePage() {
       {/* Categories */}
       <section className="section reveal-on-scroll">
         <div className="container">
-          <h2>Categories</h2>
+          <h2><BiText hi="श्रेणियाँ" en="Categories" /></h2>
           <div className="cat-cards">
             {galleryCards.map((g) => (
               <Link key={g.href} className="cat-card" href={g.href}>
@@ -209,16 +208,16 @@ export default async function HomePage() {
         <div className="container">
           <div className="lp2-head">
             <div>
-              <span className="lp2-eyebrow">Fresh from the village</span>
-              <h2 className="lp2-h2">Latest Blog Posts</h2>
-              <p className="lp2-sub">रिठाला से ताज़ा कहानियाँ, photos और updates</p>
+              <BiText as="span" className="lp2-eyebrow" hi="गाँव से ताज़ा खबर" en="Fresh from the village" />
+              <h2 className="lp2-h2"><BiText hi="ताज़े ब्लॉग पोस्ट" en="Latest Blog Posts" /></h2>
+              <BiText as="p" className="lp2-sub" hi="रिठाला से ताज़ा कहानियाँ, फ़ोटो और अपडेट" en="Fresh stories, photos and updates from Rithala" />
             </div>
-            <Link href="/blog/" className="lp2-view-all">View all posts →</Link>
+            <Link href="/blog/" className="lp2-view-all"><BiText hi="सभी पोस्ट देखें →" en="View all posts →" /></Link>
           </div>
 
           {posts.length === 0 ? (
             <div className="lp2-empty">
-              <p>No posts yet. <Link href="/admin/login">Login to admin</Link> to add the first post.</p>
+              <p><BiText hi="अभी कोई पोस्ट नहीं है।" en="No posts yet." /> <Link href="/admin/login"><BiText hi="Admin में लॉगिन करें" en="Login to admin" /></Link></p>
             </div>
           ) : (
             <div className="lp2-rail">
@@ -237,7 +236,7 @@ export default async function HomePage() {
                       <span>
                         {p.published_at ? new Date(p.published_at).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }) : ''}
                       </span>
-                      <span className="lp2-card-arrow">Read →</span>
+                      <BiText as="span" className="lp2-card-arrow" hi="पढ़ें →" en="Read →" />
                     </div>
                   </div>
                 </Link>
@@ -252,8 +251,8 @@ export default async function HomePage() {
         <section className="home-faq-section">
           <div className="container">
             <div className="home-faq-head">
-              <h2>Frequently Asked Questions</h2>
-              <Link href="/faqs/" className="home-faq-all">View all FAQs →</Link>
+              <h2><BiText hi="अक्सर पूछे जाने वाले सवाल" en="Frequently Asked Questions" /></h2>
+              <Link href="/faqs/" className="home-faq-all"><BiText hi="सभी FAQs देखें →" en="View all FAQs →" /></Link>
             </div>
             <div className="home-faq-grid">
               {homeFaqs.map((f: any) => (

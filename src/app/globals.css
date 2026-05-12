@@ -113,6 +113,77 @@ p { margin: 0 0 1em; }
   font-weight: 500; letter-spacing: 0.3px;
 }
 
+/* Header top row: tagline + controls */
+.header-top-row {
+  display: flex; align-items: center; justify-content: flex-end;
+  gap: 10px; flex-wrap: wrap;
+}
+
+/* Search + language controls group */
+.header-controls {
+  display: flex; align-items: center; gap: 8px;
+}
+
+/* Search wrapper */
+.header-search-wrap {
+  display: flex; align-items: center; gap: 6px;
+}
+.header-search-form {
+  display: flex; align-items: center;
+  background: rgba(255,255,255,0.15);
+  border: 1.5px solid rgba(255,255,255,0.5);
+  border-radius: 24px;
+  overflow: hidden;
+  backdrop-filter: blur(4px);
+}
+.header-search-input {
+  background: transparent; border: none; outline: none;
+  color: #fff; font-size: 0.88rem; padding: 5px 12px;
+  width: 180px; font-family: inherit;
+}
+.header-search-input::placeholder { color: rgba(255,255,255,0.7); }
+.header-search-btn {
+  background: transparent; border: none; cursor: pointer;
+  color: #fff; padding: 5px 10px;
+  display: flex; align-items: center;
+}
+.header-search-btn:hover { opacity: 0.8; }
+
+/* Search icon button (toggle open/close) */
+.header-icon-btn {
+  background: rgba(255,255,255,0.18);
+  border: 1.5px solid rgba(255,255,255,0.45);
+  border-radius: 50%;
+  width: 34px; height: 34px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; color: #fff;
+  transition: background 0.2s, transform 0.2s;
+  flex-shrink: 0;
+}
+.header-icon-btn:hover {
+  background: rgba(255,255,255,0.3);
+  transform: scale(1.08);
+}
+
+/* Language toggle button */
+.lang-toggle-btn {
+  display: flex; align-items: center; gap: 3px;
+  background: rgba(255,255,255,0.15);
+  border: 1.5px solid rgba(255,255,255,0.45);
+  border-radius: 20px;
+  padding: 4px 12px;
+  cursor: pointer; color: #fff;
+  font-size: 0.82rem; font-weight: 600;
+  letter-spacing: 0.5px;
+  transition: background 0.2s;
+  font-family: inherit;
+  flex-shrink: 0;
+}
+.lang-toggle-btn:hover { background: rgba(255,255,255,0.28); }
+.lang-opt { opacity: 0.55; transition: opacity 0.2s; }
+.lang-active { opacity: 1; text-shadow: 0 0 6px rgba(255,255,255,0.6); }
+.lang-divider { opacity: 0.4; margin: 0 1px; }
+
 .social-icons { display: flex; gap: 7px; align-items: center; }
 .social-icons a {
   width: 32px; height: 32px;
