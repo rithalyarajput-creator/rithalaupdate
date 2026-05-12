@@ -191,7 +191,7 @@ function NavGroup({
           </span>
         </button>
 
-        <div className="admin-nav-children" hidden={!open}>
+        <div className="admin-nav-children" style={{ display: open ? 'flex' : 'none' }}>
           {item.children.map((child, i) => (
             <Link
               key={i}
