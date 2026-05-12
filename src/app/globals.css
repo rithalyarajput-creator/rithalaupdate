@@ -103,20 +103,19 @@ p { margin: 0 0 1em; }
   letter-spacing: 1px;
 }
 
-.connect-block {
-  display: flex; flex-direction: column;
-  align-items: flex-end; gap: 6px;
-}
 .connect-tagline {
   font-size: 0.78rem; font-style: italic;
   color: #fff; text-shadow: 0 1px 3px rgba(0,0,0,0.4);
   font-weight: 500; letter-spacing: 0.3px;
 }
 
-/* Header top row: tagline + controls */
+/* Connect block: single row — tagline | social icons | search+lang */
+.connect-block {
+  display: flex; flex-direction: column; align-items: flex-end; gap: 0;
+}
 .header-top-row {
-  display: flex; align-items: center; justify-content: flex-end;
-  gap: 10px; flex-wrap: wrap;
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  justify-content: flex-end;
 }
 
 /* Search + language controls group */

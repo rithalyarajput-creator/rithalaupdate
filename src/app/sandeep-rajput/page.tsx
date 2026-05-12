@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import PublicShell from '@/components/PublicShell';
 import Icon from '@/components/Icon';
+import '../ab3-styles.css';
 
 export const revalidate = 300;
 
@@ -158,15 +159,13 @@ export default function SandeepRajputPage() {
             today, creativity remains one of the most important parts of my personality.
           </p>
 
-          <div className="sr-img-mid">
-            <img
-              src={PORTRAIT_2}
-              alt="Sandeep Rajput Rithala Village - digital creator and website developer"
-              loading="lazy"
-            />
-          </div>
-
           <h2>The Idea Behind Rithala Update</h2>
+          <img
+            src={PORTRAIT_2}
+            alt="Sandeep Rajput Rithala Village - digital creator and website developer"
+            loading="lazy"
+            className="sr-img-float"
+          />
           <p>
             The idea behind creating Rithala Update came from a simple vision — to give Rithala
             Village a strong digital identity and create one platform where people can stay
@@ -213,11 +212,11 @@ export default function SandeepRajputPage() {
           </p>
         </div>
 
-        <div className="container sr-gallery-wrap">
-          <div className="sr-gallery">
+        <div className="sr-gallery-scroll-wrap">
+          <div className="sr-gallery-scroll">
             {ARTWORKS.map((art) => (
-              <figure key={art.title} className="sr-art-card">
-                <div className="sr-art-img">
+              <figure key={art.title} className="sr-art-card-h">
+                <div className="sr-art-img-h">
                   <img src={art.img} alt={art.alt} loading="lazy" />
                 </div>
                 <figcaption>
