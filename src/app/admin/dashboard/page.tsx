@@ -84,7 +84,7 @@ export default async function Dashboard() {
   };
 
   return (
-    <AdminShell email={session.email}>
+    <AdminShell email={session.email} newLeads={stats.newLeads}>
 
       {/* ── Page Header ── */}
       <div className="dash-header">

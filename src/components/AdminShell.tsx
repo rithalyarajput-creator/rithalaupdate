@@ -68,9 +68,11 @@ const NAV: NavItem[] = [
 export default function AdminShell({
   children,
   email,
+  newLeads = 0,
 }: {
   children: React.ReactNode;
   email: string;
+  newLeads?: number;
 }) {
   const pathname = usePathname() || '';
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -101,6 +103,10 @@ export default function AdminShell({
           <Icon name="flag" size={18} />
           <span>Rithala Admin</span>
         </div>
+        <Link href="/admin/leads" className="admin-bell-btn" title="New Leads">
+          <Icon name="inbox" size={18} />
+          {newLeads > 0 && <span className="admin-bell-badge">{newLeads > 99 ? '99+' : newLeads}</span>}
+        </Link>
       </header>
 
       {/* Sidebar */}
@@ -115,6 +121,10 @@ export default function AdminShell({
               <small>Admin Panel</small>
             </div>
           </div>
+          <Link href="/admin/leads" className="admin-bell-btn" title={`${newLeads} new lead${newLeads !== 1 ? 's' : ''}`}>
+            <Icon name="inbox" size={17} />
+            {newLeads > 0 && <span className="admin-bell-badge">{newLeads > 99 ? '99+' : newLeads}</span>}
+          </Link>
         </div>
 
         <nav className="admin-nav">

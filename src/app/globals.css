@@ -742,6 +742,7 @@ p { margin: 0 0 1em; }
 .admin-main-v2 {
   grid-column: 2;
   min-width: 0;
+  overflow-x: hidden;
 }
 .admin-sidebar-v2::-webkit-scrollbar { width: 6px; }
 .admin-sidebar-v2::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 3px; }
@@ -945,13 +946,9 @@ p { margin: 0 0 1em; }
   border-color: rgba(239,68,68,0.5);
 }
 
-.admin-main-v2 {
-  min-width: 0;
-  overflow-x: hidden;
-}
 .admin-main-inner {
   padding: 28px 32px;
-  max-width: 1400px;
+  max-width: 100%;
 }
 @media (max-width: 768px) {
   .admin-main-inner { padding: 18px 16px; }
@@ -9437,3 +9434,20 @@ body { overflow-x: clip; }
 @media (max-width: 1100px) { .dash-main-grid { grid-template-columns: 1fr; } .dash-panel-wide, .dash-right-col { grid-column: 1; } .dash-right-col { display: grid; grid-template-columns: 1fr 1fr; } }
 @media (max-width: 760px) { .dash-kpi-row { grid-template-columns: 1fr 1fr; } .dash-right-col { grid-template-columns: 1fr; } }
 @media (max-width: 480px) { .dash-kpi-row { grid-template-columns: 1fr; } }
+
+/* Bell notification button */
+.admin-bell-btn {
+  position: relative; display: flex; align-items: center; justify-content: center;
+  width: 34px; height: 34px; border-radius: 8px;
+  background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.7);
+  text-decoration: none; transition: background 0.15s, color 0.15s; flex-shrink: 0;
+}
+.admin-bell-btn:hover { background: rgba(255,255,255,0.15); color: #fff; }
+.admin-bell-badge {
+  position: absolute; top: -4px; right: -4px;
+  background: #ef4444; color: #fff;
+  font-size: 0.65rem; font-weight: 700; line-height: 1;
+  padding: 2px 5px; border-radius: 20px; min-width: 16px; text-align: center;
+  border: 2px solid #1a1f36;
+}
+.admin-sidebar-head { display: flex; align-items: center; justify-content: space-between; }
