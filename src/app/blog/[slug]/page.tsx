@@ -9,6 +9,25 @@ import { sql, getPostBySlug, getPublishedPosts, getCategoriesForPost, getAllSett
 export const revalidate = 30;
 export const dynamicParams = true;
 
+function prepareContent(raw: string): string {
+  if (!raw) return '';
+  // Unescape HTML entities first (&lt; -> <, etc.)
+  let s = raw
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&amp;/g, '&')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'");
+  // If still no real HTML tags, treat as plain text
+  if (!/<[a-zA-Z]/.test(s)) {
+    return s
+      .split(/\n\n+/)
+      .map(p => `<p>${p.replace(/\n/g, '<br>')}</p>`)
+      .join('');
+  }
+  return s;
+}
+
 const SITE = process.env.NEXT_PUBLIC_SITE_URL || 'https://rithalaupdate.online';
 
 type Props = { params: { slug: string } };
@@ -217,7 +236,7 @@ export default async function BlogDetail({ params }: Props) {
             )}
 
             {/* CONTENT */}
-            <div className="bd2-content" dangerouslySetInnerHTML={{ __html: post.content || '' }} />
+            <div className="bd2-content" dangerouslySetInnerHTML={{ __html: prepareContent(post.content || '') }} />
 
             {/* TAGS / CATEGORIES STRIP */}
             {cats.length > 0 && (
