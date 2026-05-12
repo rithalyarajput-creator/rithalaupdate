@@ -185,32 +185,6 @@ export default async function BlogDetail({ params }: Props) {
                   </div>
                 </div>
 
-                <div className="bd2-share">
-                  <a href={`https://www.facebook.com/sharer/sharer.php?u=${shareLink}`}
-                    target="_blank" rel="noopener" aria-label="Share on Facebook"
-                    className="bd2-share-btn bd2-share-fb">
-                    <Icon name="facebook" size={14} />
-                  </a>
-                  {settings.social_instagram && (
-                    <a href={settings.social_instagram}
-                      target="_blank" rel="noopener" aria-label="Instagram"
-                      className="bd2-share-btn bd2-share-ig">
-                      <Icon name="instagram" size={14} />
-                    </a>
-                  )}
-                  {settings.social_pinterest && (
-                    <a href={settings.social_pinterest}
-                      target="_blank" rel="noopener" aria-label="Pinterest"
-                      className="bd2-share-btn bd2-share-pn">
-                      <Icon name="pinterest" size={14} />
-                    </a>
-                  )}
-                  <a href={`mailto:${settings.contact_email || settings.social_email || 'rithalyarajput@gmail.com'}`}
-                    aria-label="Email"
-                    className="bd2-share-btn bd2-share-em">
-                    <Icon name="mail" size={14} />
-                  </a>
-                </div>
               </div>
             </header>
 
