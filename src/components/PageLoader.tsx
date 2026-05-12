@@ -8,6 +8,8 @@ function LoaderInner() {
   const search = useSearchParams();
   const [active, setActive] = useState(false);
 
+  if (pathname?.startsWith('/admin')) return null;
+
   useEffect(() => {
     setActive(true);
     const t = setTimeout(() => setActive(false), 900);

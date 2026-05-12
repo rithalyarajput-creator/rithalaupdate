@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Icon from './Icon';
 
 type NavItem = {
@@ -174,10 +174,6 @@ function NavGroup({
 }) {
   const groupActive = isGroupActive(item);
   const [open, setOpen] = useState(false);
-
-  useEffect(() => {
-    if (!groupActive) setOpen(false);
-  }, [groupActive]);
 
   if (item.children) {
     return (
