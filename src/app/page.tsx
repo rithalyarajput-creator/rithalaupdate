@@ -182,20 +182,6 @@ export default async function HomePage() {
         <HeroSlider />
       </div>
 
-      {/* Categories */}
-      <section className="section reveal-on-scroll">
-        <div className="container">
-          <h2><BiText hi="श्रेणियाँ" en="Categories" /></h2>
-          <div className="cat-cards">
-            {galleryCards.map((g) => (
-              <Link key={g.href} className="cat-card" href={g.href}>
-                <img src={g.img} alt={g.title} loading="lazy" />
-                <span>{g.title}</span>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* Reels Auto-Scroll Strip */}
       {allReels.length > 0 && (
