@@ -1,134 +1,235 @@
-# 🚩 Rithala Update v2 — Full-stack Next.js + Postgres
+# Rithala Update — Official Website
 
-> **Public website + Admin dashboard + Database — all on Vercel, all free**
+**Live:** [rithalaupdate.online](https://rithalaupdate.online)  
+**Built by:** [Sandeep Rajput (Rithalya Rajput)](https://rithalaupdate.online/sandeep-rajput/)
 
-This is the **dynamic v2** of [rithalaupdate.online](https://rithalaupdate.online),
-rebuilt from the static Astro v1 to give Sandeep Rajput a real WordPress-style
-admin where new posts go live in **under 10 seconds** without touching code.
+[![Next.js](https://img.shields.io/badge/Next.js-14-000000?logo=next.js&logoColor=white)](https://nextjs.org)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org)
+[![Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-000000?logo=vercel&logoColor=white)](https://vercel.com)
+[![PostgreSQL](https://img.shields.io/badge/Database-Vercel%20Postgres-336791?logo=postgresql&logoColor=white)](https://vercel.com/storage/postgres)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-[![Built with Next.js](https://img.shields.io/badge/Built%20with-Next.js%2014-000000?logo=next.js&logoColor=white)](https://nextjs.org)
-[![Database: Vercel Postgres](https://img.shields.io/badge/DB-Vercel%20Postgres-336791?logo=postgresql&logoColor=white)](https://vercel.com/storage/postgres)
-[![Deploy: Vercel](https://img.shields.io/badge/Deploy-Vercel-000000?logo=vercel&logoColor=white)](https://vercel.com)
+---
 
-## ✨ What you get
+## About
 
-* 🌐 **Public site** at `/` — home, post pages, category pages
-* 🔐 **Admin login** at `/admin/login` — email + password
-* 📊 **Dashboard** at `/admin/dashboard` — counts + recent activity
-* 📝 **Post editor** at `/admin/posts/new` — title, slug, body, image, categories
-* 🖼️ **Image upload** to Vercel Blob storage
-* ⚡ **Real-time updates** — `revalidatePath()` on every save means the live
-  site refreshes within seconds, no rebuild needed
-* 🔍 **SEO ready** — sitemap, robots, OpenGraph, RSS, JSON-LD
-* 🔗 **Legacy URL preservation** — old WordPress paths (`/2025/09/14/747/`)
-  still resolve, so Google rankings carry over from v1
+Rithala Update is the official digital platform for **Rithala Village**, North-West Delhi — celebrating Rajputana heritage, culture, events, temples, and the stories of our community since 15 August 2022.
 
-## 📁 Folder layout
+This is **v2** of the website — a full-stack Next.js application with a custom admin dashboard, replacing the earlier static Astro v1. New blog posts go live in under 10 seconds without touching any code.
+
+---
+
+## Features
+
+### Public Website
+- Home page with hero section, Rajputana heritage section, auto-sliding image banner, reels strip, latest blog posts, testimonials, and FAQs
+- Blog listing page with category, author, year, and search filters
+- Individual blog post pages with related posts and SEO structured data
+- Photo gallery with category tabs, album folders, and lightbox viewer
+- Reels page with embedded video cards
+- About / Sandeep Rajput page
+- Rithala Village History page
+- Contact page with form
+- FAQs page
+- AI Chatbot (Rithala AI) — tree-based conversational assistant with voice input/output
+- PWA-ready (installable on mobile)
+- Fully mobile responsive with iPhone safe-area support
+
+### Admin Dashboard (`/admin`)
+- Secure login with bcrypt + JWT (HTTP-only cookie)
+- Dashboard with post counts and recent activity
+- Post editor — title, slug, excerpt, content, featured image, categories, status, scheduled publishing
+- Media manager — upload images to Vercel Blob storage
+- Categories, Authors, Reels, Photos managers
+- Testimonials manager — approve/reject community testimonials
+- FAQs manager — create/edit FAQs, set show-on-home flag
+- Leads manager — view contact form submissions
+- Settings and Users managers
+
+### Technical
+- ISR with on-demand revalidation — publish a post and it is live in seconds
+- SEO: sitemap.xml, robots.txt, OpenGraph, Twitter cards, JSON-LD structured data, RSS feed
+- Legacy WordPress URL support — old post paths still resolve
+- Vercel Postgres (Neon) for database
+- Vercel Blob for image/media storage
+
+---
+
+## Tech Stack
+
+| Layer | Technology |
+|---|---|
+| Framework | Next.js 14 (App Router) |
+| Language | TypeScript |
+| Styling | Pure custom CSS (no Tailwind) |
+| Database | Vercel Postgres (PostgreSQL via Neon) |
+| Storage | Vercel Blob |
+| Auth | JWT + bcryptjs (HTTP-only cookie) |
+| Deployment | Vercel |
+| AI Chatbot | Custom tree-based logic (no external AI API) |
+
+---
+
+## Project Structure
 
 ```
-rithalaupdate-v2/
+rithalaupdate/
 ├── public/
 │   ├── logo.png
 │   └── favicon.png
 ├── scripts/
-│   ├── schema.sql           # Postgres schema
-│   ├── db-setup.mjs         # creates tables, admin user, imports WP posts
-│   └── rithala-wxr.xml      # WordPress export to migrate from
+│   ├── schema.sql           # PostgreSQL schema
+│   └── db-setup.mjs         # Creates tables + admin user
 ├── src/
 │   ├── app/
-│   │   ├── layout.tsx       # root layout
-│   │   ├── page.tsx         # home
-│   │   ├── [...slug]/       # post & page detail (catch-all)
-│   │   ├── category/[slug]/ # category archive
-│   │   ├── admin/           # all admin pages (protected by middleware)
-│   │   ├── api/             # /api/auth, /api/posts, /api/upload
+│   │   ├── layout.tsx           # Root layout
+│   │   ├── page.tsx             # Home page
+│   │   ├── globals.css          # All CSS (single file, no Tailwind)
+│   │   ├── [...slug]/           # Blog post / static page (catch-all)
+│   │   ├── blog/                # Blog listing + single post
+│   │   ├── category/[slug]/     # Category archive
+│   │   ├── photos/              # Photo gallery
+│   │   ├── reels/               # Reels page
+│   │   ├── faqs/                # FAQs page
+│   │   ├── contact/             # Contact page
+│   │   ├── about/               # About page
+│   │   ├── sandeep-rajput/      # Creator bio page
+│   │   ├── rithala-village-history/
+│   │   ├── contact-location/
+│   │   ├── admin/               # All admin pages (protected)
+│   │   ├── api/                 # REST API routes
 │   │   ├── sitemap.ts
 │   │   ├── robots.ts
 │   │   └── rss.xml/route.ts
-│   ├── components/          # PublicShell, AdminShell, PostCard, PostEditor
-│   ├── lib/                 # db.ts, auth.ts
-│   └── middleware.ts        # protects /admin/*
+│   ├── components/
+│   │   ├── PublicShell.tsx      # Public layout wrapper
+│   │   ├── AdminShell.tsx       # Admin layout wrapper
+│   │   ├── AIChatBot.tsx        # AI chatbot
+│   │   ├── HeroSlider.tsx       # Auto-sliding image banner
+│   │   ├── ReelsStrip.tsx       # Horizontal reels strip
+│   │   ├── TestimonialsSection.tsx
+│   │   ├── PostEditor.tsx       # Rich post editor
+│   │   ├── Icon.tsx             # SVG icon system
+│   │   └── ...
+│   ├── lib/
+│   │   ├── db.ts                # Database queries
+│   │   └── auth.ts              # JWT auth helpers
+│   └── middleware.ts            # Protects /admin/* routes
 ├── package.json
 ├── next.config.mjs
 └── tsconfig.json
 ```
 
-## 🚀 Local development
+---
+
+## Local Development
+
+### Prerequisites
+- Node.js 18+
+- A Vercel account (for Postgres + Blob storage)
+
+### Setup
 
 ```bash
-# 1. Install dependencies
+# 1. Clone the repo
+git clone https://github.com/rithalyarajput-creator/rithalaupdate.git
+cd rithalaupdate
+
+# 2. Install dependencies
 npm install
 
-# 2. Copy env template
-cp .env.example .env.local
+# 3. Pull environment variables from Vercel
+vercel env pull .env.local
+# Or manually create .env.local:
+#   POSTGRES_URL=...
+#   BLOB_READ_WRITE_TOKEN=...
+#   JWT_SECRET=any-32-char-random-string
+#   ADMIN_EMAIL=your@email.com
+#   ADMIN_PASSWORD=yourpassword
+#   NEXT_PUBLIC_SITE_URL=http://localhost:3000
 
-# 3. Edit .env.local — at minimum set:
-#    POSTGRES_URL              (from Vercel project → Storage → Postgres)
-#    JWT_SECRET                (any 32+ char random string)
-#    ADMIN_EMAIL               (your email)
-#    ADMIN_PASSWORD            (initial password — change after first login)
-
-# 4. Initialise database (creates tables, admin user, imports WP posts)
+# 4. Set up database (creates tables + admin user)
 node scripts/db-setup.mjs
 
 # 5. Run dev server
 npm run dev
-
-# 6. Open
-#    http://localhost:3000             — public site
-#    http://localhost:3000/admin/login — admin (use email/password from step 3)
 ```
 
-## 🌐 Deploy to Vercel (5 minutes)
+Open:
+- `http://localhost:3000` — public site
+- `http://localhost:3000/admin/login` — admin panel
 
-1. Push this repo to GitHub.
-2. <https://vercel.com/new> → Import the repo.
-3. **Storage tab → Create → Postgres** → connect to the project.
-4. **Storage tab → Create → Blob** → connect to the project (for image uploads).
-5. **Settings → Environment Variables** add:
-   * `JWT_SECRET` — long random string
-   * `ADMIN_EMAIL` — your email
-   * `ADMIN_PASSWORD` — initial password
-   * `NEXT_PUBLIC_SITE_URL` — `https://rithalaupdate.online`
-   (Postgres + Blob env vars are auto-injected.)
-6. Deploy. Vercel gives you `https://rithalaupdate-v2.vercel.app`.
-7. **Run the DB setup** — open the Vercel project's **Postgres → Query** tab
-   and paste the contents of `scripts/schema.sql`, then run.
-   Or locally: `vercel env pull .env.local && node scripts/db-setup.mjs`
-8. **Custom domain** → Domains tab → add `rithalaupdate.online`.
+---
 
-## 🔄 How "instant publish" works
+## Deploy to Vercel
+
+1. Push this repo to GitHub
+2. Go to [vercel.com/new](https://vercel.com/new) and import the repo
+3. **Storage tab** → Create → **Postgres** → connect to project
+4. **Storage tab** → Create → **Blob** → connect to project
+5. **Settings → Environment Variables**, add:
+   - `JWT_SECRET` — any long random string
+   - `ADMIN_EMAIL` — your login email
+   - `ADMIN_PASSWORD` — initial password
+   - `NEXT_PUBLIC_SITE_URL` — `https://rithalaupdate.online`
+6. Deploy
+7. Run the schema: open **Postgres → Query** tab on Vercel and paste `scripts/schema.sql`
+8. Add custom domain under the **Domains** tab
+
+---
+
+## How Instant Publishing Works
 
 ```
-Admin edits post → click Publish
-   ↓
-POST/PUT /api/posts → row written in Postgres
-   ↓
-revalidatePath('/') and revalidatePath('/{slug}/')
-   ↓
-Next 5–10s: any visitor hitting those paths sees the new content
+Admin clicks Publish
+        ↓
+POST /api/posts  →  row saved in Postgres
+        ↓
+revalidatePath('/') + revalidatePath('/blog/slug/')
+        ↓
+Within 5–10 seconds: live site shows updated content
 ```
 
-No git commit, no rebuild, no cache to clear. Vercel's ISR + on-demand
-revalidation handles it transparently.
+No git commit. No rebuild. No cache clearing. Just save and it is live.
 
-## 🔒 Security notes
+---
 
-* Passwords are bcrypt-hashed (10 rounds).
-* Sessions are JWT in an HTTP-only cookie (7 day expiry).
-* `middleware.ts` blocks unauthenticated access to `/admin/*` at the edge.
-* `BLOB_READ_WRITE_TOKEN` is server-only; clients never see it.
-* All write APIs (`POST /api/posts`, `DELETE`, etc.) require a valid session.
+## Security
 
-## 🛠 Customising
+- Passwords hashed with **bcrypt** (10 rounds)
+- Sessions via **JWT** in HTTP-only, Secure, SameSite=Lax cookies (7-day expiry)
+- `middleware.ts` blocks all `/admin/*` routes at the edge for unauthenticated users
+- `BLOB_READ_WRITE_TOKEN` is server-only — never exposed to the client
+- All write APIs require a valid session cookie
 
-* **Add a category** → just `INSERT INTO categories (slug, name) VALUES (...)`
-  in the Postgres Query tab. The admin dropdown picks it up automatically.
-* **Change the site title / social links** → `UPDATE settings SET value = ...`
-  (or wire up a Settings page in admin — left as future work).
-* **Reset admin password** → re-run `node scripts/db-setup.mjs` with new
-  `ADMIN_PASSWORD` env var.
+---
 
-## 📜 License
+## Environment Variables
 
-MIT.
+| Variable | Required | Description |
+|---|---|---|
+| `POSTGRES_URL` | Yes | Vercel Postgres connection string |
+| `BLOB_READ_WRITE_TOKEN` | Yes | Vercel Blob token for image uploads |
+| `JWT_SECRET` | Yes | Secret key for signing JWT tokens |
+| `ADMIN_EMAIL` | Yes | Initial admin login email |
+| `ADMIN_PASSWORD` | Yes | Initial admin login password |
+| `NEXT_PUBLIC_SITE_URL` | Yes | Full site URL (e.g. `https://rithalaupdate.online`) |
+
+---
+
+## Creator
+
+**Sandeep Rajput** (known online as *Rithalya Rajput*)  
+18-year-old digital creator, website developer, and artist from Rithala Village, Delhi.  
+Launched Rithala Update on 15 August 2022.
+
+- Website: [rithalaupdate.online](https://rithalaupdate.online)
+- Instagram: [@rithala_update](https://instagram.com/rithala_update)
+- YouTube: [@rithala_update](https://youtube.com/@rithala_update)
+- Email: rithalyarajput@gmail.com
+
+---
+
+## License
+
+MIT — see [LICENSE](LICENSE) for details.
