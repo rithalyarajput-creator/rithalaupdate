@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 
 type MenuItem = { label: string; url: string; children?: MenuItem[] };
@@ -8,6 +8,11 @@ type MenuItem = { label: string; url: string; children?: MenuItem[] };
 export default function MobileNav({ menu }: { menu: MenuItem[] }) {
   const [open, setOpen] = useState(false);
   const [expandedIdx, setExpandedIdx] = useState<number | null>(null);
+
+  useEffect(() => {
+    document.body.style.overflow = open ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [open]);
 
   return (
     <>
