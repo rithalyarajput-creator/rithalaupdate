@@ -9257,12 +9257,13 @@ body { overflow-x: clip; }
 .faq-empty h3 { margin: 12px 0 6px; }
 
 /* ========== HOMEPAGE FAQ SECTION ========== */
-.home-faq-section { padding: 60px 0; background: #eef2f7; }
+.home-faq-section { padding: 60px 0; background: #FFF9E7; }
 .home-faq-section .container { max-width: 780px; }
 .home-faq-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 28px; flex-wrap: wrap; gap: 12px; }
 .home-faq-head h2 { font-size: 1.8rem; font-weight: 800; color: #0f172a; margin: 0; text-align: center; width: 100%; }
 .home-faq-all { display: block; text-align: center; color: #f59e0b; font-weight: 600; text-decoration: none; font-size: 0.9rem; margin-top: -10px; }
 .home-faq-grid { display: flex; flex-direction: column; gap: 10px; }
+.home-faq-all { display: none !important; }
 .home-faq-item { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 0; overflow: hidden; box-shadow: 0 2px 6px rgba(0,0,0,0.04); }
 .home-faq-item summary { padding: 18px 20px; cursor: pointer; font-weight: 600; font-size: 0.97rem; color: #0f172a; list-style: none; display: flex; justify-content: space-between; gap: 12px; align-items: center; }
 .home-faq-item summary::-webkit-details-marker { display: none; }
@@ -9293,8 +9294,8 @@ body { overflow-x: clip; }
   flex: 0 0 calc((100% - 40px) / 3);
   min-width: 260px;
   scroll-snap-align: start;
-  background: #FFF9E7;
-  border: 1px solid rgba(245,198,27,0.3);
+  background: #fff;
+  border: 1px solid rgba(245,198,27,0.25);
   border-radius: 16px;
   padding: 24px;
   display: flex; flex-direction: column; gap: 14px;
