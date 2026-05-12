@@ -4024,15 +4024,17 @@ body { overflow-x: clip; }
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 28px;
+  padding: 10px 4px 4px;
 }
 @media (max-width: 700px) {
   .bc-grid {
     display: flex;
     flex-direction: row;
     overflow-x: auto;
+    overflow-y: visible;
     scroll-snap-type: x mandatory;
     gap: 14px;
-    padding-bottom: 12px;
+    padding: 10px 4px 16px;
     scrollbar-width: none;
   }
   .bc-grid::-webkit-scrollbar { display: none; }
@@ -4059,7 +4061,7 @@ body { overflow-x: clip; }
   position: relative;
 }
 .bc-card:hover {
-  transform: translateY(-8px) scale(1.01);
+  transform: translateY(-6px);
   box-shadow:
     0 2px 4px rgba(0,0,0,0.06),
     0 8px 16px rgba(0,0,0,0.08),
