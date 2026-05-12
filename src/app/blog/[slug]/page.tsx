@@ -152,18 +152,22 @@ export default async function BlogDetail({ params }: Props) {
           <main className="bd2-main">
             {/* HEADER */}
             <header className="bd2-header">
-              {primaryCat && (
-                <Link href={`/blog/?category=${primaryCat.slug}`} className="bd2-cat-pill">
-                  {primaryCat.name}
-                </Link>
-              )}
+              {/* Category + Date top row */}
+              <div className="bd2-top-row">
+                {primaryCat && (
+                  <Link href={`/blog/?category=${primaryCat.slug}`} className="bd2-cat-pill">
+                    {primaryCat.name}
+                  </Link>
+                )}
+                <span className="bd2-top-date">
+                  <Icon name="calendar" size={12} />
+                  {new Date(post.published_at || post.created_at).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}
+                </span>
+              </div>
 
               <h1 className="bd2-title">{post.title}</h1>
 
-              {(post.excerpt) && (
-                <p className="bd2-excerpt">{post.excerpt}</p>
-              )}
-
+              {/* Author + Social icons one row */}
               <div className="bd2-meta-row">
                 <div className="bd2-author">
                   {authorAvatar ? (
@@ -182,48 +186,34 @@ export default async function BlogDetail({ params }: Props) {
                     ) : (
                       <strong>{post.author_name || 'Sandeep Rajput'}</strong>
                     )}
-                    <span className="bd2-meta-date">
-                      <Icon name="calendar" size={12} />
-                      {new Date(post.published_at || post.created_at).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}
-                    </span>
                   </div>
                 </div>
 
                 <div className="bd2-share">
-                  <a
-                    href={`https://www.facebook.com/sharer/sharer.php?u=${shareLink}`}
-                    target="_blank" rel="noopener"
-                    aria-label="Share on Facebook"
-                    className="bd2-share-btn bd2-share-fb"
-                  >
+                  <a href={`https://www.facebook.com/sharer/sharer.php?u=${shareLink}`}
+                    target="_blank" rel="noopener" aria-label="Share on Facebook"
+                    className="bd2-share-btn bd2-share-fb">
                     <Icon name="facebook" size={14} />
                   </a>
-                  <a
-                    href={`https://twitter.com/intent/tweet?text=${shareTitle}&url=${shareLink}`}
-                    target="_blank" rel="noopener"
-                    aria-label="Share on Twitter"
-                    className="bd2-share-btn bd2-share-tw"
-                  >
-                    <Icon name="twitter" size={14} />
-                  </a>
-                  <a
-                    href={`https://wa.me/?text=${shareTitle}%20${shareLink}`}
-                    target="_blank" rel="noopener"
-                    aria-label="Share on WhatsApp"
-                    className="bd2-share-btn bd2-share-wa"
-                  >
-                    <Icon name="whatsapp" size={14} />
-                  </a>
                   {settings.social_instagram && (
-                    <a
-                      href={settings.social_instagram}
-                      target="_blank" rel="noopener"
-                      aria-label="Instagram"
-                      className="bd2-share-btn bd2-share-ig"
-                    >
+                    <a href={settings.social_instagram}
+                      target="_blank" rel="noopener" aria-label="Instagram"
+                      className="bd2-share-btn bd2-share-ig">
                       <Icon name="instagram" size={14} />
                     </a>
                   )}
+                  {settings.social_pinterest && (
+                    <a href={settings.social_pinterest}
+                      target="_blank" rel="noopener" aria-label="Pinterest"
+                      className="bd2-share-btn bd2-share-pn">
+                      <Icon name="pinterest" size={14} />
+                    </a>
+                  )}
+                  <a href={`mailto:${settings.contact_email || settings.social_email || 'rithalyarajput@gmail.com'}`}
+                    aria-label="Email"
+                    className="bd2-share-btn bd2-share-em">
+                    <Icon name="mail" size={14} />
+                  </a>
                 </div>
               </div>
             </header>
