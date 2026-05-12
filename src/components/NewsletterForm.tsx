@@ -30,6 +30,14 @@ export default function NewsletterForm() {
     }
   }
 
+  if (status === 'success') {
+    return (
+      <p style={{ color: '#4ade80', fontWeight: 600, fontSize: '0.9rem', margin: '8px 0' }}>
+        Subscribed! Updates milte rahenge.
+      </p>
+    );
+  }
+
   return (
     <form onSubmit={handleSubmit} className="ftr-newsletter-form">
       <input
@@ -44,14 +52,10 @@ export default function NewsletterForm() {
       <button type="submit" disabled={status === 'loading'}>
         {status === 'loading' ? '...' : 'Join →'}
       </button>
-      {msg && (
-        <p style={{
-          gridColumn: '1 / -1',
-          margin: '8px 0 0',
-          fontSize: '0.78rem',
-          color: status === 'success' ? '#4ade80' : '#f87171',
-          fontWeight: 600,
-        }}>{msg}</p>
+      {msg && status === 'error' && (
+        <p style={{ gridColumn: '1 / -1', margin: '6px 0 0', fontSize: '0.8rem', color: '#f87171', fontWeight: 600 }}>
+          {msg}
+        </p>
       )}
     </form>
   );
