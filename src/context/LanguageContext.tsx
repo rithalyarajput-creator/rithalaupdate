@@ -7,14 +7,19 @@ const LangCtx = createContext<{ lang: Lang; toggle: () => void }>({ lang: 'hi', 
 export function LanguageProvider({ children }: { children: ReactNode }) {
   const [lang, setLang] = useState<Lang>('hi');
 
+  // Read saved preference after mount (avoids SSR mismatch)
   useEffect(() => {
-    const saved = localStorage.getItem('ru_lang') as Lang | null;
-    if (saved === 'en' || saved === 'hi') setLang(saved);
+    try {
+      const saved = localStorage.getItem('ru_lang') as Lang | null;
+      if (saved === 'en' || saved === 'hi') setLang(saved);
+    } catch {}
   }, []);
 
   useEffect(() => {
-    document.documentElement.setAttribute('data-lang', lang);
-    localStorage.setItem('ru_lang', lang);
+    try {
+      document.documentElement.setAttribute('data-lang', lang);
+      localStorage.setItem('ru_lang', lang);
+    } catch {}
   }, [lang]);
 
   const toggle = () => setLang(l => (l === 'hi' ? 'en' : 'hi'));
