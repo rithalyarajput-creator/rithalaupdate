@@ -152,18 +152,14 @@ export default async function BlogDetail({ params }: Props) {
           <main className="bd2-main">
             {/* HEADER */}
             <header className="bd2-header">
-              {/* Category + Date top row */}
-              <div className="bd2-top-row">
-                {primaryCat && (
+              {/* Category pill top */}
+              {primaryCat && (
+                <div className="bd2-top-row">
                   <Link href={`/blog/?category=${primaryCat.slug}`} className="bd2-cat-pill">
                     {primaryCat.name}
                   </Link>
-                )}
-                <span className="bd2-top-date">
-                  <Icon name="calendar" size={12} />
-                  {new Date(post.published_at || post.created_at).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}
-                </span>
-              </div>
+                </div>
+              )}
 
               <h1 className="bd2-title">{post.title}</h1>
 
