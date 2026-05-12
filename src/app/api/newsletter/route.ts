@@ -5,12 +5,13 @@ import { sql } from '@/lib/db';
 
 export async function POST(req: NextRequest) {
   let email = '';
-  const fd = await req.formData().catch(() => null);
-  if (fd) {
-    email = String(fd.get('email') || '').trim();
-  } else {
+  const contentType = req.headers.get('content-type') || '';
+  if (contentType.includes('application/json')) {
     const j = await req.json().catch(() => ({}));
     email = String(j.email || '').trim();
+  } else {
+    const fd = await req.formData().catch(() => null);
+    email = fd ? String(fd.get('email') || '').trim() : '';
   }
 
   if (!email || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
