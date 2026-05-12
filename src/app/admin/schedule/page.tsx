@@ -1,4 +1,4 @@
-import Link from 'next/link';
+﻿import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import AdminShell from '@/components/AdminShell';
 import { sql } from '@/lib/db';
@@ -35,13 +35,13 @@ export default async function ScheduledPostsPage() {
   return (
     <AdminShell email={session.email}>
       <div className="admin-header">
-        <h1>⏰ Scheduled Blogs ({scheduled.length})</h1>
+        <h1> Scheduled Blogs ({scheduled.length})</h1>
         <Link className="btn btn-sm" href="/admin/posts/new">+ New Blog</Link>
       </div>
 
       {pendingPublish.length > 0 && (
         <div className="admin-card" style={{ borderLeft: '4px solid #f59e0b', background: '#fffbeb' }}>
-          <h2 style={{ marginTop: 0, color: '#b45309' }}>⚠️ Ready to Publish ({pendingPublish.length})</h2>
+          <h2 style={{ marginTop: 0, color: '#b45309' }}> Ready to Publish ({pendingPublish.length})</h2>
           <p style={{ color: '#92400e', fontSize: '0.9rem' }}>
             इन posts का schedule date आ चुका है पर status अभी 'draft' है। Edit करके status को 'published' करें।
           </p>
@@ -80,7 +80,7 @@ export default async function ScheduledPostsPage() {
                 return (
                   <tr key={p.id}>
                     <td><strong>{p.title}</strong></td>
-                    <td style={{ fontSize: '0.85rem' }}>{p.author_name || '—'}</td>
+                    <td style={{ fontSize: '0.85rem' }}>{p.author_name || ''}</td>
                     <td>
                       <div style={{ fontSize: '0.85rem' }}>{date.toLocaleString('en-IN', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' })}</div>
                       <div style={{ fontSize: '0.78rem', color: '#dc2626', fontWeight: 600 }}>in {days} day{days !== 1 ? 's' : ''}</div>
@@ -98,12 +98,12 @@ export default async function ScheduledPostsPage() {
       </div>
 
       <div className="admin-card" style={{ background: '#f9fafb' }}>
-        <h3 style={{ marginTop: 0 }}>💡 How scheduling works</h3>
+        <h3 style={{ marginTop: 0 }}> How scheduling works</h3>
         <ol style={{ margin: 0, paddingLeft: 20, color: '#4b5563', fontSize: '0.9rem', lineHeight: 1.8 }}>
           <li>New Blog form में <strong>Schedule date</strong> set करें (future date)</li>
           <li>Status को <strong>draft</strong> रखें</li>
           <li>Date आने पर इस page पर "Ready to Publish" section में दिखेगा</li>
-          <li>Click करके edit करें, status को <strong>published</strong> करें → live हो जाएगा</li>
+          <li>Click करके edit करें, status को <strong>published</strong> करें  live हो जाएगा</li>
         </ol>
       </div>
     </AdminShell>

@@ -1,4 +1,4 @@
-// Idempotent migration endpoint — runs schema-v2 (extra tables/columns).
+﻿// Idempotent migration endpoint  runs schema-v2 (extra tables/columns).
 // Protected by ADMIN_SETUP_TOKEN. Safe to run multiple times.
 
 import { NextRequest, NextResponse } from 'next/server';
@@ -18,9 +18,9 @@ export async function POST(req: NextRequest) {
   const run = async (label: string, q: Promise<unknown>) => {
     try {
       await q;
-      results.push(`✓ ${label}`);
+      results.push(` ${label}`);
     } catch (e: any) {
-      results.push(`✗ ${label}: ${e.message}`);
+      results.push(` ${label}: ${e.message}`);
     }
   };
 
@@ -142,7 +142,7 @@ export async function POST(req: NextRequest) {
   // Default author
   await run('default author', sql`
     INSERT INTO authors (name, slug, bio, email)
-    VALUES ('Sandeep Rajput', 'sandeep-rajput', 'Founder & writer at Rithala Update — sharing the heritage of Rithala village.', 'rithalyarajput@gmail.com')
+    VALUES ('Sandeep Rajput', 'sandeep-rajput', 'Founder & writer at Rithala Update  sharing the heritage of Rithala village.', 'rithalyarajput@gmail.com')
     ON CONFLICT (slug) DO NOTHING
   `);
 
@@ -196,7 +196,7 @@ export async function POST(req: NextRequest) {
     )
   `);
 
-  // Reels — direct video file (MP4 etc.) and YouTube URL columns
+  // Reels  direct video file (MP4 etc.) and YouTube URL columns
   await run('reels.video_url', sql`ALTER TABLE reels ADD COLUMN IF NOT EXISTS video_url TEXT`);
   await run('reels.youtube_url', sql`ALTER TABLE reels ADD COLUMN IF NOT EXISTS youtube_url TEXT`);
   // Optional click-through URL when user taps the reel card
@@ -233,7 +233,7 @@ export async function POST(req: NextRequest) {
       { label: 'About', url: '/about/' },
       { label: 'Contact', url: '/contact/' },
     ])],
-    ['seo_default_title', 'Rithala Update — Rajput Heritage, Temples, Festivals'],
+    ['seo_default_title', 'Rithala Update  Rajput Heritage, Temples, Festivals'],
     ['seo_default_description', 'Bhakti Reels, Rajput Culture & Temple Moments from Rithala Village, Delhi.'],
   ];
 

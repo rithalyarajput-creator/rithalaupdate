@@ -1,4 +1,4 @@
-// One-shot endpoint to reset the header/footer menus to current defaults.
+﻿// One-shot endpoint to reset the header/footer menus to current defaults.
 // Requires admin login. Hit GET /api/reset-menu while logged in.
 
 import { NextResponse } from 'next/server';
@@ -29,7 +29,7 @@ const FOOTER = [
 
 export async function GET() {
   const session = await getSession();
-  if (!session) return NextResponse.json({ error: 'Unauthorized — log into /admin first' }, { status: 401 });
+  if (!session) return NextResponse.json({ error: 'Unauthorized  log into /admin first' }, { status: 401 });
 
   await sql`
     INSERT INTO settings (key, value)

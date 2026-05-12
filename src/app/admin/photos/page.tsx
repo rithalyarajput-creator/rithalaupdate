@@ -1,4 +1,4 @@
-import { redirect } from 'next/navigation';
+﻿import { redirect } from 'next/navigation';
 import AdminShell from '@/components/AdminShell';
 import Icon from '@/components/Icon';
 import { getSession } from '@/lib/auth';
@@ -67,7 +67,7 @@ export default async function PhotosPage() {
       <div className="adm-page-head">
         <div>
           <h1 className="adm-h1"><Icon name="photo" size={22} /> Photos</h1>
-          <p className="adm-h1-sub">Categories → Folders → Photos. Build photo albums by event/year.</p>
+          <p className="adm-h1-sub">Categories  Folders  Photos. Build photo albums by event/year.</p>
         </div>
       </div>
 

@@ -1,5 +1,5 @@
-// POST /api/posts — create a new post
-// GET  /api/posts  — list (admin only)
+﻿// POST /api/posts  create a new post
+// GET  /api/posts   list (admin only)
 
 import { NextRequest, NextResponse } from 'next/server';
 import { sql } from '@/lib/db';

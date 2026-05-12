@@ -1,4 +1,4 @@
-import { redirect } from 'next/navigation';
+﻿import { redirect } from 'next/navigation';
 import AdminShell from '@/components/AdminShell';
 import Icon from '@/components/Icon';
 import { getSession } from '@/lib/auth';
@@ -76,7 +76,7 @@ export default async function AuthorsPage() {
           </div>
           <div>
             <div className="adm-stat-num" style={{ fontSize: '1.05rem', lineHeight: 1.2 }}>
-              {topAuthor?.name || '—'}
+              {topAuthor?.name || ''}
             </div>
             <div className="adm-stat-label">Top Author ({topAuthor?.post_count || 0} posts)</div>
           </div>

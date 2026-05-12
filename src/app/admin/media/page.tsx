@@ -1,4 +1,4 @@
-import { redirect } from 'next/navigation';
+﻿import { redirect } from 'next/navigation';
 import AdminShell from '@/components/AdminShell';
 import { getSession } from '@/lib/auth';
 import { getAllMedia } from '@/lib/db';
@@ -15,7 +15,7 @@ export default async function MediaPage() {
   return (
     <AdminShell email={session.email}>
       <div className="admin-header">
-        <h1>🖼️ Media Library</h1>
+        <h1> Media Library</h1>
       </div>
       <MediaManager initialMedia={media} />
     </AdminShell>

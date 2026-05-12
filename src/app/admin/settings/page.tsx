@@ -1,4 +1,4 @@
-import { redirect } from 'next/navigation';
+﻿import { redirect } from 'next/navigation';
 import AdminShell from '@/components/AdminShell';
 import { getSession } from '@/lib/auth';
 import { getAllSettings } from '@/lib/db';
@@ -15,7 +15,7 @@ export default async function SettingsPage() {
   return (
     <AdminShell email={session.email}>
       <div className="admin-header">
-        <h1>⚙️ Site Settings</h1>
+        <h1> Site Settings</h1>
       </div>
       <SettingsManager initialSettings={settings} />
     </AdminShell>

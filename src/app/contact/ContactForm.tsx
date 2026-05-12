@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState } from 'react';
 import Icon from '@/components/Icon';
@@ -19,7 +19,7 @@ export default function ContactForm() {
     const j = await res.json().catch(() => ({}));
 
     if (res.ok) {
-      setOkMsg(j.message || '✓ Thank you! Message received. We will reply soon.');
+      setOkMsg(j.message || ' Thank you! Message received. We will reply soon.');
       (e.target as HTMLFormElement).reset();
     } else {
       setErrMsg(j.error || 'Failed to send. Please try again.');
@@ -76,7 +76,7 @@ export default function ContactForm() {
       </div>
 
       <button type="submit" className="ctf-submit" disabled={submitting}>
-        {submitting ? 'Sending…' : (
+        {submitting ? 'Sending' : (
           <>
             <Icon name="send" size={15} />
             Send Message

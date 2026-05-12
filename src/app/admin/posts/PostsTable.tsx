@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import Link from 'next/link';
 import { useState } from 'react';
@@ -141,10 +141,10 @@ export default function PostsTable({
                     <div className="adm-slug">/{p.slug}/</div>
                   </td>
                   <td className="adm-cell-muted">
-                    {p.category_names || <span style={{ color: '#cbd5e1' }}>—</span>}
+                    {p.category_names || <span style={{ color: '#cbd5e1' }}></span>}
                   </td>
                   <td className="adm-cell-muted">
-                    {p.author_name || <span style={{ color: '#cbd5e1' }}>—</span>}
+                    {p.author_name || <span style={{ color: '#cbd5e1' }}></span>}
                   </td>
                   <td>{statusBadge(p)}</td>
                   <td className="adm-cell-muted" style={{ fontSize: '0.82rem' }}>
@@ -152,7 +152,7 @@ export default function PostsTable({
                       ? new Date(p.scheduled_at).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })
                       : p.published_at
                         ? new Date(p.published_at).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })
-                        : '—'}
+                        : ''}
                   </td>
                   <td style={{ textAlign: 'right' }}>
                     <div className="adm-actions">

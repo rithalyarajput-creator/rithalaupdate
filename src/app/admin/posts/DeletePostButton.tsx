@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
@@ -21,7 +21,7 @@ export default function DeletePostButton({ id, title }: { id: number; title: str
 
   return (
     <button onClick={handleDelete} className="btn-danger" disabled={loading}>
-      {loading ? '…' : 'Delete'}
+      {loading ? '' : 'Delete'}
     </button>
   );
 }

@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState } from 'react';
 
@@ -26,7 +26,7 @@ export default function MigrateForm({ token }: { token: string }) {
   return (
     <div>
       <button className="btn" onClick={runMigration} disabled={running} style={{ width: '100%' }}>
-        {running ? 'Running migration…' : '🚀 Run Migration Now'}
+        {running ? 'Running migration' : ' Run Migration Now'}
       </button>
 
       {err && <div className="form-error" style={{ marginTop: 16 }}>{err}</div>}
@@ -37,7 +37,7 @@ export default function MigrateForm({ token }: { token: string }) {
             <div key={i}>{r}</div>
           ))}
           <div style={{ marginTop: 8, color: '#fff' }}>
-            ✅ Done! You can now use the new admin features. Close this page.
+             Done! You can now use the new admin features. Close this page.
           </div>
         </div>
       )}

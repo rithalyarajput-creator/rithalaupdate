@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState } from 'react';
 import { useSearchParams } from 'next/navigation';
@@ -132,7 +132,7 @@ export default function LeadsManager({ initialLeads }: { initialLeads: Lead[] })
                     {l.email && <div>{l.email}</div>}
                     {l.phone && <div className="leads-phone">{l.phone}</div>}
                   </td>
-                  <td className="leads-td-subject">{l.subject || '—'}</td>
+                  <td className="leads-td-subject">{l.subject || ''}</td>
                   <td>
                     <span className={`leads-source-badge leads-source-${l.source}`}>
                       {SOURCE_LABEL[l.source] || l.source}

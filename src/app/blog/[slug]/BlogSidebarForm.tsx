@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState } from 'react';
 
@@ -20,7 +20,7 @@ export default function BlogSidebarForm({ postTitle }: { postTitle: string }) {
     const j = await res.json().catch(() => ({}));
 
     if (res.ok) {
-      setOkMsg(j.message || '✓ Thank you! Message received.');
+      setOkMsg(j.message || ' Thank you! Message received.');
       (e.target as HTMLFormElement).reset();
     } else {
       setErrMsg(j.error || 'Failed to send. Please try again.');
@@ -31,7 +31,7 @@ export default function BlogSidebarForm({ postTitle }: { postTitle: string }) {
   return (
     <div className="bd-sidebar-card">
       <div className="bd-sidebar-head">
-        <span className="bd-sidebar-eyebrow">💬 Got something to say?</span>
+        <span className="bd-sidebar-eyebrow"> Got something to say?</span>
         <h3>Ask us anything</h3>
         <p>Photos, stories, or questions — हमें सीधे यहाँ भेजें।</p>
       </div>
@@ -63,7 +63,7 @@ export default function BlogSidebarForm({ postTitle }: { postTitle: string }) {
 
       <div className="bd-sidebar-foot">
         <small>
-          🔒 Private · We reply within 24-48 hours
+           Private · We reply within 24-48 hours
         </small>
       </div>
     </div>

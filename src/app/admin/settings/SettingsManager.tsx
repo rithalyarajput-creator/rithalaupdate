@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState, useRef } from 'react';
 
@@ -34,12 +34,12 @@ export default function SettingsManager({ initialSettings }: { initialSettings: 
     if (!file) return;
     const fd = new FormData();
     fd.append('file', file);
-    setMsg('Uploading…');
+    setMsg('Uploading');
     const res = await fetch('/api/upload', { method: 'POST', body: fd });
     if (res.ok) {
       const j = await res.json();
       set('site_logo_url', j.url);
-      setMsg('✓ Logo uploaded');
+      setMsg(' Logo uploaded');
       setTimeout(() => setMsg(null), 2000);
     }
   }
@@ -54,7 +54,7 @@ export default function SettingsManager({ initialSettings }: { initialSettings: 
       body: JSON.stringify(settings),
     });
     if (res.ok) {
-      setMsg('✓ Settings saved. Live in a few seconds.');
+      setMsg(' Settings saved. Live in a few seconds.');
       setTimeout(() => setMsg(null), 3000);
     } else {
       const j = await res.json().catch(() => ({}));
@@ -103,7 +103,7 @@ export default function SettingsManager({ initialSettings }: { initialSettings: 
                   [next[i - 1], next[i]] = [next[i], next[i - 1]];
                   setMenu(menuKey, next);
                 }}
-              >↑</button>
+              ></button>
               <button
                 type="button"
                 className="btn btn-sm btn-secondary"
@@ -113,7 +113,7 @@ export default function SettingsManager({ initialSettings }: { initialSettings: 
                   [next[i], next[i + 1]] = [next[i + 1], next[i]];
                   setMenu(menuKey, next);
                 }}
-              >↓</button>
+              ></button>
               <button
                 type="button"
                 className="btn-danger"
@@ -124,7 +124,7 @@ export default function SettingsManager({ initialSettings }: { initialSettings: 
             {supportDropdown && (
               <div style={{ marginTop: 10, paddingLeft: 16, borderLeft: '3px solid #fde68a' }}>
                 <p style={{ fontSize: '0.78rem', color: '#666', margin: '4px 0' }}>
-                  Dropdown items (sub-menu) — leave empty for no dropdown:
+                  Dropdown items (sub-menu)  leave empty for no dropdown:
                 </p>
                 {(item.children || []).map((child, j) => (
                   <div key={j} style={{ display: 'flex', gap: 6, marginBottom: 4, alignItems: 'center' }}>
@@ -201,12 +201,12 @@ export default function SettingsManager({ initialSettings }: { initialSettings: 
       <div className="admin-card">
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: 20, borderBottom: '1px solid #ddd', paddingBottom: 12 }}>
           {[
-            ['general', '🏠 General'],
-            ['header', '📐 Header Menu'],
-            ['footer', '📋 Footer'],
-            ['contact', '📞 Contact'],
-            ['social', '📱 Social Links'],
-            ['seo', '🔍 SEO Defaults'],
+            ['general', ' General'],
+            ['header', ' Header Menu'],
+            ['footer', ' Footer'],
+            ['contact', ' Contact'],
+            ['social', ' Social Links'],
+            ['seo', ' SEO Defaults'],
           ].map(([k, label]) => (
             <button
               key={k}
@@ -360,7 +360,7 @@ export default function SettingsManager({ initialSettings }: { initialSettings: 
         {activeTab === 'header' && (
           <div>
             <h3 style={{ marginTop: 0 }}>Header Navigation Menu</h3>
-            <p className="help">Drag-style ordering with ↑↓ buttons. These links appear in the top navigation bar.</p>
+            <p className="help">Drag-style ordering with  buttons. These links appear in the top navigation bar.</p>
             <MenuEditor menuKey="header_menu_json" items={headerMenu} />
           </div>
         )}
@@ -502,7 +502,7 @@ export default function SettingsManager({ initialSettings }: { initialSettings: 
 
       <div className="admin-card" style={{ position: 'sticky', bottom: 16 }}>
         <button className="btn" onClick={handleSave} disabled={saving} style={{ width: '100%' }}>
-          {saving ? 'Saving…' : '💾 Save All Settings'}
+          {saving ? 'Saving' : ' Save All Settings'}
         </button>
       </div>
     </div>

@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState, useRef } from 'react';
 import slugify from 'slugify';
@@ -59,7 +59,7 @@ export default function AuthorsManager({ initialAuthors }: { initialAuthors: Aut
     if (!file) return;
     const fd = new FormData();
     fd.append('file', file);
-    setMsg('Uploading…');
+    setMsg('Uploading');
     const res = await fetch('/api/upload', { method: 'POST', body: fd });
     if (res.ok) {
       const j = await res.json();

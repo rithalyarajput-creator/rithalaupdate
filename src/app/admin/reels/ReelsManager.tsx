@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState, useRef } from 'react';
 import Icon from '@/components/Icon';
@@ -72,12 +72,12 @@ export default function ReelsManager({ initialReels }: { initialReels: Reel[] })
     // Vercel Blob default limit: 4.5MB for Hobby; warn but allow
     const fd = new FormData();
     fd.append('file', file);
-    setMsg('Uploading video… (may take a minute)');
+    setMsg('Uploading video (may take a minute)');
     const res = await fetch('/api/upload', { method: 'POST', body: fd });
     if (res.ok) {
       const j = await res.json();
       setVideoUrl(j.url);
-      setMsg('Video uploaded ✓');
+      setMsg('Video uploaded ');
       setTimeout(() => setMsg(null), 3000);
     } else {
       const j = await res.json().catch(() => ({}));
@@ -90,12 +90,12 @@ export default function ReelsManager({ initialReels }: { initialReels: Reel[] })
     if (!file) return;
     const fd = new FormData();
     fd.append('file', file);
-    setMsg('Uploading thumbnail…');
+    setMsg('Uploading thumbnail');
     const res = await fetch('/api/upload', { method: 'POST', body: fd });
     if (res.ok) {
       const j = await res.json();
       setThumbnailUrl(j.url);
-      setMsg('Thumbnail uploaded ✓');
+      setMsg('Thumbnail uploaded ');
       setTimeout(() => setMsg(null), 2000);
     }
   }
@@ -106,7 +106,7 @@ export default function ReelsManager({ initialReels }: { initialReels: Reel[] })
 
     if (!title.trim()) { setErr('Title is required'); return; }
     if (!videoUrl && !youtubeUrl && !instagramUrl) {
-      setErr('Add at least one source — Video file, YouTube URL, or Instagram URL.');
+      setErr('Add at least one source  Video file, YouTube URL, or Instagram URL.');
       return;
     }
 
@@ -186,7 +186,7 @@ export default function ReelsManager({ initialReels }: { initialReels: Reel[] })
 
             {/* SOURCE TABS */}
             <div className="adm-field">
-              <label>Video Source <small style={{ color: '#94a3b8', fontWeight: 400 }}>(at least one is required — Video file takes priority)</small></label>
+              <label>Video Source <small style={{ color: '#94a3b8', fontWeight: 400 }}>(at least one is required  Video file takes priority)</small></label>
 
               {/* MP4 upload */}
               <div className="adm-source-card">
@@ -249,7 +249,7 @@ export default function ReelsManager({ initialReels }: { initialReels: Reel[] })
             </div>
 
             <div className="adm-field">
-              <label>Click-through URL <small style={{ color: '#94a3b8', fontWeight: 400 }}>(optional — where user goes when they tap the reel)</small></label>
+              <label>Click-through URL <small style={{ color: '#94a3b8', fontWeight: 400 }}>(optional  where user goes when they tap the reel)</small></label>
               <input
                 type="url" value={clickUrl}
                 onChange={(e) => setClickUrl(e.target.value)}
@@ -258,7 +258,7 @@ export default function ReelsManager({ initialReels }: { initialReels: Reel[] })
             </div>
 
             <div className="adm-field">
-              <label>Thumbnail Image <small style={{ color: '#94a3b8', fontWeight: 400 }}>(optional — shown for video files; not needed for YouTube/Instagram)</small></label>
+              <label>Thumbnail Image <small style={{ color: '#94a3b8', fontWeight: 400 }}>(optional  shown for video files; not needed for YouTube/Instagram)</small></label>
               {thumbnailUrl ? (
                 <div className="adm-img-preview">
                   <img src={thumbnailUrl} alt="" />
@@ -353,7 +353,7 @@ export default function ReelsManager({ initialReels }: { initialReels: Reel[] })
                     <strong>{r.title}</strong>
                     <small>
                       Order: {r.display_order} · {r.status}
-                      {r.is_featured && ' · ★ Featured'}
+                      {r.is_featured && ' ·  Featured'}
                     </small>
                   </div>
                   <div className="adm-actions">

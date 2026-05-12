@@ -1,4 +1,4 @@
-// Header + footer wrapper used by every public page.
+﻿// Header + footer wrapper used by every public page.
 // Pulls logo, header menu, footer, and social links from settings table.
 
 import Link from 'next/link';
@@ -35,7 +35,7 @@ const FALLBACK_HEADER: MenuItem[] = [
 ];
 
 export default async function PublicShell({ children }: { children: React.ReactNode }) {
-  noStore(); // always fetch the latest settings — header/footer reflect changes instantly
+  noStore(); // always fetch the latest settings  header/footer reflect changes instantly
   const settings: Record<string, string> = await getAllSettings().catch(() => ({}));
   const headerMenu = parseMenu(settings.header_menu_json);
   const footerMenu = parseMenu(settings.footer_menu_json);
@@ -112,7 +112,7 @@ export default async function PublicShell({ children }: { children: React.ReactN
               <div key={i} className={hasChildren ? 'nav-item has-dropdown' : 'nav-item'}>
                 <Link href={item.url}>
                   {item.label}
-                  {hasChildren && <span className="dropdown-arrow">▾</span>}
+                  {hasChildren && <span className="dropdown-arrow"></span>}
                 </Link>
                 {hasChildren && (
                   <div className="dropdown-menu">

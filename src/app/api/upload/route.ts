@@ -1,4 +1,4 @@
-// POST /api/upload — uploads an image to Vercel Blob storage and
+﻿// POST /api/upload  uploads an image to Vercel Blob storage and
 // returns the public URL + saved media row.
 
 import { NextRequest, NextResponse } from 'next/server';
@@ -14,7 +14,7 @@ export async function POST(req: NextRequest) {
 
   if (!process.env.BLOB_READ_WRITE_TOKEN) {
     return NextResponse.json(
-      { error: 'BLOB_READ_WRITE_TOKEN not set. Enable Vercel Blob in your project (Storage → Create → Blob).' },
+      { error: 'BLOB_READ_WRITE_TOKEN not set. Enable Vercel Blob in your project (Storage  Create  Blob).' },
       { status: 500 }
     );
   }

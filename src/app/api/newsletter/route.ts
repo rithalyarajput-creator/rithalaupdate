@@ -1,4 +1,4 @@
-// POST /api/newsletter — public newsletter signup (saves as a lead)
+﻿// POST /api/newsletter  public newsletter signup (saves as a lead)
 
 import { NextRequest, NextResponse } from 'next/server';
 import { sql } from '@/lib/db';

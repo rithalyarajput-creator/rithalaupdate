@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+﻿import type { Metadata } from 'next';
 import PublicShell from '@/components/PublicShell';
 import CountUp from '@/components/CountUp';
 
@@ -7,9 +7,9 @@ export const revalidate = 300;
 const SITE = process.env.NEXT_PUBLIC_SITE_URL || 'https://rithalaupdate.online';
 
 export const metadata: Metadata = {
-  title: 'Rithala Village History — रिठाला गाँव का इतिहास, Tomar Rajput Heritage',
+  title: 'Rithala Village History  रिठाला गाँव का इतिहास, Tomar Rajput Heritage',
   description:
-    'रिठाला गाँव दिल्ली का प्राचीन ऐतिहासिक गाँव — Tomar Rajput History, Rana Rajpal Singh, लाठी वाला परंपरा, पूठ कलां और 640+ वर्षों की राजपूताना वीरता की पूरी कहानी।',
+    'रिठाला गाँव दिल्ली का प्राचीन ऐतिहासिक गाँव  Tomar Rajput History, Rana Rajpal Singh, लाठी वाला परंपरा, पूठ कलां और 640+ वर्षों की राजपूताना वीरता की पूरी कहानी।',
   keywords: [
     'Rithala Village History', 'रिठाला गाँव का इतिहास', 'Tomar Rajput',
     'Rana Rajpal Singh', 'राणा राजपाल सिंह', 'लाठी वाला',
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: '/rithala-village-history/' },
   openGraph: {
-    title: 'Rithala Village History — रिठाला गाँव का इतिहास',
+    title: 'Rithala Village History  रिठाला गाँव का इतिहास',
     description: 'Tomar Rajput history, Rana Rajpal Singh, और राजपूताना वीरता की पूरी कहानी।',
     type: 'article',
     url: `${SITE}/rithala-village-history/`,
@@ -39,18 +39,18 @@ const CHAPTERS: Chapter[] = [
   {
     id: 'intro',
     chapter: 'Chapter 01',
-    era: '1384–85 ईस्वी',
-    emoji: '🏛️',
+    era: '138485 ईस्वी',
+    emoji: '',
     title: 'रिठाला गाँव का इतिहास',
     pull: 'गाँव की नींव राणा राजपाल सिंह ने रखी थी।',
     body:
-      'रिठाला गाँव दिल्ली के प्राचीन और ऐतिहासिक गाँवों में से एक है, जो अपनी राजपूताना विरासत, वीरता और सांस्कृतिक गौरव के लिए प्रसिद्ध है। यह गाँव आज भी दिल्ली के Tomar Rajput History और राजपूत परंपरा का जीवंत प्रतीक है। रिठाला गाँव की स्थापना 1384–85 ईस्वी में हुई थी, जब दिल्ली पर सुल्तान फिरोज शाह तुगलक का शासन था। इस गाँव की नींव राणा राजपाल सिंह (Rana Rajpal Singh) ने रखी थी, जो तोमर चंद्रवंशी राजपूत वंश के साहसी योद्धा थे।',
+      'रिठाला गाँव दिल्ली के प्राचीन और ऐतिहासिक गाँवों में से एक है, जो अपनी राजपूताना विरासत, वीरता और सांस्कृतिक गौरव के लिए प्रसिद्ध है। यह गाँव आज भी दिल्ली के Tomar Rajput History और राजपूत परंपरा का जीवंत प्रतीक है। रिठाला गाँव की स्थापना 138485 ईस्वी में हुई थी, जब दिल्ली पर सुल्तान फिरोज शाह तुगलक का शासन था। इस गाँव की नींव राणा राजपाल सिंह (Rana Rajpal Singh) ने रखी थी, जो तोमर चंद्रवंशी राजपूत वंश के साहसी योद्धा थे।',
   },
   {
     id: 'lathi-wala',
     chapter: 'Chapter 02',
     era: 'प्राचीन काल',
-    emoji: '🥢',
+    emoji: '',
     title: 'लाठी वाला: रिठाला की वीर गाथा',
     pull: 'यहाँ की सुरक्षा क़िले नहीं, योद्धाओं की बहादुरी पर थी।',
     body:
@@ -59,18 +59,18 @@ const CHAPTERS: Chapter[] = [
   {
     id: 'puth-kalan',
     chapter: 'Chapter 03',
-    era: '1048–49 ईस्वी',
-    emoji: '⚔️',
+    era: '104849 ईस्वी',
+    emoji: '',
     title: 'राणा राजपाल सिंह और पूठ कलां',
     pull: 'पूठ कलां से रिठाला तक की रणनीतिक यात्रा।',
     body:
-      'राणा राजपाल सिंह के पूर्वज प्रारम्भ में पूठ कलां गाँव में रहते थे, जिसकी स्थापना लगभग 1048–49 ईस्वी में हुई थी। यह इलाका उस समय तोमर राजपूत वंश के नियंत्रण में था। पूठ कलां गाँव कृषि और पशुपालन पर आधारित था और यह राजपूतों की सैन्य शक्ति का प्रतीक माना जाता था। समय के साथ जनसंख्या वृद्धि, सामाजिक विस्तार और सुरक्षा कारणों से राणा राजपाल सिंह ने अपने समुदाय के लिए नई बस्ती बसाने का निर्णय लिया।',
+      'राणा राजपाल सिंह के पूर्वज प्रारम्भ में पूठ कलां गाँव में रहते थे, जिसकी स्थापना लगभग 104849 ईस्वी में हुई थी। यह इलाका उस समय तोमर राजपूत वंश के नियंत्रण में था। पूठ कलां गाँव कृषि और पशुपालन पर आधारित था और यह राजपूतों की सैन्य शक्ति का प्रतीक माना जाता था। समय के साथ जनसंख्या वृद्धि, सामाजिक विस्तार और सुरक्षा कारणों से राणा राजपाल सिंह ने अपने समुदाय के लिए नई बस्ती बसाने का निर्णय लिया।',
   },
   {
     id: 'rajputana-veerta',
     chapter: 'Chapter 04',
     era: 'सदियों से',
-    emoji: '🐎',
+    emoji: '',
     title: 'राजपूताना वीरता और संघर्ष',
     pull: 'लाठी, तलवार और धनुष-बाण से रक्षा की परंपरा।',
     body:
@@ -80,7 +80,7 @@ const CHAPTERS: Chapter[] = [
     id: 'samajik',
     chapter: 'Chapter 05',
     era: 'परंपरा',
-    emoji: '🤝',
+    emoji: '',
     title: 'सामाजिक और सांस्कृतिक परंपराएँ',
     pull: 'भाईचारा इस गाँव की सबसे बड़ी ताकत।',
     body:
@@ -90,7 +90,7 @@ const CHAPTERS: Chapter[] = [
     id: 'modern',
     chapter: 'Chapter 06',
     era: 'आज',
-    emoji: '🏯',
+    emoji: '',
     title: 'वर्तमान में ऐतिहासिक पहचान',
     pull: 'शहर में बदला, पहचान बरकरार।',
     body:
@@ -102,7 +102,7 @@ export default function HistoryPage() {
   const articleLd = {
     '@context': 'https://schema.org',
     '@type': 'Article',
-    headline: 'रिठाला गाँव का इतिहास — Rithala Village History',
+    headline: 'रिठाला गाँव का इतिहास  Rithala Village History',
     description:
       'रिठाला गाँव की स्थापना 1384-85 ईस्वी में राणा राजपाल सिंह द्वारा। तोमर चंद्रवंशी राजपूत वंश का इतिहास, लाठी वाला परंपरा, और पूठ कलां की जड़ें।',
     datePublished: '2026-01-01',
@@ -142,7 +142,7 @@ export default function HistoryPage() {
                 <span className="rvh-title-line-2">गाँव का इतिहास</span>
               </h1>
               <p className="rvh-subtitle">
-                The 640-year journey of a Tomar Rajput village —
+                The 640-year journey of a Tomar Rajput village 
                 from <em>पूठ कलां</em> roots to modern Delhi.
               </p>
               <div className="rvh-hero-actions">
@@ -157,7 +157,7 @@ export default function HistoryPage() {
               <div className="rvh-emblem-ring rvh-ring-1"></div>
               <div className="rvh-emblem-ring rvh-ring-2"></div>
               <div className="rvh-emblem-center">
-                <span className="rvh-emblem-icon">🚩</span>
+                <span className="rvh-emblem-icon"></span>
                 <span className="rvh-emblem-label">राजपूताना</span>
                 <span className="rvh-emblem-sub">Heritage</span>
               </div>
@@ -173,7 +173,7 @@ export default function HistoryPage() {
             <div className="rvh-stat">
               <div className="rvh-stat-num">
                 <CountUp end={1384} duration={1800} />
-                <span className="rvh-stat-tail">–85</span>
+                <span className="rvh-stat-tail">85</span>
               </div>
               <div className="rvh-stat-label">ईस्वी में स्थापना</div>
               <div className="rvh-stat-sub">Founding year</div>
@@ -188,7 +188,7 @@ export default function HistoryPage() {
             <div className="rvh-stat">
               <div className="rvh-stat-num">
                 <CountUp end={1048} duration={1800} />
-                <span className="rvh-stat-tail">–49</span>
+                <span className="rvh-stat-tail">49</span>
               </div>
               <div className="rvh-stat-label">पूठ कलां स्थापना</div>
               <div className="rvh-stat-sub">Ancestral village</div>
@@ -208,7 +208,7 @@ export default function HistoryPage() {
       <section className="rvh-chapters">
         <div className="container">
           <div className="rvh-section-head reveal-on-scroll">
-            <span className="rvh-section-eyebrow">━━ The Chapters ━━</span>
+            <span className="rvh-section-eyebrow"> The Chapters </span>
             <h2>इतिहास की यात्रा</h2>
             <p>हर अध्याय एक नई कहानी, हर पन्ने पर एक नया सबक।</p>
           </div>
@@ -228,7 +228,7 @@ export default function HistoryPage() {
               <div className="rvh-chapter-card">
                 <h3 className="rvh-chapter-title">{c.title}</h3>
                 <blockquote className="rvh-chapter-pull">
-                  <span className="rvh-quote-mark">“</span>
+                  <span className="rvh-quote-mark"></span>
                   {c.pull}
                 </blockquote>
                 <p className="rvh-chapter-body">{c.body}</p>
@@ -242,7 +242,7 @@ export default function HistoryPage() {
       <section className="rvh-quote-section reveal-on-scroll">
         <div className="container">
           <div className="rvh-quote-card">
-            <div className="rvh-quote-icon">❝</div>
+            <div className="rvh-quote-icon"></div>
             <p className="rvh-quote-text">
               जहाँ राजपूत की तलवार उठती है, वहाँ इतिहास लिखा जाता है।
               रिठाला उसी इतिहास का जीवंत प्रमाण है।
@@ -259,10 +259,10 @@ export default function HistoryPage() {
       <section className="rvh-cta-section reveal-on-scroll">
         <div className="container">
           <div className="rvh-cta-card">
-            <div className="rvh-cta-icon">🚩</div>
+            <div className="rvh-cta-icon"></div>
             <h2>क्या आपके पास कोई पुरानी कहानी है?</h2>
             <p>
-              रिठाला से जुड़ी कोई तस्वीर, परिवार की याद या वीरगाथा — हमें भेजें।
+              रिठाला से जुड़ी कोई तस्वीर, परिवार की याद या वीरगाथा  हमें भेजें।
               हम उसे इस archive में संजोएँगे।
             </p>
             <div className="rvh-cta-actions">

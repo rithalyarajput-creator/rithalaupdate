@@ -1,4 +1,4 @@
-import { redirect } from 'next/navigation';
+﻿import { redirect } from 'next/navigation';
 import AdminShell from '@/components/AdminShell';
 import Icon from '@/components/Icon';
 import { getSession } from '@/lib/auth';
@@ -24,7 +24,7 @@ export default async function FaqsPage() {
       <div className="adm-page-head">
         <div>
           <h1 className="adm-h1"><Icon name="book" size={22} /> FAQs</h1>
-          <p className="adm-h1-sub">Frequently asked questions — toggle &quot;Show on Home&quot; to feature on homepage</p>
+          <p className="adm-h1-sub">Frequently asked questions  toggle &quot;Show on Home&quot; to feature on homepage</p>
         </div>
       </div>
 

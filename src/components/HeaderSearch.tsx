@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { useLang } from '@/context/LanguageContext';
@@ -154,7 +154,7 @@ export default function HeaderSearch() {
           ))}
           <div className="hs-view-all">
             <button type="button" onClick={handleSubmit as any} className="hs-view-all-btn">
-              {lang === 'hi' ? `"${query}" के सभी नतीजे देखें →` : `See all results for "${query}" →`}
+              {lang === 'hi' ? `"${query}" के सभी नतीजे देखें ` : `See all results for "${query}" `}
             </button>
           </div>
         </div>

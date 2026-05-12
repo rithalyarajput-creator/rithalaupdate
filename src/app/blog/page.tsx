@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+﻿import type { Metadata } from 'next';
 import Link from 'next/link';
 import PublicShell from '@/components/PublicShell';
 import BlogFilters from './BlogFilters';
@@ -8,7 +8,7 @@ import Icon from '@/components/Icon';
 export const revalidate = 60;
 
 export const metadata: Metadata = {
-  title: 'Blog — Rithala Update | Posts by category, author, date',
+  title: 'Blog  Rithala Update | Posts by category, author, date',
   description:
     'All blog posts about Rithala village, Rajput heritage, events, temples, and culture. Filter by category, author, and date.',
   alternates: { canonical: '/blog/' },

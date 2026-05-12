@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+﻿import type { Metadata } from 'next';
 import Link from 'next/link';
 import PublicShell from '@/components/PublicShell';
 import { getAllSettings } from '@/lib/db';
@@ -7,12 +7,12 @@ import '../ab3-styles.css';
 export const revalidate = 300;
 
 export const metadata: Metadata = {
-  title: 'About Us — Rithala Update | Story, Mission & Vision',
-  description: 'About Rithala Update — a digital platform created by Sandeep Rajput (Rithalya Rajput) to share the latest news, history, culture, festivals and updates of Rithala Village, Delhi. Officially launched on 15 August 2022.',
+  title: 'About Us  Rithala Update | Story, Mission & Vision',
+  description: 'About Rithala Update  a digital platform created by Sandeep Rajput (Rithalya Rajput) to share the latest news, history, culture, festivals and updates of Rithala Village, Delhi. Officially launched on 15 August 2022.',
   keywords: 'About Rithala Update, Rithala Village Delhi, Sandeep Rajput, Rithalya Rajput, Rithala history, digital village platform',
   alternates: { canonical: '/about/' },
   openGraph: {
-    title: 'About Rithala Update — Sandeep Rajput',
+    title: 'About Rithala Update  Sandeep Rajput',
     description: 'Digital platform for Rithala Village, Delhi. Sharing news, history, culture, festivals and community updates since 15 August 2022.',
     url: '/about/',
     type: 'website',
@@ -35,7 +35,7 @@ const PILLARS = [
     title: 'Village History',
     titleHi: 'गाँव का इतिहास',
     text: 'Documenting 640+ years of Rithala history, founded in 1384-85 by Rana Rajpal Singh, preserving Tomar Chandravanshi Rajput heritage.',
-    textHi: '640+ वर्षों के रिठाला के इतिहास को संरक्षित करना — 1384 में राणा राजपाल सिंह द्वारा बसाया गया।',
+    textHi: '640+ वर्षों के रिठाला के इतिहास को संरक्षित करना  1384 में राणा राजपाल सिंह द्वारा बसाया गया।',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
         <path d="M3 21h18M9 21V9l3-6 3 6v12M9 12h6M5 21V11l-2-2M19 21V11l2-2" />
@@ -45,7 +45,7 @@ const PILLARS = [
   {
     title: 'Photos & Memories',
     titleHi: 'फ़ोटो और यादें',
-    text: 'Galleries from Kawad Yatra, Janmashtami, temple events, festivals and everyday village life — old memories preserved digitally.',
+    text: 'Galleries from Kawad Yatra, Janmashtami, temple events, festivals and everyday village life  old memories preserved digitally.',
     textHi: 'कावड़ यात्रा, जन्माष्टमी, मंदिर उत्सव और रोज़मर्रा की गाँव की ज़िंदगी की यादें डिजिटल रूप में सहेजी गई हैं।',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
@@ -83,8 +83,8 @@ const PILLARS = [
 ];
 
 const TIMELINE = [
-  { year: '2020', text: 'Rithala Update started on Instagram and social media — sharing village updates, photos and local news', textHi: '2020 में Instagram और social media पर रिठाला अपडेट की शुरुआत हुई' },
-  { year: '2022', text: 'Official Rithala Update website launched on 15 August 2022 — India\'s Independence Day', textHi: '15 अगस्त 2022 को आधिकारिक Rithala Update वेबसाइट लॉन्च हुई' },
+  { year: '2020', text: 'Rithala Update started on Instagram and social media  sharing village updates, photos and local news', textHi: '2020 में Instagram और social media पर रिठाला अपडेट की शुरुआत हुई' },
+  { year: '2022', text: 'Official Rithala Update website launched on 15 August 2022  India\'s Independence Day', textHi: '15 अगस्त 2022 को आधिकारिक Rithala Update वेबसाइट लॉन्च हुई' },
   { year: '2024', text: 'Photo archives, Reels and community submissions expanded', textHi: 'फ़ोटो आर्काइव, Reels और सामुदायिक सबमिशन का विस्तार हुआ' },
   { year: '2026', text: 'Full digital platform with AI chatbot, FAQs and Testimonials', textHi: 'AI chatbot, FAQs और Testimonials के साथ पूर्ण डिजिटल प्लेटफ़ॉर्म' },
 ];
@@ -99,8 +99,8 @@ const FAQS = [
   {
     q: 'Who created Rithala Update?',
     qHi: 'रिठाला अपडेट किसने बनाया?',
-    a: 'Rithala Update was created and is managed by Sandeep Rajput (Rithalya Rajput) — a digital creator, website developer and artist from Rithala Village, Delhi.',
-    aHi: 'रिठाला अपडेट को संदीप राजपूत (Rithalya Rajput) ने बनाया — जो रिठाला गाँव के एक digital creator, website developer और artist हैं।',
+    a: 'Rithala Update was created and is managed by Sandeep Rajput (Rithalya Rajput)  a digital creator, website developer and artist from Rithala Village, Delhi.',
+    aHi: 'रिठाला अपडेट को संदीप राजपूत (Rithalya Rajput) ने बनाया  जो रिठाला गाँव के एक digital creator, website developer और artist हैं।',
   },
   {
     q: 'What is the history of Rithala Village?',
@@ -148,7 +148,7 @@ export default async function AboutPage() {
           </h1>
           <p className="ab-hero-sub">
             A digital platform preserving the identity, culture and heritage of
-            Rithala Village, Delhi — created by <strong>Sandeep Rajput</strong> (Rithalya Rajput).
+            Rithala Village, Delhi  created by <strong>Sandeep Rajput</strong> (Rithalya Rajput).
           </p>
           <p className="ab-hero-sub-hi">
             रिठाला गाँव की पहचान, संस्कृति और विरासत को डिजिटल रूप में संरक्षित करने के लिए बनाया गया मंच।
@@ -182,7 +182,7 @@ export default async function AboutPage() {
             <h2>Our Mission</h2>
             <p className="ab-mission-p">
               To digitally connect the people of Rithala and preserve the identity, culture, and heritage
-              of the village for future generations — so that every story, festival, photograph and memory
+              of the village for future generations  so that every story, festival, photograph and memory
               of Rithala lives on in the modern digital age.
             </p>
             <p className="ab-mission-hi">
@@ -230,7 +230,7 @@ export default async function AboutPage() {
               What started in <strong>2020</strong> as a small social media initiative on Instagram gradually
               became one of the growing local digital platforms representing Rithala online. As the
               audience grew, the need for a dedicated website became clear. On{' '}
-              <strong>15 August 2022</strong> — India&#39;s Independence Day — the official Rithala Update
+              <strong>15 August 2022</strong>  India&#39;s Independence Day  the official Rithala Update
               website was launched, symbolizing awareness, freedom of information, and community connection.
             </p>
             <p className="ab-story-hi">
@@ -259,7 +259,7 @@ export default async function AboutPage() {
           <div className="ab-founder-img-wrap">
             <img
               src="https://9qidomuaf1nvlbrh.public.blob.vercel-storage.com/uploads/1778480814023-sandeep-rajput-rithalya-rajput-rithala-delhi.png-1HotTzrfaJxcggidFmo033DNSHDPMu.webp"
-              alt="Sandeep Rajput — Founder of Rithala Update"
+              alt="Sandeep Rajput  Founder of Rithala Update"
               loading="lazy"
             />
             <div className="ab-founder-tag">Rithalya Rajput</div>
@@ -274,7 +274,7 @@ export default async function AboutPage() {
               designed and maintained with dedication and passion.
             </p>
             <p className="ab-founder-hi">
-              संदीप राजपूत — रिठाला गाँव के रहने वाले digital creator, website developer और artist।
+              संदीप राजपूत  रिठाला गाँव के रहने वाले digital creator, website developer और artist।
               पूरा platform उन्होंने खुद ही डिज़ाइन और maintain किया है।
             </p>
             <div className="ab-founder-skills">
@@ -331,7 +331,7 @@ export default async function AboutPage() {
           <h2>Be Part of Rithala Update</h2>
           <p className="ab-cta-hi">रिठाला अपडेट का हिस्सा बनें</p>
           <p className="ab-cta-sub">
-            Share your photos, stories, or testimonials — and help us preserve the village for future generations.
+            Share your photos, stories, or testimonials  and help us preserve the village for future generations.
           </p>
           <div className="ab-cta-btns">
             <Link href="/contact/" className="ab-cta-btn-primary">Share Your Story</Link>

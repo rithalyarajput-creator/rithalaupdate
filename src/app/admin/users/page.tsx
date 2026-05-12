@@ -1,4 +1,4 @@
-import { redirect } from 'next/navigation';
+﻿import { redirect } from 'next/navigation';
 import AdminShell from '@/components/AdminShell';
 import Icon from '@/components/Icon';
 import { getSession } from '@/lib/auth';
@@ -29,7 +29,7 @@ export default async function UsersPage() {
       <div className="adm-page-head">
         <div>
           <h1 className="adm-h1"><Icon name="users" size={22} /> Users</h1>
-          <p className="adm-h1-sub">Manage admin users — add new admins or change passwords</p>
+          <p className="adm-h1-sub">Manage admin users  add new admins or change passwords</p>
         </div>
       </div>
 
@@ -67,7 +67,7 @@ export default async function UsersPage() {
           </div>
           <div>
             <div className="adm-stat-num" style={{ fontSize: '0.95rem', lineHeight: 1.2 }}>
-              {newestUser?.display_name || newestUser?.email?.split('@')[0] || '—'}
+              {newestUser?.display_name || newestUser?.email?.split('@')[0] || ''}
             </div>
             <div className="adm-stat-label">Newest user</div>
           </div>

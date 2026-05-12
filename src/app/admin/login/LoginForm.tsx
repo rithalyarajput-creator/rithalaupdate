@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState } from 'react';
 
@@ -36,7 +36,7 @@ export default function LoginForm({ next, error }: { next?: string; error?: stri
         <input id="password" name="password" type="password" required />
       </div>
       <button type="submit" className="btn" style={{ width: '100%' }} disabled={submitting}>
-        {submitting ? 'Signing in…' : 'Login'}
+        {submitting ? 'Signing in' : 'Login'}
       </button>
     </form>
   );

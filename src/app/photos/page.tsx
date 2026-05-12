@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+﻿import type { Metadata } from 'next';
 import Link from 'next/link';
 import PublicShell from '@/components/PublicShell';
 import Icon from '@/components/Icon';
@@ -8,8 +8,8 @@ import PhotosBrowser from './PhotosBrowser';
 export const revalidate = 60;
 
 export const metadata: Metadata = {
-  title: 'Photos — Rithala Update | Village photo gallery',
-  description: 'Photo gallery of Rithala village — Kawad Yatra, festivals, temples, village life. Browse photos by category and album.',
+  title: 'Photos  Rithala Update | Village photo gallery',
+  description: 'Photo gallery of Rithala village  Kawad Yatra, festivals, temples, village life. Browse photos by category and album.',
   alternates: { canonical: '/photos/' },
 };
 
@@ -88,7 +88,7 @@ export default async function PhotosPage({ searchParams }: { searchParams: SP })
           <span className="ph2-eyebrow">Photo Gallery</span>
           <h1 className="ph2-h1">Rithala Photos</h1>
           <p className="ph2-lead">
-            Browse photos by category and album — Festivals, Temples, Kawad Yatra, और गाँव की झलकियाँ।
+            Browse photos by category and album  Festivals, Temples, Kawad Yatra, और गाँव की झलकियाँ।
           </p>
         </div>
       </section>
@@ -126,7 +126,7 @@ export default async function PhotosPage({ searchParams }: { searchParams: SP })
             </nav>
           )}
 
-          {/* Folder is selected → show photo grid with lightbox */}
+          {/* Folder is selected  show photo grid with lightbox */}
           {activeFolder ? (
             <>
               <div className="ph2-folder-head">

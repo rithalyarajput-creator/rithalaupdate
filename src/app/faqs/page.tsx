@@ -1,4 +1,4 @@
-import { sql } from '@/lib/db';
+﻿import { sql } from '@/lib/db';
 import { unstable_noStore as noStore } from 'next/cache';
 import Icon from '@/components/Icon';
 
@@ -15,8 +15,8 @@ type Faq = {
 };
 
 export const metadata = {
-  title: 'Frequently Asked Questions — Rithala Update',
-  description: 'Common questions about Rithala Update — submissions, sharing photos, accounts, and more.',
+  title: 'Frequently Asked Questions  Rithala Update',
+  description: 'Common questions about Rithala Update  submissions, sharing photos, accounts, and more.',
 };
 
 export default async function FaqsPage() {
@@ -43,7 +43,7 @@ export default async function FaqsPage() {
       <section className="faq-hero">
         <div className="container">
           <h1>Frequently Asked Questions</h1>
-          <p>Everything you need to know about Rithala Update — submitting photos, accounts, and how the site works.</p>
+          <p>Everything you need to know about Rithala Update  submitting photos, accounts, and how the site works.</p>
         </div>
       </section>
 

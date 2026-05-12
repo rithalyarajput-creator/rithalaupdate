@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useEffect, useRef, useState } from 'react';
 import Icon from './Icon';
@@ -125,7 +125,7 @@ export default function TestimonialsSection() {
             {items.map((t) => (
               <article key={t.id} className="home-test-card">
                 <div className="home-test-stars">
-                  {'★'.repeat(t.rating)}<span style={{ opacity: 0.3 }}>{'★'.repeat(5 - t.rating)}</span>
+                  {''.repeat(t.rating)}<span style={{ opacity: 0.3 }}>{''.repeat(5 - t.rating)}</span>
                 </div>
                 <p className="home-test-msg">"{t.message}"</p>
                 <div className="home-test-author">
@@ -181,11 +181,11 @@ export default function TestimonialsSection() {
                   <label>Location<input name="location" type="text" placeholder="e.g. Rithala, Delhi" /></label>
                   <label>Rating
                     <select name="rating" defaultValue="5">
-                      <option value="5">★★★★★ Excellent</option>
-                      <option value="4">★★★★ Very Good</option>
-                      <option value="3">★★★ Good</option>
-                      <option value="2">★★ Fair</option>
-                      <option value="1">★ Poor</option>
+                      <option value="5"> Excellent</option>
+                      <option value="4"> Very Good</option>
+                      <option value="3"> Good</option>
+                      <option value="2"> Fair</option>
+                      <option value="1"> Poor</option>
                     </select>
                   </label>
                   <button type="submit" className="home-test-submit"><Icon name="send" size={14} /> Submit for review</button>

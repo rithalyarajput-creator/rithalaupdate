@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState } from 'react';
 
@@ -23,7 +23,7 @@ export default function SetupForm({ token }: { token: string }) {
     const j = await res.json().catch(() => ({}));
 
     if (res.ok) {
-      setOkMsg('✅ Admin user created/updated. Redirecting to login…');
+      setOkMsg(' Admin user created/updated. Redirecting to login');
       setTimeout(() => {
         window.location.href = '/admin/login';
       }, 1500);
@@ -79,7 +79,7 @@ export default function SetupForm({ token }: { token: string }) {
         style={{ width: '100%' }}
         disabled={submitting}
       >
-        {submitting ? 'Creating…' : 'Create / Reset Admin'}
+        {submitting ? 'Creating' : 'Create / Reset Admin'}
       </button>
     </form>
   );

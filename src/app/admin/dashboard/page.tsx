@@ -1,4 +1,4 @@
-import Link from 'next/link';
+﻿import Link from 'next/link';
 import AdminShell from '@/components/AdminShell';
 import Icon from '@/components/Icon';
 import { sql } from '@/lib/db';
@@ -86,7 +86,7 @@ export default async function Dashboard() {
   return (
     <AdminShell email={session.email} newLeads={stats.newLeads}>
 
-      {/* ── Page Header ── */}
+      {/*  Page Header  */}
       <div className="dash-header">
         <div>
           <p className="dash-date">{now.toLocaleDateString('en-IN', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}</p>
@@ -98,7 +98,7 @@ export default async function Dashboard() {
         </Link>
       </div>
 
-      {/* ── KPI Row ── */}
+      {/*  KPI Row  */}
       <div className="dash-kpi-row">
         <Link href="/admin/posts" className="dash-kpi">
           <div className="dash-kpi-icon" style={{ background: 'linear-gradient(135deg,#6366f1,#4f46e5)' }}>
@@ -147,7 +147,7 @@ export default async function Dashboard() {
         </div>
       </div>
 
-      {/* ── Main Grid ── */}
+      {/*  Main Grid  */}
       <div className="dash-main-grid">
 
         {/* Blog Posts Table */}
@@ -188,7 +188,7 @@ export default async function Dashboard() {
                         )}
                         <span className="dash-post-name">{p.title}</span>
                       </td>
-                      <td className="dash-post-author">{p.author_name || '—'}</td>
+                      <td className="dash-post-author">{p.author_name || ''}</td>
                       <td>
                         <span className={`dash-status-pill ${p.status === 'published' ? 'dash-status-published' : p.status === 'draft' ? 'dash-status-draft' : 'dash-status-scheduled'}`}>
                           {p.status}
@@ -197,7 +197,7 @@ export default async function Dashboard() {
                       <td className="dash-post-date">
                         {p.published_at
                           ? new Date(p.published_at).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })
-                          : '—'}
+                          : ''}
                       </td>
                       <td>
                         <div className="dash-post-actions">
@@ -227,7 +227,7 @@ export default async function Dashboard() {
             <div className="dash-panel-head">
               <div>
                 <h2 className="dash-panel-title">Leads Breakdown</h2>
-                <p className="dash-panel-sub">{stats.leads} total — {stats.newLeads} new</p>
+                <p className="dash-panel-sub">{stats.leads} total  {stats.newLeads} new</p>
               </div>
               <Link href="/admin/leads" className="dash-panel-link">View all</Link>
             </div>

@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useEffect, useState } from 'react';
 
@@ -54,9 +54,9 @@ export default function PWAInstall() {
       <div className="pwa-install-content">
         <img src="/logo.png" alt="Rithala Update" width={48} height={48} />
         <div style={{ flex: 1 }}>
-          <div style={{ fontWeight: 600 }}>📱 Install Rithala Update</div>
+          <div style={{ fontWeight: 600 }}> Install Rithala Update</div>
           <div style={{ fontSize: '0.85rem', opacity: 0.9 }}>
-            App ki tarah phone/desktop pe install karein — fast & offline support
+            App ki tarah phone/desktop pe install karein  fast & offline support
           </div>
         </div>
         <div style={{ display: 'flex', gap: 8 }}>

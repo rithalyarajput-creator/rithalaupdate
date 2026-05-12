@@ -1,4 +1,4 @@
-import type { Metadata, Viewport } from 'next';
+﻿import type { Metadata, Viewport } from 'next';
 import './globals.css';
 import { getAllSettings } from '@/lib/db';
 import PWAInstall from '@/components/PWAInstall';
@@ -14,6 +14,7 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 5,
   themeColor: '#f63a3a',
+  viewportFit: 'cover',
 };
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -22,8 +23,8 @@ export async function generateMetadata(): Promise<Metadata> {
     settings = (await getAllSettings()) as Record<string, string>;
   } catch {}
 
-  const siteTitle = settings.seo_default_title || settings.site_title || 'Rithala Update — Rajput Heritage, Temples, Festivals';
-  const siteDesc = settings.seo_default_description || settings.site_description || 'Rithala Update — Bhakti Reels, Rajput Culture & Temple Moments from Rithala Village, Delhi.';
+  const siteTitle = settings.seo_default_title || settings.site_title || 'Rithala Update  Rajput Heritage, Temples, Festivals';
+  const siteDesc = settings.seo_default_description || settings.site_description || 'Rithala Update  Bhakti Reels, Rajput Culture & Temple Moments from Rithala Village, Delhi.';
   const ogImage = settings.seo_default_og_image || undefined;
   const verification = settings.seo_google_verification;
 

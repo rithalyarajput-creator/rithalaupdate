@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useRef, useEffect } from 'react';
 
@@ -73,11 +73,11 @@ export default function ReelsStrip({ reels }: { reels: Reel[] }) {
           <div>
             <span className="reels-eyebrow">ON THE GRAM</span>
             <h2 className="reels-h2">Latest Reels & Shorts</h2>
-            <p className="reels-sub">हमारे गाँव की झलकियाँ — videos and shorts</p>
+            <p className="reels-sub">हमारे गाँव की झलकियाँ  videos and shorts</p>
           </div>
           <div className="reels-nav">
-            <button onClick={() => scrollBy(-1)} aria-label="Scroll left">‹</button>
-            <button onClick={() => scrollBy(1)} aria-label="Scroll right">›</button>
+            <button onClick={() => scrollBy(-1)} aria-label="Scroll left"></button>
+            <button onClick={() => scrollBy(1)} aria-label="Scroll right"></button>
           </div>
         </div>
 
@@ -153,8 +153,8 @@ export default function ReelsStrip({ reels }: { reels: Reel[] }) {
                     </div>
                   )}
                   <span className="reel-source-tag">
-                    {srcKind === 'video' ? '▶ HD' :
-                     srcKind === 'youtube' ? '▶ YT' :
+                    {srcKind === 'video' ? ' HD' :
+                     srcKind === 'youtube' ? ' YT' :
                      srcKind === 'instagram' ? 'IG' : ''}
                   </span>
                 </div>
@@ -167,7 +167,7 @@ export default function ReelsStrip({ reels }: { reels: Reel[] }) {
         </div>
 
         <div className="reels-strip-foot">
-          <a href="/reels/" className="reels-view-all">View All Reels →</a>
+          <a href="/reels/" className="reels-view-all">View All Reels </a>
         </div>
       </div>
     </section>

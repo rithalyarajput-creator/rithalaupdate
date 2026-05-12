@@ -1,4 +1,4 @@
-import { redirect } from 'next/navigation';
+﻿import { redirect } from 'next/navigation';
 import AdminShell from '@/components/AdminShell';
 import Icon from '@/components/Icon';
 import { getSession } from '@/lib/auth';
@@ -62,7 +62,7 @@ export default async function CategoriesPage() {
           </div>
           <div>
             <div className="adm-stat-num" style={{ fontSize: '1.05rem', lineHeight: 1.2 }}>
-              {topCat?.name || '—'}
+              {topCat?.name || ''}
             </div>
             <div className="adm-stat-label">Top Category ({topCat?.n || 0} posts)</div>
           </div>

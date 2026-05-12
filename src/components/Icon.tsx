@@ -1,4 +1,4 @@
-// Reusable SVG icon set — no emojis anywhere
+﻿// Reusable SVG icon set  no emojis anywhere
 // Usage: <Icon name="blog" size={18} />
 
 import type { SVGProps } from 'react';

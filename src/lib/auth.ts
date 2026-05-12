@@ -1,4 +1,4 @@
-// Authentication helpers — JWT in an HTTP-only cookie.
+﻿// Authentication helpers  JWT in an HTTP-only cookie.
 // Uses `jose` because it works in both Node.js and Edge runtimes.
 
 import { SignJWT, jwtVerify } from 'jose';

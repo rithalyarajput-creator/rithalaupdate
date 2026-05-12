@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState } from 'react';
 
@@ -20,7 +20,7 @@ export default function NewsletterForm() {
     const j = await res.json().catch(() => ({}));
     if (res.ok) {
       setStatus('success');
-      setMsg(j.message || '✓ Subscribed!');
+      setMsg(j.message || ' Subscribed!');
       setEmail('');
       setTimeout(() => { setStatus('idle'); setMsg(''); }, 4000);
     } else {
@@ -50,7 +50,7 @@ export default function NewsletterForm() {
         disabled={status === 'loading'}
       />
       <button type="submit" disabled={status === 'loading'}>
-        {status === 'loading' ? '...' : 'Join →'}
+        {status === 'loading' ? '...' : 'Join '}
       </button>
       {msg && status === 'error' && (
         <p style={{ gridColumn: '1 / -1', margin: '6px 0 0', fontSize: '0.8rem', color: '#f87171', fontWeight: 600 }}>

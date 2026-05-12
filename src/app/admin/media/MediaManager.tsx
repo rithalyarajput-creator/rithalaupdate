@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState, useRef } from 'react';
 
@@ -52,7 +52,7 @@ export default function MediaManager({ initialMedia }: { initialMedia: Media[] }
         setErr(j.error || 'Upload failed');
       }
     }
-    setMsg(`✓ ${files.length} file(s) uploaded`);
+    setMsg(` ${files.length} file(s) uploaded`);
     setUploading(false);
     if (fileRef.current) fileRef.current.value = '';
     setTimeout(() => setMsg(null), 3000);
@@ -71,7 +71,7 @@ export default function MediaManager({ initialMedia }: { initialMedia: Media[] }
       }),
     });
     if (res.ok) {
-      setMsg('✓ Saved');
+      setMsg(' Saved');
       setMedia((m) => m.map((x) => (x.id === item.id ? item : x)));
       setTimeout(() => setMsg(null), 2000);
     } else {
@@ -92,14 +92,14 @@ export default function MediaManager({ initialMedia }: { initialMedia: Media[] }
 
   function copyUrl(url: string) {
     navigator.clipboard.writeText(url);
-    setMsg('✓ URL copied to clipboard');
+    setMsg(' URL copied to clipboard');
     setTimeout(() => setMsg(null), 2000);
   }
 
   function copyImgTag(item: Media) {
     const tag = `<img src="${item.url}" alt="${item.alt_text || ''}" />`;
     navigator.clipboard.writeText(tag);
-    setMsg('✓ <img> tag copied — paste into post content');
+    setMsg(' <img> tag copied  paste into post content');
     setTimeout(() => setMsg(null), 2500);
   }
 
@@ -119,7 +119,7 @@ export default function MediaManager({ initialMedia }: { initialMedia: Media[] }
           disabled={uploading}
         />
         <p className="help">
-          {uploading ? 'Uploading…' : 'Select multiple images. They will be stored in Vercel Blob.'}
+          {uploading ? 'Uploading' : 'Select multiple images. They will be stored in Vercel Blob.'}
         </p>
       </div>
 
@@ -159,11 +159,11 @@ export default function MediaManager({ initialMedia }: { initialMedia: Media[] }
                   {selected.url}
                 </p>
                 <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-                  <button className="btn btn-sm" onClick={() => copyUrl(selected.url)}>📋 Copy URL</button>
+                  <button className="btn btn-sm" onClick={() => copyUrl(selected.url)}> Copy URL</button>
                   <button className="btn btn-sm btn-secondary" onClick={() => copyImgTag(selected)}>
-                    📋 Copy &lt;img&gt; tag
+                     Copy &lt;img&gt; tag
                   </button>
-                  <button className="btn-danger" onClick={() => deleteItem(selected.id)}>🗑 Delete</button>
+                  <button className="btn-danger" onClick={() => deleteItem(selected.id)}> Delete</button>
                 </div>
               </div>
               <div>
@@ -194,7 +194,7 @@ export default function MediaManager({ initialMedia }: { initialMedia: Media[] }
                     style={{ minHeight: 60, fontFamily: 'inherit' }}
                   />
                 </div>
-                <button className="btn" onClick={() => saveItemMeta(selected)}>💾 Save Details</button>
+                <button className="btn" onClick={() => saveItemMeta(selected)}> Save Details</button>
               </div>
             </div>
           </div>

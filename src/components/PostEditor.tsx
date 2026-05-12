@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState, useRef, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
@@ -65,7 +65,7 @@ function cleanPastedHtml(html: string): string {
         }
 
         if (!ALLOWED.has(tag)) {
-          // Unwrap unknown tag — keep its children
+          // Unwrap unknown tag  keep its children
           const parent = el.parentNode!;
           while (el.firstChild) parent.insertBefore(el.firstChild, el);
           parent.removeChild(el);
@@ -180,7 +180,7 @@ export default function PostEditor({
     if (!file) return;
     const fd = new FormData();
     fd.append('file', file);
-    setMsg('Uploading image…');
+    setMsg('Uploading image');
     const res = await fetch('/api/upload', { method: 'POST', body: fd });
     if (res.ok) {
       const j = await res.json();
@@ -346,7 +346,7 @@ export default function PostEditor({
             <small>Google Preview:</small>
             <div className="pe-gp-title">{metaTitle || title || 'Post Title'}</div>
             <div className="pe-gp-url">rithalaupdate.online/blog/{slug || 'your-slug'}/</div>
-            <div className="pe-gp-desc">{metaDescription || excerpt || 'Description preview will appear here…'}</div>
+            <div className="pe-gp-desc">{metaDescription || excerpt || 'Description preview will appear here'}</div>
           </div>
         </div>
       </div>
@@ -382,7 +382,7 @@ export default function PostEditor({
               disabled={saving || !title}
               style={{ width: '100%' }}
             >
-              {saving ? 'Saving…' : (post?.id ? 'Update' : 'Publish')}
+              {saving ? 'Saving' : (post?.id ? 'Update' : 'Publish')}
             </button>
             <button
               type="button"
@@ -483,7 +483,7 @@ export default function PostEditor({
             </div>
             <div className="pe-media-modal-body">
               {mediaLoading ? (
-                <p style={{ textAlign: 'center', color: '#94a3b8', padding: 40 }}>Loading…</p>
+                <p style={{ textAlign: 'center', color: '#94a3b8', padding: 40 }}>Loading</p>
               ) : mediaItems.length === 0 ? (
                 <div className="adm-empty">
                   <Icon name="image" size={48} />
@@ -517,7 +517,7 @@ export default function PostEditor({
 }
 
 /* ===========================================
-   ContentEditor — Visual + HTML with paste-preserve
+   ContentEditor  Visual + HTML with paste-preserve
    =========================================== */
 
 function ContentEditor({
@@ -573,7 +573,7 @@ function ContentEditor({
             <button type="button" onClick={() => exec('underline')} title="Underline"><u>U</u></button>
             <button type="button" onClick={() => exec('strikeThrough')} title="Strikethrough"><s>S</s></button>
             <span className="ce-divider"></span>
-            <button type="button" onClick={() => exec('insertUnorderedList')} title="Bullet list">• List</button>
+            <button type="button" onClick={() => exec('insertUnorderedList')} title="Bullet list"> List</button>
             <button type="button" onClick={() => exec('insertOrderedList')} title="Numbered list">1. List</button>
             <button type="button" onClick={() => exec('formatBlock', '<blockquote>')} title="Quote">&ldquo; &rdquo;</button>
             <span className="ce-divider"></span>
@@ -582,9 +582,9 @@ function ContentEditor({
               <Icon name="image" size={14} /> Image
             </button>
             <span className="ce-divider"></span>
-            <button type="button" onClick={() => exec('justifyLeft')} title="Align left">⇤</button>
-            <button type="button" onClick={() => exec('justifyCenter')} title="Align center">↔</button>
-            <button type="button" onClick={() => exec('justifyRight')} title="Align right">⇥</button>
+            <button type="button" onClick={() => exec('justifyLeft')} title="Align left"></button>
+            <button type="button" onClick={() => exec('justifyCenter')} title="Align center"></button>
+            <button type="button" onClick={() => exec('justifyRight')} title="Align right"></button>
             <span className="ce-divider"></span>
             <button type="button" onClick={() => exec('removeFormat')} title="Clear formatting">Clear</button>
           </div>
@@ -600,7 +600,7 @@ function ContentEditor({
               if (html) {
                 e.preventDefault();
                 const clean = cleanPastedHtml(html);
-                // Use insertHTML — keeps block-level tags like h1/h2/h3/blockquote/ul/ol intact
+                // Use insertHTML  keeps block-level tags like h1/h2/h3/blockquote/ul/ol intact
                 document.execCommand('insertHTML', false, clean);
                 if (editorRef.current) {
                   onChange(editorRef.current.innerHTML);
@@ -612,7 +612,7 @@ function ContentEditor({
             }}
           />
           <p className="pe-help">
-            Type or paste content. Word / Docs / Google Docs से paste करने पर bold, headings, links — सब preserved रहेंगे।
+            Type or paste content. Word / Docs / Google Docs से paste करने पर bold, headings, links  सब preserved रहेंगे।
           </p>
         </>
       )}
@@ -636,7 +636,7 @@ function ContentEditor({
 }
 
 /* ===========================================
-   CategoriesPicker — Author-style dropdown with checkboxes
+   CategoriesPicker  Author-style dropdown with checkboxes
    =========================================== */
 function CategoriesPicker({
   categories,
@@ -725,7 +725,7 @@ function CategoriesPicker({
 }
 
 /* ===========================================
-   AuthorPicker — dropdown with avatars
+   AuthorPicker  dropdown with avatars
    =========================================== */
 function AuthorPicker({
   authors,

@@ -1,4 +1,4 @@
-import Link from 'next/link';
+﻿import Link from 'next/link';
 import NewsletterForm from './NewsletterForm';
 import Icon from './Icon';
 
@@ -82,14 +82,14 @@ export default function SiteFooter({
         <div className="ftr3-col ftr3-col-links">
           <details className="ftr3-accordion" open>
             <summary className="ftr3-heading ftr3-accordion-summary">
-              Quick Links <span className="ftr3-acc-arrow">›</span>
+              Quick Links <span className="ftr3-acc-arrow"></span>
             </summary>
             <ul className="ftr3-menu">
-              <li><Link href="/"><span className="ftr3-arrow">›</span>Home</Link></li>
-              <li><Link href="/blog/"><span className="ftr3-arrow">›</span>Blog</Link></li>
-              <li><Link href="/rithala-village-history/"><span className="ftr3-arrow">›</span>History</Link></li>
-              <li><Link href="/about/"><span className="ftr3-arrow">›</span>About</Link></li>
-              <li><Link href="/contact/"><span className="ftr3-arrow">›</span>Contact</Link></li>
+              <li><Link href="/"><span className="ftr3-arrow"></span>Home</Link></li>
+              <li><Link href="/blog/"><span className="ftr3-arrow"></span>Blog</Link></li>
+              <li><Link href="/rithala-village-history/"><span className="ftr3-arrow"></span>History</Link></li>
+              <li><Link href="/about/"><span className="ftr3-arrow"></span>About</Link></li>
+              <li><Link href="/contact/"><span className="ftr3-arrow"></span>Contact</Link></li>
             </ul>
           </details>
         </div>
@@ -98,13 +98,13 @@ export default function SiteFooter({
         <div className="ftr3-col ftr3-col-links">
           <details className="ftr3-accordion" open>
             <summary className="ftr3-heading ftr3-accordion-summary">
-              More <span className="ftr3-acc-arrow">›</span>
+              More <span className="ftr3-acc-arrow"></span>
             </summary>
             <ul className="ftr3-menu">
-              <li><Link href="/photos/"><span className="ftr3-arrow">›</span>Photos</Link></li>
-              <li><Link href="/reels/"><span className="ftr3-arrow">›</span>Reels</Link></li>
-              <li><Link href="/faqs/"><span className="ftr3-arrow">›</span>FAQs</Link></li>
-              <li><Link href="/sandeep-rajput/"><span className="ftr3-arrow">›</span>About Me</Link></li>
+              <li><Link href="/photos/"><span className="ftr3-arrow"></span>Photos</Link></li>
+              <li><Link href="/reels/"><span className="ftr3-arrow"></span>Reels</Link></li>
+              <li><Link href="/faqs/"><span className="ftr3-arrow"></span>FAQs</Link></li>
+              <li><Link href="/sandeep-rajput/"><span className="ftr3-arrow"></span>About Me</Link></li>
             </ul>
           </details>
           {settings.contact_phone && (

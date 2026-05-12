@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState, useRef, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
@@ -17,210 +17,210 @@ type Option = {
 const MASCOT_IMG = 'https://9qidomuaf1nvlbrh.public.blob.vercel-storage.com/uploads/1778477060484-3bd4fa98-21df-4bd8-a3e5-d594a0770adf-Photoroom-cdJpoqggOK8fAIidR10p1NY2cIefcK.png';
 
 const ROOT_MENU: Option[] = [
-  { label: '🏛️ रिठाला का इतिहास', value: 'history' },
-  { label: '🚩 राजपूताना', value: 'rajputana' },
-  { label: '🎬 Reels & Videos', value: 'reels' },
-  { label: '📍 Location & Contact', value: 'contact' },
-  { label: '📝 Blog Posts', value: 'posts' },
-  { label: '🎉 Events', value: 'events' },
-  { label: '👤 Sandeep Rajput कौन हैं?', value: 'sandeep' },
+  { label: ' रिठाला का इतिहास', value: 'history' },
+  { label: ' राजपूताना', value: 'rajputana' },
+  { label: ' Reels & Videos', value: 'reels' },
+  { label: ' Location & Contact', value: 'contact' },
+  { label: ' Blog Posts', value: 'posts' },
+  { label: ' Events', value: 'events' },
+  { label: ' Sandeep Rajput कौन हैं?', value: 'sandeep' },
 ];
 
 type TopicReply = { reply: string; next?: Option[] };
 
 const TREE: Record<string, TopicReply> = {
   history: {
-    reply: '📜 रिठाला गाँव का इतिहास 640+ साल पुराना है। आप क्या जानना चाहते हैं?',
+    reply: ' रिठाला गाँव का इतिहास 640+ साल पुराना है। आप क्या जानना चाहते हैं?',
     next: [
-      { label: '📅 गाँव कब बसा?', value: 'history_year' },
-      { label: '👑 Founder कौन था?', value: 'history_founder' },
-      { label: '🥢 लाठी वाला नाम क्यों?', value: 'history_lathi' },
-      { label: '🏘️ पूठ कलां क्या है?', value: 'history_puth' },
-      { label: '📖 पूरा history page', value: 'history_full' },
+      { label: ' गाँव कब बसा?', value: 'history_year' },
+      { label: ' Founder कौन था?', value: 'history_founder' },
+      { label: ' लाठी वाला नाम क्यों?', value: 'history_lathi' },
+      { label: ' पूठ कलां क्या है?', value: 'history_puth' },
+      { label: ' पूरा history page', value: 'history_full' },
     ],
   },
   history_year: {
-    reply: '🗓️ रिठाला गाँव की स्थापना **1384-85 ईस्वी** में हुई थी, जब दिल्ली पर सुल्तान फिरोज शाह तुगलक का शासन था।',
+    reply: ' रिठाला गाँव की स्थापना **1384-85 ईस्वी** में हुई थी, जब दिल्ली पर सुल्तान फिरोज शाह तुगलक का शासन था।',
     next: [
-      { label: '👑 Founder कौन था?', value: 'history_founder' },
-      { label: '🥢 लाठी वाला नाम', value: 'history_lathi' },
-      { label: '↩️ Main menu', value: 'menu' },
+      { label: ' Founder कौन था?', value: 'history_founder' },
+      { label: ' लाठी वाला नाम', value: 'history_lathi' },
+      { label: ' Main menu', value: 'menu' },
     ],
   },
   history_founder: {
-    reply: '👑 गाँव की नींव **राणा राजपाल सिंह** ने रखी थी। वे **तोमर चंद्रवंशी राजपूत** वंश के साहसी योद्धा थे।',
+    reply: ' गाँव की नींव **राणा राजपाल सिंह** ने रखी थी। वे **तोमर चंद्रवंशी राजपूत** वंश के साहसी योद्धा थे।',
     next: [
-      { label: '🏘️ पूठ कलां क्या है?', value: 'history_puth' },
-      { label: '⚔️ तोमर वंश', value: 'history_tomar' },
-      { label: '↩️ Main menu', value: 'menu' },
+      { label: ' पूठ कलां क्या है?', value: 'history_puth' },
+      { label: ' तोमर वंश', value: 'history_tomar' },
+      { label: ' Main menu', value: 'menu' },
     ],
   },
   history_lathi: {
-    reply: '🥢 रिठाला का प्राचीन नाम **"लाठी वाला"** था। यहाँ के लोग लाठी, भाला, तलवार चलाने में निपुण थे।',
+    reply: ' रिठाला का प्राचीन नाम **"लाठी वाला"** था। यहाँ के लोग लाठी, भाला, तलवार चलाने में निपुण थे।',
     next: [
-      { label: '⚔️ राजपूताना वीरता', value: 'rajputana' },
-      { label: '↩️ Main menu', value: 'menu' },
+      { label: ' राजपूताना वीरता', value: 'rajputana' },
+      { label: ' Main menu', value: 'menu' },
     ],
   },
   history_puth: {
-    reply: '🏘️ **पूठ कलां** राणा राजपाल सिंह का पैतृक गाँव था, जिसकी स्थापना 1048-49 ईस्वी में हुई थी।',
+    reply: ' **पूठ कलां** राणा राजपाल सिंह का पैतृक गाँव था, जिसकी स्थापना 1048-49 ईस्वी में हुई थी।',
     next: [
-      { label: '👑 Founder कौन था?', value: 'history_founder' },
-      { label: '↩️ Main menu', value: 'menu' },
+      { label: ' Founder कौन था?', value: 'history_founder' },
+      { label: ' Main menu', value: 'menu' },
     ],
   },
   history_tomar: {
-    reply: '⚔️ **तोमर वंश** चंद्रवंशी राजपूतों का प्राचीन वंश है, जो दिल्ली के शासकों में रहे हैं।',
+    reply: ' **तोमर वंश** चंद्रवंशी राजपूतों का प्राचीन वंश है, जो दिल्ली के शासकों में रहे हैं।',
     next: [
-      { label: '🚩 राजपूताना', value: 'rajputana' },
-      { label: '↩️ Main menu', value: 'menu' },
+      { label: ' राजपूताना', value: 'rajputana' },
+      { label: ' Main menu', value: 'menu' },
     ],
   },
   history_full: {
-    reply: '📖 पूरा detailed history यहाँ पढ़ें: **/rithala-village-history/**',
-    next: [{ label: '↩️ Main menu', value: 'menu' }],
+    reply: ' पूरा detailed history यहाँ पढ़ें: **/rithala-village-history/**',
+    next: [{ label: ' Main menu', value: 'menu' }],
   },
   rajputana: {
-    reply: '🚩 **राजपूताना** का अर्थ है "राजपूतों की भूमि"।',
+    reply: ' **राजपूताना** का अर्थ है "राजपूतों की भूमि"।',
     next: [
-      { label: '🛡️ वीरता की कहानी', value: 'rajputana_veerta' },
-      { label: '🎨 सांस्कृतिक परंपराएँ', value: 'rajputana_culture' },
-      { label: '⚔️ तोमर वंश', value: 'history_tomar' },
-      { label: '↩️ Main menu', value: 'menu' },
+      { label: ' वीरता की कहानी', value: 'rajputana_veerta' },
+      { label: ' सांस्कृतिक परंपराएँ', value: 'rajputana_culture' },
+      { label: ' तोमर वंश', value: 'history_tomar' },
+      { label: ' Main menu', value: 'menu' },
     ],
   },
   rajputana_veerta: {
-    reply: '🛡️ रिठाला के राजपूत हमेशा अपनी मातृभूमि की रक्षा के लिए तैयार रहे।',
+    reply: ' रिठाला के राजपूत हमेशा अपनी मातृभूमि की रक्षा के लिए तैयार रहे।',
     next: [
-      { label: '🥢 लाठी वाला', value: 'history_lathi' },
-      { label: '↩️ Main menu', value: 'menu' },
+      { label: ' लाठी वाला', value: 'history_lathi' },
+      { label: ' Main menu', value: 'menu' },
     ],
   },
   rajputana_culture: {
-    reply: '🎨 गाँव में पीढ़ी-दर-पीढ़ी त्यौहार, धार्मिक आयोजन, मेले निभाए जाते हैं।',
+    reply: ' गाँव में पीढ़ी-दर-पीढ़ी त्यौहार, धार्मिक आयोजन, मेले निभाए जाते हैं।',
     next: [
-      { label: '🎉 Events देखें', value: 'events' },
-      { label: '↩️ Main menu', value: 'menu' },
+      { label: ' Events देखें', value: 'events' },
+      { label: ' Main menu', value: 'menu' },
     ],
   },
   reels: {
-    reply: '🎬 हम Instagram reels और YouTube shorts share करते हैं।',
+    reply: ' हम Instagram reels और YouTube shorts share करते हैं।',
     next: [
-      { label: '▶ All Reels देखें', value: 'reels_all' },
-      { label: '📷 Instagram', value: 'social_ig' },
-      { label: '▶ YouTube', value: 'social_yt' },
-      { label: '↩️ Main menu', value: 'menu' },
+      { label: ' All Reels देखें', value: 'reels_all' },
+      { label: ' Instagram', value: 'social_ig' },
+      { label: ' YouTube', value: 'social_yt' },
+      { label: ' Main menu', value: 'menu' },
     ],
   },
   reels_all: {
-    reply: '▶ सारे reels: **/reels/**',
-    next: [{ label: '↩️ Main menu', value: 'menu' }],
+    reply: ' सारे reels: **/reels/**',
+    next: [{ label: ' Main menu', value: 'menu' }],
   },
   contact: {
-    reply: '📞 आप 4 तरीकों से जुड़ सकते हैं:',
+    reply: ' आप 4 तरीकों से जुड़ सकते हैं:',
     next: [
-      { label: '📧 Email', value: 'contact_email' },
-      { label: '📍 Location/Map', value: 'contact_loc' },
-      { label: '📝 Direct Form', value: 'contact_form' },
-      { label: '🌐 Social Media', value: 'contact_social' },
-      { label: '↩️ Main menu', value: 'menu' },
+      { label: ' Email', value: 'contact_email' },
+      { label: ' Location/Map', value: 'contact_loc' },
+      { label: ' Direct Form', value: 'contact_form' },
+      { label: ' Social Media', value: 'contact_social' },
+      { label: ' Main menu', value: 'menu' },
     ],
   },
   contact_email: {
-    reply: '📧 Email करें: **rithalyarajput@gmail.com** — 24-48 घंटे में reply।',
-    next: [{ label: '↩️ Main menu', value: 'menu' }],
+    reply: ' Email करें: **rithalyarajput@gmail.com**  24-48 घंटे में reply।',
+    next: [{ label: ' Main menu', value: 'menu' }],
   },
   contact_loc: {
-    reply: '📍 **Rithala Village, North-West Delhi (Pin 110085)**\nMetro: Rithala (Red Line)\nMap: **/contact-location/**',
-    next: [{ label: '↩️ Main menu', value: 'menu' }],
+    reply: ' **Rithala Village, North-West Delhi (Pin 110085)**\nMetro: Rithala (Red Line)\nMap: **/contact-location/**',
+    next: [{ label: ' Main menu', value: 'menu' }],
   },
   contact_form: {
-    reply: '📝 Contact form यहाँ: **/contact-location/**',
-    next: [{ label: '↩️ Main menu', value: 'menu' }],
+    reply: ' Contact form यहाँ: **/contact-location/**',
+    next: [{ label: ' Main menu', value: 'menu' }],
   },
   contact_social: {
-    reply: '🌐 हमें social पर follow करें:',
+    reply: ' हमें social पर follow करें:',
     next: [
-      { label: '📷 Instagram', value: 'social_ig' },
-      { label: '📘 Facebook', value: 'social_fb' },
-      { label: '▶ YouTube', value: 'social_yt' },
-      { label: '↩️ Main menu', value: 'menu' },
+      { label: ' Instagram', value: 'social_ig' },
+      { label: ' Facebook', value: 'social_fb' },
+      { label: ' YouTube', value: 'social_yt' },
+      { label: ' Main menu', value: 'menu' },
     ],
   },
-  social_ig: { reply: '📷 Instagram: **@rithala_update**', next: [{ label: '↩️ Main menu', value: 'menu' }] },
-  social_fb: { reply: '📘 Facebook page पर follow करें।', next: [{ label: '↩️ Main menu', value: 'menu' }] },
-  social_yt: { reply: '▶ YouTube: **@rithala_update**', next: [{ label: '↩️ Main menu', value: 'menu' }] },
+  social_ig: { reply: ' Instagram: **@rithala_update**', next: [{ label: ' Main menu', value: 'menu' }] },
+  social_fb: { reply: ' Facebook page पर follow करें।', next: [{ label: ' Main menu', value: 'menu' }] },
+  social_yt: { reply: ' YouTube: **@rithala_update**', next: [{ label: ' Main menu', value: 'menu' }] },
   posts: {
-    reply: '📝 Blog posts देखें: **/blog/** — category, author, date से filter करें।',
+    reply: ' Blog posts देखें: **/blog/**  category, author, date से filter करें।',
     next: [
-      { label: '📜 History posts', value: 'posts_history' },
-      { label: '🎉 Events posts', value: 'posts_events' },
-      { label: '🏛️ Places posts', value: 'posts_places' },
-      { label: '🚩 Kawad Yatra', value: 'posts_kawad' },
-      { label: '↩️ Main menu', value: 'menu' },
+      { label: ' History posts', value: 'posts_history' },
+      { label: ' Events posts', value: 'posts_events' },
+      { label: ' Places posts', value: 'posts_places' },
+      { label: ' Kawad Yatra', value: 'posts_kawad' },
+      { label: ' Main menu', value: 'menu' },
     ],
   },
-  posts_history: { reply: '📜 History posts: **/blog/?category=history**', next: [{ label: '↩️ Main menu', value: 'menu' }] },
-  posts_events: { reply: '🎉 Events posts: **/blog/?category=events**', next: [{ label: '↩️ Main menu', value: 'menu' }] },
-  posts_places: { reply: '🏛️ Places gallery: **/blog/?category=places**', next: [{ label: '↩️ Main menu', value: 'menu' }] },
-  posts_kawad: { reply: '🚩 Kawad Yatra: **/blog/?category=kawad-yatra-2025**', next: [{ label: '↩️ Main menu', value: 'menu' }] },
+  posts_history: { reply: ' History posts: **/blog/?category=history**', next: [{ label: ' Main menu', value: 'menu' }] },
+  posts_events: { reply: ' Events posts: **/blog/?category=events**', next: [{ label: ' Main menu', value: 'menu' }] },
+  posts_places: { reply: ' Places gallery: **/blog/?category=places**', next: [{ label: ' Main menu', value: 'menu' }] },
+  posts_kawad: { reply: ' Kawad Yatra: **/blog/?category=kawad-yatra-2025**', next: [{ label: ' Main menu', value: 'menu' }] },
   events: {
-    reply: '🎉 गाँव में पूरे साल events होते हैं:',
+    reply: ' गाँव में पूरे साल events होते हैं:',
     next: [
-      { label: '🚩 Kawad Yatra 2025', value: 'posts_kawad' },
-      { label: '🪔 Festivals', value: 'events_festivals' },
-      { label: '🏛️ Temple events', value: 'events_temple' },
-      { label: '↩️ Main menu', value: 'menu' },
+      { label: ' Kawad Yatra 2025', value: 'posts_kawad' },
+      { label: ' Festivals', value: 'events_festivals' },
+      { label: ' Temple events', value: 'events_temple' },
+      { label: ' Main menu', value: 'menu' },
     ],
   },
-  events_festivals: { reply: '🪔 Diwali, Holi, Janmashtami सब बड़े उत्साह से मनाते हैं।', next: [{ label: '↩️ Main menu', value: 'menu' }] },
-  events_temple: { reply: '🏛️ श्री जागेश्वर नाथ कात्यायनी धाम में नियमित आयोजन होते हैं।', next: [{ label: '↩️ Main menu', value: 'menu' }] },
+  events_festivals: { reply: ' Diwali, Holi, Janmashtami सब बड़े उत्साह से मनाते हैं।', next: [{ label: ' Main menu', value: 'menu' }] },
+  events_temple: { reply: ' श्री जागेश्वर नाथ कात्यायनी धाम में नियमित आयोजन होते हैं।', next: [{ label: ' Main menu', value: 'menu' }] },
   menu: {
-    reply: '🚩 जय राजपूताना! बताइए क्या जानना चाहते हैं?',
+    reply: ' जय राजपूताना! बताइए क्या जानना चाहते हैं?',
     next: ROOT_MENU,
   },
   sandeep: {
-    reply: '👤 **Sandeep Rajput** (जिन्हें online पर **Rithalya Rajput** के नाम से जाना जाता है) Rithala Update के founder हैं। वे Rithala Village, Delhi के 18 साल के digital creator, website developer, artist और social media designer हैं। उन्होंने **15 August 2022** को Rithala Update launch किया था।',
+    reply: ' **Sandeep Rajput** (जिन्हें online पर **Rithalya Rajput** के नाम से जाना जाता है) Rithala Update के founder हैं। वे Rithala Village, Delhi के 18 साल के digital creator, website developer, artist और social media designer हैं। उन्होंने **15 August 2022** को Rithala Update launch किया था।',
     next: [
-      { label: '🎓 Education', value: 'sandeep_edu' },
-      { label: '🎨 Creative works', value: 'sandeep_works' },
-      { label: '💼 क्या करते हैं?', value: 'sandeep_work' },
-      { label: '🚀 क्यों बनाया Rithala Update?', value: 'sandeep_why' },
-      { label: '📖 Full About Me page', value: 'sandeep_full' },
-      { label: '↩️ Main menu', value: 'menu' },
+      { label: ' Education', value: 'sandeep_edu' },
+      { label: ' Creative works', value: 'sandeep_works' },
+      { label: ' क्या करते हैं?', value: 'sandeep_work' },
+      { label: ' क्यों बनाया Rithala Update?', value: 'sandeep_why' },
+      { label: ' Full About Me page', value: 'sandeep_full' },
+      { label: ' Main menu', value: 'menu' },
     ],
   },
   sandeep_edu: {
-    reply: '🎓 Sandeep Rajput ने **Rana Pratap Government Boys Senior Secondary School, Rithala, New Delhi** से schooling पूरी की है। उन्होंने lockdown के दौरान drawing और design skills पर बहुत focus किया।',
+    reply: ' Sandeep Rajput ने **Rana Pratap Government Boys Senior Secondary School, Rithala, New Delhi** से schooling पूरी की है। उन्होंने lockdown के दौरान drawing और design skills पर बहुत focus किया।',
     next: [
-      { label: '🎨 Creative works', value: 'sandeep_works' },
-      { label: '↩️ Main menu', value: 'menu' },
+      { label: ' Creative works', value: 'sandeep_works' },
+      { label: ' Main menu', value: 'menu' },
     ],
   },
   sandeep_works: {
-    reply: '🎨 उनके सबसे बेहतरीन pencil sketches में हैं — **Maharana Pratap**, **Little Krishna**, **Little Ram**, **Karan Aujla** और **Virat Kohli** के sketch। वे website development, social media management, creative designing और digital branding पर भी काम करते हैं।',
+    reply: ' उनके सबसे बेहतरीन pencil sketches में हैं  **Maharana Pratap**, **Little Krishna**, **Little Ram**, **Karan Aujla** और **Virat Kohli** के sketch। वे website development, social media management, creative designing और digital branding पर भी काम करते हैं।',
     next: [
-      { label: '👤 More about Sandeep', value: 'sandeep' },
-      { label: '↩️ Main menu', value: 'menu' },
+      { label: ' More about Sandeep', value: 'sandeep' },
+      { label: ' Main menu', value: 'menu' },
     ],
   },
   sandeep_work: {
-    reply: '💼 Sandeep Rajput website development, social media handling, digital promotions और creative designing करते हैं। उन्होंने ये पूरी Rithala Update website खुद design और develop की है, और Instagram, YouTube channels को भी खुद manage करते हैं।',
+    reply: ' Sandeep Rajput website development, social media handling, digital promotions और creative designing करते हैं। उन्होंने ये पूरी Rithala Update website खुद design और develop की है, और Instagram, YouTube channels को भी खुद manage करते हैं।',
     next: [
-      { label: '🎨 Creative works', value: 'sandeep_works' },
-      { label: '↩️ Main menu', value: 'menu' },
+      { label: ' Creative works', value: 'sandeep_works' },
+      { label: ' Main menu', value: 'menu' },
     ],
   },
   sandeep_why: {
-    reply: '🚀 Rithala Update बनाने के पीछे एक simple vision था — Rithala Village को एक strong digital identity देना और एक ऐसा platform बनाना जहाँ लोग अपनी culture, community और local updates से connected रहें। पहले Instagram और social media पर content share होता था, फिर 15 August 2022 को website launch हुई।',
+    reply: ' Rithala Update बनाने के पीछे एक simple vision था  Rithala Village को एक strong digital identity देना और एक ऐसा platform बनाना जहाँ लोग अपनी culture, community और local updates से connected रहें। पहले Instagram और social media पर content share होता था, फिर 15 August 2022 को website launch हुई।',
     next: [
-      { label: '📖 Full About Me page', value: 'sandeep_full' },
-      { label: '↩️ Main menu', value: 'menu' },
+      { label: ' Full About Me page', value: 'sandeep_full' },
+      { label: ' Main menu', value: 'menu' },
     ],
   },
   sandeep_full: {
-    reply: '📖 पूरा detailed About Me page यहाँ पढ़ें: **/sandeep-rajput/**',
-    next: [{ label: '↩️ Main menu', value: 'menu' }],
+    reply: ' पूरा detailed About Me page यहाँ पढ़ें: **/sandeep-rajput/**',
+    next: [{ label: ' Main menu', value: 'menu' }],
   },
 };
 
@@ -230,7 +230,7 @@ function plainText(t: string): string {
     .replace(/\*\*(.+?)\*\*/g, '$1')
     .replace(/<[^>]+>/g, '')
     .replace(/\/[a-z0-9-]+\//gi, '')
-    .replace(/[📜🚩🎬📞📝🎉🏛️📅👑🥢🏘️⚔️🛡️🎨▶📷📘📍📧📨🪔🌐↩️🗓️]/g, '')
+    .replace(/[]/g, '')
     .trim();
 }
 
@@ -279,10 +279,10 @@ export default function AIChatBot() {
     if (!open || hasGreeted) return;
     setHasGreeted(true);
     setTimeout(() => {
-      setMessages([{ role: 'bot', text: '🚩 राम राम जी! जय राजपूताना!' }]);
+      setMessages([{ role: 'bot', text: ' राम राम जी! जय राजपूताना!' }]);
     }, 200);
     setTimeout(() => {
-      setMessages((m) => [...m, { role: 'bot', text: 'मैं **Rithala AI** हूँ — आपकी सेवा में 🙏' }]);
+      setMessages((m) => [...m, { role: 'bot', text: 'मैं **Rithala AI** हूँ  आपकी सेवा में ' }]);
     }, 900);
     setTimeout(() => {
       setMessages((m) => [
@@ -340,7 +340,7 @@ export default function AIChatBot() {
       if (topic) {
         botReply(topic.reply, topic.next);
       } else {
-        botReply('मुझे आपका सवाल पूरी तरह समझ नहीं आया 🙏 नीचे से कोई option चुनें या email करें: rithalyarajput@gmail.com', ROOT_MENU);
+        botReply('मुझे आपका सवाल पूरी तरह समझ नहीं आया  नीचे से कोई option चुनें या email करें: rithalyarajput@gmail.com', ROOT_MENU);
       }
       setTyping(false);
     }, 600 + Math.random() * 400);
@@ -397,7 +397,7 @@ export default function AIChatBot() {
           aria-label="Open chat assistant"
         >
           <span className="ai-mascot-tooltip">
-            🙏 जय राजपूताना!<br />Click to chat
+             जय राजपूताना!<br />Click to chat
           </span>
           <span className="ai-mascot-img-wrap">
             <img src={MASCOT_IMG} alt="Rithala AI Assistant" />
@@ -424,7 +424,7 @@ export default function AIChatBot() {
               aria-label={voiceOn ? 'Mute voice' : 'Enable voice'}
               title={voiceOn ? 'Voice on (click to mute)' : 'Click to enable voice'}
             >
-              {voiceOn ? '🔊' : '🔇'}
+              {voiceOn ? '' : ''}
             </button>
             <button className="ai-chat-close" onClick={() => setOpen(false)} aria-label="Close chat">×</button>
           </header>
@@ -454,7 +454,7 @@ export default function AIChatBot() {
                       aria-label="Play this message"
                       title="Listen"
                     >
-                      🔊
+                      
                     </button>
                   )}
                 </div>
@@ -500,7 +500,7 @@ export default function AIChatBot() {
               aria-label={listening ? 'Stop listening' : 'Voice input'}
               title="Speak your question (Hindi/English)"
             >
-              {listening ? '⏹' : '🎤'}
+              {listening ? '' : ''}
             </button>
             <input
               type="text"

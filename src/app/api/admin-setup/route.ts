@@ -1,4 +1,4 @@
-// One-time admin user creation endpoint.
+﻿// One-time admin user creation endpoint.
 // Protected by ADMIN_SETUP_TOKEN env var.
 
 import { NextRequest, NextResponse } from 'next/server';
@@ -10,7 +10,7 @@ export async function POST(req: NextRequest) {
   const expectedToken = process.env.ADMIN_SETUP_TOKEN;
   if (!expectedToken) {
     return NextResponse.json(
-      { error: 'Setup disabled — ADMIN_SETUP_TOKEN not set' },
+      { error: 'Setup disabled  ADMIN_SETUP_TOKEN not set' },
       { status: 403 }
     );
   }

@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState } from 'react';
 import Icon from '@/components/Icon';
@@ -187,7 +187,7 @@ export default function UsersManager({
                       <strong>{u.email}</strong>
                       {u.email === currentUserEmail && <span className="adm-badge adm-badge-blue" style={{ marginLeft: 8 }}>You</span>}
                     </td>
-                    <td className="adm-cell-muted">{u.display_name || '—'}</td>
+                    <td className="adm-cell-muted">{u.display_name || ''}</td>
                     <td><span className="adm-badge adm-badge-purple">{u.role}</span></td>
                     <td style={{ textAlign: 'right' }}>
                       <div className="adm-actions">

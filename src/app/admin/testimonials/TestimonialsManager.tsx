@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState } from 'react';
 import Icon from '@/components/Icon';
@@ -130,11 +130,11 @@ export default function TestimonialsManager({ initialItems }: { initialItems: Te
               <div className="adm-field">
                 <label>Rating</label>
                 <select name="rating" defaultValue="5">
-                  <option value="5">★★★★★ (5)</option>
-                  <option value="4">★★★★ (4)</option>
-                  <option value="3">★★★ (3)</option>
-                  <option value="2">★★ (2)</option>
-                  <option value="1">★ (1)</option>
+                  <option value="5"> (5)</option>
+                  <option value="4"> (4)</option>
+                  <option value="3"> (3)</option>
+                  <option value="2"> (2)</option>
+                  <option value="1"> (1)</option>
                 </select>
               </div>
               <div className="adm-field">
@@ -143,7 +143,7 @@ export default function TestimonialsManager({ initialItems }: { initialItems: Te
               </div>
             </div>
             <button type="submit" disabled={addBusy} className="adm-btn-primary" style={{ margin: '8px 22px 6px' }}>
-              <Icon name="check" size={14} /> {addBusy ? 'Adding…' : 'Add & Auto-Approve'}
+              <Icon name="check" size={14} /> {addBusy ? 'Adding' : 'Add & Auto-Approve'}
             </button>
           </form>
         </div>
@@ -185,7 +185,7 @@ export default function TestimonialsManager({ initialItems }: { initialItems: Te
                   </div>
                   <p className="adm-test-msg">{t.message}</p>
                   <div className="adm-test-meta">
-                    <span>{'★'.repeat(t.rating)}{'☆'.repeat(5 - t.rating)}</span>
+                    <span>{''.repeat(t.rating)}{''.repeat(5 - t.rating)}</span>
                     {t.phone && <span><Icon name="phone" size={12} /> {t.phone}</span>}
                     {t.email && <span><Icon name="mail" size={12} /> {t.email}</span>}
                     <span>{new Date(t.created_at).toLocaleDateString('en-IN')}</span>

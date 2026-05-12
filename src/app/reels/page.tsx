@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+﻿import type { Metadata } from 'next';
 import PublicShell from '@/components/PublicShell';
 import { getPublishedReels } from '@/lib/db';
 
@@ -15,7 +15,7 @@ export default async function ReelsPage() {
   return (
     <PublicShell>
       <section className="container section">
-        <h1 style={{ textAlign: 'center', color: 'var(--color-link)' }}>🎬 Reels</h1>
+        <h1 style={{ textAlign: 'center', color: 'var(--color-link)' }}> Reels</h1>
         <p style={{ textAlign: 'center', color: '#5b6573', maxWidth: 600, margin: '0 auto 30px' }}>
           Bhakti, Rajputana culture, and temple moments from Rithala Village.
         </p>
@@ -32,9 +32,9 @@ export default async function ReelsPage() {
                   {r.thumbnail_url ? (
                     <img src={r.thumbnail_url} alt={r.title} />
                   ) : (
-                    <div className="reel-placeholder">▶ Reel</div>
+                    <div className="reel-placeholder"> Reel</div>
                   )}
-                  <div className="reel-play-overlay">▶</div>
+                  <div className="reel-play-overlay"></div>
                 </div>
                 <div style={{ padding: 12 }}>
                   <h3 style={{ margin: '0 0 4px', fontSize: '1rem' }}>{r.title}</h3>

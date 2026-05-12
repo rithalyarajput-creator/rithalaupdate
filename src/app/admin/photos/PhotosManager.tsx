@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState, useRef } from 'react';
 import slugify from 'slugify';
@@ -114,7 +114,7 @@ export default function PhotosManager({
     const file = e.target.files?.[0];
     if (!file) return;
     const fd = new FormData(); fd.append('file', file);
-    setMsg('Uploading…');
+    setMsg('Uploading');
     const res = await fetch('/api/upload', { method: 'POST', body: fd });
     if (res.ok) {
       const j = await res.json();
@@ -193,7 +193,7 @@ export default function PhotosManager({
     const file = e.target.files?.[0];
     if (!file) return;
     const fd = new FormData(); fd.append('file', file);
-    setMsg('Uploading…');
+    setMsg('Uploading');
     const res = await fetch('/api/upload', { method: 'POST', body: fd });
     if (res.ok) {
       const j = await res.json();
@@ -656,7 +656,7 @@ export default function PhotosManager({
                   <div className="adm-field">
                     <label>Folder / Album</label>
                     <select value={photoFolderId} onChange={(e) => setPhotoFolderId(Number(e.target.value) || '')}>
-                      <option value="">— No folder —</option>
+                      <option value=""> No folder </option>
                       {folders.map((f) => (
                         <option key={f.id} value={f.id}>{f.category_name} · {f.name}</option>
                       ))}

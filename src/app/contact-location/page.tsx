@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+﻿import type { Metadata } from 'next';
 import PublicShell from '@/components/PublicShell';
 import { getAllSettings } from '@/lib/db';
 import ContactForm from '../contact/ContactForm';
@@ -8,9 +8,9 @@ export const revalidate = 300;
 const SITE = process.env.NEXT_PUBLIC_SITE_URL || 'https://rithalaupdate.online';
 
 export const metadata: Metadata = {
-  title: 'Contact Us — Rithala Update | Get in Touch',
+  title: 'Contact Us  Rithala Update | Get in Touch',
   description:
-    'हमसे जुड़ें — Email, location, social media, या direct message form। 24-48 घंटे में जवाब।',
+    'हमसे जुड़ें  Email, location, social media, या direct message form। 24-48 घंटे में जवाब।',
   alternates: { canonical: '/contact-location/' },
 };
 
@@ -19,7 +19,7 @@ export default async function ContactLocationPage() {
 
   const email = settings.contact_email || 'rithalyarajput@gmail.com';
   const phone = settings.contact_phone || '+91-9355753533';
-  const address = settings.contact_address || 'Rithala Village, North-West Delhi — 110085';
+  const address = settings.contact_address || 'Rithala Village, North-West Delhi  110085';
 
   const localBusinessLd = {
     '@context': 'https://schema.org',
@@ -55,11 +55,11 @@ export default async function ContactLocationPage() {
       {/* HERO */}
       <section className="ct2-hero">
         <div className="container">
-          <span className="ct2-eyebrow">📞 Get in Touch</span>
+          <span className="ct2-eyebrow"> Get in Touch</span>
           <h1>
-            हमसे जुड़ें — <span className="ct2-grad">Contact Us</span>
+            हमसे जुड़ें  <span className="ct2-grad">Contact Us</span>
           </h1>
-          <p>आपका हर सवाल, कहानी, या photo — हम सब सुनते हैं। 24-48 घंटे में reply की guarantee।</p>
+          <p>आपका हर सवाल, कहानी, या photo  हम सब सुनते हैं। 24-48 घंटे में reply की guarantee।</p>
         </div>
       </section>
 
@@ -67,17 +67,17 @@ export default async function ContactLocationPage() {
       <section className="ct2-main">
         <div className="container">
           <div className="ct2-grid">
-            {/* LEFT — FORM */}
+            {/* LEFT  FORM */}
             <div className="ct2-form-card">
               <div className="ct2-form-head">
-                <span className="ct2-form-eyebrow">✉️ Send Message</span>
+                <span className="ct2-form-eyebrow"> Send Message</span>
                 <h2>एक मैसेज भेजें</h2>
-                <p>Form भरें या email करें — कुछ भी पूछें, हम जवाब देंगे।</p>
+                <p>Form भरें या email करें  कुछ भी पूछें, हम जवाब देंगे।</p>
               </div>
               <ContactForm />
             </div>
 
-            {/* RIGHT — MAP + INFO */}
+            {/* RIGHT  MAP + INFO */}
             <div className="ct2-side">
               <div className="ct2-map-card">
                 <div className="ct2-map-frame">
@@ -101,7 +101,7 @@ export default async function ContactLocationPage() {
 
               <div className="ct2-info-card">
                 <h3 className="ct2-info-h3">
-                  <span className="ct2-info-icon-h">📞</span>
+                  <span className="ct2-info-icon-h"></span>
                   Get in Touch
                 </h3>
 
@@ -142,7 +142,7 @@ export default async function ContactLocationPage() {
                     </span>
                     <div>
                       <strong>Response Time</strong>
-                      <span>Monday – Sunday · 24-48 hours</span>
+                      <span>Monday  Sunday · 24-48 hours</span>
                     </div>
                   </div>
                 </div>

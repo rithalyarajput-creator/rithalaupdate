@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useEffect, useState, Suspense } from 'react';
 import { usePathname, useSearchParams } from 'next/navigation';
@@ -35,7 +35,7 @@ function LoaderInner() {
       {/* Top progress bar */}
       <div className="pl-bar" />
 
-      {/* Swords orb — bottom right corner */}
+      {/* Swords orb  bottom right corner */}
       <div className="pl-orb">
         <svg className="pl-swords-scene" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
           {/* Sparks */}

@@ -1,4 +1,4 @@
-import Link from 'next/link';
+﻿import Link from 'next/link';
 import PublicShell from '@/components/PublicShell';
 import PostCard from '@/components/PostCard';
 import HeroSlider from '@/components/HeroSlider';
@@ -43,10 +43,10 @@ export default async function HomePage() {
           ============================== */}
       <section className="hero-v2">
         <div className="hero-decorations" aria-hidden="true">
-          <span className="hero-flag">🚩</span>
-          <span className="hero-star hero-star-1">✦</span>
-          <span className="hero-star hero-star-2">✦</span>
-          <span className="hero-star hero-star-3">✦</span>
+          <span className="hero-flag"></span>
+          <span className="hero-star hero-star-1"></span>
+          <span className="hero-star hero-star-2"></span>
+          <span className="hero-star hero-star-3"></span>
         </div>
 
         <div className="container">
@@ -66,7 +66,7 @@ export default async function HomePage() {
                 <div className="hero-image-corner bottom-left"></div>
                 <div className="hero-image-corner bottom-right"></div>
               </div>
-              <div className="hero-image-badge">🚩 Jai Rajputana</div>
+              <div className="hero-image-badge"> Jai Rajputana</div>
             </div>
 
             <div className="hero-content-v2">
@@ -89,27 +89,27 @@ export default async function HomePage() {
 
               <ul className="hero-highlights">
                 <li>
-                  <span className="hero-icon">📜</span>
+                  <span className="hero-icon"></span>
                   <BiText hi="सदियों पुरानी परंपराओं का प्रतीक" en="Symbol of centuries-old traditions" />
                 </li>
                 <li>
-                  <span className="hero-icon">⚔️</span>
+                  <span className="hero-icon"></span>
                   <BiText hi="राजपूत वीरता की गौरवशाली कहानियाँ" en="Glorious stories of Rajput bravery" />
                 </li>
                 <li>
-                  <span className="hero-icon">🏛️</span>
+                  <span className="hero-icon"></span>
                   <BiText hi="सांस्कृतिक धरोहर और ऐतिहासिक स्थल" en="Cultural heritage and historical sites" />
                 </li>
                 <li>
-                  <span className="hero-icon">🤝</span>
+                  <span className="hero-icon"></span>
                   <BiText hi="भाईचारे और सामाजिक एकता" en="Brotherhood and social unity" />
                 </li>
               </ul>
 
               <div className="hero-cta-row">
                 <Link href="/about/" className="btn-hero-primary">
-                  <BiText as="span" className="btn-hero-text" hi="📖 पूरी कहानी पढ़ें" en="📖 Read Full Story" />
-                  <span className="btn-hero-arrow">→</span>
+                  <BiText as="span" className="btn-hero-text" hi=" पूरी कहानी पढ़ें" en=" Read Full Story" />
+                  <span className="btn-hero-arrow"></span>
                 </Link>
                 <Link href="/contact/" className="btn-hero-secondary">
                   <BiText hi="संपर्क करें" en="Contact Us" />
@@ -125,9 +125,9 @@ export default async function HomePage() {
           ============================== */}
       <section className="rajputana-section reveal-on-scroll">
         <div className="rajputana-decor" aria-hidden="true">
-          <span className="rj-deco-1">⚔️</span>
-          <span className="rj-deco-2">🏰</span>
-          <span className="rj-deco-3">🛡️</span>
+          <span className="rj-deco-1"></span>
+          <span className="rj-deco-2"></span>
+          <span className="rj-deco-3"></span>
         </div>
         <div className="container">
           <div className="rajputana-grid">
@@ -141,7 +141,7 @@ export default async function HomePage() {
               <p className="rajputana-text">
                 <strong>राजपूताना</strong> भारत का एक ऐतिहासिक क्षेत्र है, जिसका
                 अर्थ है <strong>"राजपूतों की भूमि"</strong>। यह नाम दो शब्दों से
-                बना है — <em>राजा + पुत्र</em> यानी <em>"राजपूत"</em>, जो शाही
+                बना है  <em>राजा + पुत्र</em> यानी <em>"राजपूत"</em>, जो शाही
                 वंश के योद्धा होते थे, और <em>"राजपूताना"</em> यानी वह भूमि जहाँ
                 इनका शासन और प्रभाव था। राजपूताना में वर्तमान राजस्थान राज्य और
                 उसके आसपास के कुछ हिस्से जैसे हरियाणा, गुजरात और मध्यप्रदेश शामिल
@@ -149,7 +149,7 @@ export default async function HomePage() {
               </p>
               <p className="rajputana-text">
                 अंग्रेज़ी शासनकाल में इसे <strong>"राजपूताना एजेंसी"</strong> कहा
-                जाता था, जिसमें 18 बड़ी और 20 छोटी रियासतें थीं — जैसे मेवाड़,
+                जाता था, जिसमें 18 बड़ी और 20 छोटी रियासतें थीं  जैसे मेवाड़,
                 मारवाड़, जयपुर, जोधपुर, बीकानेर, बूंदी और कोटा। यह क्षेत्र अपनी
                 वीरता, शौर्य और संस्कृति के लिए प्रसिद्ध था।
               </p>
@@ -169,7 +169,7 @@ export default async function HomePage() {
                   loading="lazy"
                 />
               </div>
-              <p className="rajputana-caption">📜 Imperial Gazetteer of India — Rajputana Agency Map</p>
+              <p className="rajputana-caption"> Imperial Gazetteer of India  Rajputana Agency Map</p>
             </div>
           </div>
         </div>
@@ -195,7 +195,7 @@ export default async function HomePage() {
               <h2 className="lp2-h2"><BiText hi="ताज़े ब्लॉग पोस्ट" en="Latest Blog Posts" /></h2>
               <BiText as="p" className="lp2-sub" hi="रिठाला से ताज़ा कहानियाँ, फ़ोटो और अपडेट" en="Fresh stories, photos and updates from Rithala" />
             </div>
-            <Link href="/blog/" className="lp2-view-all"><BiText hi="सभी पोस्ट देखें →" en="View all posts →" /></Link>
+            <Link href="/blog/" className="lp2-view-all"><BiText hi="सभी पोस्ट देखें " en="View all posts " /></Link>
           </div>
 
           {posts.length === 0 ? (
@@ -245,7 +245,7 @@ export default async function HomePage() {
           <div className="container">
             <div className="home-faq-head">
               <h2><BiText hi="अक्सर पूछे जाने वाले सवाल" en="Frequently Asked Questions" /></h2>
-              <Link href="/faqs/" className="home-faq-all"><BiText hi="सभी FAQs देखें →" en="View all FAQs →" /></Link>
+              <Link href="/faqs/" className="home-faq-all"><BiText hi="सभी FAQs देखें " en="View all FAQs " /></Link>
             </div>
             <div className="home-faq-grid">
               {homeFaqs.map((f: any) => (

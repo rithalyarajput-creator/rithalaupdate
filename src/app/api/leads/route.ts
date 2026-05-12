@@ -1,12 +1,12 @@
-// POST /api/leads — public endpoint for contact form submissions
-// GET  /api/leads — admin only (used by Leads list)
+﻿// POST /api/leads  public endpoint for contact form submissions
+// GET  /api/leads  admin only (used by Leads list)
 
 import { NextRequest, NextResponse } from 'next/server';
 import { sql } from '@/lib/db';
 import { getSession } from '@/lib/auth';
 
 export async function POST(req: NextRequest) {
-  // Public — no auth check
+  // Public  no auth check
   const fd = await req.formData().catch(() => null);
   let name = '';
   let email = '';

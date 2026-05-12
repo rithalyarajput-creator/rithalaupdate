@@ -1,4 +1,4 @@
-import { redirect } from 'next/navigation';
+﻿import { redirect } from 'next/navigation';
 import AdminShell from '@/components/AdminShell';
 import { getSession } from '@/lib/auth';
 import { sql } from '@/lib/db';
@@ -19,7 +19,7 @@ export default async function ReelsPage() {
   return (
     <AdminShell email={session.email}>
       <div className="admin-header">
-        <h1>🎬 Instagram Reels</h1>
+        <h1> Instagram Reels</h1>
       </div>
       <ReelsManager initialReels={reels} />
     </AdminShell>

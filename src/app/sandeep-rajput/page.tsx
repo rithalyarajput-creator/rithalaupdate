@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+﻿import type { Metadata } from 'next';
 import Link from 'next/link';
 import PublicShell from '@/components/PublicShell';
 import Icon from '@/components/Icon';
@@ -43,12 +43,12 @@ const ARTWORKS = [
 ];
 
 export const metadata: Metadata = {
-  title: 'Sandeep Rajput (Rithalya Rajput) — Founder of Rithala Update | Digital Creator from Rithala Village, Delhi',
-  description: 'Sandeep Rajput, popularly known as Rithalya Rajput, is an 18-year-old digital creator, website developer, artist and founder of Rithala Update — the digital platform of Rithala Village, Delhi. Launched on 15 August 2022.',
+  title: 'Sandeep Rajput (Rithalya Rajput)  Founder of Rithala Update | Digital Creator from Rithala Village, Delhi',
+  description: 'Sandeep Rajput, popularly known as Rithalya Rajput, is an 18-year-old digital creator, website developer, artist and founder of Rithala Update  the digital platform of Rithala Village, Delhi. Launched on 15 August 2022.',
   keywords: 'Sandeep Rajput, Rithalya Rajput, Rithala Village, Rithala Delhi, founder of Rithala Update, digital creator Delhi, website developer Rithala, social media designer, pencil sketch artist, Maharana Pratap sketch, Sandeep Rajput biography, Sandeep Rajput age, Sandeep Rajput Instagram',
   alternates: { canonical: '/sandeep-rajput/' },
   openGraph: {
-    title: 'Sandeep Rajput (Rithalya Rajput) — Founder of Rithala Update',
+    title: 'Sandeep Rajput (Rithalya Rajput)  Founder of Rithala Update',
     description: '18-year-old digital creator, website developer and artist from Rithala Village, Delhi. Founder of Rithala Update.',
     url: '/sandeep-rajput/',
     type: 'profile',
@@ -56,7 +56,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Sandeep Rajput (Rithalya Rajput) — Rithala Update Founder',
+    title: 'Sandeep Rajput (Rithalya Rajput)  Rithala Update Founder',
     description: 'Digital creator, website developer and artist from Rithala Village, Delhi.',
     images: [PORTRAIT],
   },
@@ -114,7 +114,7 @@ export default function SandeepRajputPage() {
             <p className="sr-lead">
               Hello and welcome! I am an 18-year-old digital creator, website developer, artist
               and social media designer from <strong>Rithala Village, Delhi</strong>. I am the
-              creator and founder of <Link href="/">Rithala Update</Link> — a digital platform
+              creator and founder of <Link href="/">Rithala Update</Link>  a digital platform
               dedicated to sharing the culture, history, news, events and community updates of
               Rithala Village with the world.
             </p>
@@ -167,7 +167,7 @@ export default function SandeepRajputPage() {
             className="sr-img-float"
           />
           <p>
-            The idea behind creating Rithala Update came from a simple vision — to give Rithala
+            The idea behind creating Rithala Update came from a simple vision  to give Rithala
             Village a strong digital identity and create one platform where people can stay
             connected with their culture, community, and local updates. Before launching the
             website, I started by posting updates, photographs, and local content on Instagram
@@ -207,7 +207,7 @@ export default function SandeepRajputPage() {
           <p>
             Some of my best creative works include pencil sketches of <strong>Maharana Pratap</strong>,
             <strong> Little Krishna</strong>, <strong>Little Ram</strong>, <strong>Karan Aujla</strong>, and
-            <strong> Virat Kohli</strong> — each piece representing a different side of my artistic journey,
+            <strong> Virat Kohli</strong>  each piece representing a different side of my artistic journey,
             from historical Rajput heritage to spiritual devotion and modern portraiture.
           </p>
         </div>
@@ -232,7 +232,7 @@ export default function SandeepRajputPage() {
 
           <h2>More Than Just a Website</h2>
           <p>
-            For me, Rithala Update is not just a website or social media page — it is an emotion,
+            For me, Rithala Update is not just a website or social media page  it is an emotion,
             a responsibility, and a platform created with passion for my village and community.
             Through this journey, I want to continue learning, growing, and creating digital
             content that inspires people while preserving the identity and culture of Rithala

@@ -1,7 +1,7 @@
-import LoginForm from './LoginForm';
+﻿import LoginForm from './LoginForm';
 
 export const metadata = {
-  title: 'Login — Rithala Admin',
+  title: 'Login  Rithala Admin',
   robots: { index: false, follow: false },
 };
 
@@ -13,7 +13,7 @@ export default function LoginPage({
   return (
     <div className="login-page">
       <div className="login-box">
-        <h1>🚩 Rithala Admin</h1>
+        <h1> Rithala Admin</h1>
         <p style={{ textAlign: 'center', color: '#666', marginTop: -8 }}>
           Sign in to manage your site
         </p>

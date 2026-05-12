@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+﻿import type { Metadata } from 'next';
 import PublicShell from '@/components/PublicShell';
 import Icon from '@/components/Icon';
 import { getAllSettings } from '@/lib/db';
@@ -9,8 +9,8 @@ export const revalidate = 300;
 const SITE = process.env.NEXT_PUBLIC_SITE_URL || 'https://rithalaupdate.online';
 
 export const metadata: Metadata = {
-  title: 'Contact Us — Rithala Update | Get in Touch',
-  description: 'हमसे संपर्क करें। Email, location, social media, or send a direct message — we reply within 24-48 hours.',
+  title: 'Contact Us  Rithala Update | Get in Touch',
+  description: 'हमसे संपर्क करें। Email, location, social media, or send a direct message  we reply within 24-48 hours.',
   alternates: { canonical: '/contact/' },
 };
 
@@ -18,7 +18,7 @@ export default async function ContactPage() {
   const settings: Record<string, string> = await getAllSettings().catch(() => ({}));
   const email = settings.contact_email || 'rithalaupdate@gmail.com';
   const phone = settings.contact_phone || '';
-  const address = settings.contact_address || 'Rithala Village, North-West Delhi — 110085';
+  const address = settings.contact_address || 'Rithala Village, North-West Delhi  110085';
 
   const ig = settings.social_instagram || '';
   const fb = settings.social_facebook || '';
@@ -61,7 +61,7 @@ export default async function ContactPage() {
         <div className="container">
           <span className="ctf-pill"><Icon name="mail" size={13} /> Get in Touch</span>
           <h1 className="ctf-h1">
-            हमसे जुड़ें — <span className="ctf-h1-grad">Contact Us</span>
+            हमसे जुड़ें  <span className="ctf-h1-grad">Contact Us</span>
           </h1>
           <p className="ctf-lead">
             आपका हर सवाल, सुझाव, या message हमारे लिए important है।<br />
@@ -74,7 +74,7 @@ export default async function ContactPage() {
       <section className="ctf-main">
         <div className="container">
           <div className="ctf-grid">
-            {/* LEFT — FORM CARD */}
+            {/* LEFT  FORM CARD */}
             <div className="ctf-card ctf-form-card">
               <div className="ctf-card-head">
                 <div className="ctf-card-icon ctf-card-icon-orange">
@@ -88,7 +88,7 @@ export default async function ContactPage() {
               <ContactForm />
             </div>
 
-            {/* RIGHT COLUMN — Map + Get in Touch */}
+            {/* RIGHT COLUMN  Map + Get in Touch */}
             <div className="ctf-side">
               {/* Map card */}
               <div className="ctf-card">
@@ -158,7 +158,7 @@ export default async function ContactPage() {
                     <span className="ctf-info-ic"><Icon name="clock" size={16} /></span>
                     <div>
                       <small>Response Time</small>
-                      <span>Within 24–48 hours</span>
+                      <span>Within 2448 hours</span>
                     </div>
                   </div>
                 </div>
