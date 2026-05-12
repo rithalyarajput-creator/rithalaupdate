@@ -9730,3 +9730,16 @@ body { overflow-x: clip; }
   .ftr3-accordion:not([open]) .ftr3-menu { display: none; }
   .ftr3-accordion[open] .ftr3-acc-arrow { transform: rotate(90deg); }
 }
+
+.heritage-banner-wrap {
+  display: flex; justify-content: center;
+  padding: 24px 16px;
+  background: #FFFFE4;
+}
+.heritage-banner-img {
+  max-width: 700px;
+  width: 100%;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  display: block;
+}
