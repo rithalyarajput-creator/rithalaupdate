@@ -8,7 +8,7 @@ export default function ComingSoonClient() {
   const [step, setStep] = useState<'form' | 'done'>('form');
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState('');
-  const [uploadedImgs, setUploadedImgs] = useState<string[]>([]);
+  const [uploadedImgs, setUploadedImgs] = useState<{ preview: string; url: string | null }[]>([]);
   const [uploadingCount, setUploadingCount] = useState(0);
   const [pwModal, setPwModal] = useState(false);
   const [pw, setPw] = useState('');
@@ -26,25 +26,30 @@ export default function ComingSoonClient() {
   async function handleImageUpload(e: React.ChangeEvent<HTMLInputElement>) {
     const files = Array.from(e.target.files || []);
     if (!files.length) return;
+    // Show previews instantly
+    const newEntries = files.map((f) => ({ preview: URL.createObjectURL(f), url: null }));
+    setUploadedImgs((prev) => [...prev, ...newEntries]);
     setUploadingCount((c) => c + files.length);
-    await Promise.all(files.map(async (file) => {
+    files.forEach(async (file, i) => {
       try {
         const fd = new FormData();
         fd.append('file', file);
         const r = await fetch('/api/guest-upload', { method: 'POST', body: fd });
         if (r.ok) {
           const j = await r.json();
-          if (j.url) setUploadedImgs((prev) => [...prev, j.url]);
+          if (j.url) {
+            const preview = newEntries[i].preview;
+            setUploadedImgs((prev) => prev.map((img) => img.preview === preview ? { preview, url: j.url } : img));
+          }
         }
       } catch {}
       setUploadingCount((c) => c - 1);
-    }));
-    // Reset input so same file can be selected again
+    });
     e.target.value = '';
   }
 
-  function removeImg(url: string) {
-    setUploadedImgs((prev) => prev.filter((u) => u !== url));
+  function removeImg(preview: string) {
+    setUploadedImgs((prev) => prev.filter((u) => u.preview !== preview));
   }
 
   async function handleSubmit(e: React.FormEvent) {
@@ -58,7 +63,7 @@ export default function ComingSoonClient() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           name, email, phone, topic,
-          image_url: uploadedImgs.join(','),
+          image_url: uploadedImgs.filter((i) => i.url).map((i) => i.url).join(','),
           video_link: videoLink,
           content,
         }),
@@ -200,10 +205,11 @@ export default function ComingSoonClient() {
                   <div className="cs-upload-area">
                     {uploadedImgs.length > 0 && (
                       <div className="cs-img-grid">
-                        {uploadedImgs.map((url, i) => (
-                          <div key={i} className="cs-img-thumb">
-                            <img src={url} alt={`upload ${i + 1}`} />
-                            <button type="button" className="cs-img-remove" onClick={() => removeImg(url)}>×</button>
+                        {uploadedImgs.map((img, i) => (
+                          <div key={i} className={`cs-img-thumb${img.url === null ? ' cs-img-uploading' : ''}`}>
+                            <img src={img.preview} alt={`upload ${i + 1}`} />
+                            {img.url === null && <div className="cs-img-spinner" />}
+                            <button type="button" className="cs-img-remove" onClick={() => removeImg(img.preview)}>×</button>
                           </div>
                         ))}
                       </div>
