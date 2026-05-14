@@ -10030,11 +10030,11 @@ body { overflow-x: clip; }
 
 /* Mobile */
 @media (max-width: 560px) {
-  .cs-page { padding: 16px 14px 32px; }
-  .cs-wrap { gap: 14px; }
+  .cs-page { padding: 8px 14px 28px; align-items: flex-start; }
+  .cs-wrap { gap: 10px; padding-top: 8px; }
   .cs-form-card { padding: 24px 18px; }
   .cs-field-row { grid-template-columns: 1fr; }
-  .cs-logo { width: 120px; height: 120px; }
+  .cs-logo { width: 160px; height: 160px; }
 }
 
 /* ============================================
