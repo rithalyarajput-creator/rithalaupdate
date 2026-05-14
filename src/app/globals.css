@@ -9846,7 +9846,7 @@ body { overflow-x: clip; }
   gap: 20px;
 }
 .cs-logo-wrap { display: flex; justify-content: center; }
-.cs-logo { width: 110px; height: 110px; object-fit: contain; filter: drop-shadow(0 4px 20px rgba(245,198,27,0.4)); }
+.cs-logo { width: 180px; height: 180px; object-fit: contain; filter: drop-shadow(0 4px 28px rgba(245,198,27,0.5)); }
 .cs-launch-badge {
   display: inline-flex; align-items: center; gap: 8px;
   background: rgba(245,198,27,0.12);
@@ -9990,7 +9990,7 @@ body { overflow-x: clip; }
 @media (max-width: 560px) {
   .cs-form-card { padding: 24px 18px; }
   .cs-field-row { grid-template-columns: 1fr; }
-  .cs-logo { width: 88px; height: 88px; }
+  .cs-logo { width: 140px; height: 140px; }
 }
 
 /* ============================================

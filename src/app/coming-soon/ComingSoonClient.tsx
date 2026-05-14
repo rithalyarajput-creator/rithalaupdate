@@ -32,7 +32,7 @@ export default function ComingSoonClient() {
     try {
       const fd = new FormData();
       fd.append('file', file);
-      const r = await fetch('/api/upload', { method: 'POST', body: fd });
+      const r = await fetch('/api/guest-upload', { method: 'POST', body: fd });
       if (r.ok) {
         const j = await r.json();
         setUploadedImgUrl(j.url || '');

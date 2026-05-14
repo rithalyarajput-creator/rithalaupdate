@@ -8,6 +8,7 @@ const SITE_ACCESS_COOKIE = 'rithala_site_access';
 const ALWAYS_ALLOWED = [
   '/coming-soon',
   '/api/guest-submissions',
+  '/api/guest-upload',
   '/api/site-access',
   '/admin',
   '/_next',
