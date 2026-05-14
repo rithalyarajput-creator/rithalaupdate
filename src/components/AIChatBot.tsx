@@ -246,7 +246,7 @@ export default function AIChatBot() {
   const recogRef = useRef<any>(null);
 
   const isAdminPage = pathname?.startsWith('/admin');
-  const isComingSoon = pathname === '/coming-soon';
+  const isComingSoon = pathname?.startsWith('/coming-soon');
 
   useEffect(() => {
     if (open) endRef.current?.scrollIntoView({ behavior: 'smooth' });
