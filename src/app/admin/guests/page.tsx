@@ -15,7 +15,7 @@ export default async function GuestsPage() {
   }
 
   return (
-    <AdminShell active="guests">
+    <AdminShell email="">
       <GuestsManager submissions={submissions} tableExists={tableExists} />
     </AdminShell>
   );
