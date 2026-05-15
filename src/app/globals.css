@@ -10114,6 +10114,16 @@ body { overflow-x: clip; }
   transition: background 0.15s;
 }
 .gm-view-btn:hover { background: #e2e8f0; }
+.gm-del-btn {
+  background: #fff0f0; border: 1px solid #fecaca;
+  color: #dc2626; border-radius: 8px;
+  padding: 6px 14px; font-size: 0.8rem; font-weight: 600;
+  cursor: pointer; white-space: nowrap;
+  transition: background 0.15s;
+}
+.gm-del-btn:hover { background: #fee2e2; }
+.gm-del-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.gm-modal-del { position: absolute; top: 16px; left: 16px; }
 
 /* Modal */
 .gm-modal-overlay {

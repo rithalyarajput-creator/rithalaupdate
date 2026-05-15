@@ -28,6 +28,17 @@ export async function POST(req: NextRequest) {
   }
 }
 
+export async function DELETE(req: NextRequest) {
+  try {
+    const { id } = await req.json();
+    if (!id) return NextResponse.json({ error: 'ID required' }, { status: 400 });
+    await sql`DELETE FROM guest_submissions WHERE id = ${id}`;
+    return NextResponse.json({ ok: true });
+  } catch (e: any) {
+    return NextResponse.json({ error: e.message }, { status: 500 });
+  }
+}
+
 export async function GET() {
   try {
     const r = await sql`

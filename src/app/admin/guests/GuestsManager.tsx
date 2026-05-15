@@ -32,6 +32,21 @@ export default function GuestsManager({ submissions, tableExists }: Props) {
   const [selected, setSelected] = useState<Submission | null>(null);
   const [migrating, setMigrating] = useState(false);
   const [lightbox, setLightbox] = useState<string | null>(null);
+  const [list, setList] = useState<Submission[]>(submissions);
+  const [deleting, setDeleting] = useState<number | null>(null);
+
+  async function handleDelete(id: number) {
+    if (!confirm('Delete this submission?')) return;
+    setDeleting(id);
+    await fetch('/api/guest-submissions', {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id }),
+    });
+    setList((prev) => prev.filter((s) => s.id !== id));
+    if (selected?.id === id) setSelected(null);
+    setDeleting(null);
+  }
 
   async function runMigrate() {
     setMigrating(true);
@@ -58,7 +73,7 @@ export default function GuestsManager({ submissions, tableExists }: Props) {
     <div className="adm-page">
       <div className="adm-page-head">
         <div>
-          <h1 className="adm-h1">Guests <span className="gm-count">{submissions.length}</span></h1>
+          <h1 className="adm-h1">Guests <span className="gm-count">{list.length}</span></h1>
           <p className="adm-h1-sub">All submissions from the Coming Soon page</p>
         </div>
       </div>
@@ -84,7 +99,7 @@ export default function GuestsManager({ submissions, tableExists }: Props) {
               </tr>
             </thead>
             <tbody>
-              {submissions.map((s) => {
+              {list.map((s) => {
                 const imgs = getImages(s.image_url);
                 return (
                   <tr key={s.id} className="gm-row" onClick={() => setSelected(s)}>
@@ -114,7 +129,12 @@ export default function GuestsManager({ submissions, tableExists }: Props) {
                     </td>
                     <td className="gm-date">{fmt(s.created_at)}</td>
                     <td>
-                      <button className="gm-view-btn" onClick={(e) => { e.stopPropagation(); setSelected(s); }}>View</button>
+                      <div style={{ display: 'flex', gap: 6 }}>
+                        <button className="gm-view-btn" onClick={(e) => { e.stopPropagation(); setSelected(s); }}>View</button>
+                        <button className="gm-del-btn" onClick={(e) => { e.stopPropagation(); handleDelete(s.id); }} disabled={deleting === s.id}>
+                          {deleting === s.id ? '...' : 'Delete'}
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 );
@@ -130,6 +150,7 @@ export default function GuestsManager({ submissions, tableExists }: Props) {
         return (
           <div className="gm-modal-overlay" onClick={() => setSelected(null)}>
             <div className="gm-modal" onClick={(e) => e.stopPropagation()}>
+              <button className="gm-del-btn gm-modal-del" onClick={() => handleDelete(selected!.id)}>Delete</button>
               <button className="gm-modal-close" onClick={() => setSelected(null)}>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
               </button>
