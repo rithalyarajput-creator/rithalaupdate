@@ -8,8 +8,10 @@ import { sql } from './db';
 const COOKIE_NAME = 'rithala_admin_session';
 const ALG = 'HS256';
 
+const FALLBACK_SECRET = 'rithala-admin-jwt-secret-key-2025-secure-login-xk9';
+
 function getSecret() {
-  const secret = process.env.JWT_SECRET || 'rithala-default-secret-key-2025-secure';
+  const secret = process.env.JWT_SECRET || FALLBACK_SECRET;
   return new TextEncoder().encode(secret);
 }
 

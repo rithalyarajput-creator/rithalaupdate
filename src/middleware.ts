@@ -18,9 +18,11 @@ const ALWAYS_ALLOWED = [
   '/sitemap',
 ];
 
+const FALLBACK_SECRET = 'rithala-admin-jwt-secret-key-2025-secure-login-xk9';
+
 async function isAdminAuthenticated(token: string | undefined) {
   if (!token) return false;
-  const secret = process.env.JWT_SECRET || 'rithala-default-secret-key-2025-secure';
+  const secret = process.env.JWT_SECRET || FALLBACK_SECRET;
   try {
     await jwtVerify(token, new TextEncoder().encode(secret));
     return true;
