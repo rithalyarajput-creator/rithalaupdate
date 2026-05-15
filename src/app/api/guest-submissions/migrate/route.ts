@@ -15,9 +15,11 @@ export async function GET() {
         image_url  TEXT,
         video_link TEXT,
         content    TEXT,
+        is_read    BOOLEAN NOT NULL DEFAULT FALSE,
         created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
       )
     `;
+    await sql`ALTER TABLE guest_submissions ADD COLUMN IF NOT EXISTS is_read BOOLEAN NOT NULL DEFAULT FALSE`;
     return NextResponse.json({ ok: true, message: 'guest_submissions table ready' });
   } catch (e: any) {
     return NextResponse.json({ error: e.message }, { status: 500 });

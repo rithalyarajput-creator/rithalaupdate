@@ -11,6 +11,7 @@ type Submission = {
   image_url: string | null;
   video_link: string | null;
   content: string | null;
+  is_read: boolean;
   created_at: string;
 };
 
@@ -28,12 +29,35 @@ function fmt(dt: string) {
   });
 }
 
+function isToday(dt: string) {
+  const d = new Date(dt);
+  const now = new Date();
+  return d.getDate() === now.getDate() && d.getMonth() === now.getMonth() && d.getFullYear() === now.getFullYear();
+}
+
 export default function GuestsManager({ submissions, tableExists }: Props) {
+  const [list, setList] = useState<Submission[]>(submissions);
   const [selected, setSelected] = useState<Submission | null>(null);
   const [migrating, setMigrating] = useState(false);
   const [lightbox, setLightbox] = useState<string | null>(null);
-  const [list, setList] = useState<Submission[]>(submissions);
   const [deleting, setDeleting] = useState<number | null>(null);
+
+  // Analytics
+  const total = list.length;
+  const unread = list.filter((s) => !s.is_read).length;
+  const today = list.filter((s) => isToday(s.created_at)).length;
+  const withPhoto = list.filter((s) => s.image_url).length;
+  const withVideo = list.filter((s) => s.video_link).length;
+
+  async function markRead(id: number) {
+    await fetch('/api/guest-submissions', {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id }),
+    });
+    setList((prev) => prev.map((s) => s.id === id ? { ...s, is_read: true } : s));
+    if (selected?.id === id) setSelected((s) => s ? { ...s, is_read: true } : s);
+  }
 
   async function handleDelete(id: number) {
     if (!confirm('Delete this submission?')) return;
@@ -46,6 +70,11 @@ export default function GuestsManager({ submissions, tableExists }: Props) {
     setList((prev) => prev.filter((s) => s.id !== id));
     if (selected?.id === id) setSelected(null);
     setDeleting(null);
+  }
+
+  function openDetail(s: Submission) {
+    setSelected(s);
+    if (!s.is_read) markRead(s.id);
   }
 
   async function runMigrate() {
@@ -73,16 +102,37 @@ export default function GuestsManager({ submissions, tableExists }: Props) {
     <div className="adm-page">
       <div className="adm-page-head">
         <div>
-          <h1 className="adm-h1">Guests <span className="gm-count">{list.length}</span></h1>
+          <h1 className="adm-h1">Guests <span className="gm-count">{total}</span></h1>
           <p className="adm-h1-sub">All submissions from the Coming Soon page</p>
         </div>
       </div>
 
-      {submissions.length === 0 ? (
+      {/* Analytics cards */}
+      <div className="gm-stats">
+        <div className="gm-stat-card">
+          <span className="gm-stat-value">{total}</span>
+          <span className="gm-stat-label">Total</span>
+        </div>
+        <div className="gm-stat-card gm-stat-unread">
+          <span className="gm-stat-value">{unread}</span>
+          <span className="gm-stat-label">Unread</span>
+        </div>
+        <div className="gm-stat-card gm-stat-today">
+          <span className="gm-stat-value">{today}</span>
+          <span className="gm-stat-label">Today</span>
+        </div>
+        <div className="gm-stat-card gm-stat-photo">
+          <span className="gm-stat-value">{withPhoto}</span>
+          <span className="gm-stat-label">With Photo</span>
+        </div>
+        <div className="gm-stat-card gm-stat-video">
+          <span className="gm-stat-value">{withVideo}</span>
+          <span className="gm-stat-label">With Video</span>
+        </div>
+      </div>
+
+      {list.length === 0 ? (
         <div style={{ padding: '80px 0', textAlign: 'center', color: '#94a3b8' }}>
-          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" style={{ marginBottom: 16 }}>
-            <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>
-          </svg>
           <p style={{ fontSize: '1rem' }}>No submissions yet.</p>
         </div>
       ) : (
@@ -102,7 +152,7 @@ export default function GuestsManager({ submissions, tableExists }: Props) {
               {list.map((s) => {
                 const imgs = getImages(s.image_url);
                 return (
-                  <tr key={s.id} className="gm-row" onClick={() => setSelected(s)}>
+                  <tr key={s.id} className={`gm-row${!s.is_read ? ' gm-row-unread' : ''}`} onClick={() => openDetail(s)}>
                     <td>
                       <div className="gm-name-cell">
                         {imgs[0] ? (
@@ -110,7 +160,10 @@ export default function GuestsManager({ submissions, tableExists }: Props) {
                         ) : (
                           <div className="gm-avatar-placeholder">{s.name[0].toUpperCase()}</div>
                         )}
-                        <strong>{s.name}</strong>
+                        <div>
+                          <strong>{s.name}</strong>
+                          {!s.is_read && <span className="gm-new-dot">NEW</span>}
+                        </div>
                       </div>
                     </td>
                     <td>
@@ -130,7 +183,7 @@ export default function GuestsManager({ submissions, tableExists }: Props) {
                     <td className="gm-date">{fmt(s.created_at)}</td>
                     <td>
                       <div style={{ display: 'flex', gap: 6 }}>
-                        <button className="gm-view-btn" onClick={(e) => { e.stopPropagation(); setSelected(s); }}>View</button>
+                        <button className="gm-view-btn" onClick={(e) => { e.stopPropagation(); openDetail(s); }}>View</button>
                         <button className="gm-del-btn" onClick={(e) => { e.stopPropagation(); handleDelete(s.id); }} disabled={deleting === s.id}>
                           {deleting === s.id ? '...' : 'Delete'}
                         </button>
@@ -217,7 +270,6 @@ export default function GuestsManager({ submissions, tableExists }: Props) {
         );
       })()}
 
-      {/* Lightbox */}
       {lightbox && (
         <div className="gm-lightbox" onClick={() => setLightbox(null)}>
           <img src={lightbox} alt="Full size" />

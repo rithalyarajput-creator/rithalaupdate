@@ -10043,6 +10043,42 @@ body { overflow-x: clip; }
 /* ============================================
    ADMIN: GUESTS — TABLE LAYOUT
    ============================================ */
+.admin-nav-badge {
+  margin-left: auto;
+  background: #dc2626; color: #fff;
+  font-size: 0.68rem; font-weight: 700;
+  border-radius: 20px; padding: 1px 7px;
+  min-width: 18px; text-align: center;
+}
+.gm-stats {
+  display: flex; gap: 12px; flex-wrap: wrap;
+  margin: 20px 0 24px;
+}
+.gm-stat-card {
+  background: #fff; border: 1px solid #e2e8f0;
+  border-radius: 14px; padding: 16px 20px;
+  display: flex; flex-direction: column; gap: 4px;
+  min-width: 100px; flex: 1;
+}
+.gm-stat-value { font-size: 1.8rem; font-weight: 800; color: #0f172a; line-height: 1; }
+.gm-stat-label { font-size: 0.75rem; font-weight: 600; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.05em; }
+.gm-stat-unread { border-color: #fecaca; background: #fff5f5; }
+.gm-stat-unread .gm-stat-value { color: #dc2626; }
+.gm-stat-today { border-color: #bfdbfe; background: #eff6ff; }
+.gm-stat-today .gm-stat-value { color: #1d4ed8; }
+.gm-stat-photo { border-color: #bbf7d0; background: #f0fdf4; }
+.gm-stat-photo .gm-stat-value { color: #15803d; }
+.gm-stat-video { border-color: #fef08a; background: #fefce8; }
+.gm-stat-video .gm-stat-value { color: #a16207; }
+.gm-row-unread { background: #fffbeb !important; }
+.gm-row-unread:hover { background: #fef9c3 !important; }
+.gm-new-dot {
+  display: inline-block; margin-left: 6px;
+  background: #dc2626; color: #fff;
+  font-size: 0.6rem; font-weight: 700;
+  padding: 1px 5px; border-radius: 4px;
+  vertical-align: middle; letter-spacing: 0.05em;
+}
 .gm-count {
   display: inline-flex; align-items: center; justify-content: center;
   background: #dc2626; color: #fff;

@@ -70,10 +70,12 @@ export default function AdminShell({
   children,
   email,
   newLeads = 0,
+  newGuests = 0,
 }: {
   children: React.ReactNode;
   email: string;
   newLeads?: number;
+  newGuests?: number;
 }) {
   const pathname = usePathname() || '';
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -104,9 +106,9 @@ export default function AdminShell({
           <Icon name="flag" size={18} />
           <span>Rithala Admin</span>
         </div>
-        <Link href="/admin/leads" className="admin-bell-btn" title="New Leads">
-          <Icon name="inbox" size={18} />
-          {newLeads > 0 && <span className="admin-bell-badge">{newLeads > 99 ? '99+' : newLeads}</span>}
+        <Link href="/admin/guests" className="admin-bell-btn" title="New Guest Submissions">
+          <Icon name="users" size={18} />
+          {newGuests > 0 && <span className="admin-bell-badge">{newGuests > 99 ? '99+' : newGuests}</span>}
         </Link>
       </header>
 
@@ -122,15 +124,15 @@ export default function AdminShell({
               <small>Admin Panel</small>
             </div>
           </div>
-          <Link href="/admin/leads" className="admin-bell-btn" title={`${newLeads} new lead${newLeads !== 1 ? 's' : ''}`}>
-            <Icon name="inbox" size={17} />
-            {newLeads > 0 && <span className="admin-bell-badge">{newLeads > 99 ? '99+' : newLeads}</span>}
+          <Link href="/admin/guests" className="admin-bell-btn" title={`${newGuests} new guest${newGuests !== 1 ? 's' : ''}`}>
+            <Icon name="users" size={17} />
+            {newGuests > 0 && <span className="admin-bell-badge">{newGuests > 99 ? '99+' : newGuests}</span>}
           </Link>
         </div>
 
         <nav className="admin-nav">
           {NAV.map((item, i) => (
-            <NavGroup key={i} item={item} isActive={isActive} isGroupActive={isGroupActive} />
+            <NavGroup key={i} item={item} isActive={isActive} isGroupActive={isGroupActive} badge={item.href === '/admin/guests' ? newGuests : 0} />
           ))}
 
           <a
@@ -178,10 +180,12 @@ function NavGroup({
   item,
   isActive,
   isGroupActive,
+  badge = 0,
 }: {
   item: NavItem;
   isActive: (href?: string) => boolean;
   isGroupActive: (item: NavItem) => boolean;
+  badge?: number;
 }) {
   const groupActive = isGroupActive(item);
   const [open, setOpen] = useState(false);
@@ -225,6 +229,7 @@ function NavGroup({
     >
       <span className="admin-nav-icon"><Icon name={item.icon as any} size={17} /></span>
       <span className="admin-nav-label">{item.label}</span>
+      {badge > 0 && <span className="admin-nav-badge">{badge > 99 ? '99+' : badge}</span>}
     </Link>
   );
 }
