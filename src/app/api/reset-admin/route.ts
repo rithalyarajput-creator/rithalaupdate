@@ -13,9 +13,8 @@ export async function GET(req: NextRequest) {
   }
 
   const bcrypt = await import('bcryptjs');
-  const hash = await bcrypt.hash('rithala@2025', 10);
+  const hash = await bcrypt.hash('rithala244', 10);
 
-  // Create table if not exists
   await sql`
     CREATE TABLE IF NOT EXISTS users (
       id            SERIAL PRIMARY KEY,
@@ -28,7 +27,6 @@ export async function GET(req: NextRequest) {
     )
   `;
 
-  // Upsert admin user
   await sql`
     INSERT INTO users (email, password_hash, display_name, role)
     VALUES ('rithalyarajput@gmail.com', ${hash}, 'Rithalya Rajput', 'admin')
@@ -37,8 +35,7 @@ export async function GET(req: NextRequest) {
       updated_at = NOW()
   `;
 
-  // Return all users to confirm
   const { rows } = await sql`SELECT id, email, role, created_at FROM users`;
 
-  return NextResponse.json({ ok: true, message: 'Password reset to rithala@2025', users: rows });
+  return NextResponse.json({ ok: true, message: 'Password reset to rithala244', users: rows });
 }
