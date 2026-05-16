@@ -36,16 +36,26 @@ export default function TestimonialsSection() {
     if (!el) return;
     const card = el.children[idx] as HTMLElement | undefined;
     if (!card) return;
-    el.scrollTo({ left: card.offsetLeft - el.offsetLeft, behavior: 'smooth' });
+    el.scrollTo({ left: card.offsetLeft, behavior: 'smooth' });
     setActiveIdx(idx);
   }
 
   function handleRailScroll() {
     const el = railRef.current;
     if (!el || items.length === 0) return;
-    const cardW = (el.firstElementChild as HTMLElement | null)?.offsetWidth || 300;
-    const idx = Math.round(el.scrollLeft / (cardW + 20));
-    setActiveIdx(Math.min(idx, items.length - 1));
+    // Find which card is most visible
+    let bestIdx = 0;
+    let bestOverlap = -1;
+    const railLeft = el.scrollLeft;
+    const railRight = railLeft + el.clientWidth;
+    Array.from(el.children).forEach((child, i) => {
+      const c = child as HTMLElement;
+      const cLeft = c.offsetLeft;
+      const cRight = cLeft + c.offsetWidth;
+      const overlap = Math.min(cRight, railRight) - Math.max(cLeft, railLeft);
+      if (overlap > bestOverlap) { bestOverlap = overlap; bestIdx = i; }
+    });
+    setActiveIdx(bestIdx);
   }
 
   function openShare() {

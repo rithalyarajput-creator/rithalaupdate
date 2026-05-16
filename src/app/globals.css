@@ -51,11 +51,11 @@ p { margin: 0 0 1em; }
     radial-gradient(circle at 80% 70%, rgba(255,75,75,0.5) 0%, transparent 50%),
     linear-gradient(135deg, #b91c1c 0%, #dc2626 25%, #ea580c 50%, #d97706 75%, #b45309 100%);
   color: #fff; padding: 14px 0;
-  overflow: hidden;
   border-bottom: 4px solid #f5c61b;
 }
 .header-bg-pattern {
   position: absolute; inset: 0; opacity: 0.08;
+  overflow: hidden;
   background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 5L35 20L50 22L38 32L42 47L30 39L18 47L22 32L10 22L25 20Z' fill='%23ffffff'/%3E%3C/svg%3E");
   background-size: 60px 60px;
   pointer-events: none;
