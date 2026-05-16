@@ -63,7 +63,7 @@ export default function ReelsStrip({ reels }: { reels: Reel[] }) {
   function scrollBy(dir: 1 | -1) {
     const track = trackRef.current;
     if (!track) return;
-    track.scrollBy({ left: dir * 320, behavior: 'smooth' });
+    track.scrollBy({ left: dir * 640, behavior: 'smooth' });
   }
 
   return (
@@ -76,8 +76,12 @@ export default function ReelsStrip({ reels }: { reels: Reel[] }) {
             <p className="reels-sub">हमारे गाँव की झलकियाँ  videos and shorts</p>
           </div>
           <div className="reels-nav">
-            <button onClick={() => scrollBy(-1)} aria-label="Scroll left"></button>
-            <button onClick={() => scrollBy(1)} aria-label="Scroll right"></button>
+            <button onClick={() => scrollBy(-1)} aria-label="Scroll left">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+            </button>
+            <button onClick={() => scrollBy(1)} aria-label="Scroll right">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M9 18l6-6-6-6"/></svg>
+            </button>
           </div>
         </div>
 
