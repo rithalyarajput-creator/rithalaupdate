@@ -1,6 +1,6 @@
 ﻿'use client';
 
-import { useRef, useEffect } from 'react';
+import { useRef } from 'react';
 
 type Reel = {
   id: number;
@@ -38,27 +38,6 @@ function igEmbed(url: string): string | null {
 export default function ReelsStrip({ reels }: { reels: Reel[] }) {
   const trackRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const track = trackRef.current;
-    if (!track) return;
-    let rafId: number;
-    let lastTime = performance.now();
-    const speed = 0.25;
-    const step = (now: number) => {
-      const dt = now - lastTime;
-      lastTime = now;
-      if (!track.matches(':hover')) {
-        if (track.scrollLeft >= track.scrollWidth - track.clientWidth - 2) {
-          track.scrollLeft = 0;
-        } else {
-          track.scrollLeft += speed * dt;
-        }
-      }
-      rafId = requestAnimationFrame(step);
-    };
-    rafId = requestAnimationFrame(step);
-    return () => cancelAnimationFrame(rafId);
-  }, []);
 
   function scrollBy(dir: 1 | -1) {
     const track = trackRef.current;
