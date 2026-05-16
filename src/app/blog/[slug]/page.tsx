@@ -241,28 +241,29 @@ export default async function BlogDetail({ params }: Props) {
             <div className="bd-related-head">
               <h2>You Must Also Read</h2>
             </div>
-            <div className="blog-grid-3d">
+            <div className="bc-grid">
               {related.map((p) => {
                 const cleanSlug = (p.slug || '').replace(/^\d{4}\/\d{2}\/\d{2}\//, '');
+                const cats = p.category_name ? p.category_name.split(',') : [];
                 return (
-                <Link key={p.id} href={`/blog/${cleanSlug}/`} className="blog-card-3d">
-                  <div className="blog-card-img">
-                    {p.featured_image ? (
-                      <img src={p.featured_image} alt={p.title} loading="lazy" />
-                    ) : (
-                      <div className="blog-card-img-placeholder">Rithala</div>
-                    )}
-                    <div className="blog-card-glow" aria-hidden="true"></div>
-                  </div>
-                  <div className="blog-card-body">
-                    <div className="blog-card-meta">
-                      <Icon name="calendar" size={12} />
-                      <span>{p.published_at ? new Date(p.published_at).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }) : ''}</span>
+                  <Link key={p.id} href={`/blog/${cleanSlug}/`} className="bc-card">
+                    <div className="bc-img-wrap">
+                      {p.featured_image ? (
+                        <img src={p.featured_image} alt={p.title} loading="lazy" />
+                      ) : (
+                        <div className="bc-placeholder"><span>RITHALA</span></div>
+                      )}
+                      <div className="bc-overlay" />
+                      {cats[0] && <span className="bc-tag">{cats[0].trim()}</span>}
                     </div>
-                    <h3 className="blog-card-title">{p.title}</h3>
-                    <span className="blog-card-arrow">Read more →</span>
-                  </div>
-                </Link>
+                    <div className="bc-body">
+                      <h3 className="bc-title">{p.title}</h3>
+                      <div className="bc-meta">
+                        <span className="bc-date">{p.published_at ? new Date(p.published_at).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }) : ''}</span>
+                        <span className="bc-read">पढ़ें →</span>
+                      </div>
+                    </div>
+                  </Link>
                 );
               })}
             </div>
