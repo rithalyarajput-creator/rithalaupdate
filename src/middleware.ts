@@ -55,6 +55,14 @@ export async function middleware(req: NextRequest) {
     return NextResponse.next();
   }
 
+  // --- Blog date-based URL redirect (e.g. /blog/2025/08/10/slug -> /blog/slug) ---
+  const blogDateMatch = pathname.match(/^\/blog\/\d{4}\/\d{2}\/\d{2}\/(.+)/);
+  if (blogDateMatch) {
+    const url = req.nextUrl.clone();
+    url.pathname = `/blog/${blogDateMatch[1]}`;
+    return NextResponse.redirect(url, 301);
+  }
+
   // --- Coming soon gate ---
   // Allow static assets, API routes, coming-soon itself
   const isAllowed = ALWAYS_ALLOWED.some((p) => pathname.startsWith(p));
