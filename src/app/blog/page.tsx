@@ -95,7 +95,7 @@ export default async function BlogPage({ searchParams }: { searchParams: SP }) {
       {featured && (
         <section className="blog2-featured-section">
           <div className="container">
-            <Link href={`/blog/${featured.slug}/`} className="blog2-featured">
+            <Link href={`/blog/${(featured.slug||'').replace(/^\d{4}\/\d{2}\/\d{2}\//, '')}/`} className="blog2-featured">
               <div className="blog2-featured-img">
                 {featured.featured_image ? (
                   <img src={featured.featured_image} alt={featured.title} loading="eager" fetchPriority="high" />
@@ -158,7 +158,7 @@ export default async function BlogPage({ searchParams }: { searchParams: SP }) {
           ) : rest.length === 0 ? null : (
             <div className="bc-grid">
               {rest.map((p) => (
-                <Link key={p.id} href={`/blog/${p.slug}/`} className="bc-card">
+                <Link key={p.id} href={`/blog/${(p.slug||'').replace(/^\d{4}\/\d{2}\/\d{2}\//, '')}/`} className="bc-card">
                   <div className="bc-img-wrap">
                     {p.featured_image ? (
                       <img src={p.featured_image} alt={p.title} loading="lazy" />

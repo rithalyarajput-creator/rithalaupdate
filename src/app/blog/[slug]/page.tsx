@@ -61,7 +61,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function BlogDetail({ params }: Props) {
   // Try the slug exactly first, then trimmed/decoded
-  const slug = decodeURIComponent(params.slug || '').trim();
+  const slug = decodeURIComponent(params.slug || '').trim().replace(/^\d{4}\/\d{2}\/\d{2}\//, '');
   let post: any = await getPostBySlug(slug).catch(() => null);
   if (!post) {
     // Fallback: case-insensitive match
@@ -242,8 +242,10 @@ export default async function BlogDetail({ params }: Props) {
               <h2>You Must Also Read</h2>
             </div>
             <div className="blog-grid-3d">
-              {related.map((p) => (
-                <Link key={p.id} href={`/blog/${p.slug}/`} className="blog-card-3d">
+              {related.map((p) => {
+                const cleanSlug = (p.slug || '').replace(/^\d{4}\/\d{2}\/\d{2}\//, '');
+                return (
+                <Link key={p.id} href={`/blog/${cleanSlug}/`} className="blog-card-3d">
                   <div className="blog-card-img">
                     {p.featured_image ? (
                       <img src={p.featured_image} alt={p.title} loading="lazy" />
@@ -261,7 +263,8 @@ export default async function BlogDetail({ params }: Props) {
                     <span className="blog-card-arrow">Read more →</span>
                   </div>
                 </Link>
-              ))}
+                );
+              })}
             </div>
           </div>
         </section>
