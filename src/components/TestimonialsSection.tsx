@@ -20,6 +20,7 @@ export default function TestimonialsSection() {
   const [items, setItems] = useState<Testimonial[]>([]);
   const [account, setAccount] = useState<Account | null>(null);
   const [modal, setModal] = useState<'closed' | 'account' | 'submit' | 'thanks'>('closed');
+  const [activeIdx, setActiveIdx] = useState(0);
   const railRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -30,23 +31,22 @@ export default function TestimonialsSection() {
     } catch {}
   }, []);
 
-  // Auto-scroll when more than 3
-  useEffect(() => {
-    if (items.length <= 3) return;
+  function scrollToIdx(idx: number) {
     const el = railRef.current;
     if (!el) return;
-    const id = setInterval(() => {
-      if (!el) return;
-      const cardW = el.firstElementChild ? (el.firstElementChild as HTMLElement).offsetWidth + 20 : 320;
-      const next = el.scrollLeft + cardW;
-      if (next >= el.scrollWidth - el.clientWidth - 4) {
-        el.scrollTo({ left: 0, behavior: 'smooth' });
-      } else {
-        el.scrollTo({ left: next, behavior: 'smooth' });
-      }
-    }, 4000);
-    return () => clearInterval(id);
-  }, [items.length]);
+    const card = el.children[idx] as HTMLElement | undefined;
+    if (!card) return;
+    el.scrollTo({ left: card.offsetLeft - el.offsetLeft, behavior: 'smooth' });
+    setActiveIdx(idx);
+  }
+
+  function handleRailScroll() {
+    const el = railRef.current;
+    if (!el || items.length === 0) return;
+    const cardW = (el.firstElementChild as HTMLElement | null)?.offsetWidth || 300;
+    const idx = Math.round(el.scrollLeft / (cardW + 20));
+    setActiveIdx(Math.min(idx, items.length - 1));
+  }
 
   function openShare() {
     if (account) setModal('submit');
@@ -121,25 +121,49 @@ export default function TestimonialsSection() {
             <p>Be the first to share your testimonial.</p>
           </div>
         ) : (
-          <div className="home-test-rail" ref={railRef}>
-            {items.map((t) => (
-              <article key={t.id} className="home-test-card">
-                <div className="home-test-stars">
-                  {''.repeat(t.rating)}<span style={{ opacity: 0.3 }}>{''.repeat(5 - t.rating)}</span>
-                </div>
-                <p className="home-test-msg">"{t.message}"</p>
-                <div className="home-test-author">
-                  <div className="home-test-avatar">
-                    {t.avatar_url ? <img src={t.avatar_url} alt={t.name} /> : <Icon name="user" size={20} />}
+          <>
+            <div className="home-test-rail" ref={railRef} onScroll={handleRailScroll}>
+              {items.map((t) => (
+                <article key={t.id} className="home-test-card">
+                  <div className="home-test-stars">
+                    {Array.from({ length: 5 }).map((_, i) => (
+                      <svg key={i} width="18" height="18" viewBox="0 0 24 24" fill={i < t.rating ? '#f59e0b' : 'none'} stroke={i < t.rating ? '#f59e0b' : '#d1d5db'} strokeWidth="1.5">
+                        <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26" />
+                      </svg>
+                    ))}
                   </div>
-                  <div>
-                    <strong>{t.name}</strong>
-                    {t.location && <small>{t.location}</small>}
+                  <p className="home-test-msg">"{t.message}"</p>
+                  <div className="home-test-author">
+                    <div className="home-test-avatar">
+                      {t.avatar_url ? <img src={t.avatar_url} alt={t.name} /> : <Icon name="user" size={20} />}
+                    </div>
+                    <div>
+                      <strong>{t.name}</strong>
+                      {t.location && <small>{t.location}</small>}
+                    </div>
                   </div>
-                </div>
-              </article>
-            ))}
-          </div>
+                </article>
+              ))}
+            </div>
+
+            {/* Dot navigation */}
+            <div className="home-test-dots">
+              <button className="home-test-dot-arrow" onClick={() => scrollToIdx(Math.max(0, activeIdx - 1))} aria-label="Previous">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+              </button>
+              {items.map((_, i) => (
+                <button
+                  key={i}
+                  className={`home-test-dot${i === activeIdx ? ' active' : ''}`}
+                  onClick={() => scrollToIdx(i)}
+                  aria-label={`Go to ${i + 1}`}
+                />
+              ))}
+              <button className="home-test-dot-arrow" onClick={() => scrollToIdx(Math.min(items.length - 1, activeIdx + 1))} aria-label="Next">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M9 18l6-6-6-6"/></svg>
+              </button>
+            </div>
+          </>
         )}
       </div>
 

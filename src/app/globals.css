@@ -9310,7 +9310,7 @@ body { overflow-x: clip; }
   display: flex; flex-direction: column; gap: 14px;
   box-shadow: 0 4px 14px rgba(0,0,0,0.05);
 }
-.home-test-stars { color: #f59e0b; font-size: 1.1rem; letter-spacing: 3px; }
+.home-test-stars { display: flex; gap: 2px; margin-bottom: 4px; }
 .home-test-msg { color: #334155; line-height: 1.65; flex: 1; margin: 0; font-style: italic; }
 .home-test-author { display: flex; align-items: center; gap: 12px; margin-top: 4px; }
 .home-test-avatar { width: 42px; height: 42px; border-radius: 50%; background: #e2e8f0; display: flex; align-items: center; justify-content: center; color: #64748b; overflow: hidden; flex-shrink: 0; border: 2px solid #f1f5f9; }
@@ -9319,6 +9319,12 @@ body { overflow-x: clip; }
 .home-test-author strong { display: block; color: #0f172a; font-weight: 700; }
 .home-test-author small { color: #64748b; font-size: 0.82rem; }
 .home-test-empty { text-align: center; padding: 40px; color: #94a3b8; }
+/* Dots nav */
+.home-test-dots { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 24px; }
+.home-test-dot { width: 10px; height: 10px; border-radius: 50%; border: none; background: #cbd5e1; cursor: pointer; padding: 0; transition: background 0.2s, transform 0.2s; }
+.home-test-dot.active { background: #b45309; transform: scale(1.3); }
+.home-test-dot-arrow { background: #fff; border: 1.5px solid #e2e8f0; border-radius: 50%; width: 34px; height: 34px; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; color: #475569; transition: background 0.2s, color 0.2s; }
+.home-test-dot-arrow:hover { background: #b45309; color: #fff; border-color: #b45309; }
 @media (max-width: 768px) {
   .home-test-card { flex: 0 0 82%; }
   .home-test-section { padding: 40px 0; }
