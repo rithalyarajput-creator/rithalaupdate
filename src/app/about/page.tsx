@@ -8,12 +8,12 @@ export const revalidate = 300;
 
 export const metadata: Metadata = {
   title: 'About Us  Rithala Update | Story, Mission & Vision',
-  description: 'About Rithala Update  a digital platform created by Sandeep Rajput (Rithalya Rajput) to share the latest news, history, culture, festivals and updates of Rithala Village, Delhi. Officially launched on 15 August 2022.',
+  description: 'About Rithala Update  a digital platform created by Sandeep Rajput (Rithalya Rajput) to share the latest news, history, culture, festivals and updates of Rithala Village, Delhi. Officially launched on 17 May 2026.',
   keywords: 'About Rithala Update, Rithala Village Delhi, Sandeep Rajput, Rithalya Rajput, Rithala history, digital village platform',
   alternates: { canonical: '/about/' },
   openGraph: {
     title: 'About Rithala Update  Sandeep Rajput',
-    description: 'Digital platform for Rithala Village, Delhi. Sharing news, history, culture, festivals and community updates since 15 August 2022.',
+    description: 'Digital platform for Rithala Village, Delhi. Sharing news, history, culture, festivals and community updates since 17 May 2026.',
     url: '/about/',
     type: 'website',
   },
@@ -84,7 +84,7 @@ const PILLARS = [
 
 const TIMELINE = [
   { year: '2020', text: 'Rithala Update started on Instagram and social media  sharing village updates, photos and local news', textHi: '2020 में Instagram और social media पर रिठाला अपडेट की शुरुआत हुई' },
-  { year: '2022', text: 'Official Rithala Update website launched on 15 August 2022  India\'s Independence Day', textHi: '15 अगस्त 2022 को आधिकारिक Rithala Update वेबसाइट लॉन्च हुई' },
+  { year: '2026', text: 'Official Rithala Update website launched on 17 May 2026', textHi: '17 मई 2026 को आधिकारिक Rithala Update वेबसाइट लॉन्च हुई' },
   { year: '2024', text: 'Photo archives, Reels and community submissions expanded', textHi: 'फ़ोटो आर्काइव, Reels और सामुदायिक सबमिशन का विस्तार हुआ' },
   { year: '2026', text: 'Full digital platform with AI chatbot, FAQs and Testimonials', textHi: 'AI chatbot, FAQs और Testimonials के साथ पूर्ण डिजिटल प्लेटफ़ॉर्म' },
 ];
@@ -93,8 +93,8 @@ const FAQS = [
   {
     q: 'When did Rithala Update start?',
     qHi: 'रिठाला अपडेट कब शुरू हुआ?',
-    a: 'The Rithala Update website was officially launched on 15 August 2022. Before that, updates were shared on Instagram and social media since 2020.',
-    aHi: 'रिठाला अपडेट वेबसाइट 15 अगस्त 2022 को लॉन्च हुई। इससे पहले 2020 से Instagram पर अपडेट शेयर होती थीं।',
+    a: 'The Rithala Update website was officially launched on 17 May 2026. Before that, updates were shared on Instagram and social media since 2020.',
+    aHi: 'रिठाला अपडेट वेबसाइट 17 मई 2026 को लॉन्च हुई। इससे पहले 2020 से Instagram पर अपडेट शेयर होती थीं।',
   },
   {
     q: 'Who created Rithala Update?',
@@ -137,7 +137,7 @@ export default async function AboutPage() {
             <div className="ab-logo-meta">
               <strong>Rithala Update</strong>
               <span>Social Media: 2020 onwards</span>
-              <span>Website: 15 August 2022</span>
+              <span>Website: 17 May 2026</span>
             </div>
           </div>
 
@@ -157,7 +157,7 @@ export default async function AboutPage() {
           <div className="ab-stats">
             {[
               { n: '640+', l: 'Years of Heritage' },
-              { n: '2022', l: 'Website Launched' },
+              { n: 'May 2026', l: 'Website Launched' },
               { n: '1384', l: 'Village Founded' },
               { n: '1', l: 'Founder & Creator' },
             ].map(s => (
@@ -230,8 +230,9 @@ export default async function AboutPage() {
               What started in <strong>2020</strong> as a small social media initiative on Instagram gradually
               became one of the growing local digital platforms representing Rithala online. As the
               audience grew, the need for a dedicated website became clear. On{' '}
-              <strong>15 August 2022</strong>  India&#39;s Independence Day  the official Rithala Update
-              website was launched, symbolizing awareness, freedom of information, and community connection.
+
+              <strong>17 May 2026</strong>  the official Rithala Update
+              website was launched, connecting the entire Rithala community digitally.
             </p>
             <p className="ab-story-hi">
               Instagram से शुरू हुई यात्रा आज रिठाला गाँव का पूर्ण डिजिटल घर बन चुकी है।
