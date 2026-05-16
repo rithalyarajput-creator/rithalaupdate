@@ -6922,8 +6922,11 @@ body { overflow-x: clip; }
 @media (max-width: 480px) {
   .bd-related-section .blog-grid-3d {
     grid-template-columns: 1fr 1fr;
-    gap: 12px;
+    gap: 10px;
   }
+  .bd-related-section .blog-card-img { height: 110px; }
+  .bd-related-section .blog-card-title { font-size: 0.78rem; }
+  .bd-related-section .blog-card-body { padding: 8px 10px 10px; }
 }
 .bd-related-section .blog-card-3d {
   border-radius: 10px;
@@ -6943,7 +6946,7 @@ body { overflow-x: clip; }
 }
 .bd-related-section .blog-card-img {
   position: relative;
-  aspect-ratio: 16/9;
+  height: 160px;
   overflow: hidden;
 }
 .bd-related-section .blog-card-img img {
