@@ -1,8 +1,9 @@
 ﻿import type { Metadata } from 'next';
 import PublicShell from '@/components/PublicShell';
 import CountUp from '@/components/CountUp';
+import { getAllSettings } from '@/lib/db';
 
-export const revalidate = 300;
+export const dynamic = 'force-dynamic';
 
 const SITE = process.env.NEXT_PUBLIC_SITE_URL || 'https://rithalaupdate.online';
 
@@ -98,7 +99,24 @@ const CHAPTERS: Chapter[] = [
   },
 ];
 
-export default function HistoryPage() {
+export default async function HistoryPage() {
+  const settings: Record<string, string> = await getAllSettings().catch(() => ({}));
+  const g = (key: string, def: string) => settings[key] || def;
+
+  const chapters = CHAPTERS.map((c, i) => ({
+    ...c,
+    title: g(`rvh_ch${i+1}_title`, c.title),
+    era:   g(`rvh_ch${i+1}_era`,   c.era),
+    pull:  g(`rvh_ch${i+1}_pull`,  c.pull),
+    body:  g(`rvh_ch${i+1}_body`,  c.body),
+  }));
+
+  const heroBadge = g('rvh_hero_badge', 'Heritage Story · Est. 1384');
+  const heroSub   = g('rvh_hero_sub', 'The 640-year journey of a Tomar Rajput village — from पूठ कलां roots to modern Delhi.');
+  const bigQuote  = g('rvh_big_quote', 'जहाँ राजपूत की तलवार उठती है, वहाँ इतिहास लिखा जाता है।');
+  const ctaH      = g('rvh_cta_h', 'क्या आपके पास कोई पुरानी कहानी है?');
+  const ctaP      = g('rvh_cta_p', 'रिठाला से जुड़ी कोई तस्वीर, परिवार की याद या वीरगाथा — हमें भेजें।');
+
   const articleLd = {
     '@context': 'https://schema.org',
     '@type': 'Article',
@@ -135,16 +153,13 @@ export default function HistoryPage() {
             <div className="rvh-hero-text">
               <div className="rvh-badge">
                 <span className="rvh-badge-dot"></span>
-                Heritage Story · Est. 1384
+                {heroBadge}
               </div>
               <h1 className="rvh-title">
                 <span className="rvh-title-line-1">रिठाला</span>
                 <span className="rvh-title-line-2">गाँव का इतिहास</span>
               </h1>
-              <p className="rvh-subtitle">
-                The 640-year journey of a Tomar Rajput village 
-                from <em>पूठ कलां</em> roots to modern Delhi.
-              </p>
+              <p className="rvh-subtitle">{heroSub}</p>
               <div className="rvh-hero-actions">
                 <a href="#chapter-1" className="rvh-cta-primary">
                   Begin the Story
@@ -213,7 +228,7 @@ export default function HistoryPage() {
             <p>हर अध्याय एक नई कहानी, हर पन्ने पर एक नया सबक।</p>
           </div>
 
-          {CHAPTERS.map((c, i) => (
+          {chapters.map((c, i) => (
             <article
               key={c.id}
               id={`chapter-${i + 1}`}
@@ -243,10 +258,7 @@ export default function HistoryPage() {
         <div className="container">
           <div className="rvh-quote-card">
             <div className="rvh-quote-icon"></div>
-            <p className="rvh-quote-text">
-              जहाँ राजपूत की तलवार उठती है, वहाँ इतिहास लिखा जाता है।
-              रिठाला उसी इतिहास का जीवंत प्रमाण है।
-            </p>
+            <p className="rvh-quote-text">{bigQuote}</p>
             <div className="rvh-quote-author">
               <strong>राणा राजपाल सिंह</strong>
               <span>Founder of Rithala Village · तोमर चंद्रवंशी राजपूत</span>
@@ -260,11 +272,8 @@ export default function HistoryPage() {
         <div className="container">
           <div className="rvh-cta-card">
             <div className="rvh-cta-icon"></div>
-            <h2>क्या आपके पास कोई पुरानी कहानी है?</h2>
-            <p>
-              रिठाला से जुड़ी कोई तस्वीर, परिवार की याद या वीरगाथा  हमें भेजें।
-              हम उसे इस archive में संजोएँगे।
-            </p>
+            <h2>{ctaH}</h2>
+            <p>{ctaP}</p>
             <div className="rvh-cta-actions">
               <a href="/contact/" className="rvh-cta-primary">
                 अपनी कहानी साझा करें

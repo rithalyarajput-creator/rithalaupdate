@@ -4,7 +4,7 @@ import PublicShell from '@/components/PublicShell';
 import { getAllSettings } from '@/lib/db';
 import '../ab3-styles.css';
 
-export const revalidate = 300;
+export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
   title: 'About Us  Rithala Update | Story, Mission & Vision',
@@ -116,9 +116,65 @@ const FAQS = [
   },
 ];
 
+const AB = {
+  hero_label: 'About Us',
+  hero_h1: 'The Story Behind Rithala Update',
+  hero_sub: 'A digital platform preserving the identity, culture and heritage of Rithala Village, Delhi — created by Sandeep Rajput (Rithalya Rajput).',
+  hero_sub_hi: 'रिठाला गाँव की पहचान, संस्कृति और विरासत को डिजिटल रूप में संरक्षित करने के लिए बनाया गया मंच।',
+  launch_text: 'Social Media: 2020 onwards',
+  launch_date: 'Website: 17 May 2026',
+  stat1_n: '640+', stat1_l: 'Years of Heritage',
+  stat2_n: 'May 2026', stat2_l: 'Website Launched',
+  stat3_n: '1384', stat3_l: 'Village Founded',
+  stat4_n: '1', stat4_l: 'Founder & Creator',
+  mission_en: 'To digitally connect the people of Rithala and preserve the identity, culture, and heritage of the village for future generations — so that every story, festival, photograph and memory of Rithala lives on in the modern digital age.',
+  mission_hi: 'रिठाला के लोगों को डिजिटल रूप से जोड़ना और गाँव की पहचान, संस्कृति और विरासत को आने वाली पीढ़ियों के लिए संरक्षित करना।',
+  story_h2: "From Instagram to a Village's Digital Home",
+  story_p1: "In today's fast-moving digital world, local communities and their stories often get ignored. Rithala Update was created to ensure that the traditions, history, festivals, achievements, and daily life of Rithala Village continue to reach people through modern digital platforms.",
+  story_p2: "What started in 2020 as a small social media initiative on Instagram gradually became one of the growing local digital platforms representing Rithala online. On 17 May 2026 — the official Rithala Update website was launched, connecting the entire Rithala community digitally.",
+  story_hi: 'Instagram से शुरू हुई यात्रा आज रिठाला गाँव का पूर्ण डिजिटल घर बन चुकी है।',
+  founder_img: 'https://9qidomuaf1nvlbrh.public.blob.vercel-storage.com/uploads/1778480814023-sandeep-rajput-rithalya-rajput-rithala-delhi.png-1HotTzrfaJxcggidFmo033DNSHDPMu.webp',
+  founder_h2: 'Created & Managed by Sandeep Rajput',
+  founder_p: 'Popularly known online as Rithalya Rajput, Sandeep is a resident of Rithala Village and an 18-year-old digital creator, website developer and artist. From content creation to event coverage, the entire platform has been independently designed and maintained with dedication and passion.',
+  founder_hi: 'संदीप राजपूत — रिठाला गाँव के रहने वाले digital creator, website developer और artist। पूरा platform उन्होंने खुद ही डिज़ाइन और maintain किया है।',
+  founder_skills: 'Website Development\nContent Creation\nDigital Branding\nPencil Sketch Art',
+  cta_h2: 'Be Part of Rithala Update',
+  cta_hi: 'रिठाला अपडेट का हिस्सा बनें',
+  cta_sub: 'Share your photos, stories, or testimonials — and help us preserve the village for future generations.',
+};
+
+function g(settings: Record<string, string>, key: string, def: string) {
+  return settings[`ab_${key}`] || def;
+}
+
 export default async function AboutPage() {
   const settings: Record<string, string> = await getAllSettings().catch(() => ({}));
   const logoUrl = settings.site_logo_url || '/logo.png';
+
+  const s = (key: keyof typeof AB) => g(settings, key, AB[key]);
+
+  const pillars = [1,2,3,4,5].map(i => ({
+    title: g(settings, `pillar${i}_en`, (PILLARS[i-1] as any).title),
+    titleHi: g(settings, `pillar${i}_hi`, (PILLARS[i-1] as any).titleHi),
+    text: g(settings, `pillar${i}_text`, (PILLARS[i-1] as any).text),
+    textHi: g(settings, `pillar${i}_texthi`, (PILLARS[i-1] as any).textHi),
+    icon: (PILLARS[i-1] as any).icon,
+  }));
+
+  const timeline = [1,2,3,4].map(i => ({
+    year: g(settings, `tl${i}_year`, (TIMELINE[i-1] as any).year),
+    text: g(settings, `tl${i}_text`, (TIMELINE[i-1] as any).text),
+    textHi: g(settings, `tl${i}_hi`, (TIMELINE[i-1] as any).textHi),
+  }));
+
+  const faqs = [1,2,3,4].map(i => ({
+    q: g(settings, `faq${i}_q`, (FAQS[i-1] as any).q),
+    qHi: g(settings, `faq${i}_qhi`, (FAQS[i-1] as any).qHi),
+    a: g(settings, `faq${i}_a`, (FAQS[i-1] as any).a),
+    aHi: g(settings, `faq${i}_ahi`, (FAQS[i-1] as any).aHi),
+  }));
+
+  const founderSkills = s('founder_skills').split('\n').map(l => l.trim()).filter(Boolean);
 
   return (
     <PublicShell>
@@ -136,34 +192,23 @@ export default async function AboutPage() {
             </div>
             <div className="ab-logo-meta">
               <strong>Rithala Update</strong>
-              <span>Social Media: 2020 onwards</span>
-              <span>Website: 17 May 2026</span>
+              <span>{s('launch_text')}</span>
+              <span>{s('launch_date')}</span>
             </div>
           </div>
 
-          <div className="ab-hero-label">About Us</div>
+          <div className="ab-hero-label">{s('hero_label')}</div>
           <h1 className="ab-hero-h1">
-            The Story Behind<br />
-            <span>Rithala Update</span>
+            <span>{s('hero_h1')}</span>
           </h1>
-          <p className="ab-hero-sub">
-            A digital platform preserving the identity, culture and heritage of
-            Rithala Village, Delhi  created by <strong>Sandeep Rajput</strong> (Rithalya Rajput).
-          </p>
-          <p className="ab-hero-sub-hi">
-            रिठाला गाँव की पहचान, संस्कृति और विरासत को डिजिटल रूप में संरक्षित करने के लिए बनाया गया मंच।
-          </p>
+          <p className="ab-hero-sub">{s('hero_sub')}</p>
+          <p className="ab-hero-sub-hi">{s('hero_sub_hi')}</p>
 
           <div className="ab-stats">
-            {[
-              { n: '640+', l: 'Years of Heritage' },
-              { n: 'May 2026', l: 'Website Launched' },
-              { n: '1384', l: 'Village Founded' },
-              { n: '1', l: 'Founder & Creator' },
-            ].map(s => (
-              <div key={s.n} className="ab-stat">
-                <strong>{s.n}</strong>
-                <span>{s.l}</span>
+            {[1,2,3,4].map(i => (
+              <div key={i} className="ab-stat">
+                <strong>{g(settings, `stat${i}_n`, AB[`stat${i}_n` as keyof typeof AB])}</strong>
+                <span>{g(settings, `stat${i}_l`, AB[`stat${i}_l` as keyof typeof AB])}</span>
               </div>
             ))}
           </div>
@@ -180,15 +225,8 @@ export default async function AboutPage() {
               </svg>
             </div>
             <h2>Our Mission</h2>
-            <p className="ab-mission-p">
-              To digitally connect the people of Rithala and preserve the identity, culture, and heritage
-              of the village for future generations  so that every story, festival, photograph and memory
-              of Rithala lives on in the modern digital age.
-            </p>
-            <p className="ab-mission-hi">
-              रिठाला के लोगों को डिजिटल रूप से जोड़ना और गाँव की पहचान, संस्कृति और विरासत को
-              आने वाली पीढ़ियों के लिए संरक्षित करना।
-            </p>
+            <p className="ab-mission-p">{s('mission_en')}</p>
+            <p className="ab-mission-hi">{s('mission_hi')}</p>
           </div>
         </div>
       </section>
@@ -202,7 +240,7 @@ export default async function AboutPage() {
             <p>Everything we share is built around these five core themes.</p>
           </div>
           <div className="ab-pillars">
-            {PILLARS.map((p, i) => (
+            {pillars.map((p, i) => (
               <div key={i} className="ab-pillar">
                 <div className="ab-pillar-icon">{p.icon}</div>
                 <h3>{p.title}</h3>
@@ -219,28 +257,14 @@ export default async function AboutPage() {
         <div className="container ab-story-wrap">
           <div className="ab-story">
             <div className="ab-sec-line" />
-            <h2>From Instagram to a Village&#39;s Digital Home</h2>
-            <p>
-              In today&#39;s fast-moving digital world, local communities and their stories often get
-              ignored. Rithala Update was created to ensure that the traditions, history,
-              festivals, achievements, and daily life of Rithala Village continue to reach people
-              through modern digital platforms.
-            </p>
-            <p>
-              What started in <strong>2020</strong> as a small social media initiative on Instagram gradually
-              became one of the growing local digital platforms representing Rithala online. As the
-              audience grew, the need for a dedicated website became clear. On{' '}
-
-              <strong>17 May 2026</strong>  the official Rithala Update
-              website was launched, connecting the entire Rithala community digitally.
-            </p>
-            <p className="ab-story-hi">
-              Instagram से शुरू हुई यात्रा आज रिठाला गाँव का पूर्ण डिजिटल घर बन चुकी है।
-            </p>
+            <h2>{s('story_h2')}</h2>
+            <p>{s('story_p1')}</p>
+            <p>{s('story_p2')}</p>
+            <p className="ab-story-hi">{s('story_hi')}</p>
           </div>
 
           <div className="ab-timeline">
-            {TIMELINE.map((t, i) => (
+            {timeline.map((t, i) => (
               <div key={i} className="ab-tl-item">
                 <div className="ab-tl-year">{t.year}</div>
                 <div className="ab-tl-dot" />
@@ -258,30 +282,16 @@ export default async function AboutPage() {
       <section className="ab-section ab-section-dark">
         <div className="container ab-founder">
           <div className="ab-founder-img-wrap">
-            <img
-              src="https://9qidomuaf1nvlbrh.public.blob.vercel-storage.com/uploads/1778480814023-sandeep-rajput-rithalya-rajput-rithala-delhi.png-1HotTzrfaJxcggidFmo033DNSHDPMu.webp"
-              alt="Sandeep Rajput  Founder of Rithala Update"
-              loading="lazy"
-            />
+            <img src={s('founder_img')} alt="Sandeep Rajput — Founder of Rithala Update" loading="lazy" />
             <div className="ab-founder-tag">Rithalya Rajput</div>
           </div>
           <div className="ab-founder-body">
             <div className="ab-sec-line" />
-            <h2>Created &amp; Managed by Sandeep Rajput</h2>
-            <p>
-              Popularly known online as <strong>Rithalya Rajput</strong>, Sandeep is a resident of
-              Rithala Village and an 18-year-old digital creator, website developer and artist.
-              From content creation to event coverage, the entire platform has been independently
-              designed and maintained with dedication and passion.
-            </p>
-            <p className="ab-founder-hi">
-              संदीप राजपूत  रिठाला गाँव के रहने वाले digital creator, website developer और artist।
-              पूरा platform उन्होंने खुद ही डिज़ाइन और maintain किया है।
-            </p>
+            <h2>{s('founder_h2')}</h2>
+            <p>{s('founder_p')}</p>
+            <p className="ab-founder-hi">{s('founder_hi')}</p>
             <div className="ab-founder-skills">
-              {['Website Development', 'Content Creation', 'Digital Branding', 'Pencil Sketch Art'].map(s => (
-                <span key={s}>{s}</span>
-              ))}
+              {founderSkills.map(sk => <span key={sk}>{sk}</span>)}
             </div>
             <Link href="/sandeep-rajput/" className="ab-btn-primary">
               Read Full Story
@@ -302,7 +312,7 @@ export default async function AboutPage() {
             <p>अक्सर पूछे जाने वाले सवाल और उनके जवाब</p>
           </div>
           <div className="ab-faqs">
-            {FAQS.map((f, i) => (
+            {faqs.map((f, i) => (
               <details key={i} className="ab-faq">
                 <summary>
                   <div className="ab-faq-qs">
@@ -329,11 +339,9 @@ export default async function AboutPage() {
           <svg className="ab-cta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" width="48" height="48">
             <path d="M3 21h18M9 21V9l3-6 3 6v12M9 12h6M5 21V11l-2-2M19 21V11l2-2" />
           </svg>
-          <h2>Be Part of Rithala Update</h2>
-          <p className="ab-cta-hi">रिठाला अपडेट का हिस्सा बनें</p>
-          <p className="ab-cta-sub">
-            Share your photos, stories, or testimonials  and help us preserve the village for future generations.
-          </p>
+          <h2>{s('cta_h2')}</h2>
+          <p className="ab-cta-hi">{s('cta_hi')}</p>
+          <p className="ab-cta-sub">{s('cta_sub')}</p>
           <div className="ab-cta-btns">
             <Link href="/contact/" className="ab-cta-btn-primary">Share Your Story</Link>
             <Link href="/photos/" className="ab-cta-btn-ghost">View Photos</Link>

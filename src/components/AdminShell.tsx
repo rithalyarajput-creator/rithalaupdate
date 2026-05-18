@@ -56,10 +56,10 @@ const NAV: NavItem[] = [
     label: 'Content',
     icon: 'edit',
     children: [
-      { href: '/admin/settings?page=home', label: 'Home Page', icon: 'dashboard' },
-      { href: '/admin/settings?page=about', label: 'About Us', icon: 'book' },
+      { href: '/admin/home-page', label: 'Home Page', icon: 'dashboard' },
+      { href: '/admin/about-page', label: 'About Us', icon: 'book' },
       { href: '/admin/about-me', label: 'About Me', icon: 'feather' },
-      { href: '/admin/settings?page=history', label: 'History', icon: 'tag' },
+      { href: '/admin/history-page', label: 'History', icon: 'tag' },
     ],
   },
   { href: '/admin/users', label: 'Users', icon: 'users' },
