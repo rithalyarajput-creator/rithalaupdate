@@ -5,7 +5,7 @@ import Icon from '@/components/Icon';
 import { getAllSettings } from '@/lib/db';
 import '../ab3-styles.css';
 
-export const revalidate = 60;
+export const dynamic = 'force-dynamic';
 
 const DEFAULT_PORTRAIT = 'https://9qidomuaf1nvlbrh.public.blob.vercel-storage.com/uploads/1778480814023-sandeep-rajput-rithalya-rajput-rithala-delhi.png-1HotTzrfaJxcggidFmo033DNSHDPMu.webp';
 const DEFAULT_PORTRAIT_2 = 'https://9qidomuaf1nvlbrh.public.blob.vercel-storage.com/uploads/1778480815703-sandeep-rajput-rithala-village-2-xymbfyECPUpkDzS95iO3FwDK5vkUim.png';

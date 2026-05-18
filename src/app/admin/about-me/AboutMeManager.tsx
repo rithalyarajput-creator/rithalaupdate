@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import Icon from '@/components/Icon';
 
 type Settings = Record<string, string>;
@@ -57,6 +57,8 @@ export default function AboutMeManager({ initialSettings }: { initialSettings: S
   const [sections, setSections] = useState<CustomSection[]>(() =>
     parseSections(initialSettings.am_custom_sections || DEFAULTS.am_custom_sections || '[]')
   );
+  const dragId = useRef<string | null>(null);
+  const dragOverId = useRef<string | null>(null);
 
   function set(key: string, val: string) {
     setS(prev => ({ ...prev, [key]: val }));
@@ -81,6 +83,23 @@ export default function AboutMeManager({ initialSettings }: { initialSettings: S
       [next[idx], next[swap]] = [next[swap], next[idx]];
       return next;
     });
+  }
+
+  function onDragStart(id: string) { dragId.current = id; }
+  function onDragOver(e: React.DragEvent, id: string) { e.preventDefault(); dragOverId.current = id; }
+  function onDrop() {
+    if (!dragId.current || !dragOverId.current || dragId.current === dragOverId.current) return;
+    setSections(prev => {
+      const arr = [...prev];
+      const from = arr.findIndex(s => s.id === dragId.current);
+      const to = arr.findIndex(s => s.id === dragOverId.current);
+      if (from < 0 || to < 0) return prev;
+      const [item] = arr.splice(from, 1);
+      arr.splice(to, 0, item);
+      return arr;
+    });
+    dragId.current = null;
+    dragOverId.current = null;
   }
 
   async function save() {
@@ -307,9 +326,20 @@ export default function AboutMeManager({ initialSettings }: { initialSettings: S
             )}
 
             {sections.map((sec, idx) => (
-              <div key={sec.id} className="amm-csec-row">
+              <div
+                key={sec.id}
+                className="amm-csec-row"
+                draggable
+                onDragStart={() => onDragStart(sec.id)}
+                onDragOver={e => onDragOver(e, sec.id)}
+                onDrop={onDrop}
+                style={{ cursor: 'grab' }}
+              >
                 <div className="amm-csec-top">
-                  <span className="amm-csec-num">Section {idx + 1}</span>
+                  <span className="amm-csec-num">
+                    <span className="amm-drag-handle" title="Drag to reorder">⠿</span>
+                    Section {idx + 1}
+                  </span>
                   <div className="amm-csec-actions">
                     <button onClick={() => moveSection(sec.id, -1)} disabled={idx === 0} className="amm-csec-btn" title="Move up">↑</button>
                     <button onClick={() => moveSection(sec.id, 1)} disabled={idx === sections.length - 1} className="amm-csec-btn" title="Move down">↓</button>
