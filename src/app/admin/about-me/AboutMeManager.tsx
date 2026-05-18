@@ -7,8 +7,43 @@ type Settings = Record<string, string>;
 
 const ARTWORK_KEYS = ['am_art_1', 'am_art_2', 'am_art_3', 'am_art_4', 'am_art_5'];
 
+const DEFAULTS: Settings = {
+  am_name: 'Sandeep Rajput',
+  am_alias: 'Rithalya Rajput',
+  am_age: '18-year-old',
+  am_location: 'Rithala Village, Delhi',
+  am_bio: 'Hello and welcome! I am an 18-year-old digital creator, website developer, artist and social media designer from Rithala Village, Delhi. I am the creator and founder of Rithala Update — a digital platform dedicated to sharing the culture, history, news, events and community updates of Rithala Village with the world.',
+  am_portrait: 'https://9qidomuaf1nvlbrh.public.blob.vercel-storage.com/uploads/1778480814023-sandeep-rajput-rithalya-rajput-rithala-delhi.png-1HotTzrfaJxcggidFmo033DNSHDPMu.webp',
+  am_portrait2: 'https://9qidomuaf1nvlbrh.public.blob.vercel-storage.com/uploads/1778480815703-sandeep-rajput-rithala-village-2-xymbfyECPUpkDzS95iO3FwDK5vkUim.png',
+  am_skills: 'Website Development\nSocial Media Management\nCreative Designing\nDigital Branding & Promotions\nDrawing & Pencil Sketch Art\nCommunity-Based Digital Projects',
+  am_instagram: 'https://www.instagram.com/rithalya_rajput/',
+  am_facebook: 'https://www.facebook.com/rithalya.rajput',
+  am_youtube: 'https://www.youtube.com/@RithalaUpdate',
+  am_linkedin: 'https://in.linkedin.com/in/sandeep-rajput-sumal',
+  am_story_journey: 'Since childhood, I have always been passionate about creativity, technology, and doing something unique. Whether it was drawing, designing, or creating digital content, I always believed in giving my full dedication to everything I create. My creative journey started during my school days when I developed a strong interest in art and pencil sketching. Over time, that creativity slowly transformed into digital designing, social media content creation, and website development.',
+  am_story_education: 'I completed my schooling from Rana Pratap Government Boys Senior Secondary School, Rithala, New Delhi. Throughout my school life, I studied in different schools, met many people, and learned valuable life lessons that helped shape my confidence, mindset, and creativity. During the lockdown period, I spent a lot of time improving my artistic and creative skills through drawing and design work.',
+  am_story_idea: 'The idea behind creating Rithala Update came from a simple vision — to give Rithala Village a strong digital identity and create one platform where people can stay connected with their culture, community, and local updates. Before launching the website, I started by posting updates, photographs, and local content on Instagram and social media platforms.',
+  am_story_what: 'Apart from managing Rithala Update, I also work on website development, social media handling, digital promotions, and creative designing. I independently designed and developed this website myself while also managing Instagram pages, YouTube content, and digital branding projects.',
+  am_closing: 'Thank you for visiting and being a part of this journey.',
+  am_art_1_img: 'https://9qidomuaf1nvlbrh.public.blob.vercel-storage.com/uploads/1778480852254-rajputs-warrior-art-by-sandeep-rajput-1-EcVAvTjm85N2w0aQvMnINf1q6UJHDc.png',
+  am_art_1_title: 'Maharana Pratap',
+  am_art_1_sub: 'Legendary Rajput Warrior | Sketch by Sandeep Rajput',
+  am_art_2_img: 'https://9qidomuaf1nvlbrh.public.blob.vercel-storage.com/uploads/1778480850386-little-krishna-art-by-sandeep-rajput-My42d3DBHBriELEJVA1mOHJJo1keeD.png',
+  am_art_2_title: 'Little Krishna',
+  am_art_2_sub: 'Pencil Drawing by Sandeep Rajput',
+  am_art_3_img: 'https://9qidomuaf1nvlbrh.public.blob.vercel-storage.com/uploads/1778480848621-karan-aujla-art-by-sandeep-rajput-lBjClfy7IXQpR7wTAV6B57kMszDu6w.png',
+  am_art_3_title: 'Karan Aujla',
+  am_art_3_sub: 'Punjabi Singer Sketch by Sandeep Rajput',
+  am_art_4_img: 'https://9qidomuaf1nvlbrh.public.blob.vercel-storage.com/uploads/1778480846991-little-ram-art-by-sandeep-rajput-CfC5gcy4UkzhNKrzWUXgaWxdUDXvuC.png',
+  am_art_4_title: 'Little Ram',
+  am_art_4_sub: 'Pencil Art by Sandeep Rajput',
+  am_art_5_img: 'https://9qidomuaf1nvlbrh.public.blob.vercel-storage.com/uploads/1778480845194-virat-kholi-art-by-sandeep-rajput-yfvTxR9dqTw0jHTXu8nBNxAQBhWGTN.png',
+  am_art_5_title: 'Virat Kohli',
+  am_art_5_sub: 'Pencil Portrait by Sandeep Rajput',
+};
+
 export default function AboutMeManager({ initialSettings }: { initialSettings: Settings }) {
-  const [s, setS] = useState<Settings>(initialSettings);
+  const [s, setS] = useState<Settings>({ ...DEFAULTS, ...initialSettings });
   const [saving, setSaving] = useState(false);
   const [msg, setMsg] = useState<string | null>(null);
   const [err, setErr] = useState<string | null>(null);
@@ -131,6 +166,14 @@ export default function AboutMeManager({ initialSettings }: { initialSettings: S
               <div className="adm-field">
                 <label>YouTube URL</label>
                 <input value={s.am_youtube || ''} onChange={e => set('am_youtube', e.target.value)} placeholder="https://youtube.com/..." />
+              </div>
+              <div className="adm-field">
+                <label>Facebook URL</label>
+                <input value={s.am_facebook || ''} onChange={e => set('am_facebook', e.target.value)} placeholder="https://facebook.com/..." />
+              </div>
+              <div className="adm-field">
+                <label>LinkedIn URL</label>
+                <input value={s.am_linkedin || ''} onChange={e => set('am_linkedin', e.target.value)} placeholder="https://linkedin.com/in/..." />
               </div>
             </div>
           </div>
