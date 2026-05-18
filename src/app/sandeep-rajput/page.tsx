@@ -1,223 +1,154 @@
-﻿import type { Metadata } from 'next';
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import PublicShell from '@/components/PublicShell';
 import Icon from '@/components/Icon';
+import { getAllSettings } from '@/lib/db';
 import '../ab3-styles.css';
 
-export const revalidate = 300;
+export const revalidate = 60;
 
-const PORTRAIT = 'https://9qidomuaf1nvlbrh.public.blob.vercel-storage.com/uploads/1778480814023-sandeep-rajput-rithalya-rajput-rithala-delhi.png-1HotTzrfaJxcggidFmo033DNSHDPMu.webp';
-const PORTRAIT_2 = 'https://9qidomuaf1nvlbrh.public.blob.vercel-storage.com/uploads/1778480815703-sandeep-rajput-rithala-village-2-xymbfyECPUpkDzS95iO3FwDK5vkUim.png';
+const DEFAULT_PORTRAIT = 'https://9qidomuaf1nvlbrh.public.blob.vercel-storage.com/uploads/1778480814023-sandeep-rajput-rithalya-rajput-rithala-delhi.png-1HotTzrfaJxcggidFmo033DNSHDPMu.webp';
+const DEFAULT_PORTRAIT_2 = 'https://9qidomuaf1nvlbrh.public.blob.vercel-storage.com/uploads/1778480815703-sandeep-rajput-rithala-village-2-xymbfyECPUpkDzS95iO3FwDK5vkUim.png';
 
-const ARTWORKS = [
-  {
-    img: 'https://9qidomuaf1nvlbrh.public.blob.vercel-storage.com/uploads/1778480852254-rajputs-warrior-art-by-sandeep-rajput-1-EcVAvTjm85N2w0aQvMnINf1q6UJHDc.png',
-    title: 'Maharana Pratap',
-    sub: 'Legendary Rajput Warrior | Sketch by Sandeep Rajput',
-    alt: 'Maharana Pratap legendary Rajput warrior sketch by Sandeep Rajput Rithalya Rajput',
-  },
-  {
-    img: 'https://9qidomuaf1nvlbrh.public.blob.vercel-storage.com/uploads/1778480850386-little-krishna-art-by-sandeep-rajput-My42d3DBHBriELEJVA1mOHJJo1keeD.png',
-    title: 'Little Krishna',
-    sub: 'Pencil Drawing by Sandeep Rajput',
-    alt: 'Little Krishna pencil drawing by Sandeep Rajput from Rithala Village',
-  },
-  {
-    img: 'https://9qidomuaf1nvlbrh.public.blob.vercel-storage.com/uploads/1778480848621-karan-aujla-art-by-sandeep-rajput-lBjClfy7IXQpR7wTAV6B57kMszDu6w.png',
-    title: 'Karan Aujla',
-    sub: 'Punjabi Singer Sketch by Sandeep Rajput',
-    alt: 'Karan Aujla Punjabi singer pencil sketch by Sandeep Rajput',
-  },
-  {
-    img: 'https://9qidomuaf1nvlbrh.public.blob.vercel-storage.com/uploads/1778480846991-little-ram-art-by-sandeep-rajput-CfC5gcy4UkzhNKrzWUXgaWxdUDXvuC.png',
-    title: 'Little Ram',
-    sub: 'Pencil Art by Sandeep Rajput',
-    alt: 'Little Ram pencil art devotional drawing by Sandeep Rajput',
-  },
-  {
-    img: 'https://9qidomuaf1nvlbrh.public.blob.vercel-storage.com/uploads/1778480845194-virat-kholi-art-by-sandeep-rajput-yfvTxR9dqTw0jHTXu8nBNxAQBhWGTN.png',
-    title: 'Virat Kohli',
-    sub: 'Pencil Portrait by Sandeep Rajput',
-    alt: 'Virat Kohli Indian cricketer pencil portrait by Sandeep Rajput',
-  },
+const DEFAULT_ARTWORKS = [
+  { img: 'https://9qidomuaf1nvlbrh.public.blob.vercel-storage.com/uploads/1778480852254-rajputs-warrior-art-by-sandeep-rajput-1-EcVAvTjm85N2w0aQvMnINf1q6UJHDc.png', title: 'Maharana Pratap', sub: 'Legendary Rajput Warrior | Sketch by Sandeep Rajput' },
+  { img: 'https://9qidomuaf1nvlbrh.public.blob.vercel-storage.com/uploads/1778480850386-little-krishna-art-by-sandeep-rajput-My42d3DBHBriELEJVA1mOHJJo1keeD.png', title: 'Little Krishna', sub: 'Pencil Drawing by Sandeep Rajput' },
+  { img: 'https://9qidomuaf1nvlbrh.public.blob.vercel-storage.com/uploads/1778480848621-karan-aujla-art-by-sandeep-rajput-lBjClfy7IXQpR7wTAV6B57kMszDu6w.png', title: 'Karan Aujla', sub: 'Punjabi Singer Sketch by Sandeep Rajput' },
+  { img: 'https://9qidomuaf1nvlbrh.public.blob.vercel-storage.com/uploads/1778480846991-little-ram-art-by-sandeep-rajput-CfC5gcy4UkzhNKrzWUXgaWxdUDXvuC.png', title: 'Little Ram', sub: 'Pencil Art by Sandeep Rajput' },
+  { img: 'https://9qidomuaf1nvlbrh.public.blob.vercel-storage.com/uploads/1778480845194-virat-kholi-art-by-sandeep-rajput-yfvTxR9dqTw0jHTXu8nBNxAQBhWGTN.png', title: 'Virat Kohli', sub: 'Pencil Portrait by Sandeep Rajput' },
 ];
 
-export const metadata: Metadata = {
-  title: 'Sandeep Rajput (Rithalya Rajput)  Founder of Rithala Update | Digital Creator from Rithala Village, Delhi',
-  description: 'Sandeep Rajput, popularly known as Rithalya Rajput, is an 18-year-old digital creator, website developer, artist and founder of Rithala Update  the digital platform of Rithala Village, Delhi. Launched on 15 August 2022.',
-  keywords: 'Sandeep Rajput, Rithalya Rajput, Rithala Village, Rithala Delhi, founder of Rithala Update, digital creator Delhi, website developer Rithala, social media designer, pencil sketch artist, Maharana Pratap sketch, Sandeep Rajput biography, Sandeep Rajput age, Sandeep Rajput Instagram',
-  alternates: { canonical: '/sandeep-rajput/' },
-  openGraph: {
-    title: 'Sandeep Rajput (Rithalya Rajput)  Founder of Rithala Update',
-    description: '18-year-old digital creator, website developer and artist from Rithala Village, Delhi. Founder of Rithala Update.',
-    url: '/sandeep-rajput/',
-    type: 'profile',
-    images: [{ url: PORTRAIT, width: 800, height: 800, alt: 'Sandeep Rajput Rithalya Rajput from Rithala Village Delhi' }],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Sandeep Rajput (Rithalya Rajput)  Rithala Update Founder',
-    description: 'Digital creator, website developer and artist from Rithala Village, Delhi.',
-    images: [PORTRAIT],
-  },
-};
+const DEFAULT_SKILLS = [
+  'Website Development',
+  'Social Media Management',
+  'Creative Designing',
+  'Digital Branding & Promotions',
+  'Drawing & Pencil Sketch Art',
+  'Community-Based Digital Projects',
+];
 
-const personSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'Person',
-  name: 'Sandeep Rajput',
-  alternateName: ['Rithalya Rajput', 'Sandeep Rithalya Rajput'],
-  url: 'https://rithalaupdate.online/sandeep-rajput/',
-  image: [PORTRAIT, PORTRAIT_2],
-  jobTitle: 'Digital Creator, Website Developer, Artist',
-  birthPlace: 'Rithala Village, Delhi, India',
-  homeLocation: {
-    '@type': 'Place',
-    name: 'Rithala Village, North-West Delhi, India',
-  },
-  alumniOf: {
-    '@type': 'EducationalOrganization',
-    name: 'Rana Pratap Government Boys Senior Secondary School, Rithala, New Delhi',
-  },
-  founder: {
-    '@type': 'Organization',
-    name: 'Rithala Update',
-    url: 'https://rithalaupdate.online/',
-    foundingDate: '2022-08-15',
-  },
-  knowsAbout: [
-    'Website Development',
-    'Social Media Management',
-    'Creative Designing',
-    'Digital Branding',
-    'Pencil Sketch Art',
-    'Rithala Village History',
-    'Rajputana Heritage',
-  ],
-  description: 'Sandeep Rajput, also known as Rithalya Rajput, is an 18-year-old digital creator, website developer and artist from Rithala Village, Delhi. He is the founder of Rithala Update, a digital platform preserving the culture and history of Rithala Village.',
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const s = await getAllSettings().catch(() => ({}));
+  const name = s.am_name || 'Sandeep Rajput';
+  const alias = s.am_alias || 'Rithalya Rajput';
+  const portrait = s.am_portrait || DEFAULT_PORTRAIT;
+  return {
+    title: `${name} (${alias}) — Founder of Rithala Update | Digital Creator from Rithala Village, Delhi`,
+    description: `${name}, popularly known as ${alias}, is a digital creator, website developer, artist and founder of Rithala Update — the digital platform of Rithala Village, Delhi.`,
+    keywords: 'Sandeep Rajput, Rithalya Rajput, Rithala Village, Rithala Delhi, founder of Rithala Update, digital creator Delhi',
+    alternates: { canonical: '/sandeep-rajput/' },
+    openGraph: {
+      title: `${name} (${alias}) — Founder of Rithala Update`,
+      description: 'Digital creator, website developer and artist from Rithala Village, Delhi.',
+      url: '/sandeep-rajput/', type: 'profile',
+      images: [{ url: portrait, width: 800, height: 800, alt: `${name} from Rithala Village Delhi` }],
+    },
+    twitter: { card: 'summary_large_image', title: `${name} — Rithala Update Founder`, images: [portrait] },
+  };
+}
 
-export default function SandeepRajputPage() {
+export default async function SandeepRajputPage() {
+  const s = await getAllSettings().catch(() => ({}));
+
+  const name     = s.am_name     || 'Sandeep Rajput';
+  const alias    = s.am_alias    || 'Rithalya Rajput';
+  const age      = s.am_age      || '18-year-old';
+  const location = s.am_location || 'Rithala Village, Delhi';
+  const bio      = s.am_bio      || `Hello and welcome! I am an ${age} digital creator, website developer, artist and social media designer from ${location}. I am the creator and founder of Rithala Update — a digital platform dedicated to sharing the culture, history, news, events and community updates of Rithala Village with the world.`;
+  const portrait  = s.am_portrait  || DEFAULT_PORTRAIT;
+  const portrait2 = s.am_portrait2 || DEFAULT_PORTRAIT_2;
+  const closing   = s.am_closing   || 'Thank you for visiting and being a part of this journey.';
+
+  const storyJourney  = s.am_story_journey   || `Since childhood, I have always been passionate about creativity, technology, and doing something unique. Whether it was drawing, designing, or creating digital content, I always believed in giving my full dedication to everything I create. My creative journey started during my school days when I developed a strong interest in art and pencil sketching. Over time, that creativity slowly transformed into digital designing, social media content creation, and website development.`;
+  const storyEducation = s.am_story_education || `I completed my schooling from Rana Pratap Government Boys Senior Secondary School, Rithala, New Delhi. Throughout my school life, I studied in different schools, met many people, and learned valuable life lessons that helped shape my confidence, mindset, and creativity.`;
+  const storyIdea     = s.am_story_idea       || `The idea behind creating Rithala Update came from a simple vision — to give Rithala Village a strong digital identity and create one platform where people can stay connected with their culture, community, and local updates.`;
+  const storyWhat     = s.am_story_what       || `Apart from managing Rithala Update, I also work on website development, social media handling, digital promotions, and creative designing. I independently designed and developed this website myself while also managing Instagram pages, YouTube content, and digital branding projects.`;
+
+  // Skills
+  const skillsRaw = s.am_skills || DEFAULT_SKILLS.join('\n');
+  const skills = skillsRaw.split('\n').map(l => l.trim()).filter(Boolean);
+
+  // Artworks from settings (fall back to defaults)
+  const artworkKeys = ['am_art_1', 'am_art_2', 'am_art_3', 'am_art_4', 'am_art_5'];
+  const artworks = artworkKeys
+    .map(k => ({ img: s[`${k}_img`], title: s[`${k}_title`], sub: s[`${k}_sub`] }))
+    .filter(a => a.img && a.title);
+  const finalArtworks = artworks.length > 0 ? artworks : DEFAULT_ARTWORKS;
+
+  const personSchema = {
+    '@context': 'https://schema.org', '@type': 'Person',
+    name, alternateName: [alias],
+    url: 'https://rithalaupdate.online/sandeep-rajput/',
+    image: [portrait, portrait2],
+    jobTitle: 'Digital Creator, Website Developer, Artist',
+    birthPlace: location,
+    description: bio,
+  };
+
   return (
     <PublicShell>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
-      />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }} />
 
       <section className="sr-hero">
         <div className="container sr-hero-grid">
           <div className="sr-hero-text">
             <span className="sr-eyebrow">About Me</span>
-            <h1 className="sr-h1">Sandeep Rajput</h1>
-            <p className="sr-alias">Also known as <strong>Rithalya Rajput</strong></p>
-            <p className="sr-lead">
-              Hello and welcome! I am an 18-year-old digital creator, website developer, artist
-              and social media designer from <strong>Rithala Village, Delhi</strong>. I am the
-              creator and founder of <Link href="/">Rithala Update</Link>  a digital platform
-              dedicated to sharing the culture, history, news, events and community updates of
-              Rithala Village with the world.
-            </p>
+            <h1 className="sr-h1">{name}</h1>
+            <p className="sr-alias">Also known as <strong>{alias}</strong></p>
+            <p className="sr-lead">{bio}</p>
             <div className="sr-cta-row">
               <Link href="/contact/" className="sr-btn-primary">
                 <Icon name="mail" size={14} /> Get in Touch
               </Link>
-              <Link href="/about/" className="sr-btn-ghost">
-                About Rithala Update
-              </Link>
+              <Link href="/about/" className="sr-btn-ghost">About Rithala Update</Link>
             </div>
           </div>
           <div className="sr-hero-img">
-            <img
-              src={PORTRAIT}
-              alt="Sandeep Rajput Rithalya Rajput - founder of Rithala Update from Rithala Village Delhi"
-              loading="eager"
-            />
+            <img src={portrait} alt={`${name} ${alias} - founder of Rithala Update from Rithala Village Delhi`} loading="eager" />
           </div>
         </div>
       </section>
 
       <section className="sr-section">
         <div className="container sr-prose">
+
           <h2>My Creative Journey</h2>
-          <p>
-            Since childhood, I have always been passionate about creativity, technology, and doing
-            something unique. Whether it was drawing, designing, or creating digital content, I
-            always believed in giving my full dedication to everything I create. My creative
-            journey started during my school days when I developed a strong interest in art and
-            pencil sketching. Over time, that creativity slowly transformed into digital
-            designing, social media content creation, and website development.
-          </p>
+          <p>{storyJourney}</p>
 
           <h2>Education</h2>
-          <p>
-            I completed my schooling from <strong>Rana Pratap Government Boys Senior Secondary
-            School, Rithala, New Delhi</strong>. Throughout my school life, I studied in different
-            schools, met many people, and learned valuable life lessons that helped shape my
-            confidence, mindset, and creativity. During the lockdown period, I spent a lot of
-            time improving my artistic and creative skills through drawing and design work. Even
-            today, creativity remains one of the most important parts of my personality.
-          </p>
+          <p>{storyEducation}</p>
 
           <h2>The Idea Behind Rithala Update</h2>
-          <img
-            src={PORTRAIT_2}
-            alt="Sandeep Rajput Rithala Village - digital creator and website developer"
-            loading="lazy"
-            className="sr-img-float"
-          />
-          <p>
-            The idea behind creating Rithala Update came from a simple vision  to give Rithala
-            Village a strong digital identity and create one platform where people can stay
-            connected with their culture, community, and local updates. Before launching the
-            website, I started by posting updates, photographs, and local content on Instagram
-            and social media platforms. As the audience started growing, I realized that
-            Rithala needed a dedicated website where all information, memories, historical
-            stories, festivals, and important updates could be preserved and accessed easily.
-          </p>
-
-          <p>
-            On <strong>15 August 2022</strong>, I officially launched Rithala Update with the
-            mission of digitally connecting people, spreading awareness, and preserving the
-            heritage of Rithala Village. Today, the platform shares local news, cultural
-            programs, historical stories, religious events, government updates, old village
-            memories, and social activities through social media and the official website.
-          </p>
+          {portrait2 && <img src={portrait2} alt={`${name} - digital creator and website developer`} loading="lazy" className="sr-img-float" />}
+          <p>{storyIdea}</p>
 
           <h2>What I Do</h2>
-          <p>
-            Apart from managing Rithala Update, I also work on website development, social media
-            handling, digital promotions, and creative designing. I independently designed and
-            developed this website myself while also managing Instagram pages, YouTube content,
-            and digital branding projects. My goal is to combine creativity and technology to
-            build meaningful digital experiences that represent local culture and community identity.
-          </p>
+          <p>{storyWhat}</p>
 
-          <h3>I am passionate about:</h3>
-          <ul className="sr-list">
-            <li><Icon name="dashboard" size={16} /> Website Development</li>
-            <li><Icon name="users" size={16} /> Social Media Management</li>
-            <li><Icon name="image" size={16} /> Creative Designing</li>
-            <li><Icon name="star" size={16} /> Digital Branding & Promotions</li>
-            <li><Icon name="feather" size={16} /> Drawing & Pencil Sketch Art</li>
-            <li><Icon name="flag" size={16} /> Community-Based Digital Projects</li>
-          </ul>
+          {skills.length > 0 && (
+            <>
+              <h3>I am passionate about:</h3>
+              <ul className="sr-list">
+                {skills.map((skill, i) => (
+                  <li key={i}>
+                    <Icon name={['dashboard','users','image','star','feather','flag','globe','heart'][i % 8] as any} size={16} />
+                    {skill}
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
 
           <h2>My Art Gallery</h2>
-          <p>
-            Some of my best creative works include pencil sketches of <strong>Maharana Pratap</strong>,
-            <strong> Little Krishna</strong>, <strong>Little Ram</strong>, <strong>Karan Aujla</strong>, and
-            <strong> Virat Kohli</strong>  each piece representing a different side of my artistic journey,
-            from historical Rajput heritage to spiritual devotion and modern portraiture.
-          </p>
+          <p>Some of my best creative works — each piece representing a different side of my artistic journey.</p>
         </div>
 
         <div className="sr-gallery-scroll-wrap">
           <div className="sr-gallery-scroll">
-            {ARTWORKS.map((art) => (
-              <figure key={art.title} className="sr-art-card-h">
+            {finalArtworks.map((art, i) => (
+              <figure key={i} className="sr-art-card-h">
                 <div className="sr-art-img-h">
-                  <img src={art.img} alt={art.alt} loading="lazy" />
+                  <img src={art.img!} alt={`${art.title} by ${name}`} loading="lazy" />
                 </div>
                 <figcaption>
                   <strong>{art.title}</strong>
@@ -229,27 +160,14 @@ export default function SandeepRajputPage() {
         </div>
 
         <div className="container sr-prose">
-
           <h2>More Than Just a Website</h2>
-          <p>
-            For me, Rithala Update is not just a website or social media page  it is an emotion,
-            a responsibility, and a platform created with passion for my village and community.
-            Through this journey, I want to continue learning, growing, and creating digital
-            content that inspires people while preserving the identity and culture of Rithala
-            Village for future generations.
-          </p>
+          <p>For me, Rithala Update is not just a website or social media page — it is an emotion, a responsibility, and a platform created with passion for my village and community.</p>
 
-          <p className="sr-closing">
-            Thank you for visiting and being a part of this journey.
-          </p>
+          <p className="sr-closing">{closing}</p>
 
           <div className="sr-cta-row">
-            <Link href="/contact/" className="sr-btn-primary">
-              <Icon name="mail" size={14} /> Contact Me
-            </Link>
-            <Link href="/blog/" className="sr-btn-ghost">
-              Read the Blog
-            </Link>
+            <Link href="/contact/" className="sr-btn-primary"><Icon name="mail" size={14} /> Contact Me</Link>
+            <Link href="/blog/" className="sr-btn-ghost">Read the Blog</Link>
           </div>
         </div>
       </section>
