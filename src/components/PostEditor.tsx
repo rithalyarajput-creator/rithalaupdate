@@ -228,7 +228,7 @@ export default function PostEditor({
       else router.refresh();
     } else {
       const j = await res.json().catch(() => ({}));
-      setErr(j.error || 'Save failed');
+      setErr(`Save failed (${res.status}): ${j.error || j.message || JSON.stringify(j) || 'Unknown error'}`);
     }
     setSaving(false);
   }
