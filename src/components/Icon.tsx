@@ -58,7 +58,9 @@ type IconName =
   | 'feather'
   | 'book'
   | 'users'
-  | 'sparkle';
+  | 'sparkle'
+  | 'copy'
+  | 'code';
 
 type Props = SVGProps<SVGSVGElement> & {
   name: IconName;
@@ -424,6 +426,20 @@ export default function Icon({ name, size = 18, ...rest }: Props) {
           <path d="M12 3l1.5 4.5L18 9l-4.5 1.5L12 15l-1.5-4.5L6 9l4.5-1.5z" />
           <path d="M19 14l.5 1.5L21 16l-1.5.5L19 18l-.5-1.5L17 16l1.5-.5z" />
           <path d="M5 16l.5 1.5L7 18l-1.5.5L5 20l-.5-1.5L3 18l1.5-.5z" />
+        </svg>
+      );
+    case 'copy':
+      return (
+        <svg {...props}>
+          <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+          <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" />
+        </svg>
+      );
+    case 'code':
+      return (
+        <svg {...props}>
+          <polyline points="16 18 22 12 16 6" />
+          <polyline points="8 6 2 12 8 18" />
         </svg>
       );
     default:
