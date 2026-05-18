@@ -6993,7 +6993,7 @@ body { overflow-x: clip; }
   border-top: 1px solid #f1f5f9;
 }
 .bd-related-head {
-  text-align: center;
+  text-align: left;
   margin-bottom: 24px;
 }
 .bd-related-head h2 {
