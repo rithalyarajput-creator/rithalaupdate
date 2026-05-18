@@ -8,9 +8,18 @@ import PhotosBrowser from './PhotosBrowser';
 export const revalidate = 60;
 
 export const metadata: Metadata = {
-  title: 'Photos  Rithala Update | Village photo gallery',
-  description: 'Photo gallery of Rithala village  Kawad Yatra, festivals, temples, village life. Browse photos by category and album.',
+  title: 'Photos — Rithala Update | Village Photo Gallery Delhi',
+  description: 'Browse photos of Rithala Village, Delhi — Kawad Yatra, festivals, temples, Rajput heritage, and village life. Curated photo albums by category.',
+  keywords: 'Rithala village photos, Kawad Yatra photos, Rithala Delhi photos, Rajput heritage photos, village festival photos, temple photos Rithala',
   alternates: { canonical: '/photos/' },
+  openGraph: {
+    title: 'Photos — Rithala Village Photo Gallery',
+    description: 'Kawad Yatra, festivals, temples, Rajput heritage and village life photos from Rithala Village, Delhi.',
+    url: '/photos/',
+    type: 'website',
+    images: [{ url: 'https://rithalaupdate.online/og-default.jpg', width: 1200, height: 630, alt: 'Rithala Village Photo Gallery' }],
+  },
+  twitter: { card: 'summary_large_image', title: 'Photos — Rithala Village', description: 'Kawad Yatra, festivals and village life photos from Rithala, Delhi.' },
 };
 
 type SP = { category?: string; folder?: string };

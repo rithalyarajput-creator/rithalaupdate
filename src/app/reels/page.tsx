@@ -5,8 +5,18 @@ import { getPublishedReels } from '@/lib/db';
 export const revalidate = 60;
 
 export const metadata: Metadata = {
-  title: 'Reels',
-  description: 'Watch the latest Bhakti and Rajput culture reels from Rithala Village.',
+  title: 'Reels — Rithala Update | Bhakti & Rajput Culture Videos',
+  description: 'Watch short reels on Bhakti, Rajput culture, Kawad Yatra, and temple moments from Rithala Village, Delhi. Follow Rithala Update on Instagram for more.',
+  keywords: 'Rithala reels, Bhakti reels, Rajput culture videos, Kawad Yatra reels, Rithala village videos, temple reels Delhi',
+  alternates: { canonical: '/reels/' },
+  openGraph: {
+    title: 'Reels — Bhakti & Rajput Culture | Rithala Update',
+    description: 'Short reels on Bhakti, Rajput culture, Kawad Yatra, and temple moments from Rithala Village, Delhi.',
+    url: '/reels/',
+    type: 'website',
+    images: [{ url: 'https://rithalaupdate.online/og-default.jpg', width: 1200, height: 630, alt: 'Rithala Update Reels' }],
+  },
+  twitter: { card: 'summary_large_image', title: 'Reels — Rithala Update', description: 'Bhakti, Rajput culture and village reels from Rithala, Delhi.' },
 };
 
 export default async function ReelsPage() {

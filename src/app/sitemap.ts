@@ -5,7 +5,15 @@ const SITE = process.env.NEXT_PUBLIC_SITE_URL || 'https://rithalaupdate.online';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const urls: MetadataRoute.Sitemap = [
-    { url: `${SITE}/`, lastModified: new Date(), changeFrequency: 'daily', priority: 1 },
+    { url: `${SITE}/`,                    lastModified: new Date(), changeFrequency: 'daily',   priority: 1.0 },
+    { url: `${SITE}/about/`,             lastModified: new Date(), changeFrequency: 'monthly',  priority: 0.9 },
+    { url: `${SITE}/sandeep-rajput/`,    lastModified: new Date(), changeFrequency: 'monthly',  priority: 0.9 },
+    { url: `${SITE}/blog/`,              lastModified: new Date(), changeFrequency: 'daily',    priority: 0.8 },
+    { url: `${SITE}/photos/`,            lastModified: new Date(), changeFrequency: 'weekly',   priority: 0.8 },
+    { url: `${SITE}/reels/`,             lastModified: new Date(), changeFrequency: 'weekly',   priority: 0.7 },
+    { url: `${SITE}/contact/`,           lastModified: new Date(), changeFrequency: 'yearly',   priority: 0.6 },
+    { url: `${SITE}/faqs/`,              lastModified: new Date(), changeFrequency: 'monthly',  priority: 0.6 },
+    { url: `${SITE}/rithala-village-history/`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.7 },
   ];
 
   try {

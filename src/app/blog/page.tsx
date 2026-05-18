@@ -8,10 +8,17 @@ import Icon from '@/components/Icon';
 export const revalidate = 60;
 
 export const metadata: Metadata = {
-  title: 'Blog  Rithala Update | Posts by category, author, date',
-  description:
-    'All blog posts about Rithala village, Rajput heritage, events, temples, and culture. Filter by category, author, and date.',
+  title: 'Blog — Rithala Update | Rithala Village News & Stories',
+  description: 'Read all blog posts about Rithala village — Rajput heritage, Kawad Yatra, festivals, temples, local events, and culture. Filter by category, author, and date.',
+  keywords: 'Rithala village blog, Rithala news, Rajput heritage blog, Kawad Yatra, Rithala Update blog, Rithala Delhi articles',
   alternates: { canonical: '/blog/' },
+  openGraph: {
+    title: 'Blog — Rithala Village News & Stories',
+    description: 'Rajput heritage, Kawad Yatra, festivals, temples and village life — all stories from Rithala Update.',
+    url: '/blog/', type: 'website',
+    images: [{ url: 'https://rithalaupdate.online/og-default.jpg', width: 1200, height: 630, alt: 'Rithala Update Blog' }],
+  },
+  twitter: { card: 'summary_large_image', title: 'Blog — Rithala Update', description: 'Rithala village news, heritage stories and culture from Rithala Update.' },
 };
 
 type SP = {

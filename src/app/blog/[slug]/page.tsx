@@ -176,7 +176,7 @@ export default async function BlogDetail({ params }: Props) {
               <div className="bd2-meta-row">
                 <div className="bd2-author">
                   {authorAvatar ? (
-                    <img src={authorAvatar} alt="" className="bd2-author-avatar" />
+                    <img src={authorAvatar} alt={post.author_name || 'Author'} className="bd2-author-avatar" />
                   ) : (
                     <div className="bd2-author-avatar bd2-author-avatar-fallback">
                       {(post.author_name || 'S')[0]}
@@ -222,7 +222,7 @@ export default async function BlogDetail({ params }: Props) {
             {/* AUTHOR CARD */}
             <div className="bd2-author-card">
               {authorAvatar ? (
-                <img src={authorAvatar} alt="" />
+                <img src={authorAvatar} alt={post.author_name || 'Author'} />
               ) : (
                 <div className="bd2-author-card-fallback">{(post.author_name || 'S')[0]}</div>
               )}
