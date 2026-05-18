@@ -2111,6 +2111,24 @@ p { margin: 0 0 1em; }
   align-items: center; gap: 16px; flex-wrap: wrap;
   margin-bottom: 24px;
 }
+
+/* ============================================
+   About Me Manager
+   ============================================ */
+.amm-wrap { display: flex; flex-direction: column; gap: 16px; }
+.amm-preview-bar { display: flex; align-items: center; gap: 10px; background: #f0f9ff; border: 1px solid #bae6fd; border-radius: 10px; padding: 10px 16px; font-size: 0.85rem; color: #0369a1; }
+.amm-preview-link { margin-left: auto; font-weight: 600; color: #0369a1; text-decoration: underline; }
+.amm-tabs { display: flex; gap: 8px; flex-wrap: wrap; }
+.amm-tab { padding: 8px 18px; border-radius: 8px; border: 1.5px solid #e2e8f0; background: #fff; font-size: 0.88rem; font-weight: 600; cursor: pointer; color: #64748b; transition: all 0.15s; }
+.amm-tab.active { background: linear-gradient(135deg, #b45309, #dc2626); color: #fff; border-color: transparent; }
+.amm-card { padding: 24px; }
+.amm-section { display: flex; flex-direction: column; gap: 14px; }
+.amm-section-title { font-size: 1rem; font-weight: 700; color: #0f172a; margin: 0; padding-bottom: 8px; border-bottom: 2px solid #f1f5f9; }
+.amm-img-preview { margin-top: 8px; width: 120px; height: 120px; object-fit: cover; border-radius: 10px; border: 2px solid #e2e8f0; }
+.amm-artwork-row { display: flex; gap: 14px; align-items: flex-start; padding: 16px; background: #f8fafc; border-radius: 12px; border: 1px solid #e2e8f0; }
+.amm-artwork-num { width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(135deg, #b45309, #dc2626); color: #fff; font-weight: 800; font-size: 0.9rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 4px; }
+.amm-artwork-fields { flex: 1; display: flex; flex-direction: column; gap: 10px; }
+.amm-save-bar { display: flex; align-items: center; gap: 16px; padding: 16px 0; }
 .adm-h1 {
   display: flex; align-items: center; gap: 10px;
   margin: 0; font-size: 1.6rem;
