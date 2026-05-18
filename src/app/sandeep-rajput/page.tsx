@@ -28,7 +28,7 @@ const DEFAULT_SKILLS = [
 ];
 
 export async function generateMetadata(): Promise<Metadata> {
-  const s = await getAllSettings().catch(() => ({}));
+  const s: Record<string, string> = await getAllSettings().catch(() => ({}));
   const name = s.am_name || 'Sandeep Rajput';
   const alias = s.am_alias || 'Rithalya Rajput';
   const portrait = s.am_portrait || DEFAULT_PORTRAIT;
@@ -48,7 +48,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function SandeepRajputPage() {
-  const s = await getAllSettings().catch(() => ({}));
+  const s: Record<string, string> = await getAllSettings().catch(() => ({}));
 
   const name     = s.am_name     || 'Sandeep Rajput';
   const alias    = s.am_alias    || 'Rithalya Rajput';
