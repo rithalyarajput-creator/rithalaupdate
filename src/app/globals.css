@@ -9531,8 +9531,8 @@ body { overflow-x: clip; }
 .sr-hero-img { display: flex; justify-content: center; }
 .sr-hero-img img { width: 100%; max-width: 360px; aspect-ratio: 1; object-fit: cover; border-radius: 50%; border: 6px solid rgba(255,255,255,0.25); box-shadow: 0 20px 50px rgba(0,0,0,0.35); }
 .sr-social-row { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 16px; }
-.sr-social-btn { display: inline-flex; align-items: center; gap: 7px; padding: 8px 16px; border-radius: 50px; font-size: 0.85rem; font-weight: 600; text-decoration: none; transition: transform 0.15s, opacity 0.15s; color: #fff; }
-.sr-social-btn:hover { transform: translateY(-2px); opacity: 0.9; }
+.sr-social-btn { display: inline-flex; align-items: center; gap: 7px; padding: 8px 16px; border-radius: 50px; font-size: 0.85rem; font-weight: 600; text-decoration: none; transition: transform 0.15s, box-shadow 0.15s; color: #fff !important; }
+.sr-social-btn:hover { transform: translateY(-3px); box-shadow: 0 6px 18px rgba(0,0,0,0.25); color: #fff !important; }
 .sr-ig { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
 .sr-fb { background: #1877f2; }
 .sr-yt { background: #ff0000; }
