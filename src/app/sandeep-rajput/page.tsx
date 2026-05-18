@@ -75,6 +75,12 @@ export default async function SandeepRajputPage() {
     .filter(a => a.img && a.title);
   const finalArtworks = artworks.length > 0 ? artworks : DEFAULT_ARTWORKS;
 
+  // Custom sections
+  type CustomSection = { id: string; heading: string; content: string; layout: 'text-only' | 'img-left' | 'img-right'; image?: string };
+  const customSections: CustomSection[] = (() => {
+    try { return JSON.parse(s.am_custom_sections || '[]') || []; } catch { return []; }
+  })();
+
   const personSchema = {
     '@context': 'https://schema.org', '@type': 'Person',
     name, alternateName: [alias],
@@ -159,6 +165,33 @@ export default async function SandeepRajputPage() {
               </ul>
             </>
           )}
+
+          {customSections.map((sec) => (
+            <div key={sec.id} className="sr-custom-section">
+              {sec.layout === 'text-only' || !sec.image ? (
+                <div className="sr-csec-text-only">
+                  {sec.heading && <h2>{sec.heading}</h2>}
+                  <p>{sec.content}</p>
+                </div>
+              ) : sec.layout === 'img-left' ? (
+                <div className="sr-csec-split">
+                  <img src={sec.image} alt={sec.heading} loading="lazy" />
+                  <div className="sr-csec-split-body">
+                    {sec.heading && <h2>{sec.heading}</h2>}
+                    <p>{sec.content}</p>
+                  </div>
+                </div>
+              ) : (
+                <div className="sr-csec-split">
+                  <div className="sr-csec-split-body">
+                    {sec.heading && <h2>{sec.heading}</h2>}
+                    <p>{sec.content}</p>
+                  </div>
+                  <img src={sec.image} alt={sec.heading} loading="lazy" />
+                </div>
+              )}
+            </div>
+          ))}
 
           <h2>My Art Gallery</h2>
           <p>Some of my best creative works — each piece representing a different side of my artistic journey.</p>

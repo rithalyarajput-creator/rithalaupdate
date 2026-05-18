@@ -42,21 +42,54 @@ const DEFAULTS: Settings = {
   am_art_5_sub: 'Pencil Portrait by Sandeep Rajput',
 };
 
+type CustomSection = { id: string; heading: string; content: string; layout: 'text-only' | 'img-left' | 'img-right'; image?: string };
+
+function parseSections(raw: string): CustomSection[] {
+  try { return JSON.parse(raw) || []; } catch { return []; }
+}
+
 export default function AboutMeManager({ initialSettings }: { initialSettings: Settings }) {
   const [s, setS] = useState<Settings>({ ...DEFAULTS, ...initialSettings });
   const [saving, setSaving] = useState(false);
   const [msg, setMsg] = useState<string | null>(null);
   const [err, setErr] = useState<string | null>(null);
-  const [activeTab, setActiveTab] = useState<'profile' | 'story' | 'artworks'>('profile');
+  const [activeTab, setActiveTab] = useState<'profile' | 'story' | 'artworks' | 'sections'>('profile');
+  const [sections, setSections] = useState<CustomSection[]>(() =>
+    parseSections(initialSettings.am_custom_sections || DEFAULTS.am_custom_sections || '[]')
+  );
 
   function set(key: string, val: string) {
     setS(prev => ({ ...prev, [key]: val }));
   }
 
+  function addSection() {
+    setSections(prev => [...prev, { id: Date.now().toString(), heading: '', content: '', layout: 'text-only', image: '' }]);
+  }
+  function updateSection(id: string, field: keyof CustomSection, val: string) {
+    setSections(prev => prev.map(sec => sec.id === id ? { ...sec, [field]: val } : sec));
+  }
+  function deleteSection(id: string) {
+    setSections(prev => prev.filter(sec => sec.id !== id));
+  }
+  function moveSection(id: string, dir: -1 | 1) {
+    setSections(prev => {
+      const idx = prev.findIndex(s => s.id === id);
+      if (idx < 0) return prev;
+      const next = [...prev];
+      const swap = idx + dir;
+      if (swap < 0 || swap >= next.length) return prev;
+      [next[idx], next[swap]] = [next[swap], next[idx]];
+      return next;
+    });
+  }
+
   async function save() {
     setSaving(true); setMsg(null); setErr(null);
     try {
-      const updates = Object.fromEntries(Object.entries(s).filter(([k]) => k.startsWith('am_')));
+      const updates = {
+        ...Object.fromEntries(Object.entries(s).filter(([k]) => k.startsWith('am_'))),
+        am_custom_sections: JSON.stringify(sections),
+      };
       const res = await fetch('/api/settings', {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
@@ -88,13 +121,13 @@ export default function AboutMeManager({ initialSettings }: { initialSettings: S
 
       {/* Tabs */}
       <div className="amm-tabs">
-        {(['profile', 'story', 'artworks'] as const).map(tab => (
+        {(['profile', 'story', 'artworks', 'sections'] as const).map(tab => (
           <button
             key={tab}
             className={`amm-tab${activeTab === tab ? ' active' : ''}`}
             onClick={() => setActiveTab(tab)}
           >
-            {tab === 'profile' ? '👤 Profile' : tab === 'story' ? '📝 Story & Bio' : '🎨 Art Gallery'}
+            {tab === 'profile' ? '👤 Profile' : tab === 'story' ? '📝 Story & Bio' : tab === 'artworks' ? '🎨 Art Gallery' : '➕ Custom Sections'}
           </button>
         ))}
       </div>
@@ -249,6 +282,121 @@ export default function AboutMeManager({ initialSettings }: { initialSettings: S
                 </div>
               );
             })}
+          </div>
+        )}
+
+        {/* CUSTOM SECTIONS TAB */}
+        {activeTab === 'sections' && (
+          <div className="amm-section">
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <div>
+                <h3 className="amm-section-title">Custom Sections</h3>
+                <small style={{ color: '#94a3b8' }}>Add extra sections like "My Achievements", "Awards", "Future Plans" etc.</small>
+              </div>
+              <button className="adm-btn-primary" onClick={addSection} style={{ flexShrink: 0 }}>
+                <Icon name="plus" size={14} /> Add Section
+              </button>
+            </div>
+
+            {sections.length === 0 && (
+              <div className="adm-empty" style={{ padding: '30px 0' }}>
+                <Icon name="plus" size={32} />
+                <h3>No custom sections yet</h3>
+                <p>Click "Add Section" to create a new section on your About Me page.</p>
+              </div>
+            )}
+
+            {sections.map((sec, idx) => (
+              <div key={sec.id} className="amm-csec-row">
+                <div className="amm-csec-top">
+                  <span className="amm-csec-num">Section {idx + 1}</span>
+                  <div className="amm-csec-actions">
+                    <button onClick={() => moveSection(sec.id, -1)} disabled={idx === 0} className="amm-csec-btn" title="Move up">↑</button>
+                    <button onClick={() => moveSection(sec.id, 1)} disabled={idx === sections.length - 1} className="amm-csec-btn" title="Move down">↓</button>
+                    <button onClick={() => deleteSection(sec.id)} className="amm-csec-btn amm-csec-del" title="Delete">
+                      <Icon name="trash" size={13} />
+                    </button>
+                  </div>
+                </div>
+
+                {/* Layout picker */}
+                <div className="adm-field">
+                  <label>Layout Template</label>
+                  <div className="amm-layout-row">
+                    {([
+                      { val: 'text-only', label: 'Text Only' },
+                      { val: 'img-left', label: 'Image Left' },
+                      { val: 'img-right', label: 'Image Right' },
+                    ] as { val: CustomSection['layout']; label: string }[]).map(opt => (
+                      <button
+                        key={opt.val}
+                        type="button"
+                        className={`amm-layout-opt${sec.layout === opt.val ? ' selected' : ''}`}
+                        onClick={() => updateSection(sec.id, 'layout', opt.val)}
+                      >
+                        <div className="amm-layout-preview">
+                          {opt.val === 'text-only' ? (
+                            <div className="amm-lp-text">
+                              <div className="amm-lp-line" style={{ width: '90%' }} />
+                              <div className="amm-lp-line" style={{ width: '70%' }} />
+                              <div className="amm-lp-line" style={{ width: '80%' }} />
+                            </div>
+                          ) : opt.val === 'img-left' ? (
+                            <>
+                              <div className="amm-lp-img" />
+                              <div className="amm-lp-text">
+                                <div className="amm-lp-line" style={{ width: '90%' }} />
+                                <div className="amm-lp-line" style={{ width: '70%' }} />
+                              </div>
+                            </>
+                          ) : (
+                            <>
+                              <div className="amm-lp-text">
+                                <div className="amm-lp-line" style={{ width: '90%' }} />
+                                <div className="amm-lp-line" style={{ width: '70%' }} />
+                              </div>
+                              <div className="amm-lp-img" />
+                            </>
+                          )}
+                        </div>
+                        {opt.label}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Image URL — only for split layouts */}
+                {sec.layout !== 'text-only' && (
+                  <div className="adm-field">
+                    <label>Image URL</label>
+                    <input
+                      value={sec.image || ''}
+                      onChange={e => updateSection(sec.id, 'image', e.target.value)}
+                      placeholder="https://... (paste image URL from Media Library)"
+                    />
+                    {sec.image && <img src={sec.image} alt="" className="amm-img-preview" style={{ width: 160, height: 100, objectFit: 'cover' }} />}
+                  </div>
+                )}
+
+                <div className="adm-field">
+                  <label>Section Heading</label>
+                  <input
+                    value={sec.heading}
+                    onChange={e => updateSection(sec.id, 'heading', e.target.value)}
+                    placeholder="e.g. My Achievements, Awards, Future Plans..."
+                  />
+                </div>
+                <div className="adm-field">
+                  <label>Content</label>
+                  <textarea
+                    rows={5}
+                    value={sec.content}
+                    onChange={e => updateSection(sec.id, 'content', e.target.value)}
+                    placeholder="Write the content for this section..."
+                  />
+                </div>
+              </div>
+            ))}
           </div>
         )}
       </div>
