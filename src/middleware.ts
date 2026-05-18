@@ -2,21 +2,6 @@ import { NextResponse, type NextRequest } from 'next/server';
 import { jwtVerify } from 'jose';
 
 const ADMIN_COOKIE = 'rithala_admin_session';
-const SITE_ACCESS_COOKIE = 'rithala_site_access';
-
-// Paths that are always accessible (no coming-soon block)
-const ALWAYS_ALLOWED = [
-  '/coming-soon',
-  '/api/guest-submissions',
-  '/api/guest-upload',
-  '/api/site-access',
-  '/admin',
-  '/_next',
-  '/favicon',
-  '/logo',
-  '/robots',
-  '/sitemap',
-];
 
 const FALLBACK_SECRET = 'rithala-admin-jwt-secret-key-2025-secure-login-xk9';
 
@@ -61,19 +46,6 @@ export async function middleware(req: NextRequest) {
     const url = req.nextUrl.clone();
     url.pathname = `/blog/${blogDateMatch[1]}`;
     return NextResponse.redirect(url, 301);
-  }
-
-  // --- Coming soon gate ---
-  // Allow static assets, API routes, coming-soon itself
-  const isAllowed = ALWAYS_ALLOWED.some((p) => pathname.startsWith(p));
-  if (isAllowed) return NextResponse.next();
-
-  // Check site access cookie
-  const hasAccess = req.cookies.get(SITE_ACCESS_COOKIE)?.value === '1';
-  if (!hasAccess) {
-    const url = req.nextUrl.clone();
-    url.pathname = '/coming-soon';
-    return NextResponse.redirect(url);
   }
 
   return NextResponse.next();
