@@ -106,11 +106,20 @@ export default async function BlogDetail({ params }: Props) {
       );
       related = r.rows;
     }
-    if (related.length < 3) {
-      const more = await getPublishedPosts(6);
-      const seen = new Set(related.map((r) => r.id));
+    if (related.length < 6) {
+      // Only pull posts from same author (Rithala posts), not imported/spam posts
+      const seen = new Set(related.map((r: any) => r.id));
       seen.add(post.id);
-      for (const m of more) {
+      const more = await sql<any>`
+        SELECT id, slug, title, excerpt, featured_image, published_at, author_name
+        FROM posts
+        WHERE status = 'published'
+          AND id != ${post.id}
+          AND author_name = ${post.author_name || 'Sandeep Rajput'}
+        ORDER BY published_at DESC NULLS LAST
+        LIMIT 6
+      `.catch(() => ({ rows: [] }));
+      for (const m of more.rows) {
         if (!seen.has(m.id) && related.length < 6) {
           related.push(m);
           seen.add(m.id);
@@ -241,27 +250,21 @@ export default async function BlogDetail({ params }: Props) {
             <div className="bd-related-head">
               <h2>You Must Also Read</h2>
             </div>
-            <div className="bc-grid">
+            <div className="bd-related-slider">
               {related.map((p) => {
                 const cleanSlug = (p.slug || '').replace(/^\d{4}\/\d{2}\/\d{2}\//, '');
-                const cats = p.category_name ? p.category_name.split(',') : [];
                 return (
-                  <Link key={p.id} href={`/blog/${cleanSlug}/`} className="bc-card">
-                    <div className="bc-img-wrap">
+                  <Link key={p.id} href={`/blog/${cleanSlug}/`} className="bd-rel-card">
+                    <div className="bd-rel-img">
                       {p.featured_image ? (
                         <img src={p.featured_image} alt={p.title} loading="lazy" />
                       ) : (
-                        <div className="bc-placeholder"><span>RITHALA</span></div>
+                        <div className="bd-rel-placeholder"><span>RITHALA</span></div>
                       )}
-                      <div className="bc-overlay" />
-                      {cats[0] && <span className="bc-tag">{cats[0].trim()}</span>}
                     </div>
-                    <div className="bc-body">
-                      <h3 className="bc-title">{p.title}</h3>
-                      <div className="bc-meta">
-                        <span className="bc-date">{p.published_at ? new Date(p.published_at).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }) : ''}</span>
-                        <span className="bc-read">पढ़ें →</span>
-                      </div>
+                    <div className="bd-rel-body">
+                      <h3 className="bd-rel-title">{p.title}</h3>
+                      <span className="bd-rel-date">{p.published_at ? new Date(p.published_at).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }) : ''}</span>
                     </div>
                   </Link>
                 );
