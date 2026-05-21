@@ -1315,12 +1315,13 @@ p { margin: 0 0 1em; }
 /* Polaroid folder cards */
 .ph2-folder-grid {
   display: grid;
-  gap: 60px 40px;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  padding: 30px 20px 50px;
+  gap: 40px 28px;
+  grid-template-columns: repeat(auto-fill, 160px);
+  justify-content: center;
+  padding: 20px 20px 50px;
 }
 @media (max-width: 600px) {
-  .ph2-folder-grid { grid-template-columns: repeat(2, 1fr); gap: 50px 24px; }
+  .ph2-folder-grid { grid-template-columns: repeat(3, 1fr); gap: 32px 14px; }
 }
 
 .ph2-folder-card {
@@ -1328,6 +1329,8 @@ p { margin: 0 0 1em; }
   text-decoration: none;
   color: inherit;
   padding-bottom: 14px;
+  width: 160px;
+  max-width: 160px;
   transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 .ph2-folder-card:hover { transform: translateY(-6px); }
@@ -1403,7 +1406,7 @@ p { margin: 0 0 1em; }
 .ph2-folder-photo figcaption strong {
   display: block;
   color: #0f172a;
-  font-size: 1.05rem;
+  font-size: 0.88rem;
   font-weight: 700;
   margin-bottom: 2px;
 }
