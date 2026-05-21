@@ -145,28 +145,54 @@ export default async function PhotosPage({ searchParams }: { searchParams: SP })
               </div>
               <PhotosBrowser photos={photosInFolder} />
             </>
+          ) : !cat ? (
+            /* ALL view — show categories as big cards */
+            cats.length === 0 ? (
+              <div className="ph2-empty">
+                <Icon name="image" size={48} />
+                <h3>No categories yet</h3>
+                <p>Create photo categories from admin to get started.</p>
+              </div>
+            ) : (
+              <div className="ph2-folder-grid">
+                {cats.map((c) => (
+                  <Link key={c.id} href={`/photos/?category=${c.slug}`} className="ph2-folder-card">
+                    <div className="ph2-folder-stack ph2-stack-3" aria-hidden="true"></div>
+                    <div className="ph2-folder-stack ph2-stack-2" aria-hidden="true"></div>
+                    <div className="ph2-folder-stack ph2-stack-1" aria-hidden="true"></div>
+                    <figure className="ph2-folder-photo">
+                      <div className="ph2-folder-cover-empty">
+                        <Icon name="image" size={28} />
+                        <small>{c.name}</small>
+                      </div>
+                      <figcaption>
+                        <strong>{c.name}</strong>
+                        <small>{c.folder_count} album{c.folder_count !== 1 ? 's' : ''}</small>
+                      </figcaption>
+                    </figure>
+                  </Link>
+                ))}
+              </div>
+            )
           ) : folders.length === 0 ? (
             <div className="ph2-empty">
               <Icon name="book" size={48} />
               <h3>No albums yet</h3>
-              <p>Photo albums will appear here once admin creates them.</p>
+              <p>No folders in this category yet.</p>
             </div>
           ) : (
             <>
-              {/* Header for category mode */}
               {activeCat && (
                 <div className="ph2-folder-head">
                   <h2>{activeCat.name}</h2>
                   <small>{folders.length} album{folders.length !== 1 ? 's' : ''}</small>
                 </div>
               )}
-
-              {/* Polaroid-style folder cards */}
               <div className="ph2-folder-grid">
                 {folders.map((f) => (
                   <Link
                     key={f.id}
-                    href={`/photos/?category=${f.category_slug || activeCat?.slug}&folder=${f.slug}`}
+                    href={`/photos/?category=${activeCat?.slug}&folder=${f.slug}`}
                     className="ph2-folder-card"
                   >
                     <div className="ph2-folder-stack ph2-stack-3" aria-hidden="true"></div>
@@ -183,10 +209,7 @@ export default async function PhotosPage({ searchParams }: { searchParams: SP })
                       )}
                       <figcaption>
                         <strong>{f.name}</strong>
-                        <small>
-                          {f.category_name && !activeCat ? `${f.category_name} · ` : ''}
-                          {f.photo_count} photo{f.photo_count !== 1 ? 's' : ''}
-                        </small>
+                        <small>{f.photo_count} photo{f.photo_count !== 1 ? 's' : ''}</small>
                       </figcaption>
                     </figure>
                   </Link>
