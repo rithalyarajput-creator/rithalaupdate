@@ -13,7 +13,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${SITE}/reels/`,             lastModified: new Date(), changeFrequency: 'weekly',   priority: 0.7 },
     { url: `${SITE}/contact/`,           lastModified: new Date(), changeFrequency: 'yearly',   priority: 0.6 },
     { url: `${SITE}/faqs/`,              lastModified: new Date(), changeFrequency: 'monthly',  priority: 0.6 },
-    { url: `${SITE}/rithala-village-history/`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.7 },
+    { url: `${SITE}/rithala-village-history/`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${SITE}/rajputana-history/`,       lastModified: new Date(), changeFrequency: 'monthly', priority: 0.9 },
   ];
 
   try {

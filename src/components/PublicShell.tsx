@@ -23,7 +23,12 @@ function parseMenu(json: string | undefined): MenuItem[] {
 const FALLBACK_HEADER: MenuItem[] = [
   { label: 'Home', url: '/' },
   { label: 'Blog', url: '/blog/' },
-  { label: 'History', url: '/rithala-village-history/' },
+  {
+    label: 'History', url: '/rithala-village-history/', children: [
+      { label: 'Rithala Village', url: '/rithala-village-history/' },
+      { label: 'Rajputana History', url: '/rajputana-history/' },
+    ],
+  },
   { label: 'Photos', url: '/photos/' },
   {
     label: 'About', url: '/about/', children: [
