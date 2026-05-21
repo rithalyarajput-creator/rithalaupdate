@@ -158,7 +158,7 @@ export default async function ContactPage() {
                     <span className="ctf-info-ic"><Icon name="clock" size={16} /></span>
                     <div>
                       <small>Response Time</small>
-                      <span>Within 2448 hours</span>
+                      <span>Within 24-48 hours</span>
                     </div>
                   </div>
                 </div>

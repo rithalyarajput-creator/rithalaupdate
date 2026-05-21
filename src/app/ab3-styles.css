@@ -2,6 +2,9 @@
    ABOUT PAGE — Professional redesign (ab-)
    ============================================================ */
 
+/* Page wrapper — ensures no cream body background bleeds at bottom */
+.ab-page-wrap { background: #0f172a; }
+
 /* HERO */
 .ab-hero {
   position: relative;

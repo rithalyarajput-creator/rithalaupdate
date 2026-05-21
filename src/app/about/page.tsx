@@ -178,6 +178,7 @@ export default async function AboutPage() {
 
   return (
     <PublicShell>
+      <div className="ab-page-wrap">
 
       {/* HERO */}
       <section className="ab-hero">
@@ -348,6 +349,7 @@ export default async function AboutPage() {
           </div>
         </div>
       </section>
+      </div>
 
     </PublicShell>
   );
