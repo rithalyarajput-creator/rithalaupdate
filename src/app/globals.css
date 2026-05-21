@@ -1315,12 +1315,12 @@ p { margin: 0 0 1em; }
 /* Polaroid folder cards — 4 per row */
 .ph2-folder-grid {
   display: grid;
-  gap: 55px 30px;
+  gap: 55px 60px;
   grid-template-columns: repeat(4, 1fr);
-  padding: 30px 10px 60px;
+  padding: 30px 20px 60px;
 }
 @media (max-width: 900px) {
-  .ph2-folder-grid { grid-template-columns: repeat(3, 1fr); gap: 48px 22px; }
+  .ph2-folder-grid { grid-template-columns: repeat(3, 1fr); gap: 48px 50px; }
 }
 @media (max-width: 600px) {
   .ph2-folder-grid { grid-template-columns: repeat(2, 1fr); gap: 40px 14px; }
