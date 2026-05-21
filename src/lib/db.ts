@@ -106,7 +106,12 @@ export async function getPublishedPosts(limit = 50) {
 
 export async function getPostBySlug(slug: string) {
   const { rows } = await sql<Post>`
-    SELECT * FROM posts WHERE slug = ${slug} LIMIT 1
+    SELECT * FROM posts
+    WHERE slug = ${slug}
+       OR slug LIKE ${'%/' + slug}
+    ORDER BY
+      CASE WHEN slug = ${slug} THEN 0 ELSE 1 END
+    LIMIT 1
   `;
   return rows[0] || null;
 }
