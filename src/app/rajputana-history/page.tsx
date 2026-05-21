@@ -131,42 +131,29 @@ const RULERS = [
   {
     key: 'pratap',
     modifier: 'rh-ruler-card--pratap',
-    icon: '⚔️',
     name: 'Maharana Pratap',
-    fullName: 'Maharana Pratap Singh I of Mewar',
     era: '1540 – 1597 CE',
     clan: 'Sisodia, Mewar',
+    image: '/maharana-pratap.jpg',
     desc: `The indomitable king who refused Mughal subjugation. Fought the Battle of Haldighati (1576) against Akbar's general Man Singh. Lived in exile but recaptured most of Mewar by 1585. His faithful horse Chetak is as legendary as the king himself.`,
   },
   {
     key: 'prithviraj',
     modifier: 'rh-ruler-card--prithviraj',
-    icon: '🏹',
     name: 'Prithviraj Chauhan',
-    fullName: 'Prithviraj Chauhan III — Rai Pithora',
     era: '1149 – 1192 CE',
     clan: 'Chauhan, Ajmer',
+    image: '/prithviraj-chauhan.jpg',
     desc: `The last Hindu emperor of Delhi. Defeated Muhammad of Ghor at the First Battle of Tarain (1191). Known for his legendary archery — shabd-bhedi baan — and his immortal love story with Sanyogita. His fall at Tarain II (1192) changed Indian history.`,
   },
   {
     key: 'sanga',
     modifier: 'rh-ruler-card--sanga',
-    icon: '🛡️',
     name: 'Rana Sanga',
-    fullName: 'Maharana Sangram Singh of Mewar',
     era: '1484 – 1527 CE',
     clan: 'Sisodia, Mewar',
+    image: null,
     desc: `The mightiest Rajput king of the 16th century, who unified nearly all Rajput clans and came closest to driving out the Mughals. Bore 100 wounds from battle and lost an eye and a hand in combat. Defeated at Khanwa (1527) by Babur's superior artillery and tactics.`,
-  },
-  {
-    key: 'bappa',
-    modifier: 'rh-ruler-card--bappa',
-    icon: '👑',
-    name: 'Bappa Rawal',
-    fullName: 'Kalabhoja "Bappa" Rawal of Mewar',
-    era: '713 – 810 CE',
-    clan: 'Guhila/Sisodia, Mewar',
-    desc: `The legendary founder-hero of the Sisodia (Guhila) dynasty of Mewar and the progenitor of the entire Mewar royal line. Defeated the Arab invaders in 738 CE in alliance with other Rajput kings at the Battle of Rajasthan, a decisive victory that halted the Arab expansion into India.`,
   },
 ];
 
@@ -346,7 +333,11 @@ export default function RajputanaHistoryPage() {
                   itemScope
                   itemType="https://schema.org/Person"
                 >
-                  <div className="rh-ruler-img-placeholder" role="img" aria-label={r.name}></div>
+                  {r.image ? (
+                    <img src={r.image} alt={r.name} className="rh-ruler-img" />
+                  ) : (
+                    <div className="rh-ruler-img-placeholder" role="img" aria-label={r.name}></div>
+                  )}
                   <div className="rh-ruler-info">
                     <span className="rh-ruler-era">{r.era} · {r.clan}</span>
                     <h3 itemProp="name">{r.name}</h3>
