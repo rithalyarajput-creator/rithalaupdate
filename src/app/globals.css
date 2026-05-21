@@ -9616,9 +9616,11 @@ body { overflow-x: clip; }
 
 @media (max-width: 768px) {
   .sr-hero-grid { grid-template-columns: 1fr; text-align: center; }
+  .sr-hero-img { order: -1; }
+  .sr-hero-img img { max-width: 200px; }
   .sr-hero-text .sr-cta-row { justify-content: center; }
-  .sr-hero-img img { max-width: 260px; }
-  .sr-h1 { font-size: 2.2rem; }
+  .sr-social-row { justify-content: center; }
+  .sr-h1 { font-size: 2rem; }
   .about-h1 { font-size: 2rem; }
 }
 
