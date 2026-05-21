@@ -44,7 +44,23 @@ export default async function PublicShell({ children }: { children: React.ReactN
   const settings: Record<string, string> = await getAllSettings().catch(() => ({}));
   const headerMenu = parseMenu(settings.header_menu_json);
   const footerMenu = parseMenu(settings.footer_menu_json);
-  const menu = headerMenu.length > 0 ? headerMenu : FALLBACK_HEADER;
+  const rawMenu = headerMenu.length > 0 ? headerMenu : FALLBACK_HEADER;
+  // Always inject dropdown children for History and About, even if DB menu lacks them
+  const menu = rawMenu.map((item) => {
+    if (item.label === 'History' && (!item.children || item.children.length === 0)) {
+      return { ...item, children: [
+        { label: 'Rithala Village', url: '/rithala-village-history/' },
+        { label: 'Rajputana History', url: '/rajputana-history/' },
+      ]};
+    }
+    if (item.label === 'About' && (!item.children || item.children.length === 0)) {
+      return { ...item, children: [
+        { label: 'About Us', url: '/about/' },
+        { label: 'About Me', url: '/sandeep-rajput/' },
+      ]};
+    }
+    return item;
+  });
 
   const logoUrl = settings.site_logo_url || '/logo.png';
   const siteTitle = settings.site_title || 'Rithala Update';

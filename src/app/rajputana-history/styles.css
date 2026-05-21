@@ -179,10 +179,12 @@
 }
 
 .rh-vansh-icon {
-  font-size: 3rem;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #c8a44a, #e8c87a);
   margin-bottom: 16px;
   display: block;
-  line-height: 1;
 }
 
 .rh-vansh-card h3 {

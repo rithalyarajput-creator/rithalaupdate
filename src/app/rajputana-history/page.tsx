@@ -172,12 +172,12 @@ const RULERS = [
 
 /* ─── Timeline data ─────────────────────────────────────────────────────── */
 const TIMELINE = [
-  { year: '~3000 BCE', label: 'Vedic Solar & Lunar dynasties mentioned in Puranas', icon: '📜' },
-  { year: '736 CE', label: 'Tomar Rajputs found Delhi (Dhillika)', icon: '🏙️' },
-  { year: '738 CE', label: 'Bappa Rawal defeats Arab invaders at Battle of Rajasthan', icon: '⚔️' },
-  { year: '1156 CE', label: 'Rawal Jaisal founds Jaisalmer Fort', icon: '🏰' },
-  { year: '1191 CE', label: 'Prithviraj Chauhan defeats Ghor at First Battle of Tarain', icon: '🏹' },
-  { year: '1576 CE', label: 'Battle of Haldighati — Maharana Pratap vs Mughals', icon: '🛡️' },
+  { year: '~3000 BCE', label: 'Vedic Solar & Lunar dynasties mentioned in Puranas' },
+  { year: '736 CE', label: 'Tomar Rajputs found Delhi (Dhillika)' },
+  { year: '738 CE', label: 'Bappa Rawal defeats Arab invaders at Battle of Rajasthan' },
+  { year: '1156 CE', label: 'Rawal Jaisal founds Jaisalmer Fort' },
+  { year: '1191 CE', label: 'Prithviraj Chauhan defeats Ghor at First Battle of Tarain' },
+  { year: '1576 CE', label: 'Battle of Haldighati — Maharana Pratap vs Mughals' },
 ];
 
 /* ─── Component ─────────────────────────────────────────────────────────── */
@@ -203,7 +203,7 @@ export default function RajputanaHistoryPage() {
             <div className="rh-timeline" role="list" aria-label="Key dates in Rajput history">
               {TIMELINE.map((t) => (
                 <div className="rh-timeline-item" key={t.year} role="listitem">
-                  <div className="rh-timeline-dot" aria-hidden="true">{t.icon}</div>
+                  <div className="rh-timeline-dot" aria-hidden="true"></div>
                   <span className="rh-timeline-year">{t.year}</span>
                   <span className="rh-timeline-label">{t.label}</span>
                 </div>
@@ -280,7 +280,7 @@ export default function RajputanaHistoryPage() {
                   itemScope
                   itemType="https://schema.org/Thing"
                 >
-                  <span className="rh-vansh-icon" aria-hidden="true">{v.icon}</span>
+                  <span className="rh-vansh-icon" aria-hidden="true"></span>
                   <h3 itemProp="name">{v.name}</h3>
                   <span className="rh-vansh-sanskrit">{v.sanskrit} | {v.hindi}</span>
                   <p>{v.desc}</p>
@@ -346,9 +346,7 @@ export default function RajputanaHistoryPage() {
                   itemScope
                   itemType="https://schema.org/Person"
                 >
-                  <div className="rh-ruler-img-placeholder" role="img" aria-label={r.name}>
-                    {r.icon}
-                  </div>
+                  <div className="rh-ruler-img-placeholder" role="img" aria-label={r.name}></div>
                   <div className="rh-ruler-info">
                     <span className="rh-ruler-era">{r.era} · {r.clan}</span>
                     <h3 itemProp="name">{r.name}</h3>
