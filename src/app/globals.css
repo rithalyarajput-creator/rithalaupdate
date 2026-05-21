@@ -4193,19 +4193,19 @@ body { overflow-x: clip; }
 }
 @media (max-width: 700px) {
   .bc-grid {
-    display: flex;
-    flex-direction: row;
-    overflow-x: auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    overflow-x: unset;
     overflow-y: visible;
-    scroll-snap-type: x mandatory;
-    gap: 14px;
+    scroll-snap-type: none;
+    gap: 20px;
     padding: 10px 4px 16px;
     scrollbar-width: none;
   }
   .bc-grid::-webkit-scrollbar { display: none; }
   .bc-card {
-    flex: 0 0 82vw;
-    scroll-snap-align: start;
+    flex: unset;
+    scroll-snap-align: none;
   }
   .lp2-head { flex-direction: column; gap: 14px; }
   .lp2-view-all { align-self: flex-start; }
@@ -9506,9 +9506,17 @@ body { overflow-x: clip; }
 .home-test-dot-arrow { background: #fff; border: 1.5px solid #e2e8f0; border-radius: 50%; width: 34px; height: 34px; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; color: #475569; transition: background 0.2s, color 0.2s; }
 .home-test-dot-arrow:hover { background: #b45309; color: #fff; border-color: #b45309; }
 @media (max-width: 768px) {
-  .home-test-card { flex: 0 0 82%; }
+  .home-test-card { flex: 0 0 88%; min-height: unset; }
   .home-test-section { padding: 40px 0; }
   .home-test-head h2 { font-size: 1.5rem; }
+  /* Dots smaller on mobile */
+  .home-test-dot { width: 7px; height: 7px; }
+  .home-test-dot.active { transform: scale(1.2); }
+  .home-test-dot-arrow { width: 28px; height: 28px; }
+  .home-test-dots { gap: 6px; margin-top: 16px; }
+  /* Card rectangle on mobile: wide, less tall */
+  .home-test-card { padding: 18px 16px; }
+  .home-test-text { font-size: 0.88rem; -webkit-line-clamp: 4; }
 }
 
 /* Testimonial modal */
