@@ -204,7 +204,7 @@ export default async function HomePage() {
             </div>
           ) : (
             <>
-            <div className="bc-grid">
+            <div className="bc-grid bc-grid--swipe">
               {posts.map((p: any) => (
                 <Link key={p.id} href={`/blog/${p.slug}/`} className="bc-card">
                   <div className="bc-img-wrap">

@@ -4187,6 +4187,12 @@ body { overflow-x: clip; }
 }
 @media (max-width: 700px) {
   .bc-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 10px 4px 16px;
+  }
+  /* Home page only — horizontal swipe */
+  .bc-grid--swipe {
     display: flex;
     flex-direction: row;
     overflow-x: auto;
@@ -4197,8 +4203,8 @@ body { overflow-x: clip; }
     padding: 10px 16px 16px;
     scrollbar-width: none;
   }
-  .bc-grid::-webkit-scrollbar { display: none; }
-  .bc-card {
+  .bc-grid--swipe::-webkit-scrollbar { display: none; }
+  .bc-grid--swipe .bc-card {
     flex: 0 0 82vw;
     max-width: 300px;
     scroll-snap-align: start;
