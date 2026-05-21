@@ -1241,17 +1241,18 @@ p { margin: 0 0 1em; }
   justify-content: center;
 }
 @media (max-width: 767px) {
-  .ph2-tabs-section { padding: 12px 0 6px; }
+  .ph2-tabs-section { padding: 14px 0 10px; }
   .ph2-tabs {
     flex-wrap: nowrap;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
     justify-content: flex-start;
-    padding-bottom: 4px;
+    padding: 0 16px 6px;
+    gap: 10px;
   }
   .ph2-tabs::-webkit-scrollbar { display: none; }
-  .ph2-tab { flex-shrink: 0; font-size: 0.82rem; padding: 6px 12px; }
+  .ph2-tab { flex-shrink: 0; font-size: 0.85rem; padding: 8px 16px; }
 }
 .ph2-tab {
   display: inline-flex; align-items: center; gap: 6px;
