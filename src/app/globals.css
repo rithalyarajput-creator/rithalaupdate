@@ -6230,7 +6230,7 @@ body { overflow-x: clip; }
 
 /* Mobile: filter in one horizontal scroll line */
 @media (max-width: 767px) {
-  .blog2-filter-section { padding: 14px 0 8px; }
+  .blog2-filter-section { padding: 14px 16px 8px; }
   .blog2-filter-row { flex-wrap: nowrap; gap: 8px; }
   .bf2-bar {
     flex-wrap: nowrap;
