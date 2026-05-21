@@ -28,7 +28,7 @@ export default async function HomePage() {
   let featuredReels: any[] = [];
   let allReels: any[] = [];
   let homeFaqs: any[] = [];
-  try { posts = await getPublishedPosts(6); } catch {}
+  try { posts = await getPublishedPosts(3); } catch {}
   try { featuredReels = await getFeaturedReels(6); } catch {}
   try { allReels = await getPublishedReels(20); } catch {}
   try {
@@ -203,6 +203,7 @@ export default async function HomePage() {
               <p><BiText hi="अभी कोई पोस्ट नहीं है।" en="No posts yet." /> <Link href="/admin/login"><BiText hi="Admin में लॉगिन करें" en="Login to admin" /></Link></p>
             </div>
           ) : (
+            <>
             <div className="bc-grid">
               {posts.map((p: any) => (
                 <Link key={p.id} href={`/blog/${p.slug}/`} className="bc-card">
@@ -235,6 +236,13 @@ export default async function HomePage() {
                 </Link>
               ))}
             </div>
+            <div style={{ textAlign: 'center', marginTop: 36 }}>
+              <Link href="/blog/" className="lp2-more-btn">
+                <BiText hi="और पोस्ट देखें" en="More Posts" />
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" width="16" height="16"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </Link>
+            </div>
+            </>
           )}
         </div>
       </section>

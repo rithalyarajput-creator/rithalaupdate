@@ -4124,6 +4124,23 @@ body { overflow-x: clip; }
   transform: translateY(-2px);
   box-shadow: 0 8px 18px rgba(220,38,38,0.3);
 }
+.lp2-more-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: transparent;
+  border: 2px solid #dc2626;
+  color: #dc2626;
+  padding: 12px 32px;
+  border-radius: 50px;
+  font-weight: 700; font-size: 1rem;
+  text-decoration: none;
+  transition: all 0.25s;
+}
+.lp2-more-btn:hover {
+  background: linear-gradient(135deg, #dc2626, #ea580c);
+  color: #fff !important;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(220,38,38,0.3);
+}
 
 .lp2-rail {
   display: grid;

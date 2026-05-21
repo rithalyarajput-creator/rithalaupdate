@@ -210,12 +210,12 @@ export async function getAuthors() {
 }
 
 export async function getCategoryPostCounts() {
-  const { rows } = await sql<{ id: number; slug: string; name: string; n: number }>`
-    SELECT c.id, c.slug, c.name, COUNT(pc.post_id)::int AS n
+  const { rows } = await sql<{ id: number; slug: string; name: string; description: string | null; n: number }>`
+    SELECT c.id, c.slug, c.name, c.description, COUNT(pc.post_id)::int AS n
     FROM categories c
     LEFT JOIN post_categories pc ON pc.category_id = c.id
     LEFT JOIN posts p ON p.id = pc.post_id AND p.status = 'published'
-    GROUP BY c.id, c.slug, c.name
+    GROUP BY c.id, c.slug, c.name, c.description
     ORDER BY c.name
   `;
   return rows;

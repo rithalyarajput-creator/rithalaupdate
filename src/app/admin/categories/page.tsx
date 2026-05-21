@@ -11,7 +11,7 @@ export default async function CategoriesPage() {
   const session = await getSession();
   if (!session) redirect('/admin/login');
 
-  const cats: { id: number; slug: string; name: string; n: number }[] = await getCategoryPostCounts().catch(() => []);
+  const cats: { id: number; slug: string; name: string; description: string | null; n: number }[] = await getCategoryPostCounts().catch(() => []);
   const totalPosts: number = cats.reduce((s, c) => s + c.n, 0);
   const activeCount: number = cats.filter((c) => c.n > 0).length;
   const topCat = cats.reduce<{ id: number; slug: string; name: string; n: number } | null>(
