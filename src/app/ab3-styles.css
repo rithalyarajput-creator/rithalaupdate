@@ -292,8 +292,21 @@
 /* ============================================================
    SANDEEP PAGE — Horizontal gallery + float image
    ============================================================ */
-.sr-gallery-scroll-wrap { padding: 0 0 30px; }
+.sr-gallery-scroll-wrap { padding: 0 0 30px; overflow: hidden; }
 .sr-gallery-scroll { display: flex; gap: 18px; flex-wrap: wrap; justify-content: center; padding: 10px 24px 16px; }
+@media (max-width: 768px) {
+  .sr-gallery-scroll {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    justify-content: flex-start;
+    padding: 10px 16px 16px;
+    scrollbar-width: none;
+  }
+  .sr-gallery-scroll::-webkit-scrollbar { display: none; }
+  .sr-art-card-h { flex: 0 0 72vw; max-width: 240px; scroll-snap-align: start; }
+}
 .sr-gallery-scroll::-webkit-scrollbar { height: 5px; }
 .sr-gallery-scroll::-webkit-scrollbar-track { background: transparent; }
 .sr-gallery-scroll::-webkit-scrollbar-thumb { background: #f5c61b; border-radius: 10px; }
