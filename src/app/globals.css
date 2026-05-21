@@ -4187,19 +4187,21 @@ body { overflow-x: clip; }
 }
 @media (max-width: 700px) {
   .bc-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    overflow-x: unset;
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
     overflow-y: visible;
-    scroll-snap-type: none;
-    gap: 20px;
-    padding: 10px 4px 16px;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: 16px;
+    padding: 10px 16px 16px;
     scrollbar-width: none;
   }
   .bc-grid::-webkit-scrollbar { display: none; }
   .bc-card {
-    flex: unset;
-    scroll-snap-align: none;
+    flex: 0 0 82vw;
+    max-width: 300px;
+    scroll-snap-align: start;
   }
   .lp2-head { flex-direction: column; gap: 14px; }
   .lp2-view-all { align-self: flex-start; }
