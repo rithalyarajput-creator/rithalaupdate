@@ -134,7 +134,7 @@ const RULERS = [
     name: 'Maharana Pratap',
     era: '1540 – 1597 CE',
     clan: 'Sisodia, Mewar',
-    image: '/maharana-pratap.jpg',
+    image: null,
     desc: `The indomitable king who refused Mughal subjugation. Fought the Battle of Haldighati (1576) against Akbar's general Man Singh. Lived in exile but recaptured most of Mewar by 1585. His faithful horse Chetak is as legendary as the king himself.`,
   },
   {
@@ -143,7 +143,7 @@ const RULERS = [
     name: 'Prithviraj Chauhan',
     era: '1149 – 1192 CE',
     clan: 'Chauhan, Ajmer',
-    image: '/prithviraj-chauhan.jpg',
+    image: null,
     desc: `The last Hindu emperor of Delhi. Defeated Muhammad of Ghor at the First Battle of Tarain (1191). Known for his legendary archery — shabd-bhedi baan — and his immortal love story with Sanyogita. His fall at Tarain II (1192) changed Indian history.`,
   },
   {
@@ -185,7 +185,7 @@ export default function RajputanaHistoryPage() {
         </section>
 
         {/* ── Timeline strip ──────────────────────────────────────────────── */}
-        <div style={{ background: '#1a0a00', padding: '0 0 4px' }}>
+        <div style={{ background: '#1a0a00', padding: '8px 0 16px' }}>
           <div className="rh-container">
             <div className="rh-timeline" role="list" aria-label="Key dates in Rajput history">
               {TIMELINE.map((t) => (

@@ -5,7 +5,7 @@
 /* ---------- Reset / base for page ---------- */
 .rh-page {
   font-family: 'Georgia', 'Times New Roman', serif;
-  color: #1a1a1a;
+  color: #f0e6d0;
   line-height: 1.75;
   background: #1a0a00;
 }
@@ -73,6 +73,16 @@
 /* ---------- Section base ---------- */
 .rh-section {
   padding: 72px 0;
+  background: #1a0a00;
+}
+
+.rh-section p,
+.rh-section li {
+  color: #f0e6d0;
+}
+
+.rh-section strong {
+  color: #f5d98a;
 }
 
 .rh-section-alt {
@@ -83,7 +93,7 @@
 .rh-section-title {
   font-size: 2rem;
   font-weight: 700;
-  color: #2d1a00;
+  color: #f5d98a;
   margin: 0 0 12px;
   position: relative;
   display: inline-block;
@@ -101,7 +111,7 @@
 
 .rh-section-lead {
   font-size: 1.1rem;
-  color: #5a3a1a;
+  color: #e8d5a0;
   max-width: 780px;
   margin: 0 0 48px;
   line-height: 1.8;
@@ -118,7 +128,7 @@
 
 .rh-intro-text p {
   font-size: 1.05rem;
-  color: #3a2a10;
+  color: #f0e6d0;
   margin: 0 0 18px;
   line-height: 1.85;
 }
@@ -371,30 +381,30 @@
 }
 
 .rh-ruler-img-placeholder {
-  height: 120px;
+  height: 180px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 2.5rem;
+  font-size: 3.5rem;
   font-weight: 800;
-  color: rgba(255,255,255,0.5);
+  color: rgba(255,255,255,0.7);
   letter-spacing: 2px;
 }
 
 .rh-ruler-card--pratap .rh-ruler-img-placeholder {
   background: linear-gradient(135deg, #8b1a1a, #c0392b);
 }
-.rh-ruler-card--pratap .rh-ruler-img-placeholder::after { content: 'MP'; }
+.rh-ruler-card--pratap .rh-ruler-img-placeholder::after { content: '⚔'; }
 
 .rh-ruler-card--prithviraj .rh-ruler-img-placeholder {
   background: linear-gradient(135deg, #1a3a6b, #2c5f8a);
 }
-.rh-ruler-card--prithviraj .rh-ruler-img-placeholder::after { content: 'PC'; }
+.rh-ruler-card--prithviraj .rh-ruler-img-placeholder::after { content: '⚔'; }
 
 .rh-ruler-card--sanga .rh-ruler-img-placeholder {
   background: linear-gradient(135deg, #5c2d00, #8b4513);
 }
-.rh-ruler-card--sanga .rh-ruler-img-placeholder::after { content: 'RS'; }
+.rh-ruler-card--sanga .rh-ruler-img-placeholder::after { content: '⚔'; }
 
 .rh-ruler-img {
   width: 100%;
