@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import PublicShell from '@/components/PublicShell';
+import { RulerCard, type Ruler } from './RulerModal';
 import './styles.css';
 
 export const dynamic = 'force-dynamic';
@@ -127,7 +128,7 @@ const CLANS = [
   },
 ];
 
-const RULERS = [
+const RULERS: Ruler[] = [
   {
     key: 'pratap',
     modifier: 'rh-ruler-card--pratap',
@@ -136,15 +137,57 @@ const RULERS = [
     clan: 'Sisodia, Mewar',
     image: 'https://9qidomuaf1nvlbrh.public.blob.vercel-storage.com/uploads/1780122956511-maharana-pratap-rajput-warrior-rithala-update.jpg-4cWdZpFodaIJNbWHtqBgrxeR7pHmEu.png',
     desc: `The indomitable king who refused Mughal subjugation. Fought the Battle of Haldighati (1576) against Akbar's general Man Singh. Lived in exile but recaptured most of Mewar by 1585. His faithful horse Chetak is as legendary as the king himself.`,
+    fullHistory: {
+      born: '9 May 1540, Kumbhalgarh, Rajasthan',
+      died: '19 January 1597, Chavand, Rajasthan',
+      reign: '1572 – 1597 CE (25 years)',
+      capital: 'Chittorgarh (lost), then Chavand',
+      father: 'Maharana Udai Singh II',
+      battles: [
+        'Battle of Haldighati (1576) — vs Mughal general Man Singh I; Pratap fought valiantly but was forced to retreat; his horse Chetak carried him to safety despite being mortally wounded',
+        'Battle of Dewair (1582) — decisive Rajput victory; Pratap recaptured Dewair and began reconquering Mewar',
+        'Guerrilla campaigns (1577–1597) — Pratap used Aravalli hills for guerrilla warfare, continuously harassing Mughal forces and reclaiming territory',
+      ],
+      achievements: [
+        'Refused to submit to Akbar — the only major Rajput ruler who never accepted Mughal sovereignty',
+        'Recaptured most of Mewar (except Chittorgarh and Ajmer) by 1585 through relentless guerrilla warfare',
+        'Built a new capital at Chavand and revived Mewar\'s administration in exile',
+        'Maintained Rajput honour and independence against the mightiest empire in India\'s history',
+        'His horse Chetak is immortalised in Rajput folklore for carrying the wounded king to safety before dying',
+      ],
+      legacy: 'Maharana Pratap is the supreme symbol of Rajput resistance and Hindu pride. He refused luxury and comfort to fight for his motherland — living in forests, eating grass rotis, sleeping on the ground — vowing never to rest until Chittorgarh was free. He is worshipped as a folk hero across Rajasthan and India. The Indian Army\'s Haldighati war cry and countless statues, films, and epics celebrate his unbreakable spirit. His life proves that honour is greater than empire.',
+      story: 'Born on 9 May 1540 at the great fortress of Kumbhalgarh, Pratap Singh was the eldest son of Maharana Udai Singh II of Mewar. When his father died in 1572, Pratap was crowned Maharana despite court intrigues favouring a younger brother. Akbar, the Mughal emperor, sent multiple diplomatic missions demanding Pratap\'s submission — all of which Pratap politely but firmly refused. In 1576, Akbar sent a massive army under his Rajput general Man Singh I to crush Mewar. At the narrow pass of Haldighati, Pratap met this force with a smaller army. The battle was fierce — Pratap personally charged at Man Singh\'s elephant but was surrounded and forced to retreat. His beloved horse Chetak, though wounded in the fight, galloped 26 km before collapsing. For the next decade, Pratap lived as a fugitive in the Aravalli forests — yet never surrendered. By 1585, with Akbar distracted by conflicts in the northwest, Pratap launched a series of devastating campaigns and recaptured 36 of Mewar\'s 84 administrative districts. He died peacefully on 19 January 1597 — free, undefeated in spirit, in the forests he had made his kingdom.',
+    },
   },
   {
     key: 'prithviraj',
     modifier: 'rh-ruler-card--prithviraj',
     name: 'Prithviraj Chauhan',
     era: '1149 – 1192 CE',
-    clan: 'Chauhan, Ajmer',
+    clan: 'Chauhan (Chahamana), Ajmer',
     image: 'https://9qidomuaf1nvlbrh.public.blob.vercel-storage.com/uploads/1780122964102-prithviraj-chauhan-rajput-emperor-rithala-update.jpg-g07BjhuXHOlWe81EsYx0Vm4p16naRT.png',
     desc: `The last Hindu emperor of Delhi. Defeated Muhammad of Ghor at the First Battle of Tarain (1191). Known for his legendary archery — shabd-bhedi baan — and his immortal love story with Sanyogita. His fall at Tarain II (1192) changed Indian history.`,
+    fullHistory: {
+      born: 'c. 1149 CE, Ajmer, Rajasthan',
+      died: 'c. 1192 CE, Ajmer (after capture at Tarain)',
+      reign: '1178 – 1192 CE (14 years)',
+      capital: 'Ajmer and Delhi (Qila Rai Pithora)',
+      father: 'Someshwar Chauhan',
+      battles: [
+        'First Battle of Tarain (1191) — crushing Rajput victory; Muhammad of Ghor was personally wounded and fled the battlefield; Prithviraj showed mercy and released him',
+        'Second Battle of Tarain (1192) — catastrophic Rajput defeat; Muhammad of Ghor returned with 120,000 cavalry; Prithviraj was captured and taken to Ghor',
+        'Multiple campaigns against Chandelas, Paramaras, and Ghurids throughout his reign establishing dominance over North India',
+      ],
+      achievements: [
+        'United the Rajput confederacy and controlled the entire region from Punjab to Rajasthan',
+        'Built the great fortification Qila Rai Pithora at Delhi — foundation of the city of Delhi',
+        'Defeated Muhammad of Ghor at First Battle of Tarain (1191) — one of the greatest Rajput military victories',
+        'Legendary master of shabd-bhedi baan (sound-guided archery) — could hit a target by sound alone in darkness',
+        'His love story with Sanyogita, princess of Kannauj, is one of the greatest romantic epics in Indian literature',
+      ],
+      legacy: 'Prithviraj Chauhan III is remembered as the last great Hindu emperor of Delhi. His defeat at Tarain II opened the floodgates of Turkic rule in North India — a watershed moment in Indian history. The legend of his shabd-bhedi baan — killing Muhammad of Ghor in Ghor itself after being blinded — though debated by historians, has kept his memory alive for centuries. The epic poem Prithviraj Raso by his court poet Chand Bardai immortalised his deeds. His fort Qila Rai Pithora still stands in South Delhi as testimony to his power.',
+      story: 'Prithviraj Chauhan III ascended the throne of Ajmer around 1178 CE at a young age and soon proved himself a warrior of extraordinary ability. He extended his kingdom across North India, defeating rival Rajput kings and establishing his capital at both Ajmer and Delhi. The great romance of his life was his elopement with Sanyogita, daughter of the rival king Jaichand of Kannauj — a love story immortalised in Chand Bardai\'s Prithviraj Raso. In 1191, when Muhammad of Ghor invaded North India, Prithviraj met him at Tarain (near Thanesar, Haryana) and inflicted a crushing defeat — personally wounding Muhammad, who fled in disgrace. In an act of Rajput chivalry, Prithviraj released the defeated Muhammad. This proved fatal: Muhammad returned in 1192 with a vastly larger army and used new tactics — feigning retreat, then attacking with fresh cavalry waves. Prithviraj\'s army was routed and he was captured. Taken to Ghazni, according to legend he used his extraordinary hearing to shoot Muhammad of Ghor with a sound-guided arrow before being killed himself. Whether legend or history, this story of a blinded king defying his captor to the last became the defining image of Rajput honour.',
+    },
   },
   {
     key: 'sanga',
@@ -154,6 +197,27 @@ const RULERS = [
     clan: 'Sisodia, Mewar',
     image: 'https://9qidomuaf1nvlbrh.public.blob.vercel-storage.com/uploads/1780122969037-rana-sanga-rajput-warrior-rithala-update.jpg-J1daVJIgGPStF8ndpl3b7V1cgl7heH.png',
     desc: `The mightiest Rajput king of the 16th century, who unified nearly all Rajput clans and came closest to driving out the Mughals. Bore 100 wounds from battle and lost an eye and a hand in combat. Defeated at Khanwa (1527) by Babur's superior artillery and tactics.`,
+    fullHistory: {
+      born: 'c. 1484 CE, Chittorgarh, Rajasthan',
+      died: '30 January 1528, Kalpi (possibly poisoned by his own nobles)',
+      reign: '1508 – 1527 CE (19 years)',
+      capital: 'Chittorgarh, Rajasthan',
+      father: 'Maharana Raimal',
+      battles: [
+        'Battle of Khatoli (1518) — defeated Ibrahim Lodi, Sultan of Delhi; captured the Sultan\'s commander',
+        'Battle of Dholpur (1519) — another defeat inflicted on Ibrahim Lodi\'s Delhi Sultanate forces',
+        'Battle of Khanwa (1527) — against Babur\'s Mughal army; Rana Sanga led 100,000+ Rajput warriors but was defeated by Babur\'s superior artillery (tufangchi) and flanking tactics; this battle decided India\'s future',
+      ],
+      achievements: [
+        'United the most powerful Rajput confederacy in history — controlling Rajasthan, Malwa, and parts of the Delhi Sultanate',
+        'Bore 80–100 battle wounds, lost one eye, lost one arm, and was permanently lame — yet continued to fight',
+        'Repeatedly defeated the weakening Delhi Sultanate under Ibrahim Lodi',
+        'At his peak, controlled more territory than any Rajput king since the 12th century',
+        'Was on the verge of establishing a Hindu empire over North India before Babur\'s invasion',
+      ],
+      legacy: 'Rana Sanga came agonisingly close to restoring a great Hindu empire in North India. He was the last Rajput king who had the power to unite all clans and challenge the emerging Mughal empire. His body — marked by 100 wounds, missing an eye, missing an arm, permanently lame — was a living testament to decades of unceasing battle. Had he won at Khanwa, the course of Indian history would have been entirely different. He is revered in Rajasthan as the "last great Rajput" — the final defender of an era.',
+      story: 'Rana Sangram Singh, known as Rana Sanga, was born around 1484 and rose to the throne of Mewar in 1508 after a brutal succession struggle in which he lost an eye. Far from weakening him, this forged him into the most formidable warrior-king of his age. Over the next two decades, Rana Sanga\'s body became a map of battles: he lost his left arm in one campaign, his right eye in another, suffered a permanent limp from a lance wound, and accumulated over 100 scars from sword, arrow, and lance. Yet he never stopped fighting. He systematically defeated the weakening Delhi Sultanate and built a confederacy of Rajput clans that stretched from Rajasthan to Malwa. He even initially invited Babur from Kabul to help defeat Ibrahim Lodi — a decision he quickly regretted. After Babur crushed Ibrahim Lodi at Panipat (1526), Rana Sanga gathered a massive Rajput army to eject the newcomers from India. At Khanwa in March 1527, his 100,000-strong force met Babur\'s smaller but technologically superior army. Babur\'s artillery — a new weapon in Indian warfare — decimated the Rajput cavalry charges. Rana Sanga was wounded and carried from the battlefield. He never recovered his former power and died in January 1528, possibly poisoned by his own nobles who feared his reckless courage would destroy them.',
+    },
   },
 ];
 
@@ -327,23 +391,7 @@ export default function RajputanaHistoryPage() {
             </p>
             <div className="rh-rulers-grid">
               {RULERS.map((r) => (
-                <article
-                  key={r.key}
-                  className={`rh-ruler-card ${r.modifier}`}
-                  itemScope
-                  itemType="https://schema.org/Person"
-                >
-                  {r.image ? (
-                    <img src={r.image} alt={r.name} className="rh-ruler-img" />
-                  ) : (
-                    <div className="rh-ruler-img-placeholder" role="img" aria-label={r.name}></div>
-                  )}
-                  <div className="rh-ruler-info">
-                    <span className="rh-ruler-era">{r.era} · {r.clan}</span>
-                    <h3 itemProp="name">{r.name}</h3>
-                    <p itemProp="description">{r.desc}</p>
-                  </div>
-                </article>
+                <RulerCard key={r.key} ruler={r} />
               ))}
             </div>
           </div>
