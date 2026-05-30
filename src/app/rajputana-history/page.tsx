@@ -451,10 +451,10 @@ export default function RajputanaHistoryPage() {
             </p>
             <div className="rh-cta-buttons">
               <a href="/rithala-village-history/" className="rh-btn rh-btn--gold">
-                📖 Rithala Village History
+                Rithala Village History
               </a>
               <a href="/sandeep-rajput/" className="rh-btn rh-btn--outline">
-                👤 Sandeep Rajput — Rithalya Rajput
+                Sandeep Rajput — Rithalya Rajput
               </a>
             </div>
           </div>
