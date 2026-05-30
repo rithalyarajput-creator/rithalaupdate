@@ -404,3 +404,41 @@
     padding: 18px 18px 22px;
   }
 }
+
+/* ---------- School Gallery ---------- */
+.sr-school-gallery {
+  padding: 0 24px 24px;
+}
+.sr-school-gallery-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #92400e;
+  margin-bottom: 12px;
+  letter-spacing: 0.02em;
+}
+.sr-school-gallery-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.sr-school-gallery-img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  object-fit: cover;
+  aspect-ratio: 4/3;
+  display: block;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+  transition: transform 0.25s;
+}
+.sr-school-gallery-img:hover {
+  transform: scale(1.02);
+}
+@media (max-width: 500px) {
+  .sr-school-gallery-grid {
+    grid-template-columns: 1fr;
+  }
+  .sr-school-gallery {
+    padding: 0 18px 20px;
+  }
+}

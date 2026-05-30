@@ -176,6 +176,23 @@ export default async function SandeepRajputPage() {
                 View School on Google
               </a>
             </div>
+
+            {/* School Gallery */}
+            <div className="sr-school-gallery">
+              <div className="sr-school-gallery-title">📸 School Memories</div>
+              <div className="sr-school-gallery-grid">
+                <img
+                  src="https://9qidomuaf1nvlbrh.public.blob.vercel-storage.com/uploads/1780126495893-sandeep-rajput-rithalya-rajput-rana-pratap-sarvodaya-school-rithala-delhi.jpg-aOf2OUhgtMt1zncuB5nE4EAvhOsiRU.jpg"
+                  alt="Sandeep Rajput Rithalya Rajput with school friends at Rana Pratap Sarvodaya School Rithala Delhi"
+                  className="sr-school-gallery-img"
+                />
+                <img
+                  src="https://9qidomuaf1nvlbrh.public.blob.vercel-storage.com/uploads/1780128070439-Sandeep_Rajput_at_Rana_Pratap_Sarvodaya_School_Rithala_Delhi-HiluKN1YF4KDt9BXsd0w7AQkxNocxX.webp"
+                  alt="Sandeep Rajput Rithalya Rajput at Rana Pratap Sarvodaya School Rithala Delhi"
+                  className="sr-school-gallery-img"
+                />
+              </div>
+            </div>
           </div>
 
           <h2>The Idea Behind Rithala Update</h2>
