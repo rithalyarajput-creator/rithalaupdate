@@ -321,3 +321,95 @@
 
 .sr-img-float { float: left; width: 180px; height: 220px; object-fit: cover; border-radius: 14px; margin: 4px 22px 16px 0; box-shadow: 0 8px 24px rgba(0,0,0,0.13); border: 3px solid #f5c61b; }
 @media (max-width: 600px) { .sr-img-float { float: none; width: 100%; height: auto; margin: 0 0 18px; } }
+
+/* ---------- School Card ---------- */
+.sr-school-card {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 28px;
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+  border: 1px solid #f1e6c2;
+  margin: 24px 0 32px;
+}
+.sr-school-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  min-height: 260px;
+}
+.sr-school-info {
+  padding: 24px 24px 24px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.sr-school-badge {
+  display: inline-block;
+  background: #fef3c7;
+  color: #92400e;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: 999px;
+  width: fit-content;
+}
+.sr-school-name {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #1a1a1a;
+  margin: 0;
+  line-height: 1.3;
+}
+.sr-school-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.sr-school-meta span {
+  font-size: 0.88rem;
+  color: #555;
+}
+.sr-school-desc {
+  font-size: 0.93rem;
+  color: #444;
+  line-height: 1.7;
+  margin: 0;
+}
+.sr-school-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: linear-gradient(135deg, #b91c1c, #dc2626);
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 700;
+  padding: 10px 22px;
+  border-radius: 8px;
+  text-decoration: none;
+  width: fit-content;
+  margin-top: 4px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.sr-school-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(185,28,28,0.35);
+  color: #fff;
+}
+@media (max-width: 700px) {
+  .sr-school-card {
+    grid-template-columns: 1fr;
+  }
+  .sr-school-img {
+    min-height: 220px;
+    max-height: 260px;
+  }
+  .sr-school-info {
+    padding: 18px 18px 22px;
+  }
+}

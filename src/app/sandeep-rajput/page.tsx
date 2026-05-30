@@ -145,6 +145,39 @@ export default async function SandeepRajputPage() {
           <h2>Education</h2>
           <p>{storyEducation}</p>
 
+          {/* Rana Pratap School Card */}
+          <div className="sr-school-card">
+            <img
+              src="https://9qidomuaf1nvlbrh.public.blob.vercel-storage.com/uploads/1780126495893-sandeep-rajput-rithalya-rajput-rana-pratap-sarvodaya-school-rithala-delhi.jpg-aOf2OUhgtMt1zncuB5nE4EAvhOsiRU.jpg"
+              alt="Rana Pratap Government Boys Senior Secondary School Rithala Delhi — Sandeep Rajput Rithalya Rajput"
+              className="sr-school-img"
+            />
+            <div className="sr-school-info">
+              <span className="sr-school-badge">Government Boys School · Rithala, Delhi</span>
+              <h3 className="sr-school-name">Rana Pratap Government Boys Senior Secondary School</h3>
+              <div className="sr-school-meta">
+                <span>📚 Class 7th – 12th</span>
+                <span>🕐 Timing: 1:00 PM – 6:00 PM</span>
+                <span>👨‍🏫 Boys School — Excellent Teachers</span>
+              </div>
+              <p className="sr-school-desc">
+                This school holds a very special place in my heart. I studied here from Class 7 to Class 12 —
+                some of the most important years of my life. The school ran in the afternoon shift, from 1 PM to 6 PM.
+                The teachers were exceptionally dedicated and hardworking. This is where my confidence, discipline,
+                and creative thinking truly took shape. Being part of a boys school environment taught me teamwork,
+                respect, and the value of education.
+              </p>
+              <a
+                href="https://www.google.com/search?q=Rana+Pratap+Government+Boys+Senior+Secondary+School+Rithala+Delhi"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="sr-school-btn"
+              >
+                View School on Google
+              </a>
+            </div>
+          </div>
+
           <h2>The Idea Behind Rithala Update</h2>
           {portrait2 && <img src={portrait2} alt={`${name} - digital creator and website developer`} loading="lazy" className="sr-img-float" />}
           <p>{storyIdea}</p>
