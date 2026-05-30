@@ -134,7 +134,7 @@ const RULERS = [
     name: 'Maharana Pratap',
     era: '1540 – 1597 CE',
     clan: 'Sisodia, Mewar',
-    image: null,
+    image: 'https://9qidomuaf1nvlbrh.public.blob.vercel-storage.com/uploads/1780122956511-maharana-pratap-rajput-warrior-rithala-update.jpg-4cWdZpFodaIJNbWHtqBgrxeR7pHmEu.png',
     desc: `The indomitable king who refused Mughal subjugation. Fought the Battle of Haldighati (1576) against Akbar's general Man Singh. Lived in exile but recaptured most of Mewar by 1585. His faithful horse Chetak is as legendary as the king himself.`,
   },
   {
@@ -143,7 +143,7 @@ const RULERS = [
     name: 'Prithviraj Chauhan',
     era: '1149 – 1192 CE',
     clan: 'Chauhan, Ajmer',
-    image: null,
+    image: 'https://9qidomuaf1nvlbrh.public.blob.vercel-storage.com/uploads/1780122964102-prithviraj-chauhan-rajput-emperor-rithala-update.jpg-g07BjhuXHOlWe81EsYx0Vm4p16naRT.png',
     desc: `The last Hindu emperor of Delhi. Defeated Muhammad of Ghor at the First Battle of Tarain (1191). Known for his legendary archery — shabd-bhedi baan — and his immortal love story with Sanyogita. His fall at Tarain II (1192) changed Indian history.`,
   },
   {
@@ -152,7 +152,7 @@ const RULERS = [
     name: 'Rana Sanga',
     era: '1484 – 1527 CE',
     clan: 'Sisodia, Mewar',
-    image: null,
+    image: 'https://9qidomuaf1nvlbrh.public.blob.vercel-storage.com/uploads/1780122969037-rana-sanga-rajput-warrior-rithala-update.jpg-J1daVJIgGPStF8ndpl3b7V1cgl7heH.png',
     desc: `The mightiest Rajput king of the 16th century, who unified nearly all Rajput clans and came closest to driving out the Mughals. Bore 100 wounds from battle and lost an eye and a hand in combat. Defeated at Khanwa (1527) by Babur's superior artillery and tactics.`,
   },
 ];
