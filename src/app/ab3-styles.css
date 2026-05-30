@@ -324,9 +324,8 @@
 
 /* ---------- School Card ---------- */
 .sr-school-card {
-  display: grid;
-  grid-template-columns: 280px 1fr;
-  gap: 28px;
+  display: flex;
+  flex-direction: column;
   background: #fff;
   border-radius: 16px;
   overflow: hidden;
@@ -336,13 +335,12 @@
 }
 .sr-school-img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto;
   display: block;
-  min-height: 260px;
+  object-fit: contain;
 }
 .sr-school-info {
-  padding: 24px 24px 24px 0;
+  padding: 24px;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -402,13 +400,6 @@
   color: #fff;
 }
 @media (max-width: 700px) {
-  .sr-school-card {
-    grid-template-columns: 1fr;
-  }
-  .sr-school-img {
-    min-height: 220px;
-    max-height: 260px;
-  }
   .sr-school-info {
     padding: 18px 18px 22px;
   }

@@ -156,9 +156,9 @@ export default async function SandeepRajputPage() {
               <span className="sr-school-badge">Government Boys School · Rithala, Delhi</span>
               <h3 className="sr-school-name">Rana Pratap Government Boys Senior Secondary School</h3>
               <div className="sr-school-meta">
-                <span>📚 Class 7th – 12th</span>
-                <span>🕐 Timing: 1:00 PM – 6:00 PM</span>
-                <span>👨‍🏫 Boys School — Excellent Teachers</span>
+                <span>🎓 Class 7th – 12th</span>
+                <span>⏰ Timing: 1:00 PM – 6:00 PM (Afternoon Shift)</span>
+                <span>🏫 Boys School — Dedicated & Excellent Teachers</span>
               </div>
               <p className="sr-school-desc">
                 This school holds a very special place in my heart. I studied here from Class 7 to Class 12 —
