@@ -379,25 +379,29 @@
   line-height: 1.7;
   margin: 0;
 }
+.sr-school-btns {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
 .sr-school-btn {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
   background: linear-gradient(135deg, #b91c1c, #dc2626);
-  color: #fff;
+  color: #fff !important;
   font-size: 0.9rem;
   font-weight: 700;
-  padding: 10px 22px;
+  padding: 10px 20px;
   border-radius: 8px;
   text-decoration: none;
-  width: fit-content;
-  margin-top: 4px;
   transition: transform 0.2s, box-shadow 0.2s;
 }
 .sr-school-btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(185,28,28,0.35);
-  color: #fff;
+  color: #fff !important;
 }
 @media (max-width: 700px) {
   .sr-school-info {
@@ -444,22 +448,18 @@
 }
 
 /* ---------- School Gallery Button & Modal ---------- */
-.sr-school-gallery { padding: 0 24px 24px; }
-
 .sr-school-gallery-btn {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
   background: linear-gradient(135deg, #1e3a5f, #2563eb);
-  color: #fff;
-  font-size: 0.92rem;
+  color: #fff !important;
+  font-size: 0.9rem;
   font-weight: 700;
-  padding: 11px 24px;
-  border-radius: 10px;
+  padding: 10px 20px;
+  border-radius: 8px;
   border: none;
   cursor: pointer;
   transition: transform 0.2s, box-shadow 0.2s;
-  box-shadow: 0 4px 14px rgba(37,99,235,0.3);
 }
 .sr-school-gallery-btn:hover {
   transform: translateY(-2px);

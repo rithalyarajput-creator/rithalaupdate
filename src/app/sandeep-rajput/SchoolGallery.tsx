@@ -23,7 +23,7 @@ export default function SchoolGallery() {
   return (
     <>
       <button className="sr-school-gallery-btn" onClick={() => { setActive(0); setOpen(true); }}>
-        📸 School Memories &amp; Photos
+        School Memories &amp; Photos
       </button>
 
       {open && (

@@ -157,9 +157,9 @@ export default async function SandeepRajputPage() {
               <span className="sr-school-badge">Government Boys School · Rithala, Delhi</span>
               <h3 className="sr-school-name">Rana Pratap Government Boys Senior Secondary School</h3>
               <div className="sr-school-meta">
-                <span>🎓 Class 7th – 12th</span>
-                <span>⏰ Timing: 1:00 PM – 6:00 PM (Afternoon Shift)</span>
-                <span>🏫 Boys School — Dedicated & Excellent Teachers</span>
+                <span>Class 7th – 12th</span>
+                <span>Timing: 1:00 PM – 6:00 PM (Afternoon Shift)</span>
+                <span>Boys School — Dedicated &amp; Excellent Teachers</span>
               </div>
               <p className="sr-school-desc">
                 This school holds a very special place in my heart. I studied here from Class 7 to Class 12 —
@@ -168,19 +168,18 @@ export default async function SandeepRajputPage() {
                 and creative thinking truly took shape. Being part of a boys school environment taught me teamwork,
                 respect, and the value of education.
               </p>
-              <a
-                href="https://www.google.com/search?q=Rana+Pratap+Government+Boys+Senior+Secondary+School+Rithala+Delhi"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="sr-school-btn"
-              >
-                View School on Google
-              </a>
+              <div className="sr-school-btns">
+                <a
+                  href="https://www.google.com/search?q=Rana+Pratap+Government+Boys+Senior+Secondary+School+Rithala+Delhi"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="sr-school-btn"
+                >
+                  View on Google
+                </a>
+                <SchoolGallery />
+              </div>
             </div>
-
-            {/* School Gallery Button */}
-            <div className="sr-school-gallery">
-              <SchoolGallery /></div>
           </div>
 
           <h2>The Idea Behind Rithala Update</h2>
