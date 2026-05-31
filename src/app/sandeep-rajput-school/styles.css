@@ -93,6 +93,16 @@
 
 .sch-school-content { display: flex; flex-direction: column; gap: 10px; }
 
+.sch-school-main-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 12px;
+  object-fit: contain;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  border: 1px solid #f1e6c2;
+}
+
 .sch-school-classes-badge {
   display: inline-block;
   background: #f1f5f9;
