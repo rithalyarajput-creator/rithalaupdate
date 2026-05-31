@@ -111,11 +111,11 @@ export default function SchoolPage() {
             <span className="sch-hero-badge">School Journey · Rithala, Delhi</span>
             <h1>Sandeep Rajput — Full School Journey</h1>
             <p className="sch-hero-sub">
-              Rithalya Rajput — From Nursery to Class 12 across 5 schools in Rithala &amp; North Delhi
+              Rithalya Rajput — From Nursery to Class 12 across 6 schools in Rithala &amp; North Delhi
             </p>
             <div className="sch-hero-tags">
               <span>Nursery – Class 12</span>
-              <span>5 Schools</span>
+              <span>6 Schools</span>
               <span>Rithala, North Delhi</span>
               <span>Sandeep Rajput</span>
             </div>
@@ -129,10 +129,12 @@ export default function SchoolPage() {
               {SCHOOLS.map((school, i) => (
                 <div key={i} className={`sch-school-item${school.isFinal ? ' sch-school-item--final' : ''}`}>
                   <div className="sch-school-number" style={{ background: school.color }}>{school.number}</div>
-                  <div className="sch-school-content">
-                    {school.image && (
+                  {school.image && (
+                    <div className="sch-school-img-col">
                       <img src={school.image} alt={school.imageAlt} className="sch-school-main-img" loading="lazy" />
-                    )}
+                    </div>
+                  )}
+                  <div className="sch-school-content">
                     <div className="sch-school-classes-badge">{school.classes}</div>
                     <h2 className="sch-school-name">{school.name}</h2>
                     <p className="sch-school-address">{school.address}</p>

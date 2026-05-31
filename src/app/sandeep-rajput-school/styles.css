@@ -60,47 +60,56 @@
 .sch-schools-list {
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: 20px;
 }
 
 .sch-school-item {
   display: grid;
-  grid-template-columns: 64px 1fr;
-  gap: 24px;
-  align-items: start;
+  grid-template-columns: 44px 260px 1fr;
+  gap: 0;
+  align-items: stretch;
+  background: #fff;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+  border: 1px solid #f1e6c2;
 }
 .sch-school-item--final {
-  background: #fff8ed;
   border: 2px solid #c8a44a;
-  border-radius: 20px;
-  padding: 28px;
-  grid-template-columns: 64px 1fr;
+  box-shadow: 0 6px 24px rgba(200,164,74,0.15);
 }
 
 .sch-school-number {
-  width: 52px;
-  height: 52px;
-  border-radius: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 900;
   color: #fff;
-  flex-shrink: 0;
-  margin-top: 4px;
+  writing-mode: vertical-rl;
+  letter-spacing: 0.05em;
+  padding: 12px 0;
 }
 
-.sch-school-content { display: flex; flex-direction: column; gap: 10px; }
+.sch-school-content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 18px 20px;
+}
 
+.sch-school-img-col {
+  width: 240px;
+  flex-shrink: 0;
+  overflow: hidden;
+}
 .sch-school-main-img {
   width: 100%;
-  height: auto;
+  height: 100%;
+  min-height: 180px;
   display: block;
-  border-radius: 12px;
-  object-fit: contain;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
-  border: 1px solid #f1e6c2;
+  object-fit: cover;
+  object-position: center;
 }
 
 .sch-school-classes-badge {
@@ -223,9 +232,15 @@
 .sch-btn--outline { border: 2px solid #c8a44a; color: #f5d98a; }
 .sch-btn:hover { transform: translateY(-2px); }
 
-@media (max-width: 600px) {
+@media (max-width: 650px) {
   .sch-school-item,
-  .sch-school-item--final { grid-template-columns: 1fr; }
+  .sch-school-item--final {
+    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
+  }
+  .sch-school-img-col { width: 100%; }
+  .sch-school-main-img { min-height: 200px; max-height: 240px; }
   .sch-school-number { width: 44px; height: 44px; font-size: 0.95rem; }
   .sch-photos-grid { grid-template-columns: 1fr; }
   .sch-cta-btns { flex-direction: column; align-items: stretch; }
