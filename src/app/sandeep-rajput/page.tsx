@@ -170,11 +170,11 @@ export default async function SandeepRajputPage() {
                 <span>Boys School — Dedicated &amp; Excellent Teachers</span>
               </div>
               <p className="sr-school-desc">
-                This school holds a very special place in my heart. I studied here from Class 7 to Class 12 —
-                some of the most important years of my life. The school ran in the afternoon shift, from 1 PM to 6 PM.
-                The teachers were exceptionally dedicated and hardworking. This is where my confidence, discipline,
-                and creative thinking truly took shape. Being part of a boys school environment taught me teamwork,
-                respect, and the value of education.
+                This school holds a very special place in my life. I completed my education here from
+                Class 7 to Class 12 — some of the most formative years of my journey. The school
+                operated in the afternoon shift, from 1:00 PM to 6:00 PM. The teachers were exceptionally
+                dedicated, knowledgeable, and inspiring. It was here that my confidence, discipline, and
+                creative thinking truly developed — shaping the person I am today.
               </p>
               <div className="sr-school-btns">
                 <a
@@ -204,13 +204,14 @@ export default async function SandeepRajputPage() {
               <span className="sr-lifestyle-badge">Personal Side</span>
               <h2 className="sr-lifestyle-heading">Photography, Modelling &amp; Social Media</h2>
               <p>
-                Mujhe photography ka bahut shok hai — chahe wo portraits hon, street shots hon, ya special moments.
-                Camera ke saamne aana mujhe achha lagta hai aur me modelling bhi karta hoon apne style mein.
+                Photography is one of my greatest passions — whether it is portraits, candid moments, or
+                creative shoots. I enjoy being in front of the camera and have a keen interest in modelling,
+                expressing my personal style through every frame.
               </p>
               <p>
-                Social media meri duniya hai. Me regularly Instagram aur YouTube pe creative videos aur latest posts
-                karta rehta hoon — Rithala ki updates se lekar personal moments tak, sab share karta hoon apne
-                followers ke saath.
+                Social media is my platform. I regularly create and post content on Instagram and YouTube —
+                from local Rithala updates and community stories to personal lifestyle content, creative
+                videos, and the latest trends — all shared with my growing community of followers.
               </p>
               <div className="sr-lifestyle-tags">
                 <span>Photography</span>
@@ -226,10 +227,10 @@ export default async function SandeepRajputPage() {
           <div className="sr-journey-section">
             <div className="sr-journey-header">
               <span className="sr-journey-badge">My Journey</span>
-              <h2 className="sr-journey-title">Bachpan Se Aaj Tak — From 2007 to Now</h2>
+              <h2 className="sr-journey-title">From Childhood to Creator — 2007 to Now</h2>
               <p className="sr-journey-lead">
-                Born in 2007 in a proud Rajputana family of Rithala, Delhi — yeh journey hai ek bachche se
-                ek digital creator aur artist tak ki.
+                Born in 2007 into a proud Rajputana family of Rithala, Delhi — this is the journey
+                of a child who grew up to become a digital creator, artist, and community builder.
               </p>
             </div>
             <div className="sr-journey-grid">
@@ -245,11 +246,12 @@ export default async function SandeepRajputPage() {
                   <span className="sr-journey-year-tag">2007</span>
                 </div>
                 <div className="sr-journey-card-body">
-                  <h3>Bachpan — The Beginning</h3>
+                  <h3>Childhood — The Beginning</h3>
                   <p>
-                    2007 mein ek Rajputana parivaar mein janam liya — Rithala, Delhi mein. Bachpan se hi
-                    creativity aur art ka shok tha. Yahi chhoti si zindagi ka pahla adhyay tha jo aage
-                    ek bade safar ki neev bana.
+                    Born in 2007 into a proud Rajputana family in Rithala, Delhi. From a very young age,
+                    there was a deep passion for creativity, art, and expression. These early years laid
+                    the foundation for everything that followed — a journey rooted in heritage and driven
+                    by ambition.
                   </p>
                   <div className="sr-journey-tags">
                     <span>Born: 2007</span>
@@ -271,11 +273,11 @@ export default async function SandeepRajputPage() {
                   <span className="sr-journey-year-tag">Now</span>
                 </div>
                 <div className="sr-journey-card-body">
-                  <h3>Aaj — Rajputana Pride</h3>
+                  <h3>Today — Rajputana Pride</h3>
                   <p>
-                    Aaj Sandeep Rajput ek digital creator, artist aur Rithala Update ke founder hain.
-                    Rajasthan cap aur earrings — yeh sirf style nahi, yeh Rajputana virasat ki pehchaan
-                    hai. Apni roots se jude, apne kaam se aage badhte hue.
+                    Today, Sandeep Rajput is a digital creator, artist, and the founder of Rithala Update.
+                    The Rajasthan cap and earrings are not just style — they represent a deep connection
+                    to Rajputana heritage and identity. Grounded in his roots, driven by his craft.
                   </p>
                   <div className="sr-journey-tags">
                     <span>Rajputana Heritage</span>
