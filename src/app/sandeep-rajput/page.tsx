@@ -243,7 +243,7 @@ export default async function SandeepRajputPage() {
                     className="sr-journey-img"
                     loading="lazy"
                   />
-                  <span className="sr-journey-year-tag">Past — 2007</span>
+                  <span className="sr-journey-year-tag">Past</span>
                 </div>
                 <div className="sr-journey-card-body">
                   <h3>Childhood — The Beginning</h3>
