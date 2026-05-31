@@ -243,7 +243,7 @@ export default async function SandeepRajputPage() {
                     className="sr-journey-img"
                     loading="lazy"
                   />
-                  <span className="sr-journey-year-tag">2007</span>
+                  <span className="sr-journey-year-tag">Past — 2007</span>
                 </div>
                 <div className="sr-journey-card-body">
                   <h3>Childhood — The Beginning</h3>
@@ -265,7 +265,7 @@ export default async function SandeepRajputPage() {
               <div className="sr-journey-card">
                 <div className="sr-journey-img-wrap">
                   <img
-                    src="/sandeep-rajput-rithalya-rajput-rajputana-cap-professional-rithala-delhi.jpeg"
+                    src="/sandeep-rajput-rithalya-rajput-rajputana-cap-professional-rithala-delhi.png"
                     alt="Sandeep Rajput Rithalya Rajput Rajputana cap earrings professional photo Rithala Delhi"
                     className="sr-journey-img"
                     loading="lazy"
