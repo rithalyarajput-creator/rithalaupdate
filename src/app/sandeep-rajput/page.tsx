@@ -258,24 +258,55 @@ export default async function SandeepRajputPage() {
               />
             </div>
             <div className="sr-lifestyle-text">
-              <span className="sr-lifestyle-badge">Personal Side</span>
-              <h2 className="sr-lifestyle-heading">Photography, Modelling &amp; Social Media</h2>
+              <span className="sr-lifestyle-badge">My Hobbies</span>
+              <h2 className="sr-lifestyle-heading">Multi-Talented & Always Exploring</h2>
+
+              <blockquote className="sr-hobby-quote">
+                &ldquo;I believe every person should try everything at least once.
+                If you have the passion to do it — nothing is truly difficult.
+                And if you do nothing, even the simplest things feel impossible.&rdquo;
+              </blockquote>
+
               <p>
-                Photography is one of my greatest passions — whether it is portraits, candid moments, or
-                creative shoots. I enjoy being in front of the camera and have a keen interest in modelling,
-                expressing my personal style through every frame.
+                Since childhood, I have had a wide range of interests and hobbies. I am naturally
+                a multi-tasker — I love learning new things, picking up new skills, and constantly
+                challenging myself. Whether it is art, technology, fitness, or content creation,
+                I believe in giving everything my best effort.
               </p>
-              <p>
-                Social media is my platform. I regularly create and post content on Instagram and YouTube —
-                from local Rithala updates and community stories to personal lifestyle content, creative
-                videos, and the latest trends — all shared with my growing community of followers.
-              </p>
-              <div className="sr-lifestyle-tags">
-                <span>Photography</span>
-                <span>Modelling</span>
-                <span>Social Media</span>
-                <span>Video Creation</span>
-                <span>Content Creator</span>
+
+              <div className="sr-hobby-grid">
+                <div className="sr-hobby-item">
+                  <span className="sr-hobby-icon">✏</span>
+                  <span>Drawing &amp; Pencil Art</span>
+                </div>
+                <div className="sr-hobby-item">
+                  <span className="sr-hobby-icon">📷</span>
+                  <span>Photography</span>
+                </div>
+                <div className="sr-hobby-item">
+                  <span className="sr-hobby-icon">📱</span>
+                  <span>Social Media &amp; Influence</span>
+                </div>
+                <div className="sr-hobby-item">
+                  <span className="sr-hobby-icon">💻</span>
+                  <span>Website Development</span>
+                </div>
+                <div className="sr-hobby-item">
+                  <span className="sr-hobby-icon">🎨</span>
+                  <span>Creativity &amp; Design</span>
+                </div>
+                <div className="sr-hobby-item">
+                  <span className="sr-hobby-icon">🏋</span>
+                  <span>Health &amp; Fitness</span>
+                </div>
+                <div className="sr-hobby-item">
+                  <span className="sr-hobby-icon">🎬</span>
+                  <span>Video Creation</span>
+                </div>
+                <div className="sr-hobby-item">
+                  <span className="sr-hobby-icon">✦</span>
+                  <span>Always Learning New Things</span>
+                </div>
               </div>
             </div>
           </div>

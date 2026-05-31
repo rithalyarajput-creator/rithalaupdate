@@ -883,3 +883,42 @@
   background: linear-gradient(135deg, #c8a44a, #e8c87a) !important;
   color: #1a0a00 !important;
 }
+
+/* ---------- Hobby Quote & Grid ---------- */
+.sr-hobby-quote {
+  background: linear-gradient(135deg, #fef3c7, #fff8e7);
+  border-left: 4px solid #c8a44a;
+  border-radius: 0 10px 10px 0;
+  padding: 14px 18px;
+  margin: 0;
+  font-size: 0.92rem;
+  font-style: italic;
+  color: #4a3000;
+  line-height: 1.7;
+  font-weight: 500;
+}
+.sr-hobby-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 4px;
+}
+.sr-hobby-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #1e293b;
+}
+.sr-hobby-icon {
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+@media (max-width: 500px) {
+  .sr-hobby-grid { grid-template-columns: 1fr; }
+}
