@@ -20,70 +20,76 @@ export const metadata: Metadata = {
 
 const TIMELINE = [
   {
-    year: '2007',
+    year: '2007 – 2010',
     title: 'Born into a Rajputana Family',
-    desc: 'Sandeep Rajput was born in 2007 into a proud Rajputana family in Rithala, North Delhi. From the very beginning, he was raised with the values of heritage, honour, and hard work.',
+    desc: 'Sandeep Rajput was born in 2007 into a proud Rajputana family in Rithala, North Delhi. His earliest years were spent in the loving environment of a heritage-rich household, where values of honour, pride, and hard work were instilled from the very beginning.',
     image: '/sandeep-rajput-rithalya-rajput-childhood-2007-rithala-delhi.png',
     imageAlt: 'Sandeep Rajput Rithalya Rajput childhood photo born 2007 Rajputana family Rithala Delhi',
     tags: ['Born 2007', 'Rithala, Delhi', 'Rajputana Family'],
-    side: 'left',
   },
   {
-    year: '2013–2014',
-    title: 'Early School Years',
-    desc: 'Began his schooling journey in Rithala. These early years sparked an interest in art, drawing, and creative expression. He spent time sketching and developing his artistic skills during school hours and at home.',
+    year: '2011 – 2013',
+    title: 'Early Childhood & First School Years',
+    desc: 'These were the years of curiosity and discovery. Sandeep began his schooling in Rithala and quickly showed a natural flair for drawing, painting, and creative thinking. He would spend hours sketching figures and exploring art in any medium he could find.',
     image: null,
-    tags: ['Primary School', 'Art & Drawing', 'Rithala'],
-    side: 'right',
+    tags: ['Primary School', 'Drawing & Art', 'Rithala'],
   },
   {
-    year: '2019',
+    year: '2014 – 2015',
+    title: 'Growing Up in Rithala',
+    desc: 'A period of growth and exploration. Sandeep deepened his connection to Rithala Village — its streets, its people, and its rich Rajput heritage. His artistic interests continued to develop, and he began taking his sketching and pencil work more seriously.',
+    image: null,
+    tags: ['Rithala Village', 'Pencil Art', 'Heritage'],
+  },
+  {
+    year: '2016 – 2017',
+    title: 'Middle School — Building Skills',
+    desc: 'Entering his middle school years, Sandeep became more focused and disciplined. He began creating more complex artworks — portraits of historical figures and cricket stars — and developed a strong personal style in pencil and colour pencil work.',
+    image: null,
+    tags: ['Middle School', 'Portrait Art', 'Creative Skills'],
+  },
+  {
+    year: '2018 – 2019',
     title: 'Joined Rana Pratap School — Class 7',
-    desc: 'Joined Rana Pratap Government Boys Senior Secondary School, Rithala, in Class 7. The school ran in the afternoon shift (1 PM – 6 PM). This chapter brought new friendships, dedicated teachers, and a stronger sense of discipline and identity.',
+    desc: 'Joined the prestigious Rana Pratap Government Boys Senior Secondary School, Rithala, in Class 7. The school ran in the afternoon shift (1:00 PM – 6:00 PM). Here he found inspiring teachers, meaningful friendships, and a structured environment that shaped his discipline and character.',
     image: null,
-    tags: ['Class 7', 'Rana Pratap School', 'Afternoon Shift'],
-    side: 'left',
+    tags: ['Class 7', 'Rana Pratap School', 'New Chapter'],
   },
   {
-    year: '2021',
-    title: 'Growing Passion for Art',
-    desc: 'During his middle school years, Sandeep\'s passion for pencil art and drawing grew significantly. He created portrait sketches of Maharana Pratap, Lord Krishna, Virat Kohli, and other iconic figures — developing a distinctive artistic style.',
+    year: '2020 – 2021',
+    title: 'Art Flourishes — The Pandemic Years',
+    desc: 'During the pandemic period, Sandeep channelled his energy into art and digital exploration. He created detailed pencil portraits of Maharana Pratap, Lord Krishna, Virat Kohli, Little Ram, and Karan Aujla — artworks that would later define his creative identity online.',
     image: null,
-    tags: ['Pencil Art', 'Portrait Sketching', 'Creative Growth'],
-    side: 'right',
+    tags: ['Pencil Art', 'Portraits', 'Digital Exploration'],
   },
   {
-    year: '2022',
-    title: 'Discovering Digital Creation',
-    desc: 'Started exploring digital design, social media content creation, and photography. This was the turning point — traditional art skills combined with digital tools opened a new world of creative possibilities.',
+    year: '2022 – 2023',
+    title: 'Class 12 & Discovering Digital Creation',
+    desc: 'Completing his senior secondary education while simultaneously diving deep into digital design, social media content creation, photography, and website development. This was the turning point — a bridge between traditional art and the digital world.',
     image: null,
-    tags: ['Digital Design', 'Social Media', 'Photography'],
-    side: 'left',
+    tags: ['Class 12', 'Digital Design', 'Social Media', 'Photography'],
   },
   {
-    year: '2023',
-    title: 'Class 12 — Final School Year',
-    desc: 'Completed his senior secondary education at Rana Pratap School. While preparing for board exams, he continued to work on digital projects and grew his understanding of web design, content creation, and community building.',
-    image: null,
-    tags: ['Class 12', 'Board Exams', 'Digital Projects'],
-    side: 'right',
-  },
-  {
-    year: '2024',
+    year: '2023 – 2024',
     title: 'Founded Rithala Update',
-    desc: 'Launched Rithala Update — a digital platform dedicated to sharing the culture, history, news, and heritage of Rithala Village with the world. Independently designed and developed the website from scratch.',
+    desc: 'Launched Rithala Update — a digital platform dedicated to sharing the culture, history, news, and Rajput heritage of Rithala Village with the world. Independently designed and developed the entire website from scratch, combining technical skill with creative vision.',
     image: null,
-    tags: ['Rithala Update', 'Website Launch', 'Founder'],
-    side: 'left',
+    tags: ['Rithala Update', 'Website Launch', 'Founder', 'Developer'],
   },
   {
-    year: 'Present',
-    title: 'Digital Creator & Artist — Rithalya Rajput',
-    desc: 'Today, Sandeep Rajput — known as Rithalya Rajput — is a full-time digital creator, artist, website developer, and social media content creator. He carries his Rajputana heritage with pride while building a modern digital legacy from Rithala, Delhi.',
+    year: '2024 – 2025',
+    title: 'Growing as a Creator & Building Community',
+    desc: 'A year of significant growth — expanding Rithala Update, growing social media presence on Instagram and YouTube, taking on website development and digital branding projects, and establishing himself as a recognised digital creator from Rithala, Delhi.',
+    image: null,
+    tags: ['Content Creation', 'Community Building', 'YouTube', 'Instagram'],
+  },
+  {
+    year: '2025 – Present',
+    title: 'Rithalya Rajput — A Digital Legacy',
+    desc: 'Today, Sandeep Rajput — proudly known as Rithalya Rajput — stands as a full-time digital creator, pencil artist, website developer, and founder of Rithala Update. He carries his Rajputana heritage with pride, wearing it as an identity — from the Rajasthani cap to the Rajput earrings — while building a lasting digital legacy from the lanes of Rithala, Delhi.',
     image: '/sandeep-rajput-rithalya-rajput-rajputana-cap-professional-rithala-delhi.png',
-    imageAlt: 'Sandeep Rajput Rithalya Rajput Rajputana cap professional photo Rithala Delhi present day',
-    tags: ['Digital Creator', 'Artist', 'Rithalya Rajput', 'Rithala Update'],
-    side: 'right',
+    imageAlt: 'Sandeep Rajput Rithalya Rajput Rajputana cap professional photo Rithala Delhi present 2025',
+    tags: ['Digital Creator', 'Artist', 'Rithalya Rajput', 'Rithala Update', 'Rajputana Pride'],
   },
 ];
 
@@ -106,38 +112,42 @@ export default function JourneyPage() {
             <div className="jrn-timeline">
               <div className="jrn-timeline-line"></div>
 
-              {TIMELINE.map((item, i) => (
-                <div key={i} className={`jrn-item jrn-item--${item.side} jrn-item--anim`}>
-                  <div className="jrn-dot">
-                    <span>{item.year}</span>
-                  </div>
-                  <div className="jrn-card">
-                    {item.image && (
-                      <img
-                        src={item.image}
-                        alt={item.imageAlt || item.title}
-                        className="jrn-card-img"
-                        loading="lazy"
-                      />
-                    )}
-                    <div className="jrn-card-body">
+              {TIMELINE.map((item, i) => {
+                const isLeft = i % 2 === 0;
+                return (
+                  <div key={i} className={`jrn-item jrn-item--${isLeft ? 'left' : 'right'} jrn-item--anim`}>
+                    {/* Image */}
+                    <div className="jrn-card-img-wrap">
+                      {item.image ? (
+                        <img src={item.image} alt={item.imageAlt || item.title} className="jrn-card-img" loading="lazy" />
+                      ) : (
+                        <div className="jrn-no-img">⚔</div>
+                      )}
+                    </div>
+
+                    {/* Center dot */}
+                    <div className="jrn-dot-col">
+                      <div className="jrn-dot"></div>
+                    </div>
+
+                    {/* Text */}
+                    <div className="jrn-card-text">
                       <span className="jrn-year-pill">{item.year}</span>
                       <h2>{item.title}</h2>
                       <p>{item.desc}</p>
                       <div className="jrn-tags">
-                        {item.tags.map((tag, j) => (
-                          <span key={j}>{tag}</span>
-                        ))}
+                        {item.tags.map((tag, j) => <span key={j}>{tag}</span>)}
                       </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </section>
 
         <JourneyAnim />
+
         {/* CTA */}
         <section className="jrn-cta">
           <div className="jrn-container">
