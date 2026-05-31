@@ -863,3 +863,23 @@
     aspect-ratio: 4 / 3;
   }
 }
+
+/* ---------- School Card V2 (no image, clean info) ---------- */
+.sr-school-card-v2 {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+  border: 1px solid #f1e6c2;
+  margin: 20px 0 28px;
+  overflow: hidden;
+}
+.sr-school-info-v2 {
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.sr-school-btn--gold {
+  background: linear-gradient(135deg, #c8a44a, #e8c87a) !important;
+  color: #1a0a00 !important;
+}

@@ -1,0 +1,186 @@
+/* Sandeep Rajput School Page */
+.sch-page { background: #fffbf3; font-family: 'Georgia', serif; }
+.sch-container { max-width: 1000px; margin: 0 auto; padding: 0 24px; }
+
+/* Hero */
+.sch-hero {
+  background: linear-gradient(135deg, #1a0a00, #3b1f00, #5c2d00);
+  padding: 80px 24px 60px;
+  text-align: center;
+}
+.sch-hero-badge {
+  display: inline-block;
+  background: rgba(200,164,74,0.2);
+  border: 1px solid rgba(200,164,74,0.4);
+  color: #f5d98a;
+  padding: 4px 18px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+}
+.sch-hero h1 {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #f5d98a;
+  margin: 0 0 14px;
+  line-height: 1.25;
+}
+.sch-hero-sub {
+  color: #e8c87a;
+  font-size: 1rem;
+  opacity: 0.85;
+  max-width: 600px;
+  margin: 0 auto 24px;
+  line-height: 1.7;
+  font-style: italic;
+}
+.sch-hero-tags {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.sch-hero-tags span {
+  background: rgba(200,164,74,0.15);
+  border: 1px solid rgba(200,164,74,0.3);
+  color: #f5d98a;
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 4px 14px;
+  border-radius: 999px;
+}
+@media (max-width: 600px) { .sch-hero h1 { font-size: 1.5rem; } }
+
+/* Sections */
+.sch-section { padding: 64px 0; background: #fffbf3; }
+.sch-section--alt { background: #fff; }
+
+/* About grid */
+.sch-about-grid {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 40px;
+  align-items: start;
+}
+.sch-about-text h2 {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #1a0a00;
+  margin: 0 0 18px;
+  border-left: 4px solid #c8a44a;
+  padding-left: 14px;
+}
+.sch-about-text p {
+  font-size: 0.95rem;
+  color: #3a2a10;
+  line-height: 1.8;
+  margin-bottom: 14px;
+}
+.sch-info-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.08);
+  border: 1px solid #f1e6c2;
+}
+.sch-info-card h3 {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #1a0a00;
+  margin: 0 0 16px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #f1e6c2;
+}
+.sch-details { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
+.sch-detail-row {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.sch-detail-row span { font-size: 0.7rem; color: #92400e; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; }
+.sch-detail-row strong { font-size: 0.88rem; color: #1a1a1a; }
+.sch-google-btn {
+  display: block;
+  background: linear-gradient(135deg, #b91c1c, #dc2626);
+  color: #fff !important;
+  font-size: 0.88rem;
+  font-weight: 700;
+  padding: 10px 20px;
+  border-radius: 8px;
+  text-decoration: none;
+  text-align: center;
+}
+
+/* Gallery */
+.sch-gallery-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #1a0a00;
+  margin: 0 0 8px;
+  border-left: 4px solid #c8a44a;
+  padding-left: 14px;
+}
+.sch-gallery-lead {
+  font-size: 0.88rem;
+  color: #64748b;
+  margin: 0 0 28px;
+  padding-left: 18px;
+}
+.sch-gallery-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.sch-gallery-card {
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+  border: 1px solid #f1e6c2;
+}
+.sch-gallery-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+.sch-gallery-caption {
+  background: #fff;
+  padding: 10px 14px;
+  font-size: 0.8rem;
+  color: #64748b;
+  margin: 0;
+  text-align: center;
+}
+
+/* CTA */
+.sch-cta {
+  background: linear-gradient(135deg, #1a0a00, #3b1f00);
+  padding: 64px 24px;
+  text-align: center;
+}
+.sch-cta h2 { font-size: 1.7rem; color: #f5d98a; margin: 0 0 10px; }
+.sch-cta p { color: #e8c87a; font-size: 0.95rem; margin: 0 0 28px; opacity: 0.85; }
+.sch-cta-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+.sch-btn {
+  display: inline-block;
+  padding: 12px 28px;
+  border-radius: 10px;
+  font-size: 0.92rem;
+  font-weight: 700;
+  text-decoration: none;
+  min-width: 180px;
+  text-align: center;
+  transition: transform 0.2s;
+}
+.sch-btn--gold { background: linear-gradient(135deg,#c8a44a,#e8c87a); color: #1a0a00; }
+.sch-btn--outline { border: 2px solid #c8a44a; color: #f5d98a; }
+.sch-btn:hover { transform: translateY(-2px); }
+
+@media (max-width: 700px) {
+  .sch-about-grid { grid-template-columns: 1fr; }
+  .sch-gallery-grid { grid-template-columns: 1fr; }
+  .sch-cta-btns { flex-direction: column; align-items: stretch; }
+  .sch-btn { min-width: unset; }
+}

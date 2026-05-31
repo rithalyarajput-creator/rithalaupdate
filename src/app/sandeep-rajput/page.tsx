@@ -214,13 +214,8 @@ export default async function SandeepRajputPage() {
           <p>{storyEducation}</p>
 
           {/* Rana Pratap School Card */}
-          <div className="sr-school-card">
-            <img
-              src="https://9qidomuaf1nvlbrh.public.blob.vercel-storage.com/uploads/1780126495893-sandeep-rajput-rithalya-rajput-rana-pratap-sarvodaya-school-rithala-delhi.jpg-aOf2OUhgtMt1zncuB5nE4EAvhOsiRU.jpg"
-              alt="Rana Pratap Government Boys Senior Secondary School Rithala Delhi — Sandeep Rajput Rithalya Rajput"
-              className="sr-school-img"
-            />
-            <div className="sr-school-info">
+          <div className="sr-school-card-v2">
+            <div className="sr-school-info-v2">
               <span className="sr-school-badge">Government Boys School · Rithala, Delhi</span>
               <h3 className="sr-school-name">Rana Pratap Government Boys Senior Secondary School</h3>
               <div className="sr-school-meta">
@@ -230,10 +225,10 @@ export default async function SandeepRajputPage() {
               </div>
               <p className="sr-school-desc">
                 This school holds a very special place in my life. I completed my education here from
-                Class 7 to Class 12 — some of the most formative years of my journey. The school
-                operated in the afternoon shift, from 1:00 PM to 6:00 PM. The teachers were exceptionally
-                dedicated, knowledgeable, and inspiring. It was here that my confidence, discipline, and
-                creative thinking truly developed — shaping the person I am today.
+                Class 7 to Class 12 — some of the most formative years of my journey. The teachers were
+                exceptionally dedicated, knowledgeable, and inspiring. It was here that my confidence,
+                discipline, and creative thinking truly developed — shaping the person I am today.
+                Sandeep Rajput (Rithalya Rajput) proudly represents this school and the values it instilled.
               </p>
               <div className="sr-school-btns">
                 <a
@@ -245,6 +240,9 @@ export default async function SandeepRajputPage() {
                   View on Google
                 </a>
                 <SchoolGallery />
+                <a href="/sandeep-rajput-school/" className="sr-school-btn sr-school-btn--gold">
+                  Full School Journey
+                </a>
               </div>
             </div>
           </div>
