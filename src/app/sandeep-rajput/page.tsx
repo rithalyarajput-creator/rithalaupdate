@@ -190,6 +190,38 @@ export default async function SandeepRajputPage() {
             </div>
           </div>
 
+          {/* Personal Lifestyle Section */}
+          <div className="sr-lifestyle-section">
+            <div className="sr-lifestyle-img-wrap">
+              <img
+                src="https://9qidomuaf1nvlbrh.public.blob.vercel-storage.com/uploads/sandeep-rajput-rithalya-rajput-personal-lifestyle-rithala-delhi.jpg"
+                alt="Sandeep Rajput Rithalya Rajput personal lifestyle photography modelling Rithala Delhi"
+                className="sr-lifestyle-img"
+                loading="lazy"
+              />
+            </div>
+            <div className="sr-lifestyle-text">
+              <span className="sr-lifestyle-badge">Personal Side</span>
+              <h2 className="sr-lifestyle-heading">Photography, Modelling &amp; Social Media</h2>
+              <p>
+                Mujhe photography ka bahut shok hai — chahe wo portraits hon, street shots hon, ya special moments.
+                Camera ke saamne aana mujhe achha lagta hai aur me modelling bhi karta hoon apne style mein.
+              </p>
+              <p>
+                Social media meri duniya hai. Me regularly Instagram aur YouTube pe creative videos aur latest posts
+                karta rehta hoon — Rithala ki updates se lekar personal moments tak, sab share karta hoon apne
+                followers ke saath.
+              </p>
+              <div className="sr-lifestyle-tags">
+                <span>Photography</span>
+                <span>Modelling</span>
+                <span>Social Media</span>
+                <span>Video Creation</span>
+                <span>Content Creator</span>
+              </div>
+            </div>
+          </div>
+
           <h2>The Idea Behind Rithala Update</h2>
           {portrait2 && <img src={portrait2} alt={`${name} - digital creator and website developer`} loading="lazy" className="sr-img-float" />}
           <p>{storyIdea}</p>
