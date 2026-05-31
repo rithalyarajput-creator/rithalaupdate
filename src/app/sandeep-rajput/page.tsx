@@ -151,6 +151,65 @@ export default async function SandeepRajputPage() {
           <h2>My Creative Journey</h2>
           <p>{storyJourney}</p>
 
+          {/* Journey Section — moved here below Creative Journey */}
+          <div className="sr-journey-section">
+            <div className="sr-journey-header">
+              <span className="sr-journey-badge">My Journey</span>
+              <h2 className="sr-journey-title">From Childhood to Creator — 2007 to Now</h2>
+              <p className="sr-journey-lead">
+                Born in 2007 into a proud Rajputana family of Rithala, Delhi — this is the journey
+                of a child who grew up to become a digital creator, artist, and community builder.
+              </p>
+            </div>
+            <div className="sr-journey-grid">
+              <div className="sr-journey-card">
+                <div className="sr-journey-img-wrap">
+                  <img
+                    src="/sandeep-rajput-rithalya-rajput-childhood-2007-rithala-delhi.png"
+                    alt="Sandeep Rajput Rithalya Rajput childhood photo born 2007 Rajputana family Rithala Delhi"
+                    className="sr-journey-img"
+                    loading="lazy"
+                  />
+                  <span className="sr-journey-year-tag">Past</span>
+                </div>
+                <div className="sr-journey-card-body">
+                  <h3>Childhood — The Beginning</h3>
+                  <p>Born in 2007 into a proud Rajputana family in Rithala, Delhi. From a very young age, there was a deep passion for creativity, art, and expression. These early years laid the foundation for everything that followed — a journey rooted in heritage and driven by ambition.</p>
+                  <div className="sr-journey-tags">
+                    <span>Born: 2007</span>
+                    <span>Rithala, Delhi</span>
+                    <span>Rajputana Family</span>
+                  </div>
+                </div>
+              </div>
+              <div className="sr-journey-card">
+                <div className="sr-journey-img-wrap">
+                  <img
+                    src="/sandeep-rajput-rithalya-rajput-rajputana-cap-professional-rithala-delhi.png"
+                    alt="Sandeep Rajput Rithalya Rajput Rajputana cap earrings professional photo Rithala Delhi"
+                    className="sr-journey-img"
+                    loading="lazy"
+                  />
+                  <span className="sr-journey-year-tag">Now</span>
+                </div>
+                <div className="sr-journey-card-body">
+                  <h3>Today — Rajputana Pride</h3>
+                  <p>Today, Sandeep Rajput is a digital creator, artist, and the founder of Rithala Update. The Rajasthan cap and earrings represent a deep connection to Rajputana heritage and identity. Grounded in his roots, driven by his craft.</p>
+                  <div className="sr-journey-tags">
+                    <span>Rajputana Heritage</span>
+                    <span>Digital Creator</span>
+                    <span>Artist</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="sr-journey-cta-wrap">
+              <a href="/sandeep-rajput-journey/" className="sr-journey-cta-btn">
+                View My Full Journey — 2007 to Present
+              </a>
+            </div>
+          </div>
+
           <h2>Education</h2>
           <p>{storyEducation}</p>
 
@@ -220,79 +279,6 @@ export default async function SandeepRajputPage() {
                 <span>Video Creation</span>
                 <span>Content Creator</span>
               </div>
-            </div>
-          </div>
-
-          {/* Journey Section */}
-          <div className="sr-journey-section">
-            <div className="sr-journey-header">
-              <span className="sr-journey-badge">My Journey</span>
-              <h2 className="sr-journey-title">From Childhood to Creator — 2007 to Now</h2>
-              <p className="sr-journey-lead">
-                Born in 2007 into a proud Rajputana family of Rithala, Delhi — this is the journey
-                of a child who grew up to become a digital creator, artist, and community builder.
-              </p>
-            </div>
-            <div className="sr-journey-grid">
-              {/* Childhood */}
-              <div className="sr-journey-card">
-                <div className="sr-journey-img-wrap">
-                  <img
-                    src="/sandeep-rajput-rithalya-rajput-childhood-2007-rithala-delhi.png"
-                    alt="Sandeep Rajput Rithalya Rajput childhood photo born 2007 Rajputana family Rithala Delhi"
-                    className="sr-journey-img"
-                    loading="lazy"
-                  />
-                  <span className="sr-journey-year-tag">Past</span>
-                </div>
-                <div className="sr-journey-card-body">
-                  <h3>Childhood — The Beginning</h3>
-                  <p>
-                    Born in 2007 into a proud Rajputana family in Rithala, Delhi. From a very young age,
-                    there was a deep passion for creativity, art, and expression. These early years laid
-                    the foundation for everything that followed — a journey rooted in heritage and driven
-                    by ambition.
-                  </p>
-                  <div className="sr-journey-tags">
-                    <span>Born: 2007</span>
-                    <span>Rithala, Delhi</span>
-                    <span>Rajputana Family</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Professional */}
-              <div className="sr-journey-card">
-                <div className="sr-journey-img-wrap">
-                  <img
-                    src="/sandeep-rajput-rithalya-rajput-rajputana-cap-professional-rithala-delhi.png"
-                    alt="Sandeep Rajput Rithalya Rajput Rajputana cap earrings professional photo Rithala Delhi"
-                    className="sr-journey-img"
-                    loading="lazy"
-                  />
-                  <span className="sr-journey-year-tag">Now</span>
-                </div>
-                <div className="sr-journey-card-body">
-                  <h3>Today — Rajputana Pride</h3>
-                  <p>
-                    Today, Sandeep Rajput is a digital creator, artist, and the founder of Rithala Update.
-                    The Rajasthan cap and earrings are not just style — they represent a deep connection
-                    to Rajputana heritage and identity. Grounded in his roots, driven by his craft.
-                  </p>
-                  <div className="sr-journey-tags">
-                    <span>Rajputana Heritage</span>
-                    <span>Digital Creator</span>
-                    <span>Artist</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Full Journey Button */}
-            <div className="sr-journey-cta-wrap">
-              <a href="/sandeep-rajput-journey/" className="sr-journey-cta-btn">
-                View My Full Journey — 2007 to Present
-              </a>
             </div>
           </div>
 
