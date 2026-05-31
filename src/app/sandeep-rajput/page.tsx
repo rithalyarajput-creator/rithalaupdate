@@ -233,69 +233,48 @@ export default async function SandeepRajputPage() {
             </div>
           </div>
 
-          {/* Personal Lifestyle Section */}
-          <div className="sr-lifestyle-section">
-            <div className="sr-lifestyle-img-wrap">
-              <img
-                src="/sandeep-rajput-rithalya-rajput-personal-lifestyle-rithala-delhi.webp"
-                alt="Sandeep Rajput Rithalya Rajput personal lifestyle photography modelling Rithala Delhi"
-                className="sr-lifestyle-img"
-                loading="lazy"
-              />
-            </div>
-            <div className="sr-lifestyle-text">
-              <span className="sr-lifestyle-badge">My Hobbies</span>
-              <h2 className="sr-lifestyle-heading">Multi-Talented & Always Exploring</h2>
-
-              <blockquote className="sr-hobby-quote">
+          {/* Hobbies Section — full width like hero */}
+        </div>
+        </section>
+        <section className="sr-hobbies-full">
+          <div className="container sr-hobbies-grid">
+            <div className="sr-hobbies-text">
+              <span className="sr-hobbies-badge">My Hobbies</span>
+              <h2 className="sr-hobbies-heading">Multi-Talented &amp; Always Exploring</h2>
+              <blockquote className="sr-hobbies-quote">
                 &ldquo;I believe every person should try everything at least once.
                 If you have the passion to do it — nothing is truly difficult.
                 And if you do nothing, even the simplest things feel impossible.&rdquo;
               </blockquote>
-
-              <p>
+              <p className="sr-hobbies-desc">
                 Since childhood, I have had a wide range of interests and hobbies. I am naturally
                 a multi-tasker — I love learning new things, picking up new skills, and constantly
                 challenging myself. Whether it is art, technology, fitness, or content creation,
                 I believe in giving everything my best effort.
               </p>
-
               <div className="sr-hobby-grid">
-                <div className="sr-hobby-item">
-                  <span className="sr-hobby-icon">✏</span>
-                  <span>Drawing &amp; Pencil Art</span>
-                </div>
-                <div className="sr-hobby-item">
-                  <span className="sr-hobby-icon">📷</span>
-                  <span>Photography</span>
-                </div>
-                <div className="sr-hobby-item">
-                  <span className="sr-hobby-icon">📱</span>
-                  <span>Social Media &amp; Influence</span>
-                </div>
-                <div className="sr-hobby-item">
-                  <span className="sr-hobby-icon">💻</span>
-                  <span>Website Development</span>
-                </div>
-                <div className="sr-hobby-item">
-                  <span className="sr-hobby-icon">🎨</span>
-                  <span>Creativity &amp; Design</span>
-                </div>
-                <div className="sr-hobby-item">
-                  <span className="sr-hobby-icon">🏋</span>
-                  <span>Health &amp; Fitness</span>
-                </div>
-                <div className="sr-hobby-item">
-                  <span className="sr-hobby-icon">🎬</span>
-                  <span>Video Creation</span>
-                </div>
-                <div className="sr-hobby-item">
-                  <span className="sr-hobby-icon">✦</span>
-                  <span>Always Learning New Things</span>
-                </div>
+                <div className="sr-hobby-item sr-hobby-item--dark"><span className="sr-hobby-icon">✏</span><span>Drawing &amp; Pencil Art</span></div>
+                <div className="sr-hobby-item sr-hobby-item--dark"><span className="sr-hobby-icon">📷</span><span>Photography</span></div>
+                <div className="sr-hobby-item sr-hobby-item--dark"><span className="sr-hobby-icon">📱</span><span>Social Media &amp; Influence</span></div>
+                <div className="sr-hobby-item sr-hobby-item--dark"><span className="sr-hobby-icon">💻</span><span>Website Development</span></div>
+                <div className="sr-hobby-item sr-hobby-item--dark"><span className="sr-hobby-icon">🎨</span><span>Creativity &amp; Design</span></div>
+                <div className="sr-hobby-item sr-hobby-item--dark"><span className="sr-hobby-icon">🏋</span><span>Health &amp; Fitness</span></div>
+                <div className="sr-hobby-item sr-hobby-item--dark"><span className="sr-hobby-icon">🎬</span><span>Video Creation</span></div>
+                <div className="sr-hobby-item sr-hobby-item--dark"><span className="sr-hobby-icon">✦</span><span>Always Learning</span></div>
               </div>
             </div>
+            <div className="sr-hobbies-img-wrap">
+              <img
+                src="/sandeep-rajput-rithalya-rajput-personal-lifestyle-rithala-delhi.webp"
+                alt="Sandeep Rajput Rithalya Rajput personal lifestyle hobbies photography Rithala Delhi"
+                className="sr-hobbies-img"
+                loading="lazy"
+              />
+            </div>
           </div>
+        </section>
+        <section className="sr-prose-section">
+        <div className="container sr-prose">
 
           <h2>The Idea Behind Rithala Update</h2>
           {portrait2 && <img src={portrait2} alt={`${name} - digital creator and website developer`} loading="lazy" className="sr-img-float" />}
@@ -348,6 +327,7 @@ export default async function SandeepRajputPage() {
           <h2>My Art Gallery</h2>
           <p>Some of my best creative works — each piece representing a different side of my artistic journey.</p>
         </div>
+        </section>
 
         <div className="sr-gallery-scroll-wrap">
           <div className="sr-gallery-scroll">
