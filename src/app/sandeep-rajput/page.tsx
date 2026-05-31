@@ -223,6 +223,31 @@ export default async function SandeepRajputPage() {
             </div>
           </div>
 
+          {/* Before After Section */}
+          <div className="sr-ba-section">
+            <div className="sr-ba-card">
+              <div className="sr-ba-label sr-ba-label--before">Before · 2007</div>
+              <img
+                src="/sandeep-rajput-rithalya-rajput-childhood-2007-rithala-delhi.png"
+                alt="Sandeep Rajput Rithalya Rajput childhood photo 2007 Rithala Delhi before"
+                className="sr-ba-img"
+                loading="lazy"
+              />
+              <div className="sr-ba-caption">Childhood — Rithala, 2007</div>
+            </div>
+            <div className="sr-ba-vs">VS</div>
+            <div className="sr-ba-card">
+              <div className="sr-ba-label sr-ba-label--after">After · 2025</div>
+              <img
+                src="/sandeep-rajput-rithalya-rajput-rajputana-cap-professional-rithala-delhi.png"
+                alt="Sandeep Rajput Rithalya Rajput professional Rajputana photo 2025 Rithala Delhi after"
+                className="sr-ba-img"
+                loading="lazy"
+              />
+              <div className="sr-ba-caption">Today — Rithalya Rajput, 2025</div>
+            </div>
+          </div>
+
           {/* Journey Button */}
           <div className="sr-journey-cta-wrap">
             <a href="/sandeep-rajput-journey/" className="sr-journey-cta-btn">
