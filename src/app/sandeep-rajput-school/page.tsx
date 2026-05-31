@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import PublicShell from '@/components/PublicShell';
+import PhotosModal from './PhotosModal';
 import './styles.css';
 
 const SITE = process.env.NEXT_PUBLIC_SITE_URL || 'https://rithalaupdate.online';
@@ -144,14 +145,7 @@ export default function SchoolPage() {
                     </div>
 
                     {school.photos && (
-                      <div className="sch-photos-grid">
-                        {school.photos.map((p, j) => (
-                          <div key={j} className="sch-photo-card">
-                            <img src={p.src} alt={p.alt} className="sch-photo-img" loading="lazy" />
-                            <p className="sch-photo-caption">{p.caption}</p>
-                          </div>
-                        ))}
-                      </div>
+                      <PhotosModal photos={school.photos} color={school.color} />
                     )}
 
                     {school.googleLink && (
