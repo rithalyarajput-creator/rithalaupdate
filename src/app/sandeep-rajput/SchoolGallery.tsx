@@ -37,7 +37,7 @@ export default function SchoolGallery() {
                 src={PHOTOS[active].src}
                 alt={PHOTOS[active].alt}
                 className="sr-sg-main-img"
-                style={PHOTOS[active].rotate ? { transform: 'rotate(90deg)', maxHeight: '55vw', width: 'auto', margin: '0 auto' } : {}}
+                style={PHOTOS[active].rotate ? { transform: 'rotate(270deg)', maxHeight: '55vw', width: 'auto', margin: '0 auto' } : {}}
               />
               <p className="sr-sg-caption">{PHOTOS[active].caption}</p>
             </div>
