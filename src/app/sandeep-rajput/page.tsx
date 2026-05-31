@@ -12,11 +12,11 @@ const DEFAULT_PORTRAIT = 'https://9qidomuaf1nvlbrh.public.blob.vercel-storage.co
 const DEFAULT_PORTRAIT_2 = 'https://9qidomuaf1nvlbrh.public.blob.vercel-storage.com/uploads/1778480815703-sandeep-rajput-rithala-village-2-xymbfyECPUpkDzS95iO3FwDK5vkUim.png';
 
 const DEFAULT_ARTWORKS = [
-  { img: 'https://9qidomuaf1nvlbrh.public.blob.vercel-storage.com/uploads/1778480852254-rajputs-warrior-art-by-sandeep-rajput-1-EcVAvTjm85N2w0aQvMnINf1q6UJHDc.png', title: 'Maharana Pratap', sub: 'Legendary Rajput Warrior | Sketch by Sandeep Rajput' },
-  { img: 'https://9qidomuaf1nvlbrh.public.blob.vercel-storage.com/uploads/1778480850386-little-krishna-art-by-sandeep-rajput-My42d3DBHBriELEJVA1mOHJJo1keeD.png', title: 'Little Krishna', sub: 'Pencil Drawing by Sandeep Rajput' },
-  { img: 'https://9qidomuaf1nvlbrh.public.blob.vercel-storage.com/uploads/1778480848621-karan-aujla-art-by-sandeep-rajput-lBjClfy7IXQpR7wTAV6B57kMszDu6w.png', title: 'Karan Aujla', sub: 'Punjabi Singer Sketch by Sandeep Rajput' },
-  { img: 'https://9qidomuaf1nvlbrh.public.blob.vercel-storage.com/uploads/1778480846991-little-ram-art-by-sandeep-rajput-CfC5gcy4UkzhNKrzWUXgaWxdUDXvuC.png', title: 'Little Ram', sub: 'Pencil Art by Sandeep Rajput' },
-  { img: 'https://9qidomuaf1nvlbrh.public.blob.vercel-storage.com/uploads/1778480845194-virat-kholi-art-by-sandeep-rajput-yfvTxR9dqTw0jHTXu8nBNxAQBhWGTN.png', title: 'Virat Kohli', sub: 'Pencil Portrait by Sandeep Rajput' },
+  { img: 'https://9qidomuaf1nvlbrh.public.blob.vercel-storage.com/uploads/1778480852254-rajputs-warrior-art-by-sandeep-rajput-1-EcVAvTjm85N2w0aQvMnINf1q6UJHDc.png', title: 'Maharana Pratap', sub: 'Rajput Warrior Pencil Drawing by Sandeep Rajput Rithalya Rajput', alt: 'Maharana Pratap pencil drawing art by Sandeep Rajput Rithalya Rajput Rithala Delhi' },
+  { img: 'https://9qidomuaf1nvlbrh.public.blob.vercel-storage.com/uploads/1778480850386-little-krishna-art-by-sandeep-rajput-My42d3DBHBriELEJVA1mOHJJo1keeD.png', title: 'Little Krishna', sub: 'Color Pencil Drawing by Sandeep Rajput Rithalya Rajput', alt: 'Little Krishna color pencil art drawing by Sandeep Rajput Rithalya Rajput Rithala Delhi' },
+  { img: 'https://9qidomuaf1nvlbrh.public.blob.vercel-storage.com/uploads/1778480848621-karan-aujla-art-by-sandeep-rajput-lBjClfy7IXQpR7wTAV6B57kMszDu6w.png', title: 'Karan Aujla', sub: 'Pencil Portrait Sketch by Sandeep Rajput Rithalya Rajput', alt: 'Karan Aujla pencil portrait sketch drawing by Sandeep Rajput Rithalya Rajput Rithala Delhi' },
+  { img: 'https://9qidomuaf1nvlbrh.public.blob.vercel-storage.com/uploads/1778480846991-little-ram-art-by-sandeep-rajput-CfC5gcy4UkzhNKrzWUXgaWxdUDXvuC.png', title: 'Little Ram', sub: 'Shri Ram Pencil Art by Sandeep Rajput Rithalya Rajput', alt: 'Little Ram Shri Ram pencil art drawing by Sandeep Rajput Rithalya Rajput Rithala Delhi' },
+  { img: 'https://9qidomuaf1nvlbrh.public.blob.vercel-storage.com/uploads/1778480845194-virat-kholi-art-by-sandeep-rajput-yfvTxR9dqTw0jHTXu8nBNxAQBhWGTN.png', title: 'Virat Kohli', sub: 'Cricket Legend Pencil Portrait by Sandeep Rajput Rithalya Rajput', alt: 'Virat Kohli pencil portrait drawing art by Sandeep Rajput Rithalya Rajput Rithala Delhi' },
 ];
 
 const DEFAULT_SKILLS = [
@@ -90,6 +90,14 @@ export default async function SandeepRajputPage() {
     jobTitle: 'Digital Creator, Website Developer, Artist',
     birthPlace: location,
     description: bio,
+    subjectOf: DEFAULT_ARTWORKS.map(a => ({
+      '@type': 'VisualArtwork',
+      name: `${a.title} - Pencil Drawing by ${name}`,
+      image: a.img,
+      description: a.alt || a.sub,
+      creator: { '@type': 'Person', name },
+      artMedium: 'Pencil, Color Pencil',
+    })),
   };
 
   return (
@@ -239,7 +247,7 @@ export default async function SandeepRajputPage() {
             {finalArtworks.map((art, i) => (
               <figure key={i} className="sr-art-card-h">
                 <div className="sr-art-img-h">
-                  <img src={art.img!} alt={`${art.title} by ${name}`} loading="lazy" />
+                  <img src={art.img!} alt={(art as any).alt || `${art.title} pencil drawing art by ${name} Rithala Delhi`} loading="lazy" />
                 </div>
                 <figcaption>
                   <strong>{art.title}</strong>
