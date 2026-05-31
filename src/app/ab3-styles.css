@@ -642,6 +642,9 @@
   margin-bottom: 28px;
   border-left: 4px solid #c8a44a;
   padding-left: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 .sr-journey-badge {
   display: inline-block;
@@ -653,7 +656,6 @@
   text-transform: uppercase;
   padding: 3px 12px;
   border-radius: 999px;
-  margin-bottom: 8px;
 }
 .sr-journey-title {
   font-size: 1.4rem;
