@@ -194,7 +194,7 @@ export default async function SandeepRajputPage() {
           <div className="sr-lifestyle-section">
             <div className="sr-lifestyle-img-wrap">
               <img
-                src="https://9qidomuaf1nvlbrh.public.blob.vercel-storage.com/uploads/sandeep-rajput-rithalya-rajput-personal-lifestyle-rithala-delhi.jpg"
+                src="/sandeep-rajput-rithalya-rajput-personal-lifestyle-rithala-delhi.webp"
                 alt="Sandeep Rajput Rithalya Rajput personal lifestyle photography modelling Rithala Delhi"
                 className="sr-lifestyle-img"
                 loading="lazy"
