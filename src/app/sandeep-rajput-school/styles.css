@@ -1,6 +1,6 @@
 /* Sandeep Rajput School Page */
 .sch-page { background: #fffbf3; font-family: 'Georgia', serif; }
-.sch-container { max-width: 1000px; margin: 0 auto; padding: 0 24px; }
+.sch-container { max-width: 860px; margin: 0 auto; padding: 0 24px; }
 
 /* Hero */
 .sch-hero {
@@ -53,106 +53,141 @@
 }
 @media (max-width: 600px) { .sch-hero h1 { font-size: 1.5rem; } }
 
-/* Sections */
-.sch-section { padding: 64px 0; background: #fffbf3; }
-.sch-section--alt { background: #fff; }
+/* Section */
+.sch-section { padding: 64px 0 80px; }
 
-/* About grid */
-.sch-about-grid {
-  display: grid;
-  grid-template-columns: 1fr 340px;
-  gap: 40px;
-  align-items: start;
-}
-.sch-about-text h2 {
-  font-size: 1.6rem;
-  font-weight: 800;
-  color: #1a0a00;
-  margin: 0 0 18px;
-  border-left: 4px solid #c8a44a;
-  padding-left: 14px;
-}
-.sch-about-text p {
-  font-size: 0.95rem;
-  color: #3a2a10;
-  line-height: 1.8;
-  margin-bottom: 14px;
-}
-.sch-info-card {
-  background: #fff;
-  border-radius: 16px;
-  padding: 24px;
-  box-shadow: 0 6px 24px rgba(0,0,0,0.08);
-  border: 1px solid #f1e6c2;
-}
-.sch-info-card h3 {
-  font-size: 1rem;
-  font-weight: 800;
-  color: #1a0a00;
-  margin: 0 0 16px;
-  padding-bottom: 10px;
-  border-bottom: 2px solid #f1e6c2;
-}
-.sch-details { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
-.sch-detail-row {
+/* Schools list */
+.sch-schools-list {
   display: flex;
   flex-direction: column;
-  gap: 2px;
-}
-.sch-detail-row span { font-size: 0.7rem; color: #92400e; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; }
-.sch-detail-row strong { font-size: 0.88rem; color: #1a1a1a; }
-.sch-google-btn {
-  display: block;
-  background: linear-gradient(135deg, #b91c1c, #dc2626);
-  color: #fff !important;
-  font-size: 0.88rem;
-  font-weight: 700;
-  padding: 10px 20px;
-  border-radius: 8px;
-  text-decoration: none;
-  text-align: center;
+  gap: 40px;
 }
 
-/* Gallery */
-.sch-gallery-title {
-  font-size: 1.5rem;
+.sch-school-item {
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  gap: 24px;
+  align-items: start;
+}
+.sch-school-item--final {
+  background: #fff8ed;
+  border: 2px solid #c8a44a;
+  border-radius: 20px;
+  padding: 28px;
+  grid-template-columns: 64px 1fr;
+}
+
+.sch-school-number {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  font-weight: 900;
+  color: #fff;
+  flex-shrink: 0;
+  margin-top: 4px;
+}
+
+.sch-school-content { display: flex; flex-direction: column; gap: 10px; }
+
+.sch-school-classes-badge {
+  display: inline-block;
+  background: #f1f5f9;
+  color: #334155;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 3px 12px;
+  border-radius: 999px;
+  width: fit-content;
+}
+
+.sch-school-name {
+  font-size: 1.25rem;
   font-weight: 800;
   color: #1a0a00;
-  margin: 0 0 8px;
-  border-left: 4px solid #c8a44a;
-  padding-left: 14px;
+  margin: 0;
+  line-height: 1.3;
 }
-.sch-gallery-lead {
-  font-size: 0.88rem;
-  color: #64748b;
-  margin: 0 0 28px;
-  padding-left: 18px;
+
+.sch-school-address {
+  font-size: 0.8rem;
+  color: #92400e;
+  margin: 0;
+  font-style: italic;
 }
-.sch-gallery-grid {
+
+.sch-school-about {
+  font-size: 0.92rem;
+  color: #3a2a10;
+  line-height: 1.8;
+  margin: 0;
+}
+
+.sch-school-highlight {
+  border-left: 3px solid;
+  padding-left: 12px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #1a0a00;
+  font-style: italic;
+}
+
+/* Divider between schools */
+.sch-school-item:not(:last-child)::after {
+  content: '';
+  display: block;
+  grid-column: 1 / -1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #e2d5b0, transparent);
+  margin-top: 8px;
+}
+
+/* Photos grid */
+.sch-photos-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 20px;
+  gap: 16px;
+  margin-top: 6px;
 }
-.sch-gallery-card {
-  border-radius: 14px;
+.sch-photo-card {
+  border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
   border: 1px solid #f1e6c2;
 }
-.sch-gallery-img {
+.sch-photo-img {
   width: 100%;
   height: auto;
   display: block;
   object-fit: cover;
 }
-.sch-gallery-caption {
+.sch-photo-caption {
   background: #fff;
-  padding: 10px 14px;
-  font-size: 0.8rem;
+  padding: 8px 12px;
+  font-size: 0.76rem;
   color: #64748b;
   margin: 0;
   text-align: center;
 }
+
+.sch-google-btn {
+  display: inline-block;
+  background: linear-gradient(135deg, #b91c1c, #dc2626);
+  color: #fff !important;
+  font-size: 0.88rem;
+  font-weight: 700;
+  padding: 10px 22px;
+  border-radius: 8px;
+  text-decoration: none;
+  width: fit-content;
+  transition: transform 0.2s;
+}
+.sch-google-btn:hover { transform: translateY(-2px); }
 
 /* CTA */
 .sch-cta {
@@ -178,9 +213,11 @@
 .sch-btn--outline { border: 2px solid #c8a44a; color: #f5d98a; }
 .sch-btn:hover { transform: translateY(-2px); }
 
-@media (max-width: 700px) {
-  .sch-about-grid { grid-template-columns: 1fr; }
-  .sch-gallery-grid { grid-template-columns: 1fr; }
+@media (max-width: 600px) {
+  .sch-school-item,
+  .sch-school-item--final { grid-template-columns: 1fr; }
+  .sch-school-number { width: 44px; height: 44px; font-size: 0.95rem; }
+  .sch-photos-grid { grid-template-columns: 1fr; }
   .sch-cta-btns { flex-direction: column; align-items: stretch; }
   .sch-btn { min-width: unset; }
 }

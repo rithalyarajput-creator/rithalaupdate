@@ -5,28 +5,86 @@ import './styles.css';
 const SITE = process.env.NEXT_PUBLIC_SITE_URL || 'https://rithalaupdate.online';
 
 export const metadata: Metadata = {
-  title: 'Sandeep Rajput School — Rana Pratap School Rithala | Rithalya Rajput',
-  description: 'Sandeep Rajput (Rithalya Rajput) school life at Rana Pratap Government Boys Senior Secondary School, Rithala, Delhi. School photos, memories and journey from Class 7 to Class 12.',
-  keywords: 'Sandeep Rajput school, Rithalya Rajput school, Rana Pratap School Rithala, Sandeep Rajput Rithala Delhi school photos',
+  title: 'Sandeep Rajput School Journey — All Schools | Rithalya Rajput Rithala Delhi',
+  description: 'Complete school journey of Sandeep Rajput (Rithalya Rajput) — from Nursery at Twinkle Star Public School to Class 12 at Rana Pratap School, Rithala, Delhi. All schools, photos and memories.',
+  keywords: 'Sandeep Rajput school, Rithalya Rajput school journey, Rana Pratap School Rithala, Twinkle Star School Vijay Vihar, Sandeep Rajput Rithala Delhi school photos',
   alternates: { canonical: '/sandeep-rajput-school/' },
   openGraph: {
-    title: 'Sandeep Rajput School — Rana Pratap School Rithala',
-    description: 'School life and memories of Sandeep Rajput Rithalya Rajput at Rana Pratap Government Boys Senior Secondary School, Rithala, Delhi.',
+    title: 'Sandeep Rajput School Journey — All Schools Rithala Delhi',
+    description: 'Complete school journey of Sandeep Rajput Rithalya Rajput from Nursery to Class 12, Rithala, Delhi.',
     url: `${SITE}/sandeep-rajput-school/`,
     type: 'profile',
   },
 };
 
-const PHOTOS = [
+const SCHOOLS = [
   {
-    src: 'https://9qidomuaf1nvlbrh.public.blob.vercel-storage.com/uploads/1780126495893-sandeep-rajput-rithalya-rajput-rana-pratap-sarvodaya-school-rithala-delhi.jpg-aOf2OUhgtMt1zncuB5nE4EAvhOsiRU.jpg',
-    alt: 'Sandeep Rajput Rithalya Rajput with school friends birthday celebration Rana Pratap School Rithala Delhi',
-    caption: 'Birthday celebration with classmates — Rana Pratap School, Rithala',
+    number: '01',
+    name: 'Twinkle Star Public School',
+    classes: 'Nursery, LKG, UKG',
+    address: 'Rithala Road, Vijay Vihar Phase 1, Block B, Vijay Vihar, Rohini, New Delhi – 110085',
+    about: 'This is where it all began. Twinkle Star Public School, Vijay Vihar was Sandeep Rajput\'s very first school — the place where he took his first steps into education, made his first friends, and developed his earliest sense of curiosity and creativity.',
+    highlight: 'First school — the beginning of the journey',
+    color: '#dc2626',
   },
   {
-    src: 'https://9qidomuaf1nvlbrh.public.blob.vercel-storage.com/uploads/1780128070439-Sandeep_Rajput_at_Rana_Pratap_Sarvodaya_School_Rithala_Delhi-HiluKN1YF4KDt9BXsd0w7AQkxNocxX.webp',
-    alt: 'Sandeep Rajput Rithalya Rajput at Rana Pratap Sarvodaya School Rithala Delhi with friends',
-    caption: 'With friends at school — Rana Pratap Sarvodaya School, Rithala',
+    number: '02',
+    name: 'Rana Pratap Sarvodya Kanya Vidyalaya, Rithala',
+    classes: 'Class 1 – Class 2',
+    address: 'Rithala, Rohini Sector 5, New Delhi',
+    about: 'After his early schooling, Sandeep moved to Rana Pratap Sarvodya Kanya Vidyalaya in Rithala for Class 1 and Class 2. This school, named after the great Rajput warrior Maharana Pratap, was close to home and gave him a strong academic foundation in his early years.',
+    highlight: 'Class 1 & 2 — early academic foundation',
+    color: '#b45309',
+  },
+  {
+    number: '03',
+    name: 'Sant Sujan Singh Ji International School',
+    classes: 'Class 3',
+    address: 'Kushak No. 2, Swaroop Nagar, Kadipur, Delhi – 110042',
+    about: 'For Class 3, Sandeep attended Sant Sujan Singh Ji International School in Swaroop Nagar. This school broadened his horizons and introduced him to a wider circle of students and teachers, further enriching his early educational experience.',
+    highlight: 'Class 3 — new experiences and wider horizons',
+    color: '#0369a1',
+  },
+  {
+    number: '04',
+    name: 'Twinkle Star Public School',
+    classes: 'Class 4 – Class 5',
+    address: 'Rithala Road, Vijay Vihar Phase 1, Block B, Vijay Vihar, Rohini, New Delhi – 110085',
+    about: 'Sandeep returned to his first school — Twinkle Star Public School, Vijay Vihar — for Class 4 and Class 5. Coming back to familiar surroundings, he reconnected with old friends and teachers, completing his primary education with confidence and a growing passion for art and creativity.',
+    highlight: 'Class 4 & 5 — returning to roots, completing primary school',
+    color: '#7c3aed',
+  },
+  {
+    number: '05',
+    name: 'Citizen Model School',
+    classes: 'Class 6',
+    address: 'Metro Station, C-1, Phase II, 18/19, Trimurti Mandir Rd, Rithala, Budh Vihar, Delhi – 110085',
+    about: 'For Class 6, Sandeep enrolled at Citizen Model School in Budh Vihar, Rithala — just near the metro station. This marked his transition to middle school and a new chapter of growing independence, where his interest in digital creativity and design began to emerge.',
+    highlight: 'Class 6 — transition to middle school, creativity emerging',
+    color: '#059669',
+  },
+  {
+    number: '06',
+    name: 'Rana Pratap Government Boys Senior Secondary School',
+    classes: 'Class 7 – Class 12',
+    address: 'Rithala, Rohini, New Delhi',
+    about: 'The most significant chapter of Sandeep\'s school life. He spent Class 7 to Class 12 at Rana Pratap Government Boys Senior Secondary School, Rithala — attending the afternoon shift from 1:00 PM to 6:00 PM. This is where his confidence, discipline, artistic skills, and digital thinking truly flourished. The dedicated teachers, the friendships, the birthday celebrations in classrooms — these are the memories that shaped Sandeep Rajput (Rithalya Rajput) into the creator he is today.',
+    highlight: 'Class 7 to 12 — the most formative years · 1:00 PM – 6:00 PM shift',
+    color: '#c8a44a',
+    isFinal: true,
+    googleLink: 'https://www.google.com/search?q=Rana+Pratap+Government+Boys+Senior+Secondary+School+Rithala+Delhi',
+    photos: [
+      {
+        src: 'https://9qidomuaf1nvlbrh.public.blob.vercel-storage.com/uploads/1780126495893-sandeep-rajput-rithalya-rajput-rana-pratap-sarvodaya-school-rithala-delhi.jpg-aOf2OUhgtMt1zncuB5nE4EAvhOsiRU.jpg',
+        alt: 'Sandeep Rajput Rithalya Rajput with friends birthday celebration Rana Pratap School Rithala Delhi',
+        caption: 'Birthday celebration with classmates — Rana Pratap School, Rithala',
+      },
+      {
+        src: 'https://9qidomuaf1nvlbrh.public.blob.vercel-storage.com/uploads/1780128070439-Sandeep_Rajput_at_Rana_Pratap_Sarvodaya_School_Rithala_Delhi-HiluKN1YF4KDt9BXsd0w7AQkxNocxX.webp',
+        alt: 'Sandeep Rajput Rithalya Rajput at Rana Pratap Sarvodaya School Rithala Delhi with school friends',
+        caption: 'With school friends — Rana Pratap Sarvodaya School, Rithala, Delhi',
+      },
+    ],
   },
 ];
 
@@ -38,78 +96,53 @@ export default function SchoolPage() {
         {/* Hero */}
         <section className="sch-hero">
           <div className="sch-container">
-            <span className="sch-hero-badge">School Life · Rithala, Delhi</span>
-            <h1>Sandeep Rajput at Rana Pratap School</h1>
+            <span className="sch-hero-badge">School Journey · Rithala, Delhi</span>
+            <h1>Sandeep Rajput — Full School Journey</h1>
             <p className="sch-hero-sub">
-              Rithalya Rajput — School memories, friendships and formative years at
-              Rana Pratap Government Boys Senior Secondary School, Rithala
+              Rithalya Rajput — From Nursery to Class 12 across 5 schools in Rithala &amp; North Delhi
             </p>
             <div className="sch-hero-tags">
-              <span>Class 7 – 12</span>
-              <span>1:00 PM – 6:00 PM</span>
+              <span>Nursery – Class 12</span>
+              <span>5 Schools</span>
               <span>Rithala, North Delhi</span>
-              <span>Boys School</span>
+              <span>Sandeep Rajput</span>
             </div>
           </div>
         </section>
 
-        {/* About School */}
+        {/* Schools Timeline */}
         <section className="sch-section">
           <div className="sch-container">
-            <div className="sch-about-grid">
-              <div className="sch-about-text">
-                <h2>About the School</h2>
-                <p>
-                  Rana Pratap Government Boys Senior Secondary School is one of the most respected
-                  government schools in Rithala, North Delhi. Named after the legendary Rajput warrior
-                  Maharana Pratap, the school carries the values of courage, discipline, and dedication
-                  in its very name.
-                </p>
-                <p>
-                  Sandeep Rajput — known as Rithalya Rajput — studied here from Class 7 to Class 12,
-                  attending the afternoon shift from 1:00 PM to 6:00 PM. These were among the most
-                  formative years of his life, shaping his confidence, creativity, and character.
-                </p>
-                <p>
-                  The school is known for its dedicated and knowledgeable teaching staff who go beyond
-                  textbooks to inspire students. It was in these classrooms and corridors that Sandeep
-                  discovered his passion for art, design, and digital creation.
-                </p>
-              </div>
-              <div className="sch-info-card">
-                <h3>School Details</h3>
-                <div className="sch-details">
-                  <div className="sch-detail-row"><span>School</span><strong>Rana Pratap Govt. Boys Sr. Sec. School</strong></div>
-                  <div className="sch-detail-row"><span>Location</span><strong>Rithala, North Delhi</strong></div>
-                  <div className="sch-detail-row"><span>Type</span><strong>Government Boys School</strong></div>
-                  <div className="sch-detail-row"><span>Classes</span><strong>Class 7 – Class 12</strong></div>
-                  <div className="sch-detail-row"><span>Shift</span><strong>Afternoon · 1:00 PM – 6:00 PM</strong></div>
-                  <div className="sch-detail-row"><span>Student</span><strong>Sandeep Rajput (Rithalya Rajput)</strong></div>
-                </div>
-                <a
-                  href="https://www.google.com/search?q=Rana+Pratap+Government+Boys+Senior+Secondary+School+Rithala+Delhi"
-                  target="_blank" rel="noopener noreferrer"
-                  className="sch-google-btn"
-                >
-                  View on Google
-                </a>
-              </div>
-            </div>
-          </div>
-        </section>
+            <div className="sch-schools-list">
+              {SCHOOLS.map((school, i) => (
+                <div key={i} className={`sch-school-item${school.isFinal ? ' sch-school-item--final' : ''}`}>
+                  <div className="sch-school-number" style={{ background: school.color }}>{school.number}</div>
+                  <div className="sch-school-content">
+                    <div className="sch-school-classes-badge">{school.classes}</div>
+                    <h2 className="sch-school-name">{school.name}</h2>
+                    <p className="sch-school-address">{school.address}</p>
+                    <p className="sch-school-about">{school.about}</p>
+                    <div className="sch-school-highlight" style={{ borderColor: school.color }}>
+                      {school.highlight}
+                    </div>
 
-        {/* Photo Gallery */}
-        <section className="sch-section sch-section--alt">
-          <div className="sch-container">
-            <h2 className="sch-gallery-title">School Memories & Photos</h2>
-            <p className="sch-gallery-lead">
-              Sandeep Rajput Rithalya Rajput school photos at Rana Pratap Sarvodaya School, Rithala, Delhi
-            </p>
-            <div className="sch-gallery-grid">
-              {PHOTOS.map((p, i) => (
-                <div key={i} className="sch-gallery-card">
-                  <img src={p.src} alt={p.alt} className="sch-gallery-img" loading="lazy" />
-                  <p className="sch-gallery-caption">{p.caption}</p>
+                    {school.photos && (
+                      <div className="sch-photos-grid">
+                        {school.photos.map((p, j) => (
+                          <div key={j} className="sch-photo-card">
+                            <img src={p.src} alt={p.alt} className="sch-photo-img" loading="lazy" />
+                            <p className="sch-photo-caption">{p.caption}</p>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+
+                    {school.googleLink && (
+                      <a href={school.googleLink} target="_blank" rel="noopener noreferrer" className="sch-google-btn">
+                        View School on Google
+                      </a>
+                    )}
+                  </div>
                 </div>
               ))}
             </div>
@@ -119,8 +152,8 @@ export default function SchoolPage() {
         {/* CTA */}
         <section className="sch-cta">
           <div className="sch-container">
-            <h2>Learn More About Sandeep Rajput</h2>
-            <p>Discover the full journey of Rithalya Rajput — from school days to digital creator.</p>
+            <h2>Discover More About Sandeep Rajput</h2>
+            <p>Explore the full life journey of Rithalya Rajput — from school days to becoming a digital creator.</p>
             <div className="sch-cta-btns">
               <a href="/sandeep-rajput/" className="sch-btn sch-btn--gold">About Me</a>
               <a href="/sandeep-rajput-journey/" className="sch-btn sch-btn--outline">Full Journey — 2007 to Present</a>

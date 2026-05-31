@@ -213,32 +213,18 @@ export default async function SandeepRajputPage() {
           <h2>Education</h2>
           <p>{storyEducation}</p>
 
-          {/* Rana Pratap School Card */}
+          {/* School Summary Card */}
           <div className="sr-school-card-v2">
             <div className="sr-school-info-v2">
-              <span className="sr-school-badge">Government Boys School · Rithala, Delhi</span>
-              <h3 className="sr-school-name">Rana Pratap Government Boys Senior Secondary School</h3>
-              <div className="sr-school-meta">
-                <span>Class 7th – 12th</span>
-                <span>Timing: 1:00 PM – 6:00 PM (Afternoon Shift)</span>
-                <span>Boys School — Dedicated &amp; Excellent Teachers</span>
-              </div>
+              <span className="sr-school-badge">Rithala, Delhi · Multiple Schools</span>
+              <h3 className="sr-school-name">My School Journey — Nursery to Class 12</h3>
               <p className="sr-school-desc">
-                This school holds a very special place in my life. I completed my education here from
-                Class 7 to Class 12 — some of the most formative years of my journey. The teachers were
-                exceptionally dedicated, knowledgeable, and inspiring. It was here that my confidence,
-                discipline, and creative thinking truly developed — shaping the person I am today.
-                Sandeep Rajput (Rithalya Rajput) proudly represents this school and the values it instilled.
+                My educational journey began at Twinkle Star Public School, Vijay Vihar and took me
+                through five different schools across Rithala and North Delhi — each one shaping a
+                different part of who I am today. Sandeep Rajput (Rithalya Rajput) proudly carries
+                the values and memories of every school he attended.
               </p>
               <div className="sr-school-btns">
-                <a
-                  href="https://www.google.com/search?q=Rana+Pratap+Government+Boys+Senior+Secondary+School+Rithala+Delhi"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="sr-school-btn"
-                >
-                  View on Google
-                </a>
                 <SchoolGallery />
                 <a href="/sandeep-rajput-school/" className="sr-school-btn sr-school-btn--gold">
                   Full School Journey
