@@ -223,6 +223,13 @@ export default async function SandeepRajputPage() {
             </div>
           </div>
 
+          {/* Journey Button */}
+          <div className="sr-journey-cta-wrap">
+            <a href="/sandeep-rajput-journey/" className="sr-journey-cta-btn">
+              View My Full Journey — 2007 to Present
+            </a>
+          </div>
+
           {/* Journey Section */}
           <div className="sr-journey-section">
             <div className="sr-journey-header">

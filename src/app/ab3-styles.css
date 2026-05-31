@@ -752,3 +752,34 @@
     font-size: 1.2rem;
   }
 }
+
+/* ---------- Journey CTA Button ---------- */
+.sr-journey-cta-wrap {
+  text-align: center;
+  margin: 32px 0 8px;
+}
+.sr-journey-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(135deg, #1a0a00, #5c2d00);
+  color: #f5d98a;
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 15px 36px;
+  border-radius: 12px;
+  text-decoration: none;
+  border: 1px solid rgba(200,164,74,0.4);
+  box-shadow: 0 6px 24px rgba(0,0,0,0.2);
+  transition: transform 0.2s, box-shadow 0.2s;
+  letter-spacing: 0.02em;
+}
+.sr-journey-cta-btn::after {
+  content: '→';
+  font-size: 1.1rem;
+}
+.sr-journey-cta-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(200,164,74,0.2);
+  color: #f5d98a;
+}
