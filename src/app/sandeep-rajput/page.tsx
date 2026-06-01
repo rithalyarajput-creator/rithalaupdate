@@ -253,14 +253,34 @@ export default async function SandeepRajputPage() {
                 I believe in giving everything my best effort.
               </p>
               <div className="sr-hobby-grid">
-                <div className="sr-hobby-item sr-hobby-item--dark"><span className="sr-hobby-icon">✏</span><span>Drawing &amp; Pencil Art</span></div>
-                <div className="sr-hobby-item sr-hobby-item--dark"><span className="sr-hobby-icon">📷</span><span>Photography</span></div>
-                <div className="sr-hobby-item sr-hobby-item--dark"><span className="sr-hobby-icon">📱</span><span>Social Media &amp; Influence</span></div>
-                <div className="sr-hobby-item sr-hobby-item--dark"><span className="sr-hobby-icon">💻</span><span>Website Development</span></div>
-                <div className="sr-hobby-item sr-hobby-item--dark"><span className="sr-hobby-icon">🎨</span><span>Creativity &amp; Design</span></div>
-                <div className="sr-hobby-item sr-hobby-item--dark"><span className="sr-hobby-icon">🏋</span><span>Health &amp; Fitness</span></div>
-                <div className="sr-hobby-item sr-hobby-item--dark"><span className="sr-hobby-icon">🎬</span><span>Video Creation</span></div>
-                <div className="sr-hobby-item sr-hobby-item--dark"><span className="sr-hobby-icon">✦</span><span>Always Learning</span></div>
+                <div className="sr-hobby-item sr-hobby-item--dark">
+                  <svg className="sr-hobby-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M15.232 5.232l3.536 3.536M9 13l6.586-6.586a2 2 0 012.828 2.828L11.828 15.828a4 4 0 01-1.414.95l-3.414.95.95-3.414a4 4 0 01.95-1.414z"/></svg>
+                  <span>Drawing &amp; Pencil Art</span>
+                </div>
+                <div className="sr-hobby-item sr-hobby-item--dark">
+                  <svg className="sr-hobby-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="3"/><path d="M20.188 10.934c.2.646.312 1.348.312 2.066s-.112 1.42-.312 2.066M3.812 13.066C3.612 12.42 3.5 11.718 3.5 11s.112-1.42.312-2.066M15.536 4.464a9 9 0 11-7.072 0"/><rect x="2" y="7" width="20" height="14" rx="2"/><circle cx="12" cy="13" r="3"/></svg>
+                  <span>Photography</span>
+                </div>
+                <div className="sr-hobby-item sr-hobby-item--dark">
+                  <svg className="sr-hobby-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                  <span>Social Media</span>
+                </div>
+                <div className="sr-hobby-item sr-hobby-item--dark">
+                  <svg className="sr-hobby-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                  <span>Website Development</span>
+                </div>
+                <div className="sr-hobby-item sr-hobby-item--dark">
+                  <svg className="sr-hobby-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="13.5" cy="6.5" r="2.5"/><path d="M17 12c0 2.5-2 4.5-4 6s-4-1-4-3.5c0-3 2.5-5.5 4-7 1.5 1.5 4 4 4 4.5z"/><path d="M8.5 14.5c-1 1.5-2 3-2 4 0 1.5 1 2.5 2.5 2.5s2.5-1 2.5-2.5"/></svg>
+                  <span>Creativity &amp; Design</span>
+                </div>
+                <div className="sr-hobby-item sr-hobby-item--dark">
+                  <svg className="sr-hobby-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M15 10l4.553-2.07A1 1 0 0121 8.87v6.26a1 1 0 01-1.447.894L15 14"/><rect x="1" y="6" width="15" height="12" rx="2"/></svg>
+                  <span>Video Creation</span>
+                </div>
+                <div className="sr-hobby-item sr-hobby-item--dark">
+                  <svg className="sr-hobby-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                  <span>Always Learning</span>
+                </div>
               </div>
             </div>
             <div className="sr-hobbies-img-wrap">
