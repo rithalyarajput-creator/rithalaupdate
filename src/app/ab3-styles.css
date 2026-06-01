@@ -1021,3 +1021,79 @@
   .sr-hobbies-img { max-width: 240px; }
   .sr-hobbies-heading { font-size: 1.4rem; }
 }
+
+/* ---------- School Banner ---------- */
+.sr-school-banner {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  margin: 20px 0 28px;
+  min-height: 260px;
+}
+.sr-school-banner-img {
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+.sr-school-banner-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, rgba(26,10,0,0.88) 0%, rgba(26,10,0,0.5) 60%, transparent 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 32px 36px;
+  gap: 10px;
+}
+.sr-school-banner-badge {
+  display: inline-block;
+  background: linear-gradient(135deg, #c8a44a, #e8c87a);
+  color: #1a0a00;
+  font-size: 0.68rem;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 3px 12px;
+  border-radius: 999px;
+  width: fit-content;
+}
+.sr-school-banner-title {
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: #f5d98a;
+  margin: 0;
+  line-height: 1.2;
+}
+.sr-school-banner-sub {
+  font-size: 0.88rem;
+  color: rgba(255,255,255,0.8);
+  margin: 0;
+  font-style: italic;
+}
+.sr-school-banner-btns {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+.sr-school-banner-btn {
+  display: inline-flex;
+  align-items: center;
+  background: linear-gradient(135deg, #c8a44a, #e8c87a);
+  color: #1a0a00 !important;
+  font-size: 0.88rem;
+  font-weight: 800;
+  padding: 10px 22px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: transform 0.2s;
+}
+.sr-school-banner-btn:hover { transform: translateY(-2px); }
+@media (max-width: 600px) {
+  .sr-school-banner-img { height: 220px; }
+  .sr-school-banner-overlay { padding: 20px 20px; }
+  .sr-school-banner-title { font-size: 1.3rem; }
+  .sr-school-banner-btns { flex-direction: column; }
+}

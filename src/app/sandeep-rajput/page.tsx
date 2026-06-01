@@ -213,20 +213,21 @@ export default async function SandeepRajputPage() {
           <h2>Education</h2>
           <p>{storyEducation}</p>
 
-          {/* School Summary Card */}
-          <div className="sr-school-card-v2">
-            <div className="sr-school-info-v2">
-              <span className="sr-school-badge">Rithala, Delhi · Multiple Schools</span>
-              <h3 className="sr-school-name">My School Journey — Nursery to Class 12</h3>
-              <p className="sr-school-desc">
-                My educational journey began at Twinkle Star Public School, Vijay Vihar and took me
-                through five different schools across Rithala and North Delhi — each one shaping a
-                different part of who I am today. Sandeep Rajput (Rithalya Rajput) proudly carries
-                the values and memories of every school he attended.
-              </p>
-              <div className="sr-school-btns">
+          {/* School Banner */}
+          <div className="sr-school-banner">
+            <img
+              src="https://9qidomuaf1nvlbrh.public.blob.vercel-storage.com/uploads/1780231594719-sandeep-rajput-rithalya-rajput-rana-pratap-government-boys-school-rithala-delhi.jpg-IitE6GfTOeqlQOkskGGYHNutTd4wbp.png"
+              alt="Rana Pratap Government Boys Senior Secondary School Rithala Delhi — Sandeep Rajput Rithalya Rajput"
+              className="sr-school-banner-img"
+              loading="lazy"
+            />
+            <div className="sr-school-banner-overlay">
+              <span className="sr-school-banner-badge">6 Schools · Nursery to Class 12</span>
+              <h3 className="sr-school-banner-title">My School Journey</h3>
+              <p className="sr-school-banner-sub">Rithala &amp; North Delhi · Sandeep Rajput (Rithalya Rajput)</p>
+              <div className="sr-school-banner-btns">
                 <SchoolGallery />
-                <a href="/sandeep-rajput-school/" className="sr-school-btn sr-school-btn--gold">
+                <a href="/sandeep-rajput-school/" className="sr-school-banner-btn">
                   Full School Journey
                 </a>
               </div>
