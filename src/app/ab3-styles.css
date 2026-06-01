@@ -1190,3 +1190,55 @@
   .sr-art-slide { flex: 0 0 160px; }
   .sr-art-slide img { width: 160px; min-height: 240px; }
 }
+
+/* ---------- Education Section ---------- */
+.sr-edu-section {
+  background: linear-gradient(135deg, #1e3a5f 0%, #2563eb 50%, #7dd3fc 100%);
+  padding: 60px 0;
+  color: #fff;
+}
+.sr-edu-inner {
+  max-width: 780px;
+}
+.sr-edu-badge {
+  display: inline-block;
+  background: #fff;
+  color: #1d4ed8;
+  font-size: 0.7rem;
+  font-weight: 900;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 4px 14px;
+  border-radius: 4px;
+  margin-bottom: 14px;
+}
+.sr-edu-heading {
+  font-size: 2rem;
+  font-weight: 900;
+  color: #fff;
+  margin: 0 0 20px;
+  line-height: 1.2;
+  border-bottom: 3px solid rgba(255,255,255,0.3);
+  padding-bottom: 14px;
+}
+.sr-edu-desc {
+  font-size: 0.92rem;
+  color: rgba(255,255,255,0.88);
+  line-height: 1.8;
+  margin: 0 0 14px;
+}
+.sr-edu-quote {
+  background: rgba(255,255,255,0.12);
+  border-left: 4px solid #fff;
+  border-radius: 0 10px 10px 0;
+  padding: 14px 20px;
+  margin: 8px 0 0;
+  font-size: 0.95rem;
+  font-style: italic;
+  font-weight: 600;
+  color: #fff;
+  line-height: 1.6;
+}
+.sr-edu-banner-wrap {
+  padding-top: 0 !important;
+}

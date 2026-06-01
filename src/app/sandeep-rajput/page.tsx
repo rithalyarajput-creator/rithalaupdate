@@ -210,8 +210,35 @@ export default async function SandeepRajputPage() {
             </div>
           </div>
 
-          <h2>Education</h2>
-          <p>{storyEducation}</p>
+        </div>
+      </section>
+
+      {/* Education Section — blue bg like hobbies */}
+      <section className="sr-edu-section">
+        <div className="container sr-edu-inner">
+          <div className="sr-edu-text">
+            <span className="sr-edu-badge">Education</span>
+            <h2 className="sr-edu-heading">My School Journey</h2>
+            <p className="sr-edu-desc">
+              My schooling journey was different from most students. I studied in both private and
+              government schools, experienced different environments, and made many friendships along
+              the way. Every school taught me something valuable and helped me grow as a person.
+            </p>
+            <p className="sr-edu-desc">
+              One thing I learned is that no school is good or bad — what truly matters is the
+              student&apos;s willingness to learn. With dedication and hard work, success can be
+              achieved from anywhere.
+            </p>
+            <blockquote className="sr-edu-quote">
+              &ldquo;A school does not define a student&apos;s future; a student&apos;s dedication
+              defines their success.&rdquo;
+            </blockquote>
+          </div>
+        </div>
+      </section>
+
+      <section className="sr-prose-section sr-edu-banner-wrap">
+        <div className="container sr-prose">
 
           {/* School Banner */}
           <div className="sr-school-banner">
@@ -232,7 +259,6 @@ export default async function SandeepRajputPage() {
             </div>
           </div>
 
-          {/* Hobbies Section — full width like hero */}
         </div>
       </section>
       <section className="sr-hobbies-full">
