@@ -923,7 +923,7 @@
 
 /* ---------- Hobbies Full Width Section ---------- */
 .sr-hobbies-full {
-  background: linear-gradient(135deg, #7c2d12, #b45309);
+  background: linear-gradient(135deg, #1e3a5f 0%, #2563eb 50%, #7dd3fc 100%);
   color: #fff;
   padding: 60px 0;
   margin: 32px 0 0;
@@ -979,7 +979,7 @@
   width: 18px;
   height: 18px;
   flex-shrink: 0;
-  stroke: #f5d98a;
+  stroke: #bae6fd;
 }
 .sr-hobbies-img-wrap {
   display: flex;
