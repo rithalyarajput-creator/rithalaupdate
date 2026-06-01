@@ -343,26 +343,45 @@ export default async function SandeepRajputPage() {
             </div>
           ))}
 
-          <h2>My Art Gallery</h2>
-          <p>Some of my best creative works — each piece representing a different side of my artistic journey.</p>
         </div>
       </section>
 
-      <div className="sr-gallery-scroll-wrap">
-          <div className="sr-gallery-scroll">
-            {finalArtworks.map((art, i) => (
-              <figure key={i} className="sr-art-card-h">
-                <div className="sr-art-img-h">
-                  <img src={art.img!} alt={(art as any).alt || `${art.title} pencil drawing art by ${name} Rithala Delhi`} loading="lazy" />
-                </div>
-                <figcaption>
-                  <strong>{art.title}</strong>
-                  <small>{art.sub}</small>
-                </figcaption>
-              </figure>
-            ))}
+      {/* Art Gallery — redesigned */}
+      <section className="sr-art-section">
+        <div className="sr-art-inner">
+          <div className="sr-art-left">
+            <span className="sr-art-badge">Self-Taught Artist</span>
+            <h2 className="sr-art-heading">Passion for Drawing &amp; Creativity</h2>
+            <p className="sr-art-desc">
+              Drawing has always been a natural part of my life. Since childhood, I have had a strong
+              interest in art, sketching, painting, and creative crafts. Although I never received
+              professional training, my passion and dedication helped me develop these skills on my own.
+            </p>
+            <p className="sr-art-desc">
+              Over the years, I have created artworks including paintings of Hindu gods, celebrity
+              sketches, and handmade craft projects. For me, drawing is more than just a hobby — it is
+              a way to express creativity, imagination, and emotions.
+            </p>
+            <a href="/sandeep-rajput-drawings/" className="sr-art-btn">
+              View All Drawings &amp; Art
+            </a>
+          </div>
+          <div className="sr-art-right">
+            <div className="sr-art-scroll">
+              {finalArtworks.map((art, i) => (
+                <figure key={i} className="sr-art-slide">
+                  <img
+                    src={art.img!}
+                    alt={(art as any).alt || `${art.title} drawing by ${name}`}
+                    loading="lazy"
+                  />
+                  <figcaption>{art.title}</figcaption>
+                </figure>
+              ))}
+            </div>
           </div>
         </div>
+      </section>
 
         <div className="container sr-prose">
           <h2>More Than Just a Website</h2>
