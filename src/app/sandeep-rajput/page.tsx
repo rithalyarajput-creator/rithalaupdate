@@ -235,8 +235,8 @@ export default async function SandeepRajputPage() {
 
           {/* Hobbies Section — full width like hero */}
         </div>
-        </section>
-        <section className="sr-hobbies-full">
+      </section>
+      <section className="sr-hobbies-full">
           <div className="container sr-hobbies-grid">
             <div className="sr-hobbies-text">
               <span className="sr-hobbies-badge">My Hobbies</span>
@@ -272,8 +272,8 @@ export default async function SandeepRajputPage() {
               />
             </div>
           </div>
-        </section>
-        <section className="sr-prose-section">
+      </section>
+      <section className="sr-prose-section">
         <div className="container sr-prose">
 
           <h2>The Idea Behind Rithala Update</h2>
@@ -327,9 +327,9 @@ export default async function SandeepRajputPage() {
           <h2>My Art Gallery</h2>
           <p>Some of my best creative works — each piece representing a different side of my artistic journey.</p>
         </div>
-        </section>
+      </section>
 
-        <div className="sr-gallery-scroll-wrap">
+      <div className="sr-gallery-scroll-wrap">
           <div className="sr-gallery-scroll">
             {finalArtworks.map((art, i) => (
               <figure key={i} className="sr-art-card-h">
@@ -356,7 +356,6 @@ export default async function SandeepRajputPage() {
             <Link href="/blog/" className="sr-btn-ghost">Read the Blog</Link>
           </div>
         </div>
-      </section>
     </PublicShell>
   );
 }
