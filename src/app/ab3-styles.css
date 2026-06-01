@@ -1202,13 +1202,18 @@
 
 /* ---------- Education Section ---------- */
 .sr-edu-section {
-  background: linear-gradient(135deg, #1e3a5f 0%, #2563eb 50%, #7dd3fc 100%);
-  padding: 60px 0 0;
+  background-image:
+    linear-gradient(135deg, rgba(30,58,95,0.88) 0%, rgba(37,99,235,0.82) 50%, rgba(125,211,252,0.75) 100%),
+    url('https://9qidomuaf1nvlbrh.public.blob.vercel-storage.com/uploads/1780126495893-sandeep-rajput-rithalya-rajput-rana-pratap-sarvodaya-school-rithala-delhi.jpg-aOf2OUhgtMt1zncuB5nE4EAvhOsiRU.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 60px 0 60px;
   color: #fff;
   overflow: hidden;
 }
 .sr-edu-section .sr-school-banner {
-  margin: 32px 0 0;
+  display: none;
 }
 .sr-edu-inner {
   max-width: 780px;
