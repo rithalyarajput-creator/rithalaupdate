@@ -1148,47 +1148,56 @@
   overflow: hidden;
   display: flex;
   align-items: stretch;
+  padding: 24px 0 24px 20px;
 }
 .sr-art-scroll {
   display: flex;
-  gap: 0;
+  gap: 14px;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   scrollbar-width: none;
   width: 100%;
+  padding-right: 40px;
 }
 .sr-art-scroll::-webkit-scrollbar { display: none; }
 .sr-art-slide {
-  flex: 0 0 200px;
+  flex: 0 0 220px;
   scroll-snap-align: start;
   position: relative;
   margin: 0;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+  background: #1e293b;
+  transition: transform 0.3s;
 }
+.sr-art-slide:hover { transform: translateY(-6px) scale(1.02); }
 .sr-art-slide img {
-  width: 200px;
-  height: 100%;
-  min-height: 500px;
+  width: 220px;
+  height: 320px;
   object-fit: cover;
+  object-position: top;
   display: block;
 }
 .sr-art-slide figcaption {
   position: absolute;
   bottom: 0; left: 0; right: 0;
-  background: linear-gradient(transparent, rgba(0,0,0,0.8));
+  background: linear-gradient(transparent, rgba(0,0,0,0.85));
   color: #fff;
-  font-size: 0.78rem;
+  font-size: 0.82rem;
   font-weight: 700;
-  padding: 20px 12px 10px;
-  text-align: center;
+  padding: 28px 14px 12px;
+  text-align: left;
 }
 @media (max-width: 800px) {
   .sr-art-inner {
     grid-template-columns: 1fr;
     min-height: unset;
   }
-  .sr-art-left { padding: 36px 24px; }
+  .sr-art-left { padding: 36px 24px 24px; }
+  .sr-art-right { padding: 0 0 20px 16px; }
   .sr-art-slide { flex: 0 0 160px; }
-  .sr-art-slide img { width: 160px; min-height: 240px; }
+  .sr-art-slide img { width: 160px; height: 220px; }
 }
 
 /* ---------- Education Section ---------- */
