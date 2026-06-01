@@ -173,11 +173,11 @@ export default async function SandeepRajputPage() {
                   <span className="sr-journey-year-tag">Past</span>
                 </div>
                 <div className="sr-journey-card-body">
-                  <h3>Childhood — The Beginning</h3>
-                  <p>Born in 2007 into a proud Rajputana family in Rithala, Delhi. From a very young age, there was a deep passion for creativity, art, and expression. These early years laid the foundation for everything that followed — a journey rooted in heritage and driven by ambition.</p>
+                  <h3>The Beginning — Childhood Days</h3>
+                  <p>Born in 2007 in Rithala Village, Delhi, Sandeep Rajput (Rithalya Rajput) grew up in a loving Rajputana family. Known for his innocent smile and cheerful personality, he enjoyed a happy childhood filled with memorable moments that built his values, confidence, and determination.</p>
                   <div className="sr-journey-tags">
                     <span>Born: 2007</span>
-                    <span>Rithala, Delhi</span>
+                    <span>Rithala Village</span>
                     <span>Rajputana Family</span>
                   </div>
                 </div>
@@ -193,12 +193,12 @@ export default async function SandeepRajputPage() {
                   <span className="sr-journey-year-tag">Now</span>
                 </div>
                 <div className="sr-journey-card-body">
-                  <h3>Today — Rajputana Pride</h3>
-                  <p>Today, Sandeep Rajput is a digital creator, artist, and the founder of Rithala Update. The Rajasthan cap and earrings represent a deep connection to Rajputana heritage and identity. Grounded in his roots, driven by his craft.</p>
+                  <h3>Growth &amp; Transformation</h3>
+                  <p>From learning technology and design to building digital platforms, Sandeep Rajput (Rithalya Rajput) has grown through dedication and consistency. The boy from Rithala Village now moves forward with bigger goals, stronger ambitions, and a vision for the future.</p>
                   <div className="sr-journey-tags">
-                    <span>Rajputana Heritage</span>
                     <span>Digital Creator</span>
-                    <span>Artist</span>
+                    <span>Rithala Update</span>
+                    <span>Always Growing</span>
                   </div>
                 </div>
               </div>
