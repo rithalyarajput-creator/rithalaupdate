@@ -1319,12 +1319,12 @@
   padding-top: 0 !important;
 }
 .sr-edu-btn-bar {
-  background: #fff;
-  padding: 20px 40px;
+  background: transparent;
+  padding: 28px 40px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-top: 3px solid #c8a44a;
+  border-top: none;
 }
 
 /* ---------- Karan Aujla Inspiration Section ---------- */
