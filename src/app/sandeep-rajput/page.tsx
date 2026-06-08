@@ -149,10 +149,6 @@ export default async function SandeepRajputPage() {
         <div className="container sr-prose">
 
           <div className="sr-cj-section">
-            <div className="sr-cj-left">
-              <span className="sr-cj-number">01</span>
-              <div className="sr-cj-line"></div>
-            </div>
             <div className="sr-cj-right">
               <span className="sr-cj-tag">My Story</span>
               <h2 className="sr-cj-heading">My Creative Journey</h2>
