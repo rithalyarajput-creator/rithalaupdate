@@ -1271,7 +1271,7 @@
   margin: 0;
 }
 .sr-edu-section .sr-school-banner {
-  display: none;
+  display: block;
 }
 .sr-edu-inner {
   max-width: 780px;
