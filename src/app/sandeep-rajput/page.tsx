@@ -148,8 +148,23 @@ export default async function SandeepRajputPage() {
       <section className="sr-section">
         <div className="container sr-prose">
 
-          <h2>My Creative Journey</h2>
-          <p>{storyJourney}</p>
+          <div className="sr-cj-section">
+            <div className="sr-cj-left">
+              <span className="sr-cj-number">01</span>
+              <div className="sr-cj-line"></div>
+            </div>
+            <div className="sr-cj-right">
+              <span className="sr-cj-tag">My Story</span>
+              <h2 className="sr-cj-heading">My Creative Journey</h2>
+              <p className="sr-cj-text">{storyJourney}</p>
+              <div className="sr-cj-pills">
+                <span>Drawing</span>
+                <span>Digital Design</span>
+                <span>Social Media</span>
+                <span>Web Development</span>
+              </div>
+            </div>
+          </div>
 
           {/* Journey Section — moved here below Creative Journey */}
           <div className="sr-journey-section">
@@ -398,6 +413,38 @@ export default async function SandeepRajputPage() {
                   <figcaption>{art.title}</figcaption>
                 </figure>
               ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Karan Aujla Inspiration Section */}
+      <section className="sr-karan-section">
+        <div className="sr-karan-inner">
+          <div className="sr-karan-img-wrap">
+            <img
+              src="https://9qidomuaf1nvlbrh.public.blob.vercel-storage.com/uploads/1778480848621-karan-aujla-art-by-sandeep-rajput-lBjClfy7IXQpR7wTAV6B57kMszDu6w.png"
+              alt="Karan Aujla pencil sketch drawing by Sandeep Rajput Rithalya Rajput"
+              className="sr-karan-img"
+              loading="lazy"
+            />
+            <span className="sr-karan-img-tag">My Drawing</span>
+          </div>
+          <div className="sr-karan-content">
+            <span className="sr-karan-badge">Inspiration</span>
+            <h2 className="sr-karan-heading">Inspired by Karan Aujla</h2>
+            <p className="sr-karan-text">
+              I have been a fan of Karan Aujla since 2018. What inspires me most is not just his music
+              but his journey, hard work, and dedication. His growth from a struggling artist to an
+              international star motivates me to stay focused on my goals and keep working consistently.
+              As a creator, I admire his passion, confidence, and never-give-up mindset.
+            </p>
+            <div className="sr-karan-quote-wrap">
+              <span className="sr-karan-quote-label">Favorite Quote</span>
+              <blockquote className="sr-karan-quote">
+                &ldquo;Work hard in silence, let success make the noise.&rdquo;
+                <cite>— Karan Aujla 🎵✨</cite>
+              </blockquote>
             </div>
           </div>
         </div>

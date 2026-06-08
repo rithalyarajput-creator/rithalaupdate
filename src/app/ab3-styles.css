@@ -1259,3 +1259,113 @@
 .sr-edu-banner-wrap {
   padding-top: 0 !important;
 }
+
+/* ---------- Karan Aujla Inspiration Section ---------- */
+.sr-karan-section {
+  background: #0f172a;
+  padding: 0;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+.sr-karan-inner {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+.sr-karan-img-wrap {
+  flex: 0 0 320px;
+  position: relative;
+  overflow: hidden;
+}
+.sr-karan-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
+.sr-karan-img-tag {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  background: rgba(0,0,0,0.65);
+  color: #f5d98a;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: 999px;
+  backdrop-filter: blur(4px);
+}
+.sr-karan-content {
+  flex: 1 1 0;
+  padding: 48px 52px 48px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  justify-content: center;
+}
+.sr-karan-badge {
+  display: inline-block;
+  background: rgba(245,198,27,0.15);
+  border: 1px solid rgba(245,198,27,0.3);
+  color: #f5c61b;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 4px 14px;
+  border-radius: 999px;
+  width: fit-content;
+}
+.sr-karan-heading {
+  font-size: 1.9rem;
+  font-weight: 900;
+  color: #fff;
+  margin: 0;
+  line-height: 1.2;
+}
+.sr-karan-text {
+  font-size: 0.92rem;
+  color: rgba(255,255,255,0.78);
+  line-height: 1.85;
+  margin: 0;
+}
+.sr-karan-quote-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.sr-karan-quote-label {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #f5c61b;
+}
+.sr-karan-quote {
+  background: rgba(245,198,27,0.08);
+  border-left: 3px solid #f5c61b;
+  border-radius: 0 10px 10px 0;
+  padding: 16px 20px;
+  margin: 0;
+  font-size: 1rem;
+  font-style: italic;
+  font-weight: 600;
+  color: #fff;
+  line-height: 1.6;
+}
+.sr-karan-quote cite {
+  display: block;
+  margin-top: 8px;
+  font-size: 0.82rem;
+  font-style: normal;
+  font-weight: 700;
+  color: #f5c61b;
+}
+@media (max-width: 800px) {
+  .sr-karan-inner { flex-direction: column; }
+  .sr-karan-img-wrap { flex: none; width: 100%; max-height: 320px; overflow: hidden; }
+  .sr-karan-img { width: 100%; max-height: 320px; object-fit: cover; object-position: top; }
+  .sr-karan-content { padding: 28px 20px 36px; }
+  .sr-karan-heading { font-size: 1.5rem; }
+}
