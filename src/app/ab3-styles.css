@@ -1149,6 +1149,7 @@
   display: flex;
   align-items: stretch;
   padding: 24px 0 24px 20px;
+  height: 420px;
 }
 .sr-art-scroll {
   display: flex;
@@ -1170,11 +1171,14 @@
   box-shadow: 0 8px 24px rgba(0,0,0,0.35);
   background: #1e293b;
   transition: transform 0.3s;
+  display: flex;
+  flex-direction: column;
 }
 .sr-art-slide:hover { transform: translateY(-6px) scale(1.02); }
 .sr-art-slide img {
   width: 220px;
-  height: 320px;
+  flex: 1 1 auto;
+  min-height: 0;
   object-fit: cover;
   object-position: center top;
   display: block;
@@ -1197,7 +1201,7 @@
   .sr-art-left { padding: 36px 24px 24px; }
   .sr-art-right { padding: 0 0 20px 16px; }
   .sr-art-slide { flex: 0 0 160px; }
-  .sr-art-slide img { width: 160px; height: 220px; }
+  .sr-art-slide img { width: 160px; }
 }
 
 /* ---------- Education Section ---------- */
