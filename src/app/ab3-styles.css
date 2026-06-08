@@ -1318,6 +1318,16 @@
 .sr-edu-banner-wrap {
   padding-top: 0 !important;
 }
+.sr-edu-btn-bar {
+  background: #fff;
+  padding: 16px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  border-top: 3px solid #c8a44a;
+}
 
 /* ---------- Karan Aujla Inspiration Section ---------- */
 .sr-karan-section {

@@ -259,22 +259,14 @@ export default async function SandeepRajputPage() {
           </div>
         </div>
 
-        {/* School Banner — inside edu section, no gap */}
-        <div className="sr-school-banner">
-          <img
-            src="https://9qidomuaf1nvlbrh.public.blob.vercel-storage.com/uploads/1780126495893-sandeep-rajput-rithalya-rajput-rana-pratap-sarvodaya-school-rithala-delhi.jpg-aOf2OUhgtMt1zncuB5nE4EAvhOsiRU.jpg"
-            alt="Sandeep Rajput Rithalya Rajput with classmates birthday celebration Rana Pratap School Rithala Delhi"
-            className="sr-school-banner-img"
-            loading="lazy"
-          />
-          <div className="sr-school-banner-btns-below">
-            <span className="sr-school-banner-badge">6 Schools · Nursery to Class 12 · Rithala, Delhi</span>
-            <div className="sr-school-banner-btns">
-              <SchoolGallery />
-              <a href="/sandeep-rajput-school/" className="sr-school-banner-btn">
-                Full School Journey
-              </a>
-            </div>
+        {/* School Button Bar */}
+        <div className="sr-edu-btn-bar">
+          <span className="sr-school-banner-badge">6 Schools · Nursery to Class 12 · Rithala, Delhi</span>
+          <div className="sr-school-banner-btns">
+            <SchoolGallery />
+            <a href="/sandeep-rajput-school/" className="sr-school-banner-btn">
+              Full School Journey
+            </a>
           </div>
         </div>
       </section>
