@@ -1089,7 +1089,6 @@
 .sr-art-inner {
   display: grid;
   grid-template-columns: 420px 1fr;
-  min-height: 500px;
 }
 .sr-art-left {
   padding: 56px 48px;
@@ -1147,9 +1146,8 @@
 .sr-art-right {
   overflow: hidden;
   display: flex;
-  align-items: stretch;
+  align-items: flex-start;
   padding: 24px 0 24px 20px;
-  height: 420px;
 }
 .sr-art-scroll {
   display: flex;
@@ -1159,29 +1157,26 @@
   scrollbar-width: none;
   width: 100%;
   padding-right: 40px;
+  align-items: flex-start;
 }
 .sr-art-scroll::-webkit-scrollbar { display: none; }
 .sr-art-slide {
-  flex: 0 0 220px;
+  flex: 0 0 auto;
   scroll-snap-align: start;
   position: relative;
   margin: 0;
   border-radius: 16px;
   overflow: hidden;
   box-shadow: 0 8px 24px rgba(0,0,0,0.35);
-  background: #1e293b;
+  background: transparent;
   transition: transform 0.3s;
-  display: flex;
-  flex-direction: column;
 }
 .sr-art-slide:hover { transform: translateY(-6px) scale(1.02); }
 .sr-art-slide img {
-  width: 220px;
-  flex: 1 1 auto;
-  min-height: 0;
-  object-fit: cover;
-  object-position: center top;
+  width: 200px;
+  height: auto;
   display: block;
+  object-fit: contain;
 }
 .sr-art-slide figcaption {
   position: absolute;
@@ -1200,8 +1195,7 @@
   }
   .sr-art-left { padding: 36px 24px 24px; }
   .sr-art-right { padding: 0 0 20px 16px; }
-  .sr-art-slide { flex: 0 0 160px; }
-  .sr-art-slide img { width: 160px; }
+  .sr-art-slide img { width: 150px; }
 }
 
 /* ---------- Education Section ---------- */
