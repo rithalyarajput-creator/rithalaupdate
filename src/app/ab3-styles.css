@@ -1320,12 +1320,10 @@
 }
 .sr-edu-btn-bar {
   background: #fff;
-  padding: 16px 40px;
+  padding: 20px 40px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  flex-wrap: wrap;
+  justify-content: center;
   border-top: 3px solid #c8a44a;
 }
 

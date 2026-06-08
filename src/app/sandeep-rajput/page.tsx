@@ -261,13 +261,9 @@ export default async function SandeepRajputPage() {
 
         {/* School Button Bar */}
         <div className="sr-edu-btn-bar">
-          <span className="sr-school-banner-badge">6 Schools · Nursery to Class 12 · Rithala, Delhi</span>
-          <div className="sr-school-banner-btns">
-            <SchoolGallery />
-            <a href="/sandeep-rajput-school/" className="sr-school-banner-btn">
-              Full School Journey
-            </a>
-          </div>
+          <a href="/sandeep-rajput-school/" className="sr-school-banner-btn">
+            Full School Journey
+          </a>
         </div>
       </section>
       <section className="sr-hobbies-full">
