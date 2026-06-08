@@ -388,14 +388,8 @@ export default async function SandeepRajputPage() {
             <span className="sr-art-badge">Self-Taught Artist</span>
             <h2 className="sr-art-heading">Passion for Drawing &amp; Creativity</h2>
             <p className="sr-art-desc">
-              Drawing has always been a natural part of my life. Since childhood, I have had a strong
-              interest in art, sketching, painting, and creative crafts. Although I never received
-              professional training, my passion and dedication helped me develop these skills on my own.
-            </p>
-            <p className="sr-art-desc">
-              Over the years, I have created artworks including paintings of Hindu gods, celebrity
-              sketches, and handmade craft projects. For me, drawing is more than just a hobby — it is
-              a way to express creativity, imagination, and emotions.
+              Self-taught artist from Rithala, Delhi. Pencil sketches, color paintings, and handmade
+              craft projects — every artwork tells a story of passion and dedication.
             </p>
             <a href="/sandeep-rajput-drawings/" className="sr-art-btn">
               View All Drawings &amp; Art
