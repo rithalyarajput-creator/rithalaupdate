@@ -166,51 +166,62 @@ export default async function SandeepRajputPage() {
             </div>
           </div>
 
-          {/* Journey Section — moved here below Creative Journey */}
-          <div className="sr-journey-section">
-            <div className="sr-journey-header">
-              <span className="sr-journey-badge">My Journey</span>
-              <h2 className="sr-journey-title">From Childhood to Creator — 2007 to Now</h2>
-              <p className="sr-journey-lead">
-                Born in 2007 into a proud Rajputana family of Rithala, Delhi — this is the journey
-                of a child who grew up to become a digital creator, artist, and community builder.
-              </p>
+          {/* Journey Section — redesigned */}
+          <div className="sr-journey-v2">
+            <div className="sr-journey-v2-header">
+              <span className="sr-journey-v2-badge">My Journey</span>
+              <h2 className="sr-journey-v2-title">From Childhood to Creator</h2>
+              <p className="sr-journey-v2-sub">2007 — Rithala, Delhi → Digital Creator, Artist &amp; Community Builder</p>
             </div>
-            <div className="sr-journey-grid">
-              <div className="sr-journey-card">
-                <div className="sr-journey-img-wrap">
+
+            <div className="sr-journey-v2-cards">
+              {/* Card 1 - Past */}
+              <div className="sr-journey-v2-card sr-journey-v2-card--past">
+                <div className="sr-journey-v2-card-top">
+                  <span className="sr-journey-v2-year">2007</span>
+                  <span className="sr-journey-v2-label">The Beginning</span>
+                </div>
+                <div className="sr-journey-v2-img-wrap">
                   <img
                     src="/sandeep-rajput-rithalya-rajput-childhood-2007-rithala-delhi.png"
-                    alt="Sandeep Rajput Rithalya Rajput childhood photo born 2007 Rajputana family Rithala Delhi"
-                    className="sr-journey-img"
+                    alt="Sandeep Rajput childhood photo 2007 Rithala Delhi"
                     loading="lazy"
                   />
-                  <span className="sr-journey-year-tag">Past</span>
                 </div>
-                <div className="sr-journey-card-body">
-                  <h3>The Beginning — Childhood Days</h3>
-                  <p>Born in 2007 in Rithala Village, Delhi, Sandeep Rajput (Rithalya Rajput) grew up in a loving Rajputana family. Known for his innocent smile and cheerful personality, he enjoyed a happy childhood filled with memorable moments that built his values, confidence, and determination.</p>
-                  <div className="sr-journey-tags">
+                <div className="sr-journey-v2-card-body">
+                  <h3>Childhood Days</h3>
+                  <p>Born in 2007 in Rithala Village into a proud Rajputana family. A happy childhood full of values, confidence, and the spark of creativity.</p>
+                  <div className="sr-journey-v2-tags">
                     <span>Born: 2007</span>
                     <span>Rithala Village</span>
                     <span>Rajputana Family</span>
                   </div>
                 </div>
               </div>
-              <div className="sr-journey-card">
-                <div className="sr-journey-img-wrap">
+
+              {/* Connector */}
+              <div className="sr-journey-v2-connector">
+                <div className="sr-journey-v2-line"></div>
+                <span className="sr-journey-v2-arrow">→</span>
+              </div>
+
+              {/* Card 2 - Now */}
+              <div className="sr-journey-v2-card sr-journey-v2-card--now">
+                <div className="sr-journey-v2-card-top">
+                  <span className="sr-journey-v2-year">Now</span>
+                  <span className="sr-journey-v2-label">The Creator</span>
+                </div>
+                <div className="sr-journey-v2-img-wrap">
                   <img
                     src="/sandeep-rajput-rithalya-rajput-rajputana-cap-professional-rithala-delhi.png"
-                    alt="Sandeep Rajput Rithalya Rajput Rajputana cap earrings professional photo Rithala Delhi"
-                    className="sr-journey-img"
+                    alt="Sandeep Rajput professional photo Rithala Delhi"
                     loading="lazy"
                   />
-                  <span className="sr-journey-year-tag">Now</span>
                 </div>
-                <div className="sr-journey-card-body">
+                <div className="sr-journey-v2-card-body">
                   <h3>Growth &amp; Transformation</h3>
-                  <p>From learning technology and design to building digital platforms, Sandeep Rajput (Rithalya Rajput) has grown through dedication and consistency. The boy from Rithala Village now moves forward with bigger goals, stronger ambitions, and a vision for the future.</p>
-                  <div className="sr-journey-tags">
+                  <p>From art and sketching to website development and digital branding — the boy from Rithala now moves forward with bigger goals and a vision.</p>
+                  <div className="sr-journey-v2-tags">
                     <span>Digital Creator</span>
                     <span>Rithala Update</span>
                     <span>Always Growing</span>
@@ -218,9 +229,10 @@ export default async function SandeepRajputPage() {
                 </div>
               </div>
             </div>
-            <div className="sr-journey-cta-wrap">
-              <a href="/sandeep-rajput-journey/" className="sr-journey-cta-btn">
-                View My Full Journey — 2007 to Present
+
+            <div className="sr-journey-v2-cta">
+              <a href="/sandeep-rajput-journey/" className="sr-journey-v2-btn">
+                View My Full Journey — 2007 to Present →
               </a>
             </div>
           </div>
