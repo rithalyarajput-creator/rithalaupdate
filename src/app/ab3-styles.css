@@ -1085,16 +1085,19 @@
   background: #0f172a;
   padding: 0;
   overflow: hidden;
+  display: inline-block;
+  width: 100%;
 }
 .sr-art-inner {
   display: grid;
   grid-template-columns: 420px 1fr;
+  align-items: start;
 }
 .sr-art-left {
-  padding: 56px 48px;
+  padding: 40px 48px 40px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 16px;
   background: #0f172a;
 }
@@ -1147,7 +1150,7 @@
   overflow: hidden;
   display: flex;
   align-items: flex-start;
-  padding: 24px 0 24px 20px;
+  padding: 40px 0 40px 20px;
 }
 .sr-art-scroll {
   display: flex;
